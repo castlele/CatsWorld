@@ -9,9 +9,13 @@ import SwiftUI
 
 @main
 struct CatsWorldApp: App {
+	
+	@StateObject private var breedsViewModel = BreedsViewModel()
+	
     var body: some Scene {
         WindowGroup {
-            ContentView()
+			BreedsList()
+				.environmentObject(breedsViewModel)
         }
     }
 }

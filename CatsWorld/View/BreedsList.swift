@@ -7,15 +7,19 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct BreedsList: View {
+	
+	@EnvironmentObject var viewModel: BreedsViewModel
+	
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+		List(viewModel.breeds) { breed in
+			Text(breed.name)
+		}
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        BreedsList()
     }
 }
