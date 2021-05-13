@@ -12,10 +12,43 @@ struct CatsWorldApp: App {
 	
 	@StateObject private var breedsViewModel = BreedsViewModel()
 	
+	let persistenceController = PersistenceController.shared
+	
+	@Environment(\.scenePhase) var scenePhase
+	
     var body: some Scene {
         WindowGroup {
-			BreedsList()
-				.environmentObject(breedsViewModel)
-        }
+			TabView() {
+				MapView()
+					.tabItem {
+						Image(systemName: "map")
+						Text("Map")
+					}
+				HomeScreenView()
+					.environment(\.managedObjectContext, persistenceController.conteiner.viewContext)
+					.tabItem {
+						Image(systemName: "house")
+						Text("Home")
+					}
+				BreedsList()
+					.environmentObject(breedsViewModel)
+					.tabItem {
+						Image(systemName: "list.bullet")
+						Text("Breeds")
+					}
+			}
+		}
+		.onChange(of: scenePhase) { (newScenePhase) in
+			savePersistenceInBackgroundState(newScenePhase)
+		}
     }
+	
+	private func savePersistenceInBackgroundState(_ scenePhase: ScenePhase) {
+		switch scenePhase {
+			case .background:
+				persistenceController.save()
+			default:
+				break
+		}
+	}
 }

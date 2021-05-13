@@ -7,12 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7B05B9A62642DE3E006FF99A /* PawButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B05B9A52642DE3E006FF99A /* PawButton.swift */; };
 		7B1AA591264A9AFE002A3774 /* NetworkEndPoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1AA590264A9AFE002A3774 /* NetworkEndPoints.swift */; };
 		7B1AA593264AA018002A3774 /* EndPointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1AA592264AA018002A3774 /* EndPointTests.swift */; };
 		7B1AA595264AA4CF002A3774 /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1AA594264AA4CF002A3774 /* MockData.swift */; };
 		7B1AA599264AA798002A3774 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1AA598264AA798002A3774 /* Array.swift */; };
-		7B5A3E3F2642C8AF000CB2F4 /* CircleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5A3E3E2642C8AF000CB2F4 /* CircleButton.swift */; };
+		7B861434264D1739008616DB /* Stash.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7B861432264D1739008616DB /* Stash.xcdatamodeld */; };
+		7B861436264D183B008616DB /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B861435264D183B008616DB /* PersistenceController.swift */; };
+		7B874684264B19F8006DC6A7 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B874683264B19F8006DC6A7 /* MapView.swift */; };
+		7B874686264B1A35006DC6A7 /* HomeScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B874685264B1A35006DC6A7 /* HomeScreenView.swift */; };
 		7B8B99E726427DDC00E98B8E /* CatsWorldApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8B99E626427DDC00E98B8E /* CatsWorldApp.swift */; };
 		7B8B99E926427DDC00E98B8E /* BreedsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8B99E826427DDC00E98B8E /* BreedsList.swift */; };
 		7B8B99EB26427DE300E98B8E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B8B99EA26427DE300E98B8E /* Assets.xcassets */; };
@@ -34,12 +36,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		7B05B9A52642DE3E006FF99A /* PawButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PawButton.swift; sourceTree = "<group>"; };
 		7B1AA590264A9AFE002A3774 /* NetworkEndPoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkEndPoints.swift; sourceTree = "<group>"; };
 		7B1AA592264AA018002A3774 /* EndPointTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPointTests.swift; sourceTree = "<group>"; };
 		7B1AA594264AA4CF002A3774 /* MockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
 		7B1AA598264AA798002A3774 /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
-		7B5A3E3E2642C8AF000CB2F4 /* CircleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleButton.swift; sourceTree = "<group>"; };
+		7B861433264D1739008616DB /* Stash.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Stash.xcdatamodel; sourceTree = "<group>"; };
+		7B861435264D183B008616DB /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
+		7B874683264B19F8006DC6A7 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		7B874685264B1A35006DC6A7 /* HomeScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenView.swift; sourceTree = "<group>"; };
 		7B8B99E326427DDC00E98B8E /* CatsWorld.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CatsWorld.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B8B99E626427DDC00E98B8E /* CatsWorldApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatsWorldApp.swift; sourceTree = "<group>"; };
 		7B8B99E826427DDC00E98B8E /* BreedsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreedsList.swift; sourceTree = "<group>"; };
@@ -48,8 +52,6 @@
 		7B8B99EF26427DE300E98B8E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7B8B99F426427DE400E98B8E /* CatsWorldTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CatsWorldTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B8B99FA26427DE400E98B8E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		7B8B9A0326427DE400E98B8E /* CatsWorldUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatsWorldUITests.swift; sourceTree = "<group>"; };
-		7B8B9A0526427DE400E98B8E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7B8B9A1926427EBA00E98B8E /* BreedsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreedsViewModel.swift; sourceTree = "<group>"; };
 		7B8B9A1C2642816D00E98B8E /* JSONParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONParser.swift; sourceTree = "<group>"; };
 		7B8B9A1E2642818000E98B8E /* NetworkRequester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequester.swift; sourceTree = "<group>"; };
@@ -82,12 +84,20 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		7B861437264D1858008616DB /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				7B861432264D1739008616DB /* Stash.xcdatamodeld */,
+				7B861435264D183B008616DB /* PersistenceController.swift */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
 		7B8B99DA26427DDC00E98B8E = {
 			isa = PBXGroup;
 			children = (
 				7B8B99E526427DDC00E98B8E /* CatsWorld */,
 				7B8B99F726427DE400E98B8E /* CatsWorldTests */,
-				7B8B9A0226427DE400E98B8E /* CatsWorldUITests */,
 				7B8B99E426427DDC00E98B8E /* Products */,
 			);
 			sourceTree = "<group>";
@@ -107,6 +117,7 @@
 				7B8B99E626427DDC00E98B8E /* CatsWorldApp.swift */,
 				7B8B99EA26427DE300E98B8E /* Assets.xcassets */,
 				7B8B99EF26427DE300E98B8E /* Info.plist */,
+				7B861437264D1858008616DB /* CoreData */,
 				7B8B9A1226427E6800E98B8E /* Model */,
 				7B8B9A1126427E5500E98B8E /* View */,
 				7B8B9A1326427E6D00E98B8E /* ViewModel */,
@@ -133,19 +144,12 @@
 			path = CatsWorldTests;
 			sourceTree = "<group>";
 		};
-		7B8B9A0226427DE400E98B8E /* CatsWorldUITests */ = {
-			isa = PBXGroup;
-			children = (
-				7B8B9A0326427DE400E98B8E /* CatsWorldUITests.swift */,
-				7B8B9A0526427DE400E98B8E /* Info.plist */,
-			);
-			path = CatsWorldUITests;
-			sourceTree = "<group>";
-		};
 		7B8B9A1126427E5500E98B8E /* View */ = {
 			isa = PBXGroup;
 			children = (
+				7B874685264B1A35006DC6A7 /* HomeScreenView.swift */,
 				7B8B99E826427DDC00E98B8E /* BreedsList.swift */,
+				7B874683264B19F8006DC6A7 /* MapView.swift */,
 				7B8B9A1426427E7C00E98B8E /* Reusable */,
 			);
 			path = View;
@@ -173,8 +177,6 @@
 		7B8B9A1426427E7C00E98B8E /* Reusable */ = {
 			isa = PBXGroup;
 			children = (
-				7B5A3E3E2642C8AF000CB2F4 /* CircleButton.swift */,
-				7B05B9A52642DE3E006FF99A /* PawButton.swift */,
 			);
 			path = Reusable;
 			sourceTree = "<group>";
@@ -287,7 +289,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7B5A3E3F2642C8AF000CB2F4 /* CircleButton.swift in Sources */,
 				7B8B9A212642819600E98B8E /* Breed.swift in Sources */,
 				7B8B99E926427DDC00E98B8E /* BreedsList.swift in Sources */,
 				7B8B99E726427DDC00E98B8E /* CatsWorldApp.swift in Sources */,
@@ -295,7 +296,10 @@
 				7B8B9A1F2642818000E98B8E /* NetworkRequester.swift in Sources */,
 				7B1AA599264AA798002A3774 /* Array.swift in Sources */,
 				7B1AA591264A9AFE002A3774 /* NetworkEndPoints.swift in Sources */,
-				7B05B9A62642DE3E006FF99A /* PawButton.swift in Sources */,
+				7B874686264B1A35006DC6A7 /* HomeScreenView.swift in Sources */,
+				7B874684264B19F8006DC6A7 /* MapView.swift in Sources */,
+				7B861434264D1739008616DB /* Stash.xcdatamodeld in Sources */,
+				7B861436264D183B008616DB /* PersistenceController.swift in Sources */,
 				7B8B9A1A26427EBA00E98B8E /* BreedsViewModel.swift in Sources */,
 				7B1AA595264AA4CF002A3774 /* MockData.swift in Sources */,
 			);
@@ -555,6 +559,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		7B861432264D1739008616DB /* Stash.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				7B861433264D1739008616DB /* Stash.xcdatamodel */,
+			);
+			currentVersion = 7B861433264D1739008616DB /* Stash.xcdatamodel */;
+			path = Stash.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 7B8B99DB26427DDC00E98B8E /* Project object */;
 }
