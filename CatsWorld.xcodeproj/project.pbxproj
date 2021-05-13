@@ -13,6 +13,10 @@
 		7B1AA599264AA798002A3774 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1AA598264AA798002A3774 /* Array.swift */; };
 		7B861434264D1739008616DB /* Stash.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7B861432264D1739008616DB /* Stash.xcdatamodeld */; };
 		7B861436264D183B008616DB /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B861435264D183B008616DB /* PersistenceController.swift */; };
+		7B861439264D278D008616DB /* CatsCardsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B861438264D278D008616DB /* CatsCardsViewModel.swift */; };
+		7B86143B264D27AA008616DB /* CatsCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B86143A264D27AA008616DB /* CatsCardView.swift */; };
+		7B86143E264D2953008616DB /* CatsCard+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B86143C264D2953008616DB /* CatsCard+CoreDataClass.swift */; };
+		7B86143F264D2953008616DB /* CatsCard+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B86143D264D2953008616DB /* CatsCard+CoreDataProperties.swift */; };
 		7B874684264B19F8006DC6A7 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B874683264B19F8006DC6A7 /* MapView.swift */; };
 		7B874686264B1A35006DC6A7 /* HomeScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B874685264B1A35006DC6A7 /* HomeScreenView.swift */; };
 		7B8B99E726427DDC00E98B8E /* CatsWorldApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8B99E626427DDC00E98B8E /* CatsWorldApp.swift */; };
@@ -42,6 +46,10 @@
 		7B1AA598264AA798002A3774 /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 		7B861433264D1739008616DB /* Stash.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Stash.xcdatamodel; sourceTree = "<group>"; };
 		7B861435264D183B008616DB /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
+		7B861438264D278D008616DB /* CatsCardsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatsCardsViewModel.swift; sourceTree = "<group>"; };
+		7B86143A264D27AA008616DB /* CatsCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatsCardView.swift; sourceTree = "<group>"; };
+		7B86143C264D2953008616DB /* CatsCard+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CatsCard+CoreDataClass.swift"; sourceTree = "<group>"; };
+		7B86143D264D2953008616DB /* CatsCard+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CatsCard+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		7B874683264B19F8006DC6A7 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		7B874685264B1A35006DC6A7 /* HomeScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenView.swift; sourceTree = "<group>"; };
 		7B8B99E326427DDC00E98B8E /* CatsWorld.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CatsWorld.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -87,10 +95,20 @@
 		7B861437264D1858008616DB /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				7B861440264D2963008616DB /* Entities */,
 				7B861432264D1739008616DB /* Stash.xcdatamodeld */,
 				7B861435264D183B008616DB /* PersistenceController.swift */,
 			);
 			path = CoreData;
+			sourceTree = "<group>";
+		};
+		7B861440264D2963008616DB /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				7B86143C264D2953008616DB /* CatsCard+CoreDataClass.swift */,
+				7B86143D264D2953008616DB /* CatsCard+CoreDataProperties.swift */,
+			);
+			path = Entities;
 			sourceTree = "<group>";
 		};
 		7B8B99DA26427DDC00E98B8E = {
@@ -169,6 +187,7 @@
 			isa = PBXGroup;
 			children = (
 				7B8B9A1926427EBA00E98B8E /* BreedsViewModel.swift */,
+				7B861438264D278D008616DB /* CatsCardsViewModel.swift */,
 				7B8B9A1B2642815E00E98B8E /* Helpers */,
 			);
 			path = ViewModel;
@@ -177,6 +196,7 @@
 		7B8B9A1426427E7C00E98B8E /* Reusable */ = {
 			isa = PBXGroup;
 			children = (
+				7B86143A264D27AA008616DB /* CatsCardView.swift */,
 			);
 			path = Reusable;
 			sourceTree = "<group>";
@@ -289,11 +309,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B86143E264D2953008616DB /* CatsCard+CoreDataClass.swift in Sources */,
 				7B8B9A212642819600E98B8E /* Breed.swift in Sources */,
 				7B8B99E926427DDC00E98B8E /* BreedsList.swift in Sources */,
+				7B86143B264D27AA008616DB /* CatsCardView.swift in Sources */,
+				7B86143F264D2953008616DB /* CatsCard+CoreDataProperties.swift in Sources */,
 				7B8B99E726427DDC00E98B8E /* CatsWorldApp.swift in Sources */,
 				7B8B9A1D2642816D00E98B8E /* JSONParser.swift in Sources */,
 				7B8B9A1F2642818000E98B8E /* NetworkRequester.swift in Sources */,
+				7B861439264D278D008616DB /* CatsCardsViewModel.swift in Sources */,
 				7B1AA599264AA798002A3774 /* Array.swift in Sources */,
 				7B1AA591264A9AFE002A3774 /* NetworkEndPoints.swift in Sources */,
 				7B874686264B1A35006DC6A7 /* HomeScreenView.swift in Sources */,

@@ -16,26 +16,31 @@ struct CatsWorldApp: App {
 	
 	@Environment(\.scenePhase) var scenePhase
 	
+	@State var selectedView = 1
+	
     var body: some Scene {
         WindowGroup {
-			TabView() {
+			TabView(selection: $selectedView) {
 				MapView()
 					.tabItem {
 						Image(systemName: "map")
 						Text("Map")
 					}
+					.tag(0)
 				HomeScreenView()
 					.environment(\.managedObjectContext, persistenceController.conteiner.viewContext)
 					.tabItem {
 						Image(systemName: "house")
 						Text("Home")
 					}
+					.tag(1)
 				BreedsList()
 					.environmentObject(breedsViewModel)
 					.tabItem {
 						Image(systemName: "list.bullet")
 						Text("Breeds")
 					}
+					.tag(2)
 			}
 		}
 		.onChange(of: scenePhase) { (newScenePhase) in
