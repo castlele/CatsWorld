@@ -17,13 +17,32 @@ struct HomeScreenView: View {
 	) var catsCards: FetchedResults<CatsCard>
 	
     var body: some View {
-		List {
-			ForEach(catsCards, id: \.id) { catsCard in
-				VStack {
-					Text("\(catsCard.name ?? "")")
-					Text("\(catsCard.age)")
-					Text("\(catsCard.breed ?? "")")
+		VStack {
+			Button(action: {
+				let cat = CatsCard(context: persistenceController)
+				cat.name = "Lulu"
+				cat.age = 5
+				cat.breed = "Unicorn"
+				cat.id = UUID()
+				PersistenceController.shared.save()
+			}, label: {
+				Text("Add")
+			})
+			.frame(width: 200, height: 100)
+			.padding()
+			
+			GeometryReader { geometry in
+				ScrollView {
+					VStack(spacing: 10) {
+						ForEach(catsCards, id: \.id) { card in
+							CatsCardView(name: card.name, age: card.age, breed: card.breed, imageData: card.image)
+								.padding()
+								.frame(width: geometry.size.width, height: geometry.size.width / 2)
+								.padding([.bottom, .leading, .trailing])
+						}
+					}
 				}
+				.frame(width: geometry.size.width, height: geometry.size.height)
 			}
 		}
     }
