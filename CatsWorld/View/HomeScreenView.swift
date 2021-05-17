@@ -24,9 +24,21 @@ struct HomeScreenView: View {
 				cat.age = 5
 				cat.breed = "Unicorn"
 				cat.id = UUID()
+				let color = UIColor.orange
+				cat.color = color.encode()
 				PersistenceController.shared.save()
 			}, label: {
 				Text("Add")
+			})
+			.frame(width: 200, height: 100)
+			.padding()
+			
+			Button(action: {
+				catsCards.forEach { card in
+					PersistenceController.shared.delete(card)
+				}
+			}, label: {
+				Text("Delete all")
 			})
 			.frame(width: 200, height: 100)
 			.padding()
@@ -35,7 +47,7 @@ struct HomeScreenView: View {
 				ScrollView {
 					VStack(spacing: 10) {
 						ForEach(catsCards, id: \.id) { card in
-							CatsCardView(name: card.name, age: card.age, breed: card.breed, imageData: card.image)
+							CatsCardView(name: card.name, age: card.age, breed: card.breed, imageData: card.image, cardColor: Color( card.cardsColor))
 								.padding()
 								.frame(width: geometry.size.width, height: geometry.size.width / 2)
 								.padding([.bottom, .leading, .trailing])

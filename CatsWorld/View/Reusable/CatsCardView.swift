@@ -14,6 +14,8 @@ struct CatsCardView: View {
 	var breed: String?
 	var imageData: Data?
 	
+	var cardColor: Color = .gray
+	
 	var image: Image {
 		if let imageData = imageData {
 			if let uiImage = UIImage(data: imageData) {
@@ -53,7 +55,7 @@ struct CatsCardView: View {
 			}
 			.padding()
 			.frame(minWidth: geometry.size.width, minHeight: geometry.size.width / 2)
-			.background(Color(#colorLiteral(red: 0.9995340705, green: 0.988355577, blue: 0.4726552367, alpha: 1)))
+			.background(cardColor)
 			.clipShape(RoundedRectangle(cornerRadius: 20))
 		}
     }

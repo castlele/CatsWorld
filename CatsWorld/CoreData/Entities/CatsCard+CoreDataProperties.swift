@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+import UIKit
 
 
 extension CatsCard {
@@ -21,9 +22,13 @@ extension CatsCard {
     @NSManaged public var breed: String?
     @NSManaged public var age: Int16
     @NSManaged public var image: Data?
+	@NSManaged public var color: Data?
 
 }
 
 extension CatsCard : Identifiable {
 
+	var cardsColor: UIColor {
+		UIColor.color(withData: color)
+	}
 }
