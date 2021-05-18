@@ -9,6 +9,7 @@ import Foundation
 
 /// Factory class for parsing JSON data
 final class JSONParser {
+	
 	/// Parse JSON from `Data`
 	/// - Parameters:
 	///   - data: Data from which JSON will be parsed

@@ -35,6 +35,7 @@ extension CatsCard {
 	@NSManaged public var isCastrated: Bool
 	@NSManaged public var additionalInfo: String?
 	@NSManaged public var catShows: Data?
+	@NSManaged public var temperament: Data?
 }
 
 extension CatsCard : Identifiable {
@@ -94,6 +95,17 @@ extension CatsCard : Identifiable {
 			}
 		}
 		return []
+	}
+	
+	var wrappedTemperament: Temperament {
+		if let data = temperament {
+			do {
+				return try JSONParser.parse(from: data)[0]
+			} catch {
+				return .none
+			}
+		}
+		return .none
 	}
 }
 
