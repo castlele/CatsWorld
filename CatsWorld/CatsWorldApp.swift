@@ -21,7 +21,7 @@ struct CatsWorldApp: App {
     var body: some Scene {
         WindowGroup {
 			TabView(selection: $selectedView) {
-				CatsCardView()
+				MapView()
 					.tabItem {
 						Image(systemName: "map")
 						Text("Map")

@@ -17,44 +17,47 @@ struct HomeScreenView: View {
 	) var catsCards: FetchedResults<CatsCard>
 	
     var body: some View {
-		VStack {
-			Button(action: {
-				let cat = CatsCard(context: persistenceController)
-				cat.name = "Lulu"
-				cat.age = 5
-				cat.breed = "Unicorn"
-				cat.id = UUID()
-				let color = UIColor.orange
-				cat.color = color.encode()
-				PersistenceController.shared.save()
-			}, label: {
-				Text("Add")
-			})
-			.frame(width: 200, height: 100)
-			.padding()
-			
-			Button(action: {
-				catsCards.forEach { card in
-					PersistenceController.shared.delete(card)
-				}
-			}, label: {
-				Text("Delete all")
-			})
-			.frame(width: 200, height: 100)
-			.padding()
-			
-			GeometryReader { geometry in
-				ScrollView {
-					VStack(spacing: 10) {
-						ForEach(catsCards, id: \.id) { card in
-							CatsCardView(name: card.name, age: card.age, breed: card.breed, imageData: card.image, cardColor: Color( card.cardsColor))
-								.padding()
-								.frame(width: geometry.size.width, height: geometry.size.width / 2)
-								.padding([.bottom, .leading, .trailing])
+		NavigationView {
+			VStack {
+				Button(action: {
+					let cat = CatsCard(context: persistenceController)
+					cat.name = "Lulu"
+//					cat.age = 5
+					cat.breed = "Unicorn"
+					cat.id = UUID()
+					cat.sex = "M"
+					let color = UIColor.orange
+					cat.color = color.encode()
+					PersistenceController.shared.save()
+				}, label: {
+					Text("Add")
+				})
+				.frame(width: 200, height: 100)
+				.padding()
+				
+				Button(action: {
+					catsCards.forEach { card in
+						PersistenceController.shared.delete(card)
+					}
+				}, label: {
+					Text("Delete all")
+				})
+				.frame(width: 200, height: 100)
+				.padding()
+				
+				GeometryReader { geometry in
+					ScrollView {
+						VStack(spacing: 10) {
+							ForEach(catsCards, id: \.id) { card in
+								CatsCardView(cat: card)
+									.padding()
+									.frame(width: geometry.size.width, height: geometry.size.width / 2)
+									.padding([.bottom, .leading, .trailing])
+							}
 						}
 					}
+					.frame(width: geometry.size.width, height: geometry.size.height)
 				}
-				.frame(width: geometry.size.width, height: geometry.size.height)
 			}
 		}
     }

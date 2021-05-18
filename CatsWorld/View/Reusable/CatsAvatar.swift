@@ -1,0 +1,29 @@
+//
+//  CatsAvatar.swift
+//  CatsWorld
+//
+//  Created by Nikita Semenov on 17.05.2021.
+//
+
+import SwiftUI
+
+struct CatsAvatar: View {
+	
+	var avatar: UIImage
+	
+	var image: Image {
+		Image(uiImage: avatar)
+	}
+	
+    var body: some View {
+        image
+			.resizable()
+			.background(Color(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)))
+    }
+}
+
+struct CatsAvatar_Previews: PreviewProvider {
+    static var previews: some View {
+		CatsAvatar(avatar: UIImage(systemName: "person.crop.circle.fill")!)
+    }
+}
