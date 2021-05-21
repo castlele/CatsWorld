@@ -10,6 +10,11 @@ import Foundation
 final class BreedsViewModel: ObservableObject {
 	
 	static let defaultEndPoint = EndPoint.breedsAPI([.attachBreed])
+	static let shared = BreedsViewModel()
+	
+	static var defaultBreed: Breed {
+		shared.breeds[0]
+	}
 		
 	@Published var breeds: [Breed] = MockData.breeds
 	
@@ -42,14 +47,16 @@ final class BreedsViewModel: ObservableObject {
 	///   - error: Optional `Error` which should be handled
 	///   Only one parameter can have `nil` value at the same time
 	private func parseJSON(data: Data?, error: Error?) -> Void {
-		if let data = data {
-			do{
-				try JSONParser.parse(from: data, completion: addBreeds(breeds:))
-			} catch {
-				print(error)
+		DispatchQueue.main.async { [self] in
+			if let data = data {
+				do{
+					try JSONParser.parse(from: data, completion: addBreeds(breeds:))
+				} catch {
+					print(error)
+					// TODO: - Error handling
+				}
 			}
 		}
-		// TODO: - Error handling
 	}
 	
 	/// Adds breeds from the array and removes all mock data

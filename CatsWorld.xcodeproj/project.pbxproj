@@ -7,10 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7B096CA32657B1F900B99D3E /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B096CA22657B1F900B99D3E /* UIApplication.swift */; };
+		7B096CA52657B54300B99D3E /* HideKeyboardGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B096CA42657B54300B99D3E /* HideKeyboardGesture.swift */; };
+		7B096CA72657B75300B99D3E /* CheckIfScrolling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B096CA62657B75300B99D3E /* CheckIfScrolling.swift */; };
+		7B096CA92657B80A00B99D3E /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B096CA82657B80A00B99D3E /* View.swift */; };
 		7B1AA591264A9AFE002A3774 /* NetworkEndPoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1AA590264A9AFE002A3774 /* NetworkEndPoints.swift */; };
 		7B1AA593264AA018002A3774 /* EndPointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1AA592264AA018002A3774 /* EndPointTests.swift */; };
 		7B1AA595264AA4CF002A3774 /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1AA594264AA4CF002A3774 /* MockData.swift */; };
 		7B1AA599264AA798002A3774 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1AA598264AA798002A3774 /* Array.swift */; };
+		7B1D6C4B2656526200968564 /* MultilineTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1D6C4A2656526200968564 /* MultilineTextFieldView.swift */; };
+		7B66A10626556AE100FDC9A7 /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B66A10526556AE100FDC9A7 /* RatingView.swift */; };
 		7B6E3D42265272AF00B04B62 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6E3D41265272AF00B04B62 /* UIColor.swift */; };
 		7B6E3D4526527DA200B04B62 /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6E3D4426527DA200B04B62 /* ImagePickerView.swift */; };
 		7B6E3D47265282CE00B04B62 /* CatsPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6E3D46265282CE00B04B62 /* CatsPageView.swift */; };
@@ -35,6 +41,9 @@
 		7B968A072653A9F1002ECE07 /* Show.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B968A062653A9F1002ECE07 /* Show.swift */; };
 		7B968A092653AE48002ECE07 /* Temperament.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B968A082653AE48002ECE07 /* Temperament.swift */; };
 		7B968A0B2653B149002ECE07 /* TemperamentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B968A0A2653B149002ECE07 /* TemperamentTests.swift */; };
+		7BE498932653B9EB004F7F52 /* EditingCatsPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE498922653B9EB004F7F52 /* EditingCatsPageView.swift */; };
+		7BE498952653BC92004F7F52 /* Gender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE498942653BC92004F7F52 /* Gender.swift */; };
+		7BE498972653E322004F7F52 /* CatsCardsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE498962653E322004F7F52 /* CatsCardsViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,10 +57,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7B096CA22657B1F900B99D3E /* UIApplication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
+		7B096CA42657B54300B99D3E /* HideKeyboardGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideKeyboardGesture.swift; sourceTree = "<group>"; };
+		7B096CA62657B75300B99D3E /* CheckIfScrolling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckIfScrolling.swift; sourceTree = "<group>"; };
+		7B096CA82657B80A00B99D3E /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		7B1AA590264A9AFE002A3774 /* NetworkEndPoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkEndPoints.swift; sourceTree = "<group>"; };
 		7B1AA592264AA018002A3774 /* EndPointTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPointTests.swift; sourceTree = "<group>"; };
 		7B1AA594264AA4CF002A3774 /* MockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
 		7B1AA598264AA798002A3774 /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
+		7B1D6C4A2656526200968564 /* MultilineTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultilineTextFieldView.swift; sourceTree = "<group>"; };
+		7B66A10526556AE100FDC9A7 /* RatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
 		7B6E3D41265272AF00B04B62 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		7B6E3D4426527DA200B04B62 /* ImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
 		7B6E3D46265282CE00B04B62 /* CatsPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatsPageView.swift; sourceTree = "<group>"; };
@@ -80,6 +95,9 @@
 		7B968A062653A9F1002ECE07 /* Show.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Show.swift; sourceTree = "<group>"; };
 		7B968A082653AE48002ECE07 /* Temperament.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Temperament.swift; sourceTree = "<group>"; };
 		7B968A0A2653B149002ECE07 /* TemperamentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemperamentTests.swift; sourceTree = "<group>"; };
+		7BE498922653B9EB004F7F52 /* EditingCatsPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingCatsPageView.swift; sourceTree = "<group>"; };
+		7BE498942653BC92004F7F52 /* Gender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gender.swift; sourceTree = "<group>"; };
+		7BE498962653E322004F7F52 /* CatsCardsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatsCardsViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,14 +123,39 @@
 			children = (
 				7B1AA598264AA798002A3774 /* Array.swift */,
 				7B6E3D41265272AF00B04B62 /* UIColor.swift */,
+				7B096CA22657B1F900B99D3E /* UIApplication.swift */,
+				7B096CA82657B80A00B99D3E /* View.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		7B66A10D26559A2300FDC9A7 /* ViewModifiers */ = {
+			isa = PBXGroup;
+			children = (
+				7B096CA42657B54300B99D3E /* HideKeyboardGesture.swift */,
+				7B096CA62657B75300B99D3E /* CheckIfScrolling.swift */,
+			);
+			path = ViewModifiers;
+			sourceTree = "<group>";
+		};
+		7B66A10E26559A3600FDC9A7 /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+				7B86143A264D27AA008616DB /* CatsCardView.swift */,
+				7B6E3D482652CB4300B04B62 /* CatsMainInfoView.swift */,
+				7B6E3D4A2652D59E00B04B62 /* EditButton.swift */,
+				7B6E3D4C2652D6DC00B04B62 /* CatsAvatar.swift */,
+				7BE498922653B9EB004F7F52 /* EditingCatsPageView.swift */,
+				7B66A10526556AE100FDC9A7 /* RatingView.swift */,
+			);
+			path = CustomViews;
 			sourceTree = "<group>";
 		};
 		7B6E3D4326527D8C00B04B62 /* UIKit */ = {
 			isa = PBXGroup;
 			children = (
 				7B6E3D4426527DA200B04B62 /* ImagePickerView.swift */,
+				7B1D6C4A2656526200968564 /* MultilineTextFieldView.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -192,10 +235,7 @@
 		7B8B9A1126427E5500E98B8E /* View */ = {
 			isa = PBXGroup;
 			children = (
-				7B874683264B19F8006DC6A7 /* MapView.swift */,
-				7B874685264B1A35006DC6A7 /* HomeScreenView.swift */,
-				7B6E3D46265282CE00B04B62 /* CatsPageView.swift */,
-				7B8B99E826427DDC00E98B8E /* BreedsList.swift */,
+				7BE498912653B9A5004F7F52 /* Main */,
 				7B8B9A1426427E7C00E98B8E /* Reusable */,
 			);
 			path = View;
@@ -215,6 +255,7 @@
 			isa = PBXGroup;
 			children = (
 				7B8B9A1926427EBA00E98B8E /* BreedsViewModel.swift */,
+				7BE498962653E322004F7F52 /* CatsCardsViewModel.swift */,
 				7B8B9A1B2642815E00E98B8E /* Helpers */,
 			);
 			path = ViewModel;
@@ -223,10 +264,8 @@
 		7B8B9A1426427E7C00E98B8E /* Reusable */ = {
 			isa = PBXGroup;
 			children = (
-				7B86143A264D27AA008616DB /* CatsCardView.swift */,
-				7B6E3D482652CB4300B04B62 /* CatsMainInfoView.swift */,
-				7B6E3D4A2652D59E00B04B62 /* EditButton.swift */,
-				7B6E3D4C2652D6DC00B04B62 /* CatsAvatar.swift */,
+				7B66A10E26559A3600FDC9A7 /* CustomViews */,
+				7B66A10D26559A2300FDC9A7 /* ViewModifiers */,
 			);
 			path = Reusable;
 			sourceTree = "<group>";
@@ -234,8 +273,8 @@
 		7B8B9A1B2642815E00E98B8E /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				7B8B9A1C2642816D00E98B8E /* JSONParser.swift */,
 				7B8B9A1E2642818000E98B8E /* NetworkRequester.swift */,
+				7B8B9A1C2642816D00E98B8E /* JSONParser.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -246,8 +285,20 @@
 				7B8B9A202642819600E98B8E /* Breed.swift */,
 				7B968A062653A9F1002ECE07 /* Show.swift */,
 				7B968A082653AE48002ECE07 /* Temperament.swift */,
+				7BE498942653BC92004F7F52 /* Gender.swift */,
 			);
 			path = DataObjects;
+			sourceTree = "<group>";
+		};
+		7BE498912653B9A5004F7F52 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				7B874683264B19F8006DC6A7 /* MapView.swift */,
+				7B874685264B1A35006DC6A7 /* HomeScreenView.swift */,
+				7B6E3D46265282CE00B04B62 /* CatsPageView.swift */,
+				7B8B99E826427DDC00E98B8E /* BreedsList.swift */,
+			);
+			path = Main;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -357,7 +408,11 @@
 				7B8B99E926427DDC00E98B8E /* BreedsList.swift in Sources */,
 				7B968A072653A9F1002ECE07 /* Show.swift in Sources */,
 				7B86143B264D27AA008616DB /* CatsCardView.swift in Sources */,
+				7BE498952653BC92004F7F52 /* Gender.swift in Sources */,
+				7B096CA32657B1F900B99D3E /* UIApplication.swift in Sources */,
 				7B86143F264D2953008616DB /* CatsCard+CoreDataProperties.swift in Sources */,
+				7B096CA72657B75300B99D3E /* CheckIfScrolling.swift in Sources */,
+				7BE498932653B9EB004F7F52 /* EditingCatsPageView.swift in Sources */,
 				7B8B99E726427DDC00E98B8E /* CatsWorldApp.swift in Sources */,
 				7B8B9A1D2642816D00E98B8E /* JSONParser.swift in Sources */,
 				7B8B9A1F2642818000E98B8E /* NetworkRequester.swift in Sources */,
@@ -365,6 +420,7 @@
 				7B1AA591264A9AFE002A3774 /* NetworkEndPoints.swift in Sources */,
 				7B874686264B1A35006DC6A7 /* HomeScreenView.swift in Sources */,
 				7B874684264B19F8006DC6A7 /* MapView.swift in Sources */,
+				7B096CA92657B80A00B99D3E /* View.swift in Sources */,
 				7B6E3D42265272AF00B04B62 /* UIColor.swift in Sources */,
 				7B861434264D1739008616DB /* Stash.xcdatamodeld in Sources */,
 				7B861436264D183B008616DB /* PersistenceController.swift in Sources */,
@@ -372,7 +428,11 @@
 				7B1AA595264AA4CF002A3774 /* MockData.swift in Sources */,
 				7B6E3D4526527DA200B04B62 /* ImagePickerView.swift in Sources */,
 				7B968A092653AE48002ECE07 /* Temperament.swift in Sources */,
+				7B1D6C4B2656526200968564 /* MultilineTextFieldView.swift in Sources */,
 				7B6E3D492652CB4300B04B62 /* CatsMainInfoView.swift in Sources */,
+				7BE498972653E322004F7F52 /* CatsCardsViewModel.swift in Sources */,
+				7B096CA52657B54300B99D3E /* HideKeyboardGesture.swift in Sources */,
+				7B66A10626556AE100FDC9A7 /* RatingView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

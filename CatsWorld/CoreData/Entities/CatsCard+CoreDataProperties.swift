@@ -17,27 +17,41 @@ extension CatsCard {
         return NSFetchRequest<CatsCard>(entityName: "CatsCard")
     }
 
+	// Properties needed for the card
     @NSManaged public var id: UUID?
+	@NSManaged public var image: Data?
+	@NSManaged public var color: Data?
+	
+	// General cat properties
     @NSManaged public var name: String?
     @NSManaged public var breed: String?
 	@NSManaged public var sex: String?
     @NSManaged public var dateOfBirth: Date?
-    @NSManaged public var image: Data?
-	@NSManaged public var color: Data?
+	
+	// Physical cat properties
+	@NSManaged public var isPhysicalSectionEnabled: Bool
 	@NSManaged public var suppressedTail: Bool
-	@NSManaged public var shorthaired: Bool
 	@NSManaged public var shortLegs: Bool
 	@NSManaged public var hairless: Bool
+	@NSManaged public var weight: Float
+	@NSManaged public var isCastrated: Bool
+	
+	// Psycological cat properties
+	@NSManaged public var isPsycolocicalSectionEnabled: Bool
 	@NSManaged public var strangerFriendly: Int16
 	@NSManaged public var childFriendly: Int16
 	@NSManaged public var dogFriendly: Int16
-	@NSManaged public var weight: Float
-	@NSManaged public var isCastrated: Bool
-	@NSManaged public var additionalInfo: String?
-	@NSManaged public var catShows: Data?
 	@NSManaged public var temperament: Data?
+	
+	// Cat's shows properties
+	@NSManaged public var isCatShowsSectionEnabled: Bool
+	@NSManaged public var catShows: Data?
+	
+	// Additional information string
+	@NSManaged public var additionalInfo: String?
 }
 
+// MARK:- Wrapped properties
 extension CatsCard : Identifiable {
 	
 	var wrappedName: String {
@@ -54,6 +68,7 @@ extension CatsCard : Identifiable {
 				return uiImage
 			}
 		}
+		// Default UIImage
 		return UIImage(systemName: "person.crop.circle.fill")!
 	}
 	
@@ -72,12 +87,10 @@ extension CatsCard : Identifiable {
 	
 	var wrappedSex: String {
 		switch sex {
-			case "M":
-				return "M"
-			case "W":
-				return "W"
+			case "male":
+				return "male"
 			default:
-				return "-"
+				return "female"
 		}
 	}
 	
@@ -98,40 +111,51 @@ extension CatsCard : Identifiable {
 	}
 	
 	var wrappedTemperament: Temperament {
+		let defaultValue = Temperament.choleric
+		
 		if let data = temperament {
 			do {
-				return try JSONParser.parse(from: data)[0]
+				return try JSONParser.parse(from: data)
 			} catch {
-				return .none
+				return defaultValue
 			}
 		}
-		return .none
+		return defaultValue
 	}
 }
 
+// MARK:- Private helper functions
 extension CatsCard {
+	
+	/// Pick needed age and its measurement
+	/// - Parameter dc: Date components of age
+	/// - Returns: Age as `String`
 	private func getAge(dateComponents dc: DateComponents) -> String {
 		if let year = dc.year, dc.year != 0 {
-			return makeStringAge(year)
+			return makeStringAge(year, measurement: "year")
 			
 		} else if let month = dc.month, dc.month != 0 {
-			return makeStringAge(month)
+			return makeStringAge(month, measurement: "month")
 			
 		} else if let week = dc.weekday, dc.weekday != 0 {
-			return makeStringAge(week)
+			return makeStringAge(week, measurement: "week")
 			
 		} else if let day = dc.day, dc.day != 0 {
-			return makeStringAge(day)
+			return makeStringAge(day, measurement: "day")
 			
 		} else {
 			return "None"
 		}
 	}
 	
-	private func makeStringAge(_ age: Int) -> String {
+	/// Makes age as string
+	/// - Parameter age: Age as `Int`
+	/// - Parameter measurement: In what age measures
+	/// - Returns: Age as`String`
+	private func makeStringAge(_ age: Int, measurement: String) -> String {
 		if age == 1 {
-			return "\(age) year"
+			return "\(age) \(measurement)"
 		}
-		return "\(age) years"
+		return "\(age) \(measurement)s"
 	}
 }

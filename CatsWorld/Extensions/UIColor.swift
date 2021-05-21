@@ -9,6 +9,10 @@ import Foundation
 import UIKit
 
 extension UIColor {
+	
+	/// Decode `UIColor` from `Data`
+	/// - Parameter data: Optional data that represents color
+	/// - Returns: Decoded `UIColor` if succseed or default `.white`
 	class func color(withData data: Data?) -> UIColor {
 		do {
 			if let data = data {
@@ -21,6 +25,8 @@ extension UIColor {
 		}
 	}
 	
+	/// Encode `UIColor` to `Data`
+	/// - Returns: `Data` that represents `UIColor`
 	func encode() -> Data {
 		do {
 			let data = try NSKeyedArchiver.archivedData(withRootObject: self, requiringSecureCoding: false)

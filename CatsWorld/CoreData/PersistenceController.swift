@@ -22,6 +22,8 @@ struct PersistenceController {
 		}
 	}
 	
+	/// Saving of changes
+	/// - Parameter completion: Error handling function
 	func save(completion: @escaping (Error?) -> Void = {_ in}) {
 		let context = conteiner.viewContext
 		
@@ -35,6 +37,10 @@ struct PersistenceController {
 		}
 	}
 	
+	/// Deleting of certain object from data base
+	/// - Parameters:
+	///   - object: Object which should me removed from data base
+	///   - completion: Error handling function
 	func delete(_ object: NSManagedObject, completion: @escaping (Error?) -> Void = {_ in}) {
 		let context = conteiner.viewContext
 		context.delete(object)

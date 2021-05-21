@@ -12,9 +12,11 @@
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="image" optional="YES" attributeType="Binary"/>
         <attribute name="isCastrated" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="isCatShowsSectionEnabled" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="isPhysicalSectionEnabled" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="isPsycolocicalSectionEnabled" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="sex" optional="YES" attributeType="String"/>
-        <attribute name="shorthaired" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="shortLegs" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="strangerFriendly" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="suppressedTail" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
@@ -22,6 +24,6 @@
         <attribute name="weight" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
     </entity>
     <elements>
-        <element name="CatsCard" positionX="-63" positionY="-18" width="128" height="314"/>
+        <element name="CatsCard" positionX="-63" positionY="-18" width="128" height="344"/>
     </elements>
 </model>

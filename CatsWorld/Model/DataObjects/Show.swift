@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// Representation of cats' shows
 struct Show: Codable {
 	var name: String
 	var place: Int

@@ -7,16 +7,18 @@
 
 import Foundation
 
-enum Temperament {
-	case none
+/// Representation of cat's Temperament
+enum Temperament: String, CaseIterable {
 	case choleric
 	case melancholic
 	case phlegmatic
 	case sanguine
 }
 
+// MARK:- Codable protocol confirmation
 extension Temperament: Codable {
 	
+	/// Key for Encoding and Decoding
 	enum Key: CodingKey {
 		case rawValue
 	}
@@ -30,8 +32,6 @@ extension Temperament: Codable {
 		let rawValue = try container.decode(String.self, forKey: .rawValue)
 		
 		switch rawValue {
-			case "none":
-				self = .none
 			case "choleric":
 				self = .choleric
 			case "melancholic":
@@ -49,8 +49,6 @@ extension Temperament: Codable {
 		var container = encoder.container(keyedBy: Key.self)
 		
 		switch self {
-			case .none:
-				try container.encode("none", forKey: .rawValue)
 			case .choleric:
 				try container.encode("choleric", forKey: .rawValue)
 			case .melancholic:

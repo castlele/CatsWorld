@@ -22,10 +22,9 @@ struct HomeScreenView: View {
 				Button(action: {
 					let cat = CatsCard(context: persistenceController)
 					cat.name = "Lulu"
-//					cat.age = 5
 					cat.breed = "Unicorn"
 					cat.id = UUID()
-					cat.sex = "M"
+					cat.sex = "male"
 					let color = UIColor.orange
 					cat.color = color.encode()
 					PersistenceController.shared.save()
