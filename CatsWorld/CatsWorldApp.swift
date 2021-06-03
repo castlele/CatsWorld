@@ -10,11 +10,11 @@ import SwiftUI
 @main
 struct CatsWorldApp: App {
 	
-	@StateObject private var breedsViewModel = BreedsViewModel.shared
-	
 	let persistenceController = PersistenceController.shared
 	
 	@Environment(\.scenePhase) var scenePhase
+	
+	@StateObject private var breedsViewModel = BreedsViewModel.shared
 	
 	@State var selectedView = 1
 	
@@ -22,18 +22,20 @@ struct CatsWorldApp: App {
         WindowGroup {
 			TabView(selection: $selectedView) {
 				MapView()
-					.environmentObject(breedsViewModel)
 					.tabItem {
 						Image(systemName: "map")
 						Text("Map")
 					}
 					.tag(0)
 				HomeScreenView()
+					.environmentObject(breedsViewModel)
+					.environment(\.managedObjectContext, persistenceController.conteiner.viewContext)
 					.tabItem {
 						Image(systemName: "house")
 						Text("Home")
 					}
 					.tag(1)
+
 				BreedsList()
 					.environmentObject(breedsViewModel)
 					.tabItem {
@@ -42,9 +44,8 @@ struct CatsWorldApp: App {
 					}
 					.tag(2)
 			}
-			.environment(\.managedObjectContext, persistenceController.conteiner.viewContext)
 		}
-		.onChange(of: scenePhase) { (newScenePhase) in
+		.onChange(of: scenePhase) { newScenePhase in
 			savePersistenceInBackgroundState(newScenePhase)
 		}
 	}

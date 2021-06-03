@@ -18,7 +18,6 @@ extension CatsCard {
     }
 
 	// Properties needed for the card
-    @NSManaged public var id: UUID?
 	@NSManaged public var image: Data?
 	@NSManaged public var color: Data?
 	
@@ -53,6 +52,10 @@ extension CatsCard {
 
 // MARK:- Wrapped properties
 extension CatsCard : Identifiable {
+	
+	public var id: UUID {
+		UUID()
+	}
 	
 	var wrappedName: String {
 		name ?? "None"

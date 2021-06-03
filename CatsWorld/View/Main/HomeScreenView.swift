@@ -9,45 +9,50 @@ import SwiftUI
 
 struct HomeScreenView: View {
 	
-	@Environment(\.managedObjectContext) var persistenceController
+	@EnvironmentObject var breedsViewModel: BreedsViewModel
+	@Environment(\.managedObjectContext) var managedObjectContext
 	
 	@FetchRequest(
 		entity: CatsCard.entity(),
-		sortDescriptors: [NSSortDescriptor(keyPath: \CatsCard.name, ascending: true)]
+		sortDescriptors: [],
+		predicate: nil,
+		animation: .spring()
 	) var catsCards: FetchedResults<CatsCard>
+	
+	@State var addCatSheet = false
+	
+	@State var editingView: EditingCatsPageView!
 	
     var body: some View {
 		NavigationView {
 			VStack {
-				Button(action: {
-					let cat = CatsCard(context: persistenceController)
-					cat.name = "Lulu"
-					cat.breed = "Unicorn"
-					cat.id = UUID()
-					cat.sex = "male"
-					let color = UIColor.orange
-					cat.color = color.encode()
-					PersistenceController.shared.save()
-				}, label: {
-					Text("Add")
-				})
-				.frame(width: 200, height: 100)
-				.padding()
+				HStack {
+
+					Spacer()
+
+					Button(action: {
+						let cat = CatsCard(context: managedObjectContext)
+						editingView = EditingCatsPageView(cat: cat, breedsViewModel: breedsViewModel)
+						addCatSheet.toggle()
+
+					}, label: {
+						Image(systemName: "plus")
+							.resizable()
+							.accentColor(.green)
+							.padding()
+					})
+					.background(Color.gray)
+					.frame(width: 60, height: 60)
+					.clipShape(Circle())
+					.padding()
+				}
 				
-				Button(action: {
-					catsCards.forEach { card in
-						PersistenceController.shared.delete(card)
-					}
-				}, label: {
-					Text("Delete all")
-				})
-				.frame(width: 200, height: 100)
-				.padding()
+				Spacer()
 				
 				GeometryReader { geometry in
 					ScrollView {
 						VStack(spacing: 10) {
-							ForEach(catsCards, id: \.id) { card in
+							ForEach(catsCards) { card in
 								CatsCardView(cat: card)
 									.padding()
 									.frame(width: geometry.size.width, height: geometry.size.width / 2)
@@ -57,13 +62,30 @@ struct HomeScreenView: View {
 					}
 					.frame(width: geometry.size.width, height: geometry.size.height)
 				}
+
+			}
+			.sheet(isPresented: $addCatSheet) {
+				editingView
+			}
+			.navigationBarHidden(true)
+			.onAppear() {
+				if managedObjectContext.hasChanges {
+					managedObjectContext.refreshAllObjects()
+				}
+				editingView = nil
+				#if DEBUG
+				print(catsCards)
+				print(catsCards.count)
+				#endif
 			}
 		}
+		
     }
 }
 
 struct HomeScreenView_Previews: PreviewProvider {
     static var previews: some View {
         HomeScreenView()
+			.environment(\.managedObjectContext, PersistenceController.preview.conteiner.viewContext)
     }
 }

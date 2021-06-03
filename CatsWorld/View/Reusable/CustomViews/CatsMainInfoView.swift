@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CatsMainInfoView: View {
 	
-	var cat: CatsCard
+	@ObservedObject var cat: CatsCard
 	
     var body: some View {
 		HStack(spacing: 20) {
@@ -37,6 +37,6 @@ struct CatsMainInfoView: View {
 
 struct CatsMainInfoView_Previews: PreviewProvider {
 	static var previews: some View {
-		CatsPageView(cat: CatsCard(context: PersistenceController.shared.conteiner.viewContext))
+		CatsMainInfoView(cat: CatsCard(context: PersistenceController.preview.conteiner.viewContext))
 	}
 }

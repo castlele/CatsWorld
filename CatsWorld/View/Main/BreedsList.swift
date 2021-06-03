@@ -15,6 +15,11 @@ struct BreedsList: View {
 		List(viewModel.breeds) { breed in
 			Text(breed.name)
 		}
+		.onAppear {
+			DispatchQueue.main.async {
+				viewModel.loadBreeds()
+			}
+		}
     }
 }
 

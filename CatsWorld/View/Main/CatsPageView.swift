@@ -9,17 +9,18 @@ import SwiftUI
 
 struct CatsPageView: View {
 	
+	var breedsViewModel: BreedsViewModel
 	@State var isEditing = true
 	
-	var cat: CatsCard
+//	var cat: CatsCard
 	
     var body: some View {
 		NavigationView {
 			ZStack {
 				if isEditing {
-					EditingCatsPageView()
+//					EditingCatsPageView(PersistenceController.shared.conteiner.viewContext, breedsViewModel: breedsViewModel)
 				} else {
-					MainCatsPageView(cat: cat)
+//					MainCatsPageView(cat: cat)
 				}
 			}
 			.navigationBarItems(trailing: EditButton(isEditing: $isEditing))
@@ -44,8 +45,8 @@ struct MainCatsPageView: View {
 	}
 }
 
-struct CatsPageView_Previews: PreviewProvider {
-    static var previews: some View {
-		CatsPageView(cat: CatsCard(context: PersistenceController.shared.conteiner.viewContext))
-    }
-}
+//struct CatsPageView_Previews: PreviewProvider {
+//    static var previews: some View {
+//		CatsPageView(breedsViewModel: BreedsViewModel.shared, cat: CatsCard(context: PersistenceController.shared.conteiner.viewContext))
+//    }
+//}

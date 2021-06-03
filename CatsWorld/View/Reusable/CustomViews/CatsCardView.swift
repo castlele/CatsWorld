@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CatsCardView: View {
 	
-	var cat: CatsCard
+	@ObservedObject var cat: CatsCard
 	
 	var cardColor: Color {
 		let uiColor = cat.wrappedColor
@@ -40,6 +40,6 @@ struct CatsCardView: View {
 
 struct CatsCardView_Previews: PreviewProvider {
     static var previews: some View {
-		CatsPageView(cat: CatsCard(context: PersistenceController.shared.conteiner.viewContext))
+		CatsCardView(cat: CatsCard(context: PersistenceController.preview.conteiner.viewContext))
     }
 }

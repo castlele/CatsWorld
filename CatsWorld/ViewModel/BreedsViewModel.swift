@@ -17,13 +17,13 @@ final class BreedsViewModel: ObservableObject {
 	}
 		
 	@Published var breeds: [Breed] = MockData.breeds
-	
-	init() {
-		makeNetworkRequest()
-	}
-	
-	/// Starts making `URLRequest`
-	private func makeNetworkRequest() {
+	@Published var isLoading = false
+}
+
+// MARK:- Public methods
+extension BreedsViewModel {
+	/// Starts making `URLRequest` and loads breeds
+	public func loadBreeds() {
 		let url = makeURL(endPoint: BreedsViewModel.defaultEndPoint)
 		
 		NetworkRequester.makeRequest(
@@ -32,7 +32,10 @@ final class BreedsViewModel: ObservableObject {
 			completion: parseJSON(data:error:)
 		)
 	}
-	
+}
+
+// MARK:- Private methods
+extension BreedsViewModel {
 	/// Makes `URL`
 	/// - Parameter endPoint: Instance of `EndPoint` enumeration
 	/// - Returns: Optional `URL` made from `endPoint`

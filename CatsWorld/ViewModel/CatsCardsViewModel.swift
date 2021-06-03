@@ -7,86 +7,101 @@
 
 import Foundation
 import SwiftUI
+import CoreData
 
 final class CatsCardsViewModel: ObservableObject {
 	
-	var cat: CatsCard
+	@Published var isAlertOfCanceling = false
+	@Published var isScrollingDown = false
 	
-	/// Track is changes was made to cat entity
-	var wasChanged = false
+	/// Currently edited object of `CatsCard`
+	var cat: CatsCard!
+	var managedObjectContext: NSManagedObjectContext!
 	
-	init(_ cat: CatsCard) {
-		self.cat = cat
-	}
+	/// Track if changes was made to cat entity
+	@Published var wasChanged = false
 	
 	@Published var name = "" {
-		didSet(newName) {
+		willSet(newName) {
+			print(newName)
+			guard let cat = cat else { return }
 			setNew(value: newName, to: &cat.name)
 		}
 	}
 	
 	@Published var dateOfBirth: Date = Date() {
-		didSet(newDate) {
+		willSet(newDate) {
+			guard let cat = cat else { return }
 			setNew(value: newDate, to: &cat.dateOfBirth)
 		}
 	}
 	
 	@Published var gender: Gender = .female {
-		didSet(newGender) {
+		willSet(newGender) {
+			guard let cat = cat else { return }
 			setNew(value: newGender.rawValue, to: &cat.sex)
 		}
 	}
 	
 	@Published var breed: String = BreedsViewModel.defaultBreed.name {
-		didSet(newBreed) {
+		willSet(newBreed) {
+			guard let cat = cat else { return }
 			setNew(value: newBreed, to: &cat.breed)
 		}
 	}
 	
 	@Published var isPhysicalSectionEnabled = false {
-		didSet(isSection) {
+		willSet(isSection) {
+			guard let cat = cat else { return }
 			setNew(value: isSection, to: &cat.isPhysicalSectionEnabled)
 		}
 	}
 	
 	@Published var weight: Float = 1 {
 		willSet(newWeight) {
+			guard let cat = cat else { return }
 			setNew(value: newWeight, to: &cat.weight)
 		}
 	}
 	
 	@Published var isCastrated = false {
-		didSet(wasCastrated) {
+		willSet(wasCastrated) {
+			guard let cat = cat else { return }
 			setNew(value: wasCastrated, to: &cat.isCastrated)
 		}
 	}
 	
 	@Published var suppressedTail = false {
-		didSet(isSuppressed) {
+		willSet(isSuppressed) {
+			guard let cat = cat else { return }
 			setNew(value: isSuppressed, to: &cat.suppressedTail)
 		}
 	}
 	
 	@Published var shortLegs = false {
-		didSet(isShort) {
+		willSet(isShort) {
+			guard let cat = cat else { return }
 			setNew(value: isShort, to: &cat.shortLegs)
 		}
 	}
 	
 	@Published var hairless = false {
-		didSet(isHairless) {
+		willSet(isHairless) {
+			guard let cat = cat else { return }
 			setNew(value: isHairless, to: &cat.hairless)
 		}
 	}
 	
 	@Published var isPsycolocicalSectionEnabled = false {
-		didSet(isSection) {
+		willSet(isSection) {
+			guard let cat = cat else { return }
 			setNew(value: isSection, to: &cat.isPsycolocicalSectionEnabled)
 		}
 	}
 	
 	@Published var temperament: Temperament = .choleric {
-		didSet(newTemperament) {
+		willSet(newTemperament) {
+			guard let cat = cat else { return }
 			if let data = encode(newTemperament) {
 				setNew(value: data, to: &cat.temperament)
 			}
@@ -94,25 +109,29 @@ final class CatsCardsViewModel: ObservableObject {
 	}
 	
 	@Published var strangerFriendly = 1 {
-		didSet(rating) {
+		willSet(rating) {
+			guard let cat = cat else { return }
 			setNew(value: Int16(rating), to: &cat.strangerFriendly)
 		}
 	}
 	
 	@Published var childFriendly = 1 {
-		didSet(rating) {
+		willSet(rating) {
+			guard let cat = cat else { return }
 			setNew(value: Int16(rating), to: &cat.childFriendly)
 		}
 	}
 	
 	@Published var dogFriendly = 1 {
-		didSet(rating) {
+		willSet(rating) {
+			guard let cat = cat else { return }
 			setNew(value: Int16(rating), to: &cat.dogFriendly)
 		}
 	}
 	
 	@Published var additionalInfo = "" {
-		didSet(newInfo) {
+		willSet(newInfo) {
+			guard let cat = cat else { return }
 			setNew(value: newInfo, to: &cat.additionalInfo)
 		}
 	}
@@ -120,6 +139,41 @@ final class CatsCardsViewModel: ObservableObject {
 	
 // MARK:- Helper methods
 extension CatsCardsViewModel {
+	
+	/// Saves changes, made to instance of `CatsCard`
+	func save() {
+		guard let _ = cat else { return }
+		
+		do {
+			try managedObjectContext.save()
+		} catch {
+			// TODO: Error handling
+			print(error.localizedDescription)
+		}
+		
+		self.cat = nil
+		self.managedObjectContext = nil
+	}
+	
+	/// Deletes `CatsCard` object from Core Data
+	/// Assigns nil to instance of `cat` and `managedObjectContext` of current `CatsCardsViewModel`
+	func delete() {
+		guard let cat = cat else { return }
+		
+		managedObjectContext.delete(cat)
+		
+		self.cat = nil
+		self.managedObjectContext = nil
+	}
+	
+	/// Dismisses `EditingCatsPageView` and discard or submit changes
+	/// - Parameters:
+	///   - isDiscardChanges: If changes, made should be discarded
+	///   - presentation: `PresentationMode` to dismiss view
+	func dismiss(isDiscardChanges: Bool = true, presentation: Binding<PresentationMode>) {
+		isDiscardChanges ? delete() : save()
+		presentation.wrappedValue.dismiss()
+	}
 	
 	/// Encode object with `JSONEncoder().encode(_:)`
 	/// - Parameter obj: `Encodable` object

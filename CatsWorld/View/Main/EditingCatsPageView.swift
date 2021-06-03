@@ -6,30 +6,25 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct EditingCatsPageView: View {
 	
 	@Environment(\.presentationMode) var presentation
-	@Environment(\.managedObjectContext) var persistenceController
+	@Environment(\.managedObjectContext) var managedObjectContext
 	
-	@EnvironmentObject var breedsViewModel: BreedsViewModel
+	@StateObject var catsViewModel = CatsCardsViewModel()
 	
-	@StateObject var catsViewModel = CatsCardsViewModel(CatsCard(context: PersistenceController.shared.conteiner.viewContext))
-	
-	@State var isScrollingDown = false
-	
-	var isSheet = false
-	
-	var listOfBreeds: [Breed] {
-		breedsViewModel.breeds
-	}
+	var cat: CatsCard
+	var breedsViewModel: BreedsViewModel
 	
 	var body: some View {
-		if !isSheet {
-			return AnyView(VStack {
-				if !isScrollingDown {
-					CatsAvatar(avatar: catsViewModel.cat.wrappedImage)
+		NavigationView {
+			VStack {
+				if !catsViewModel.isScrollingDown {
+					CatsAvatar(avatar: UIImage(systemName: "person.crop.circle.fill")!	)
 						.frame(maxWidth: 150, maxHeight: 150)
+						.padding(.top)
 				}
 				
 				Form {
@@ -42,14 +37,14 @@ struct EditingCatsPageView: View {
 							displayedComponents: .date
 						).datePickerStyle(DefaultDatePickerStyle())
 						
-						Picker("What is the cat's gender", selection: $catsViewModel.gender) {
+						Picker("What is the wrappedCat's gender", selection: $catsViewModel.gender) {
 							ForEach(0..<2) { index in
 								Text("\(Gender.allCases[index].rawValue.capitalized)").tag(Gender.allCases[index])
 							}
 						}.pickerStyle(SegmentedPickerStyle())
 						
-						Picker("Breed of the cat", selection: $catsViewModel.breed) {
-							ForEach(listOfBreeds, id: \.name) { breed in
+						Picker("Breed of the wrappedCat", selection: $catsViewModel.breed) {
+							ForEach(breedsViewModel.breeds, id: \.name) { breed in
 								Text("\(breed.name)")
 							}
 						}.pickerStyle(InlinePickerStyle())
@@ -113,20 +108,41 @@ struct EditingCatsPageView: View {
 					}
 				}
 			}
-			.checkIfScrolling(isScrolling: $isScrollingDown)
+			.checkIfScrolling(isScrolling: $catsViewModel.isScrollingDown)
 			.hideKeyboardGesture()
-			)
-		
-		} else {
-			return AnyView(NavigationView {
-				
-			})
+			.navigationBarItems(
+				leading: CancelButton(
+					presentation: presentation,
+					showAlert: $catsViewModel.isAlertOfCanceling,
+					isEditing: .constant(false),
+					wasChanges: catsViewModel.wasChanged) {
+					catsViewModel.dismiss(presentation: presentation)
+					
+				}, trailing: DoneButton(presentation: presentation) {
+					catsViewModel.dismiss(isDiscardChanges: false, presentation: presentation)
+				})
+			.alert(isPresented: $catsViewModel.isAlertOfCanceling) {
+				// TODO:- Redo Alert with Error handling
+				Alert(
+					title: Text("Discarding changes"),
+					message: Text("Are you sure you want to discard this new card"),
+					primaryButton: .default(Text("Discard"), action: { catsViewModel.dismiss(presentation: presentation) }),
+					secondaryButton: .cancel())
+			}
+		}
+		.onAppear() {
+			DispatchQueue.main.async {
+				self.breedsViewModel.loadBreeds()
+			}
+			catsViewModel.cat = cat
+			catsViewModel.managedObjectContext = managedObjectContext
 		}
 	}
 }
 
 struct EditingCatsPageView_Previews: PreviewProvider {
     static var previews: some View {
-        EditingCatsPageView()
+		EditingCatsPageView(cat: CatsCard(context: PersistenceController.preview.conteiner.viewContext), breedsViewModel: BreedsViewModel.shared)
+			.environment(\.managedObjectContext, PersistenceController.preview.conteiner.viewContext)
     }
 }
