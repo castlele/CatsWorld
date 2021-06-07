@@ -11,12 +11,15 @@ import CoreData
 
 final class CatsCardsViewModel: ObservableObject {
 	
-	@Published var isAlertOfCanceling = false
-	@Published var isScrollingDown = false
-	
 	/// Currently edited object of `CatsCard`
 	var cat: CatsCard!
 	var managedObjectContext: NSManagedObjectContext!
+	
+	@Published var isAlertOfCanceling = false
+	
+	/// Determines weather `ScrollView` was used
+	/// Used in `EdtingCatsPageView`
+	@Published var isScrollingDown = false
 	
 	/// Track if changes was made to cat entity
 	@Published var wasChanged = false
@@ -137,7 +140,7 @@ final class CatsCardsViewModel: ObservableObject {
 	}
 }
 	
-// MARK:- Helper methods
+// MARK:- Public methods
 extension CatsCardsViewModel {
 	
 	/// Saves changes, made to instance of `CatsCard`
@@ -174,11 +177,15 @@ extension CatsCardsViewModel {
 		isDiscardChanges ? delete() : save()
 		presentation.wrappedValue.dismiss()
 	}
+}
+
+// MARK: - Private methods
+extension CatsCardsViewModel {
 	
 	/// Encode object with `JSONEncoder().encode(_:)`
 	/// - Parameter obj: `Encodable` object
 	/// - Returns: Encoded `Data` or `nil` if error raised
-	func encode<T: Encodable>(_ obj: T) -> Data? {
+	private func encode<T: Encodable>(_ obj: T) -> Data? {
 		do {
 			let data = try JSONEncoder().encode(obj)
 			return data
@@ -191,7 +198,7 @@ extension CatsCardsViewModel {
 	/// - Parameters:
 	///   - value: New value to assign
 	///   - property: Cat's property to assign to
-	func setNew<T: Equatable>(value: T, to property: inout T) {
+	private func setNew<T: Equatable>(value: T, to property: inout T) {
 		if makeChangesIf(value != property) {
 			property = value
 		}
@@ -201,7 +208,7 @@ extension CatsCardsViewModel {
 	/// - Parameters:
 	///   - expression: Expression on which changes track
 	/// - Returns: `true` if changes were made else `false`
-	func makeChangesIf(_ expression: Bool) -> Bool {
+	private func makeChangesIf(_ expression: Bool) -> Bool {
 		if expression {
 			wasChanged = true
 			return true

@@ -9,6 +9,7 @@
 import Foundation
 import CoreData
 import UIKit
+import SwiftUI
 
 
 extension CatsCard {
@@ -124,6 +125,16 @@ extension CatsCard : Identifiable {
 			}
 		}
 		return defaultValue
+	}
+}
+
+// MARK:- Public functions
+extension CatsCard {
+	func setColor(_ color: Color) {
+		let uiColor = UIColor(color)
+		let data = uiColor.encode()
+		
+		self.color = data
 	}
 }
 
