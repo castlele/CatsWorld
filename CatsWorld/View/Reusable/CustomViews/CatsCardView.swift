@@ -14,7 +14,6 @@ struct CatsCardView: View {
 	@ObservedObject var cat: CatsCard
 	
 	@State var isColorPicker = false
-	@State var isSave = false
 	
 	var cardColor: Color {
 		let uiColor = cat.wrappedColor
@@ -39,27 +38,38 @@ struct CatsCardView: View {
 					
 					Spacer()
 					
-					Menu {
-						Button(action: {
-							isColorPicker.toggle()
-							
-						}, label: {
-							Text("Pick card's color")
-						})
+					HStack {
+						Text("\(cat.wrappedSex)")
+							.font(.headline)
+							.fontWeight(.medium)
+							.padding([.leading, .trailing])
 						
-					} label: {
-						HStack(spacing: 5) {
-							ForEach(0..<3) { circle in
-								Circle()
-									.frame(width: 10, height: 10)
+						Menu {
+							Button("Pick card's color") {
+								withAnimation(.spring()) {
+									isColorPicker.toggle()
+								}
 							}
+							
+							Button("Delete") {
+								withAnimation(.spring()) {
+									managedObjectContext.delete(cat)
+								}
+							}
+							
+						} label: {
+							HStack(spacing: 5) {
+								ForEach(0..<3) { circle in
+									Circle()
+										.frame(width: 10, height: 10)
+								}
+							}
+							.padding(.trailing)
 						}
+						.accentColor(.black)
 					}
+					
 				}
-				.padding()
-				.frame(minWidth: geometry.size.width, minHeight: geometry.size.width / 2)
-				.background(cardColor)
-				.clipShape(RoundedRectangle(cornerRadius: 20))
 				
 				if isColorPicker {
 					ColorPicker("Pick card's Color", selection: colorBinding)
@@ -74,6 +84,21 @@ struct CatsCardView: View {
 						}
 				}
 			}
+			.padding()
+			.frame(maxWidth: geometry.size.width, maxHeight: 100)
+			.background(
+				ZStack {
+					cardColor
+					
+					RoundedRectangle(cornerRadius: 20, style: .continuous)
+						.shadow(color: .white, radius: 7, x: -5, y: -5)
+						.shadow(color: .black, radius: 7, x: 5, y: 5)
+						.blendMode(.overlay)
+				}
+			)
+			.clipShape(RoundedRectangle(cornerRadius: 20))
+			.shadow(color: .black.opacity(0.5), radius: 5, x: 0, y: 5)
+			
 		}
     }
 }

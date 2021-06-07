@@ -51,24 +51,22 @@ struct HomeScreenView: View {
 				
 				GeometryReader { geometry in
 					ScrollView {
-						VStack(spacing: 10) {
+						VStack(spacing: 60) {
 							ForEach(catsCards) { card in
 								CatsCardView(cat: card)
 									.padding()
-									.frame(width: geometry.size.width, height: geometry.size.width / 2)
-									.padding([.bottom, .leading, .trailing])
+									.frame(maxWidth: geometry.size.width, maxHeight: 100)
+									.padding(.bottom)
 							}
 						}
 					}
-					.frame(width: geometry.size.width, height: geometry.size.height)
 				}
-
 			}
 			.sheet(isPresented: $addCatSheet) {
 				editingView
 			}
 			.navigationBarHidden(true)
-			.onAppear() {
+			.onAppear {
 				if managedObjectContext.hasChanges {
 					managedObjectContext.refreshAllObjects()
 				}

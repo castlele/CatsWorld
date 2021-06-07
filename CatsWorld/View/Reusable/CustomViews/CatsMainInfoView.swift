@@ -19,18 +19,15 @@ struct CatsMainInfoView: View {
 			
 			VStack(alignment: .leading, spacing: 2.5) {
 				Text("\(cat.wrappedName)")
-					.font(.title)
+					.font(.body)
 					.fontWeight(.bold)
 				Text("\(cat.age)")
 					.font(.footnote)
 				Text("\(cat.wrappedBreed)")
-					.font(.body)
+					.font(.subheadline)
+					.lineLimit(2)
+					.fixedSize(horizontal: false, vertical: true)
 			}
-			
-			Text("\(cat.wrappedSex)")
-				.font(.title)
-				.fontWeight(.medium)
-				.padding([.leading, .trailing])
 		}
     }
 }
