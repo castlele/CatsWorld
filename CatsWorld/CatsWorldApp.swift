@@ -18,6 +18,10 @@ struct CatsWorldApp: App {
 	
 	@State var selectedView = 1
 	
+	init() {
+		UITableViewCell.appearance().backgroundColor = UIColor.clear
+	}
+	
     var body: some Scene {
         WindowGroup {
 			TabView(selection: $selectedView) {

@@ -24,60 +24,73 @@ struct HomeScreenView: View {
 	@State var editingView: EditingCatsPageView!
 	
     var body: some View {
-		NavigationView {
-			VStack {
-				HStack {
-
-					Spacer()
-
-					Button(action: {
-						let cat = CatsCard(context: managedObjectContext)
-						editingView = EditingCatsPageView(cat: cat, breedsViewModel: breedsViewModel)
-						addCatSheet.toggle()
-
-					}, label: {
-						Image(systemName: "plus")
-							.resizable()
-							.accentColor(.green)
-							.padding()
-					})
-					.background(Color.gray)
-					.frame(width: 60, height: 60)
-					.clipShape(Circle())
-					.padding()
-				}
+		VStack {
+			HStack {
+				#if DEBUG
+				Button(action: {
+					for cat in catsCards {
+						managedObjectContext.delete(cat)
+						try! managedObjectContext.save()
+					}
+					
+				}, label: {
+					Image(systemName: "plus")
+						.resizable()
+						.accentColor(.green)
+						.padding()
+				})
+				.background(Color.gray)
+				.frame(width: 60, height: 60)
+				.clipShape(Circle())
+				.padding()
+				#endif
 				
 				Spacer()
 				
-				GeometryReader { geometry in
-					ScrollView {
-						VStack(spacing: 60) {
-							ForEach(catsCards) { card in
-								CatsCardView(cat: card)
-									.padding()
-									.frame(maxWidth: geometry.size.width, maxHeight: 100)
-									.padding(.bottom)
-							}
-						}
+				Button(action: {
+					let cat = CatsCard(context: managedObjectContext)
+					editingView = EditingCatsPageView(cat: cat, breedsViewModel: breedsViewModel)
+					addCatSheet.toggle()
+					
+				}, label: {
+					Image(systemName: "plus")
+						.resizable()
+						.accentColor(.green)
+						.padding()
+				})
+				.background(Color.gray)
+				.frame(width: 60, height: 60)
+				.clipShape(Circle())
+				.padding()
+			}
+			
+			Spacer()
+			
+			GeometryReader { geometry in
+				ScrollView(.vertical, showsIndicators: false) {
+					ForEach(catsCards) { card in
+						CatsCardView(cat: card)
+							.padding([.leading, .trailing, .top])
+						
+						Spacer(minLength: 10)
 					}
 				}
 			}
-			.sheet(isPresented: $addCatSheet) {
-				editingView
-			}
-			.navigationBarHidden(true)
-			.onAppear {
-				if managedObjectContext.hasChanges {
-					managedObjectContext.refreshAllObjects()
-				}
-				editingView = nil
-				#if DEBUG
-				print(catsCards)
-				print(catsCards.count)
-				#endif
-			}
 		}
-		
+		.sheet(isPresented: $addCatSheet) {
+			editingView
+		}
+		.navigationBarHidden(true)
+		.onAppear {
+			if managedObjectContext.hasChanges {
+				managedObjectContext.refreshAllObjects()
+			}
+			editingView = nil
+			#if DEBUG
+			print(catsCards)
+			print(catsCards.count)
+			#endif
+		}
     }
 }
 

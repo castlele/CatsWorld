@@ -8,8 +8,13 @@
 import SwiftUI
 
 struct MapView: View {
+	
+	var bg: Color = .primary
+	
     var body: some View {
-		Text("")
+		ZStack {
+			bg
+		}
     }
 }
 

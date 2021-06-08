@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		7B096CA32657B1F900B99D3E /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B096CA22657B1F900B99D3E /* UIApplication.swift */; };
-		7B096CA52657B54300B99D3E /* HideKeyboardGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B096CA42657B54300B99D3E /* HideKeyboardGesture.swift */; };
-		7B096CA72657B75300B99D3E /* CheckIfScrolling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B096CA62657B75300B99D3E /* CheckIfScrolling.swift */; };
 		7B096CA92657B80A00B99D3E /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B096CA82657B80A00B99D3E /* View.swift */; };
 		7B096CAB2657C50E00B99D3E /* CancelButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B096CAA2657C50E00B99D3E /* CancelButton.swift */; };
 		7B096CAD2657C51700B99D3E /* DoneButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B096CAC2657C51700B99D3E /* DoneButton.swift */; };
@@ -17,7 +15,6 @@
 		7B1AA593264AA018002A3774 /* EndPointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1AA592264AA018002A3774 /* EndPointTests.swift */; };
 		7B1AA595264AA4CF002A3774 /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1AA594264AA4CF002A3774 /* MockData.swift */; };
 		7B1AA599264AA798002A3774 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1AA598264AA798002A3774 /* Array.swift */; };
-		7B1D6C4B2656526200968564 /* MultilineTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1D6C4A2656526200968564 /* MultilineTextFieldView.swift */; };
 		7B66A10626556AE100FDC9A7 /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B66A10526556AE100FDC9A7 /* RatingView.swift */; };
 		7B6E3D42265272AF00B04B62 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6E3D41265272AF00B04B62 /* UIColor.swift */; };
 		7B6E3D4526527DA200B04B62 /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6E3D4426527DA200B04B62 /* ImagePickerView.swift */; };
@@ -40,6 +37,7 @@
 		7B8B9A1D2642816D00E98B8E /* JSONParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8B9A1C2642816D00E98B8E /* JSONParser.swift */; };
 		7B8B9A1F2642818000E98B8E /* NetworkRequester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8B9A1E2642818000E98B8E /* NetworkRequester.swift */; };
 		7B8B9A212642819600E98B8E /* Breed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8B9A202642819600E98B8E /* Breed.swift */; };
+		7B959AA4266F7B73001CB4FE /* VolumetricShadows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B959AA3266F7B73001CB4FE /* VolumetricShadows.swift */; };
 		7B968A072653A9F1002ECE07 /* Show.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B968A062653A9F1002ECE07 /* Show.swift */; };
 		7B968A092653AE48002ECE07 /* Temperament.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B968A082653AE48002ECE07 /* Temperament.swift */; };
 		7B968A0B2653B149002ECE07 /* TemperamentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B968A0A2653B149002ECE07 /* TemperamentTests.swift */; };
@@ -60,8 +58,6 @@
 
 /* Begin PBXFileReference section */
 		7B096CA22657B1F900B99D3E /* UIApplication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
-		7B096CA42657B54300B99D3E /* HideKeyboardGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideKeyboardGesture.swift; sourceTree = "<group>"; };
-		7B096CA62657B75300B99D3E /* CheckIfScrolling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckIfScrolling.swift; sourceTree = "<group>"; };
 		7B096CA82657B80A00B99D3E /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		7B096CAA2657C50E00B99D3E /* CancelButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelButton.swift; sourceTree = "<group>"; };
 		7B096CAC2657C51700B99D3E /* DoneButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoneButton.swift; sourceTree = "<group>"; };
@@ -69,7 +65,6 @@
 		7B1AA592264AA018002A3774 /* EndPointTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPointTests.swift; sourceTree = "<group>"; };
 		7B1AA594264AA4CF002A3774 /* MockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
 		7B1AA598264AA798002A3774 /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
-		7B1D6C4A2656526200968564 /* MultilineTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultilineTextFieldView.swift; sourceTree = "<group>"; };
 		7B66A10526556AE100FDC9A7 /* RatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
 		7B6E3D41265272AF00B04B62 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		7B6E3D4426527DA200B04B62 /* ImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
@@ -96,6 +91,7 @@
 		7B8B9A1C2642816D00E98B8E /* JSONParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONParser.swift; sourceTree = "<group>"; };
 		7B8B9A1E2642818000E98B8E /* NetworkRequester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequester.swift; sourceTree = "<group>"; };
 		7B8B9A202642819600E98B8E /* Breed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Breed.swift; sourceTree = "<group>"; };
+		7B959AA3266F7B73001CB4FE /* VolumetricShadows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolumetricShadows.swift; sourceTree = "<group>"; };
 		7B968A062653A9F1002ECE07 /* Show.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Show.swift; sourceTree = "<group>"; };
 		7B968A082653AE48002ECE07 /* Temperament.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Temperament.swift; sourceTree = "<group>"; };
 		7B968A0A2653B149002ECE07 /* TemperamentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemperamentTests.swift; sourceTree = "<group>"; };
@@ -136,8 +132,7 @@
 		7B66A10D26559A2300FDC9A7 /* ViewModifiers */ = {
 			isa = PBXGroup;
 			children = (
-				7B096CA62657B75300B99D3E /* CheckIfScrolling.swift */,
-				7B096CA42657B54300B99D3E /* HideKeyboardGesture.swift */,
+				7B959AA3266F7B73001CB4FE /* VolumetricShadows.swift */,
 			);
 			path = ViewModifiers;
 			sourceTree = "<group>";
@@ -158,7 +153,6 @@
 			isa = PBXGroup;
 			children = (
 				7B6E3D4426527DA200B04B62 /* ImagePickerView.swift */,
-				7B1D6C4A2656526200968564 /* MultilineTextFieldView.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -415,6 +409,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7B6E3D47265282CE00B04B62 /* CatsPageView.swift in Sources */,
+				7B959AA4266F7B73001CB4FE /* VolumetricShadows.swift in Sources */,
 				7B86143E264D2953008616DB /* CatsCard+CoreDataClass.swift in Sources */,
 				7B8B9A212642819600E98B8E /* Breed.swift in Sources */,
 				7B6E3D4D2652D6DC00B04B62 /* CatsAvatar.swift in Sources */,
@@ -426,7 +421,6 @@
 				7BE498952653BC92004F7F52 /* Gender.swift in Sources */,
 				7B096CA32657B1F900B99D3E /* UIApplication.swift in Sources */,
 				7B86143F264D2953008616DB /* CatsCard+CoreDataProperties.swift in Sources */,
-				7B096CA72657B75300B99D3E /* CheckIfScrolling.swift in Sources */,
 				7BE498932653B9EB004F7F52 /* EditingCatsPageView.swift in Sources */,
 				7B8B99E726427DDC00E98B8E /* CatsWorldApp.swift in Sources */,
 				7B8B9A1D2642816D00E98B8E /* JSONParser.swift in Sources */,
@@ -444,10 +438,8 @@
 				7B1AA595264AA4CF002A3774 /* MockData.swift in Sources */,
 				7B6E3D4526527DA200B04B62 /* ImagePickerView.swift in Sources */,
 				7B968A092653AE48002ECE07 /* Temperament.swift in Sources */,
-				7B1D6C4B2656526200968564 /* MultilineTextFieldView.swift in Sources */,
 				7B6E3D492652CB4300B04B62 /* CatsMainInfoView.swift in Sources */,
 				7BE498972653E322004F7F52 /* CatsCardsViewModel.swift in Sources */,
-				7B096CA52657B54300B99D3E /* HideKeyboardGesture.swift in Sources */,
 				7B66A10626556AE100FDC9A7 /* RatingView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -596,7 +588,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"CatsWorld/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = VUU8K3C66R;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = CatsWorld/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -620,7 +612,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"CatsWorld/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = VUU8K3C66R;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = CatsWorld/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;

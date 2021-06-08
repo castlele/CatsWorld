@@ -11,15 +11,13 @@ struct CancelButton: View {
 	
 	var presentationMode: Binding<PresentationMode>
 	var showAlert: Binding<Bool>
-	var isEditing: Binding<Bool>
 	
 	var wasChanges: Bool = false
 	var action: () -> Void
 	
-	init(presentation: Binding<PresentationMode>, showAlert: Binding<Bool>, isEditing: Binding<Bool>, wasChanges: Bool, action: @escaping () -> Void) {
+	init(presentation: Binding<PresentationMode>, showAlert: Binding<Bool> = .constant(false), wasChanges: Bool = false, action: @escaping () -> Void = {}) {
 		self.presentationMode = presentation
 		self.showAlert = showAlert
-		self.isEditing = isEditing
 		self.wasChanges = wasChanges
 		self.action = action
 	}
@@ -28,10 +26,8 @@ struct CancelButton: View {
 		Button(action: {
 			if wasChanges {
 				showAlert.wrappedValue = true
-				isEditing.wrappedValue = false
 			} else {
 				if presentationMode.wrappedValue.isPresented {
-					isEditing.wrappedValue = false
 					action()
 					presentationMode.wrappedValue.dismiss()
 				}
@@ -42,9 +38,9 @@ struct CancelButton: View {
     }
 }
 
-//struct CancelButton_Previews: PreviewProvider {
-//	@Environment(\.presentationMode) static var presentation
-//    static var previews: some View {
-//		CancelButton(presentationMode: presentation, showAlert: .constant(true), isEditing: .constant(false))
-//    }
-//}
+struct CancelButton_Previews: PreviewProvider {
+	@Environment(\.presentationMode) static var presentation
+    static var previews: some View {
+		CancelButton(presentation: presentation)
+    }
+}

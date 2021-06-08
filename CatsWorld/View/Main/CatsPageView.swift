@@ -9,21 +9,33 @@ import SwiftUI
 
 struct CatsPageView: View {
 	
-	var breedsViewModel: BreedsViewModel
-	@State var isEditing = true
+	@Environment(\.presentationMode) var presentationMode
+	@ObservedObject var cat: CatsCard
+	@State var isEditing = false
 	
-//	var cat: CatsCard
+	var breedsViewModel: BreedsViewModel
+	var backGroundColor: Color
 	
     var body: some View {
-		NavigationView {
-			ZStack {
+		ZStack {
+			backGroundColor.opacity(0.5)
+			
+			VStack {
+				HStack {
+					CancelButton(presentation: presentationMode)
+					Spacer()
+				}
+				
+				Spacer()
+				
 				if isEditing {
-//					EditingCatsPageView(PersistenceController.shared.conteiner.viewContext, breedsViewModel: breedsViewModel)
+					EditingCatsPageView(cat: cat, breedsViewModel: breedsViewModel)
 				} else {
-//					MainCatsPageView(cat: cat)
+					MainCatsPageView(cat: cat)
 				}
 			}
-			.navigationBarItems(trailing: EditButton(isEditing: $isEditing))
+			
+			
 		}
     }
 }
@@ -35,18 +47,12 @@ struct MainCatsPageView: View {
 	var body: some View {
 		VStack {
 			CatsMainInfoView(cat: cat)
-			
-			Form {
-				Section {
-					Text("Hello")
-				}
-			}
 		}
 	}
 }
 
-//struct CatsPageView_Previews: PreviewProvider {
-//    static var previews: some View {
-//		CatsPageView(breedsViewModel: BreedsViewModel.shared, cat: CatsCard(context: PersistenceController.shared.conteiner.viewContext))
-//    }
-//}
+struct CatsPageView_Previews: PreviewProvider {
+    static var previews: some View {
+		CatsPageView(cat: CatsCard(context: PersistenceController.preview.conteiner.viewContext), breedsViewModel: BreedsViewModel.shared, backGroundColor: .clear)
+    }
+}

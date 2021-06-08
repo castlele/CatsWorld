@@ -13,13 +13,12 @@ final class CatsCardsViewModel: ObservableObject {
 	
 	/// Currently edited object of `CatsCard`
 	var cat: CatsCard!
+	
 	var managedObjectContext: NSManagedObjectContext!
 	
 	@Published var isAlertOfCanceling = false
 	
-	/// Determines weather `ScrollView` was used
-	/// Used in `EdtingCatsPageView`
-	@Published var isScrollingDown = false
+	@Published var isImagePicker = false
 	
 	/// Track if changes was made to cat entity
 	@Published var wasChanged = false
@@ -136,6 +135,13 @@ final class CatsCardsViewModel: ObservableObject {
 		willSet(newInfo) {
 			guard let cat = cat else { return }
 			setNew(value: newInfo, to: &cat.additionalInfo)
+		}
+	}
+	
+	@Published var catsImage: UIImage? {
+		willSet(newImage) {
+			guard let image = newImage else { return }
+			setNew(value: image.pngData(), to: &cat.image)
 		}
 	}
 }

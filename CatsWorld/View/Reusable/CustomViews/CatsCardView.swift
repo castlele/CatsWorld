@@ -13,6 +13,8 @@ struct CatsCardView: View {
 	
 	@ObservedObject var cat: CatsCard
 	
+	@State var isCatsPageView = false
+	
 	@State var isColorPicker = false
 	
 	var cardColor: Color {
@@ -25,81 +27,83 @@ struct CatsCardView: View {
 		let colorBinding: Binding<Color> = Binding(
 			get: { return cardColor },
 			set: { newColor in
-				if newColor != cardColor {
-					cat.setColor(newColor)
-				}
+				cat.setColor(newColor)
 			}
 		)
 		
-		GeometryReader { geometry in
-			VStack {
-				HStack {
-					CatsMainInfoView(cat: cat)
-					
-					Spacer()
-					
-					HStack {
-						Text("\(cat.wrappedSex)")
-							.font(.headline)
-							.fontWeight(.medium)
-							.padding([.leading, .trailing])
-						
-						Menu {
-							Button("Pick card's color") {
-								withAnimation(.spring()) {
-									isColorPicker.toggle()
-								}
-							}
-							
-							Button("Delete") {
-								withAnimation(.spring()) {
-									managedObjectContext.delete(cat)
-								}
-							}
-							
-						} label: {
-							HStack(spacing: 5) {
-								ForEach(0..<3) { circle in
-									Circle()
-										.frame(width: 10, height: 10)
-								}
-							}
-							.padding(.trailing)
-						}
-						.accentColor(.black)
-					}
-					
-				}
+		VStack {
+			HStack {
+				CatsMainInfoView(cat: cat)
 				
-				if isColorPicker {
-					ColorPicker("Pick card's Color", selection: colorBinding)
-						.onDisappear {
-							do {
-								try managedObjectContext.save()
-							} catch {
-								#if DEBUG
-								print(error.localizedDescription)
-								#endif
+				Spacer()
+				
+				HStack {
+					Text("\(cat.wrappedSex)")
+						.font(.headline)
+						.fontWeight(.medium)
+						.padding([.leading, .trailing])
+					
+					Menu {
+						Button("Edit") {
+							// TODO: - Show `EditCatsPageView`
+						}
+						
+						Button("Pick card's color") {
+							withAnimation(.spring()) {
+								isColorPicker.toggle()
 							}
 						}
+						
+						Button("Delete") {
+							withAnimation(.spring()) {
+								managedObjectContext.delete(cat)
+								do {
+									try managedObjectContext.save()
+								} catch {
+									print(error.localizedDescription)
+								}
+							}
+						}
+						
+					} label: {
+						HStack(spacing: 5) {
+							ForEach(0..<3) { circle in
+								Circle()
+									.frame(width: 10, height: 10)
+							}
+						}
+						.padding(.trailing)
+					}
+					.accentColor(.black)
 				}
 			}
-			.padding()
-			.frame(maxWidth: geometry.size.width, maxHeight: 100)
-			.background(
-				ZStack {
-					cardColor
-					
-					RoundedRectangle(cornerRadius: 20, style: .continuous)
-						.shadow(color: .white, radius: 7, x: -5, y: -5)
-						.shadow(color: .black, radius: 7, x: 5, y: 5)
-						.blendMode(.overlay)
+			.onLongPressGesture {
+				withAnimation(.spring()) {
+					isCatsPageView.toggle()
 				}
-			)
-			.clipShape(RoundedRectangle(cornerRadius: 20))
-			.shadow(color: .black.opacity(0.5), radius: 5, x: 0, y: 5)
+			}
 			
+			if isColorPicker {
+				ColorPicker("Pick card's Color", selection: colorBinding)
+					.onDisappear {
+						do {
+							try managedObjectContext.save()
+						} catch {
+							#if DEBUG
+							print(error.localizedDescription)
+							#endif
+						}
+					}
+			}
 		}
+		.fullScreenCover(isPresented: $isCatsPageView) {
+			CatsPageView(cat: cat, breedsViewModel: BreedsViewModel.shared, backGroundColor: cardColor)
+		}
+		.padding()
+		.frame(minHeight: 100, maxHeight: 150)
+		.background(cardColor)
+		.clipShape(RoundedRectangle(cornerRadius: 20))
+		.volumetricShadows()
     }
 }
 

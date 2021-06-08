@@ -9,13 +9,8 @@ import SwiftUI
 
 extension View {
 	
-	/// Hides keyboard on LongPress gesture
-	func hideKeyboardGesture() -> some View {
-		self.modifier(HideKeyboardGesture())
-	}
-	
-	/// Checkes if view is scrolling
-	func checkIfScrolling(isScrolling: Binding<Bool>, isDown: Bool = true) -> some View {
-		self.modifier(CheckIfScrolling(isScrolling: isScrolling, isDown: isDown))
+	/// Adds volume to the view by applying to shadows onto it
+	func volumetricShadows(color1: Color = .white, color2: Color = .black, radius: CGFloat = 5) -> some View {
+		self.modifier(VolumetricShadows(color1: color1, color2: color2, radius: radius))
 	}
 }

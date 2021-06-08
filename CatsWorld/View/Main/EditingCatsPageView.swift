@@ -20,101 +20,108 @@ struct EditingCatsPageView: View {
 	
 	var body: some View {
 		NavigationView {
-			VStack {
-				if !catsViewModel.isScrollingDown {
-					CatsAvatar(avatar: UIImage(systemName: "person.crop.circle.fill")!	)
-						.frame(maxWidth: 150, maxHeight: 150)
-						.padding(.top)
+			Form {
+				VStack {
+					HStack {
+						Spacer()
+						
+						CatsAvatar(avatar: catsViewModel.catsImage ?? UIImage(systemName: "person.crop.circle.fill")!)
+							.frame(width: 80, height: 80)
+						
+						Spacer()
+					}
+					
+					Button("Add photo") {
+						catsViewModel.isImagePicker.toggle()
+					}
+				}
+				.listRowBackground(Color.clear)
+
+				
+				Section(header: Text("General information")) {
+					TextField("Name", text: $catsViewModel.name)
+					
+					DatePicker(
+						"Date of birth",
+						selection: $catsViewModel.dateOfBirth, in: ...Date(),
+						displayedComponents: .date
+					).datePickerStyle(DefaultDatePickerStyle())
+					
+					Picker("What is the wrappedCat's gender", selection: $catsViewModel.gender) {
+						ForEach(0..<2) { index in
+							Text("\(Gender.allCases[index].rawValue.capitalized)").tag(Gender.allCases[index])
+						}
+					}.pickerStyle(SegmentedPickerStyle())
+					
+					Picker("Breed of the wrappedCat", selection: $catsViewModel.breed) {
+						ForEach(breedsViewModel.breeds, id: \.name) { breed in
+							Text("\(breed.name)")
+						}
+					}.pickerStyle(InlinePickerStyle())
 				}
 				
-				Form {
-					Section(header: Text("General information")) {
-						TextField("Name", text: $catsViewModel.name)
+				Section(header: Text("Physical aspects")) {
+					
+					Toggle("Enable the section", isOn: $catsViewModel.isPhysicalSectionEnabled.animation())
+					
+					if catsViewModel.isPhysicalSectionEnabled {
+						HStack {
+							Text("Weight \(catsViewModel.weight, specifier: "%.1f") kg")
+							
+							Spacer()
+							
+							Slider(value: $catsViewModel.weight, in: 0...50)
+						}
 						
-						DatePicker(
-							"Date of birth",
-							selection: $catsViewModel.dateOfBirth, in: ...Date(),
-							displayedComponents: .date
-						).datePickerStyle(DefaultDatePickerStyle())
+						Toggle("Is castrated", isOn: $catsViewModel.isCastrated)
 						
-						Picker("What is the wrappedCat's gender", selection: $catsViewModel.gender) {
-							ForEach(0..<2) { index in
-								Text("\(Gender.allCases[index].rawValue.capitalized)").tag(Gender.allCases[index])
+						Toggle("Is the tail suppressed", isOn: $catsViewModel.suppressedTail)
+						
+						Toggle("Is the legs are short", isOn: $catsViewModel.shortLegs)
+						
+						Toggle("Is hair less", isOn: $catsViewModel.hairless)
+					}
+				}
+				
+				Section(header: Text("Psycological aspects")) {
+					Toggle("Enable the section", isOn: $catsViewModel.isPsycolocicalSectionEnabled.animation())
+					
+					if catsViewModel.isPsycolocicalSectionEnabled {
+						Picker("Temperament", selection: $catsViewModel.temperament) {
+							ForEach(Temperament.allCases, id: \.self) { temperament in
+								Text("\(temperament.rawValue.capitalized)")
 							}
 						}.pickerStyle(SegmentedPickerStyle())
 						
-						Picker("Breed of the wrappedCat", selection: $catsViewModel.breed) {
-							ForEach(breedsViewModel.breeds, id: \.name) { breed in
-								Text("\(breed.name)")
-							}
-						}.pickerStyle(InlinePickerStyle())
-					}
-					
-					Section(header: Text("Physical aspects")) {
+						RatingView(rating: $catsViewModel.strangerFriendly,
+								   label: "Stranger friendly",
+								   offImage: Image(systemName: "star"),
+								   onImage: Image(systemName: "star.fill")
+						)
 						
-						Toggle("Enable the section", isOn: $catsViewModel.isPhysicalSectionEnabled.animation())
+						RatingView(rating: $catsViewModel.childFriendly,
+								   label: "Child friendly",
+								   offImage: Image(systemName: "star"),
+								   onImage: Image(systemName: "star.fill")
+						)
 						
-						if catsViewModel.isPhysicalSectionEnabled {
-							HStack {
-								Text("Weight \(catsViewModel.weight, specifier: "%.1f") kg")
-								
-								Spacer()
-								
-								Slider(value: $catsViewModel.weight, in: 0...50)
-							}
-							
-							Toggle("Is castrated", isOn: $catsViewModel.isCastrated)
-							
-							Toggle("Is the tail suppressed", isOn: $catsViewModel.suppressedTail)
-							
-							Toggle("Is the legs are short", isOn: $catsViewModel.shortLegs)
-							
-							Toggle("Is hair less", isOn: $catsViewModel.hairless)
-						}
-					}
-					
-					Section(header: Text("Psycological aspects")) {
-						Toggle("Enable the section", isOn: $catsViewModel.isPsycolocicalSectionEnabled.animation())
-						
-						if catsViewModel.isPsycolocicalSectionEnabled {
-							Picker("Temperament", selection: $catsViewModel.temperament) {
-								ForEach(Temperament.allCases, id: \.self) { temperament in
-									Text("\(temperament.rawValue.capitalized)")
-								}
-							}.pickerStyle(SegmentedPickerStyle())
-							
-							RatingView(rating: $catsViewModel.strangerFriendly,
-									   label: "Stranger friendly",
-									   offImage: Image(systemName: "star"),
-									   onImage: Image(systemName: "star.fill")
-							)
-							
-							RatingView(rating: $catsViewModel.childFriendly,
-									   label: "Child friendly",
-									   offImage: Image(systemName: "star"),
-									   onImage: Image(systemName: "star.fill")
-							)
-							
-							RatingView(rating: $catsViewModel.dogFriendly,
-									   label: "Child friendly",
-									   offImage: Image(systemName: "star"),
-									   onImage: Image(systemName: "star.fill")
-							)
-						}
-					}
-					
-					Section(header: Text("Additional information"), footer: Text("Write anything you want about your fluffy friend!")) {
-						MultilineTextFieldView(text: $catsViewModel.additionalInfo, placeholder: "Write here")
+						RatingView(rating: $catsViewModel.dogFriendly,
+								   label: "Child friendly",
+								   offImage: Image(systemName: "star"),
+								   onImage: Image(systemName: "star.fill")
+						)
 					}
 				}
+				
+				Section(header: Text("Additional information"), footer: Text("Write anything you want about your fluffy friend!")) {
+					TextEditor(text: $catsViewModel.additionalInfo)
+				}
+				.listRowInsets(.init())
 			}
-			.checkIfScrolling(isScrolling: $catsViewModel.isScrollingDown)
-			.hideKeyboardGesture()
 			.navigationBarItems(
 				leading: CancelButton(
 					presentation: presentation,
 					showAlert: $catsViewModel.isAlertOfCanceling,
-					isEditing: .constant(false),
 					wasChanges: catsViewModel.wasChanged) {
 					catsViewModel.dismiss(presentation: presentation)
 					
@@ -136,6 +143,9 @@ struct EditingCatsPageView: View {
 			}
 			catsViewModel.cat = cat
 			catsViewModel.managedObjectContext = managedObjectContext
+		}
+		.sheet(isPresented: $catsViewModel.isImagePicker) {
+			ImagePicker(image: $catsViewModel.catsImage)
 		}
 	}
 }
