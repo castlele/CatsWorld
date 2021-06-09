@@ -16,7 +16,7 @@ final class CatsCardsViewModel: ObservableObject {
 	
 	var managedObjectContext: NSManagedObjectContext!
 	
-	@Published var isAlertOfCanceling = false
+	@Published var isAlertShown = false
 	
 	@Published var isImagePicker = false
 	

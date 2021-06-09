@@ -121,14 +121,14 @@ struct EditingCatsPageView: View {
 			.navigationBarItems(
 				leading: CancelButton(
 					presentation: presentation,
-					showAlert: $catsViewModel.isAlertOfCanceling,
+					showAlert: $catsViewModel.isAlertShown,
 					wasChanges: catsViewModel.wasChanged) {
 					catsViewModel.dismiss(presentation: presentation)
 					
 				}, trailing: DoneButton(presentation: presentation) {
 					catsViewModel.dismiss(isDiscardChanges: false, presentation: presentation)
 				})
-			.alert(isPresented: $catsViewModel.isAlertOfCanceling) {
+			.alert(isPresented: $catsViewModel.isAlertShown) {
 				// TODO:- Redo Alert with Error handling
 				Alert(
 					title: Text("Discarding changes"),
@@ -138,9 +138,8 @@ struct EditingCatsPageView: View {
 			}
 		}
 		.onAppear() {
-			DispatchQueue.main.async {
-				self.breedsViewModel.loadBreeds()
-			}
+			self.breedsViewModel.loadBreeds()
+			
 			catsViewModel.cat = cat
 			catsViewModel.managedObjectContext = managedObjectContext
 		}

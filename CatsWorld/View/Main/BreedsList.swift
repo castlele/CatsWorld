@@ -16,9 +16,7 @@ struct BreedsList: View {
 			Text(breed.name)
 		}
 		.onAppear {
-			DispatchQueue.main.async {
-				viewModel.loadBreeds()
-			}
+			viewModel.loadBreeds()
 		}
     }
 }

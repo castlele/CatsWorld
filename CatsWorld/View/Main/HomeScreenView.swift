@@ -55,12 +55,13 @@ struct HomeScreenView: View {
 				}, label: {
 					Image(systemName: "plus")
 						.resizable()
-						.accentColor(.green)
+						.accentColor(.gray)
 						.padding()
 				})
-				.background(Color.gray)
+				.background(Color.white)
 				.frame(width: 60, height: 60)
 				.clipShape(Circle())
+				.volumetricShadows()
 				.padding()
 			}
 			

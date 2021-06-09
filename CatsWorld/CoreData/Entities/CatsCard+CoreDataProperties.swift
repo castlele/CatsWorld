@@ -130,6 +130,9 @@ extension CatsCard : Identifiable {
 
 // MARK:- Public functions
 extension CatsCard {
+	
+	/// Converts `Color` to data and assigns it to `self.color` property
+	/// - Parameter color: `SwiftUI` `Color` instance
 	func setColor(_ color: Color) {
 		let uiColor = UIColor(color)
 		let data = uiColor.encode()

@@ -89,6 +89,7 @@ struct CatsCardView: View {
 						do {
 							try managedObjectContext.save()
 						} catch {
+							// TODO: - Error handling
 							#if DEBUG
 							print(error.localizedDescription)
 							#endif

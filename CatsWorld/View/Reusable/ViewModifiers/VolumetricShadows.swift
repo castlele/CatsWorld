@@ -17,6 +17,5 @@ struct VolumetricShadows: ViewModifier {
 		content
 			.shadow(color: color1, radius: radius, x: -5, y: -5)
 			.shadow(color: color2, radius: radius, x: 5, y: 5)
-			.blendMode(.overlay)
 	}
 }

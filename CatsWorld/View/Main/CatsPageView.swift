@@ -10,6 +10,7 @@ import SwiftUI
 struct CatsPageView: View {
 	
 	@Environment(\.presentationMode) var presentationMode
+	
 	@ObservedObject var cat: CatsCard
 	@State var isEditing = false
 	

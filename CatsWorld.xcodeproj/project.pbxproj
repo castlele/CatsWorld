@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7B096CA32657B1F900B99D3E /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B096CA22657B1F900B99D3E /* UIApplication.swift */; };
 		7B096CA92657B80A00B99D3E /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B096CA82657B80A00B99D3E /* View.swift */; };
 		7B096CAB2657C50E00B99D3E /* CancelButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B096CAA2657C50E00B99D3E /* CancelButton.swift */; };
 		7B096CAD2657C51700B99D3E /* DoneButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B096CAC2657C51700B99D3E /* DoneButton.swift */; };
@@ -57,7 +56,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		7B096CA22657B1F900B99D3E /* UIApplication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
 		7B096CA82657B80A00B99D3E /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		7B096CAA2657C50E00B99D3E /* CancelButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelButton.swift; sourceTree = "<group>"; };
 		7B096CAC2657C51700B99D3E /* DoneButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoneButton.swift; sourceTree = "<group>"; };
@@ -123,7 +121,6 @@
 			children = (
 				7B1AA598264AA798002A3774 /* Array.swift */,
 				7B6E3D41265272AF00B04B62 /* UIColor.swift */,
-				7B096CA22657B1F900B99D3E /* UIApplication.swift */,
 				7B096CA82657B80A00B99D3E /* View.swift */,
 			);
 			path = Extensions;
@@ -419,7 +416,6 @@
 				7B968A072653A9F1002ECE07 /* Show.swift in Sources */,
 				7B86143B264D27AA008616DB /* CatsCardView.swift in Sources */,
 				7BE498952653BC92004F7F52 /* Gender.swift in Sources */,
-				7B096CA32657B1F900B99D3E /* UIApplication.swift in Sources */,
 				7B86143F264D2953008616DB /* CatsCard+CoreDataProperties.swift in Sources */,
 				7BE498932653B9EB004F7F52 /* EditingCatsPageView.swift in Sources */,
 				7B8B99E726427DDC00E98B8E /* CatsWorldApp.swift in Sources */,

@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// View representing Rating system
 struct RatingView: View {
 	
 	@Binding var rating: Int
