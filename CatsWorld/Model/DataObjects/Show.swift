@@ -8,7 +8,15 @@
 import Foundation
 
 /// Representation of cats' shows
-struct Show: Codable {
+struct Show: Codable, Identifiable, Hashable {
 	var name: String
 	var place: Int
+	
+	var id: UUID {
+		UUID()
+	}
+	
+	func hash(into hasher: inout Hasher) {
+		hasher.combine(name)
+	}
 }

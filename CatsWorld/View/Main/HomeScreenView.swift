@@ -21,7 +21,7 @@ struct HomeScreenView: View {
 	
 	@State var addCatSheet = false
 	
-	@State var editingView: EditingCatsPageView!
+	@State var catsPageView: CatsPageView!
 	
     var body: some View {
 		VStack {
@@ -49,19 +49,19 @@ struct HomeScreenView: View {
 				
 				Button(action: {
 					let cat = CatsCard(context: managedObjectContext)
-					editingView = EditingCatsPageView(cat: cat, breedsViewModel: breedsViewModel)
+					catsPageView = CatsPageView(cat: cat, isEditing: true, breedsViewModel: breedsViewModel)
 					addCatSheet.toggle()
 					
 				}, label: {
-					Image(systemName: "plus")
-						.resizable()
-						.accentColor(.gray)
-						.padding()
+					Image3D(
+						topView: Image(systemName: "plus"),
+						bottomView: Image(systemName: "plus"),
+						topColor: Color(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)),
+						bottomColor: .gray
+					)
 				})
-				.background(Color.white)
 				.frame(width: 60, height: 60)
-				.clipShape(Circle())
-				.volumetricShadows()
+				.buttonStyle(CircleButtonStyle())
 				.padding()
 			}
 			
@@ -79,14 +79,15 @@ struct HomeScreenView: View {
 			}
 		}
 		.sheet(isPresented: $addCatSheet) {
-			editingView
+			catsPageView
 		}
 		.navigationBarHidden(true)
 		.onAppear {
 			if managedObjectContext.hasChanges {
 				managedObjectContext.refreshAllObjects()
 			}
-			editingView = nil
+			catsPageView = nil
+			
 			#if DEBUG
 			print(catsCards)
 			print(catsCards.count)

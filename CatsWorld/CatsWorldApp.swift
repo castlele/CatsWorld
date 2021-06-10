@@ -20,6 +20,8 @@ struct CatsWorldApp: App {
 	
 	init() {
 		UITableViewCell.appearance().backgroundColor = UIColor.clear
+		
+		BreedsViewModel.shared.loadBreeds()
 	}
 	
     var body: some Scene {

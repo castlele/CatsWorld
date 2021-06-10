@@ -84,9 +84,27 @@ extension CatsCard : Identifiable {
 		
 		return age
 	}
+	
+	var wrappedDateOfBirth: String {
+		guard let dateOfBirth = dateOfBirth else {
+			return "None"
+		}
+		let format = "d MMM YYYY"
+		
+		return dateOfBirth.getFormattedDate(format: format)
+	}
 
 	var wrappedColor: UIColor {
 		UIColor.color(withData: color)
+	}
+	
+	var genderColor: Color {
+		switch wrappedSex {
+			case "male":
+				return Color(#colorLiteral(red: 0.4513868093, green: 0.9930960536, blue: 1, alpha: 1))
+			default:
+				return Color(#colorLiteral(red: 1, green: 0.5409764051, blue: 0.8473142982, alpha: 1))
+		}
 	}
 	
 	var wrappedSex: String {

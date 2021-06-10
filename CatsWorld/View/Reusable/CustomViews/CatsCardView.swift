@@ -33,7 +33,7 @@ struct CatsCardView: View {
 		
 		VStack {
 			HStack {
-				CatsMainInfoView(cat: cat)
+				CatsMainInfoView(cat: cat, age: .constant(.age))
 				
 				Spacer()
 				
@@ -98,7 +98,7 @@ struct CatsCardView: View {
 			}
 		}
 		.fullScreenCover(isPresented: $isCatsPageView) {
-			CatsPageView(cat: cat, breedsViewModel: BreedsViewModel.shared, backGroundColor: cardColor)
+			CatsPageView(cat: cat, breedsViewModel: BreedsViewModel.shared)
 		}
 		.padding()
 		.frame(minHeight: 100, maxHeight: 150)

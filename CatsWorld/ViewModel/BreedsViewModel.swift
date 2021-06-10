@@ -16,7 +16,10 @@ final class BreedsViewModel: ObservableObject {
 		shared.breeds[0]
 	}
 		
-	@Published var breeds: [Breed] = MockData.breeds
+	lazy var breeds: [Breed] = {
+		MockData.breeds
+	}()
+	
 	@Published var isLoading = false
 }
 

@@ -19,6 +19,8 @@ struct RatingView: View {
 	var offColor: Color = .gray
 	var onColor: Color = .yellow
 	
+	var isEditing = true
+	
     var body: some View {
 		HStack {
 			if !label.isEmpty {
@@ -26,20 +28,31 @@ struct RatingView: View {
 			}
 			
 			Spacer()
-			
-			ForEach(1..<maxRating + 1) { rating in
-				if self.rating >= rating {
-					onImage
-						.foregroundColor(onColor)
-						.onTapGesture {
-							self.rating = rating
-						}
-				} else {
-					offImage
-						.foregroundColor(offColor)
-						.onTapGesture {
-							self.rating = rating
-						}
+			if isEditing {
+				ForEach(1..<maxRating + 1) { rating in
+					if self.rating >= rating {
+						onImage
+							.foregroundColor(onColor)
+							.onTapGesture {
+								self.rating = rating
+							}
+					} else {
+						offImage
+							.foregroundColor(offColor)
+							.onTapGesture {
+								self.rating = rating
+							}
+					}
+				}
+			} else {
+				ForEach(1..<maxRating + 1) { rating in
+					if self.rating >= rating {
+						onImage
+							.foregroundColor(onColor)
+					} else {
+						offImage
+							.foregroundColor(offColor)
+					}
 				}
 			}
 		}
