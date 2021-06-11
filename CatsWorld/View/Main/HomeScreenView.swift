@@ -9,7 +9,6 @@ import SwiftUI
 
 struct HomeScreenView: View {
 	
-	@EnvironmentObject var breedsViewModel: BreedsViewModel
 	@Environment(\.managedObjectContext) var managedObjectContext
 	
 	@FetchRequest(
@@ -26,30 +25,11 @@ struct HomeScreenView: View {
     var body: some View {
 		VStack {
 			HStack {
-				#if DEBUG
-				Button(action: {
-					for cat in catsCards {
-						managedObjectContext.delete(cat)
-						try! managedObjectContext.save()
-					}
-					
-				}, label: {
-					Image(systemName: "plus")
-						.resizable()
-						.accentColor(.green)
-						.padding()
-				})
-				.background(Color.gray)
-				.frame(width: 60, height: 60)
-				.clipShape(Circle())
-				.padding()
-				#endif
-				
 				Spacer()
 				
 				Button(action: {
 					let cat = CatsCard(context: managedObjectContext)
-					catsPageView = CatsPageView(cat: cat, isEditing: true, breedsViewModel: breedsViewModel)
+					catsPageView = CatsPageView(cat: cat, deleteAfterCancelation: true, isEditing: true)
 					addCatSheet.toggle()
 					
 				}, label: {
@@ -64,6 +44,7 @@ struct HomeScreenView: View {
 				.buttonStyle(CircleButtonStyle())
 				.padding()
 			}
+			.background(Color.white.opacity(0.3))
 			
 			Spacer()
 			

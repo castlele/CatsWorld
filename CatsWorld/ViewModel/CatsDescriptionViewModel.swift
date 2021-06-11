@@ -7,7 +7,17 @@
 
 import SwiftUI
 
-typealias Setting = (name: String, value: CatsDescriptionValue)
+struct Setting: Identifiable {
+	var name: String
+	var value: CatsDescriptionValue
+	
+	var id = UUID()
+	
+	init(_ name: String, _ value: CatsDescriptionValue) {
+		self.name = name
+		self.value = value
+	}
+}
 
 final class CatsDescriptionViewModel: ObservableObject {
 	

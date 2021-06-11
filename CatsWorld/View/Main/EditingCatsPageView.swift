@@ -11,12 +11,8 @@ import CoreData
 struct EditingCatsPageView: View {
 	
 	@Environment(\.presentationMode) var presentation
-	@Environment(\.managedObjectContext) var managedObjectContext
 	
-	@StateObject var catsViewModel = CatsCardsViewModel()
-	
-	var cat: CatsCard
-	var breedsViewModel: BreedsViewModel
+	@StateObject var catsViewModel: CatsCardsViewModel
 	
 	var body: some View {
 		NavigationView {
@@ -45,19 +41,22 @@ struct EditingCatsPageView: View {
 						"Date of birth",
 						selection: $catsViewModel.dateOfBirth, in: ...Date(),
 						displayedComponents: .date
-					).datePickerStyle(DefaultDatePickerStyle())
+					)
+					.datePickerStyle(DefaultDatePickerStyle())
 					
 					Picker("What is the wrappedCat's gender", selection: $catsViewModel.gender) {
 						ForEach(0..<2) { index in
 							Text("\(Gender.allCases[index].rawValue.capitalized)").tag(Gender.allCases[index])
 						}
-					}.pickerStyle(SegmentedPickerStyle())
+					}
+					.pickerStyle(SegmentedPickerStyle())
 					
 					Picker("Breed of the wrappedCat", selection: $catsViewModel.breed) {
-						ForEach(breedsViewModel.breeds, id: \.name) { breed in
+						ForEach(BreedsViewModel.shared.breeds, id: \.name) { breed in
 							Text("\(breed.name)")
 						}
-					}.pickerStyle(InlinePickerStyle())
+					}
+					.pickerStyle(InlinePickerStyle())
 				}
 				
 				Section(header: Text("Physical aspects")) {
@@ -91,7 +90,8 @@ struct EditingCatsPageView: View {
 							ForEach(Temperament.allCases, id: \.self) { temperament in
 								Text("\(temperament.rawValue.capitalized)")
 							}
-						}.pickerStyle(SegmentedPickerStyle())
+						}
+						.pickerStyle(SegmentedPickerStyle())
 						
 						RatingView(rating: $catsViewModel.strangerFriendly,
 								   label: "Stranger friendly",
@@ -106,7 +106,7 @@ struct EditingCatsPageView: View {
 						)
 						
 						RatingView(rating: $catsViewModel.dogFriendly,
-								   label: "Child friendly",
+								   label: "Dog friendly",
 								   offImage: Image(systemName: "star"),
 								   onImage: Image(systemName: "star.fill")
 						)
@@ -137,12 +137,6 @@ struct EditingCatsPageView: View {
 					secondaryButton: .cancel())
 			}
 		}
-		.onAppear() {
-			self.breedsViewModel.loadBreeds()
-			
-			catsViewModel.cat = cat
-			catsViewModel.managedObjectContext = managedObjectContext
-		}
 		.sheet(isPresented: $catsViewModel.isImagePicker) {
 			ImagePicker(image: $catsViewModel.catsImage)
 		}
@@ -151,7 +145,7 @@ struct EditingCatsPageView: View {
 
 struct EditingCatsPageView_Previews: PreviewProvider {
     static var previews: some View {
-		EditingCatsPageView(cat: CatsCard(context: PersistenceController.preview.conteiner.viewContext), breedsViewModel: BreedsViewModel.shared)
+		EditingCatsPageView(catsViewModel: CatsCardsViewModel(cat: CatsCard(context: PersistenceController.preview.conteiner.viewContext), managedObjectContext: PersistenceController.preview.conteiner.viewContext))
 			.environment(\.managedObjectContext, PersistenceController.preview.conteiner.viewContext)
     }
 }

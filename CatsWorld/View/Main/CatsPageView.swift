@@ -9,22 +9,25 @@ import SwiftUI
 
 struct CatsPageView: View {
 	
-	@ObservedObject var cat: CatsCard
-	@State var isEditing = false
+	@Environment(\.managedObjectContext) var managedObjectContext
 	
-	var breedsViewModel: BreedsViewModel
+	@ObservedObject var cat: CatsCard
+	
+	var deleteAfterCancelation = false
+	
+	@State var isEditing = false
 	
     var body: some View {
 		if isEditing {
-			EditingCatsPageView(cat: cat, breedsViewModel: breedsViewModel)
+			EditingCatsPageView(catsViewModel: CatsCardsViewModel(cat: cat, deleteAfterCancelation: deleteAfterCancelation, managedObjectContext: managedObjectContext))
 		} else {
-			MainCatsPageView(cat: cat, catsDescriptionViewModel: CatsDescriptionViewModel(cat: cat))
+			MainCatsPageView(catsDescriptionViewModel: CatsDescriptionViewModel(cat: cat))
 		}
     }
 }
 
 struct CatsPageView_Previews: PreviewProvider {
     static var previews: some View {
-		CatsPageView(cat: CatsCard(context: PersistenceController.preview.conteiner.viewContext), breedsViewModel: BreedsViewModel.shared)
+		CatsPageView(cat: CatsCard(context: PersistenceController.preview.conteiner.viewContext))
     }
 }

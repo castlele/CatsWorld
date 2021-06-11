@@ -14,8 +14,6 @@ struct CatsWorldApp: App {
 	
 	@Environment(\.scenePhase) var scenePhase
 	
-	@StateObject private var breedsViewModel = BreedsViewModel.shared
-	
 	@State var selectedView = 1
 	
 	init() {
@@ -27,14 +25,13 @@ struct CatsWorldApp: App {
     var body: some Scene {
         WindowGroup {
 			TabView(selection: $selectedView) {
-				MapView()
+				MapTabView()
 					.tabItem {
 						Image(systemName: "map")
 						Text("Map")
 					}
 					.tag(0)
 				HomeScreenView()
-					.environmentObject(breedsViewModel)
 					.environment(\.managedObjectContext, persistenceController.conteiner.viewContext)
 					.tabItem {
 						Image(systemName: "house")
@@ -43,7 +40,7 @@ struct CatsWorldApp: App {
 					.tag(1)
 
 				BreedsList()
-					.environmentObject(breedsViewModel)
+					.environmentObject(BreedsViewModel.shared)
 					.tabItem {
 						Image(systemName: "list.bullet")
 						Text("Breeds")

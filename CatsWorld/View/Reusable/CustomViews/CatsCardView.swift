@@ -14,7 +14,7 @@ struct CatsCardView: View {
 	@ObservedObject var cat: CatsCard
 	
 	@State var isCatsPageView = false
-	
+	@State var isEditingCatsPage = false
 	@State var isColorPicker = false
 	
 	var cardColor: Color {
@@ -45,7 +45,7 @@ struct CatsCardView: View {
 					
 					Menu {
 						Button("Edit") {
-							// TODO: - Show `EditCatsPageView`
+							isEditingCatsPage.toggle()
 						}
 						
 						Button("Pick card's color") {
@@ -98,7 +98,10 @@ struct CatsCardView: View {
 			}
 		}
 		.fullScreenCover(isPresented: $isCatsPageView) {
-			CatsPageView(cat: cat, breedsViewModel: BreedsViewModel.shared)
+			CatsPageView(cat: cat)
+		}
+		.sheet(isPresented: $isEditingCatsPage) {
+			CatsPageView(cat: cat, isEditing: true)
 		}
 		.padding()
 		.frame(minHeight: 100, maxHeight: 150)

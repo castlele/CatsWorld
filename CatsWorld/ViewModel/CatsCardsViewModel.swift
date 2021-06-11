@@ -12,137 +12,191 @@ import CoreData
 final class CatsCardsViewModel: ObservableObject {
 	
 	/// Currently edited object of `CatsCard`
-	var cat: CatsCard!
+	var cat: CatsCard
 	
-	var managedObjectContext: NSManagedObjectContext!
+	var deleteAfterCancelation: Bool
+	
+	var managedObjectContext: NSManagedObjectContext
+	
+	public init(cat: CatsCard, deleteAfterCancelation: Bool = false, managedObjectContext moc: NSManagedObjectContext) {
+		self.cat = cat
+		self.deleteAfterCancelation = deleteAfterCancelation
+		self.managedObjectContext = moc
+		
+		self.name = cat.name ?? ""
+		self.dateOfBirth = cat.dateOfBirth ?? Date()
+		self.gender = Gender(rawValue: cat.wrappedSex)!
+		self.breed = cat.breed ?? BreedsViewModel.defaultBreed.name
+		self.isPhysicalSectionEnabled = cat.isPhysicalSectionEnabled
+		self.weight = cat.weight
+		self.isCastrated = cat.isCastrated
+		self.suppressedTail = cat.suppressedTail
+		self.shortLegs = cat.shortLegs
+		self.hairless = cat.hairless
+		self.isPsycolocicalSectionEnabled = cat.isPhysicalSectionEnabled
+		self.temperament = cat.wrappedTemperament
+		self.strangerFriendly = Int(cat.strangerFriendly)
+		self.childFriendly = Int(cat.childFriendly)
+		self.dogFriendly = Int(cat.dogFriendly)
+		self.additionalInfo = cat.wrappedInfo
+		self.catsImage = UIImage(data: cat.image)
+	}
 	
 	@Published var isAlertShown = false
 	
 	@Published var isImagePicker = false
 	
 	/// Track if changes was made to cat entity
-	@Published var wasChanged = false
+	var wasChanged: Bool {
+		!changes.values.compactMap{ $0 }.isEmpty
+	}
 	
-	@Published var name = "" {
+	private var changes: [String: Change?] = [
+		"name": nil,
+		"dateOfBirth": nil,
+		"gender": nil,
+		"breed": nil,
+		"physicalSection": nil,
+		"weight": nil,
+		"castration": nil,
+		"suppressedTail": nil,
+		"shortLegs": nil,
+		"hairless": nil,
+		"psycologicalSection": nil,
+		"temperament": nil,
+		"strangerFriendly": nil,
+		"childFriendly": nil,
+		"dogFriendly": nil,
+		"additionalInfo": nil,
+		"image": nil
+	]
+	
+	@Published var name: String {
 		willSet(newName) {
-			print(newName)
-			guard let cat = cat else { return }
-			setNew(value: newName, to: &cat.name)
+			changes["name"] = .name(newName)
 		}
 	}
 	
-	@Published var dateOfBirth: Date = Date() {
+	@Published var dateOfBirth: Date {
 		willSet(newDate) {
-			guard let cat = cat else { return }
-			setNew(value: newDate, to: &cat.dateOfBirth)
+			changes["dateOfBirth"] = .dateOfBirth(newDate)
 		}
 	}
 	
-	@Published var gender: Gender = .female {
+	@Published var gender: Gender {
 		willSet(newGender) {
-			guard let cat = cat else { return }
-			setNew(value: newGender.rawValue, to: &cat.sex)
+			changes["gender"] = .gender(newGender.rawValue)
 		}
 	}
 	
-	@Published var breed: String = BreedsViewModel.defaultBreed.name {
+	@Published var breed: String {
 		willSet(newBreed) {
-			guard let cat = cat else { return }
-			setNew(value: newBreed, to: &cat.breed)
+			changes["breed"] = .breed(newBreed)
 		}
 	}
 	
-	@Published var isPhysicalSectionEnabled = false {
+	@Published var isPhysicalSectionEnabled: Bool {
 		willSet(isSection) {
-			guard let cat = cat else { return }
-			setNew(value: isSection, to: &cat.isPhysicalSectionEnabled)
+			changes["physicalSection"] = .physicalSection(isSection)
 		}
 	}
 	
-	@Published var weight: Float = 1 {
+	@Published var weight: Float {
 		willSet(newWeight) {
-			guard let cat = cat else { return }
-			setNew(value: newWeight, to: &cat.weight)
+			changes["weight"] = .weight(newWeight)
 		}
 	}
 	
-	@Published var isCastrated = false {
+	@Published var isCastrated: Bool {
 		willSet(wasCastrated) {
-			guard let cat = cat else { return }
-			setNew(value: wasCastrated, to: &cat.isCastrated)
+			changes["castration"] = .castration(wasCastrated)
 		}
 	}
 	
-	@Published var suppressedTail = false {
+	@Published var suppressedTail: Bool {
 		willSet(isSuppressed) {
-			guard let cat = cat else { return }
-			setNew(value: isSuppressed, to: &cat.suppressedTail)
+			changes["suppressedTail"] = .suppressedTail(isSuppressed)
 		}
 	}
 	
-	@Published var shortLegs = false {
+	@Published var shortLegs: Bool {
 		willSet(isShort) {
-			guard let cat = cat else { return }
-			setNew(value: isShort, to: &cat.shortLegs)
+			changes["shortLegs"] = .shortLegs(isShort)
 		}
 	}
 	
-	@Published var hairless = false {
+	@Published var hairless: Bool {
 		willSet(isHairless) {
-			guard let cat = cat else { return }
-			setNew(value: isHairless, to: &cat.hairless)
+			changes["hairless"] = .hairless(isHairless)
 		}
 	}
 	
-	@Published var isPsycolocicalSectionEnabled = false {
+	@Published var isPsycolocicalSectionEnabled: Bool {
 		willSet(isSection) {
-			guard let cat = cat else { return }
-			setNew(value: isSection, to: &cat.isPsycolocicalSectionEnabled)
+			changes["psycologicalSection"] = .psycologicalSection(isSection)
 		}
 	}
 	
-	@Published var temperament: Temperament = .choleric {
+	@Published var temperament: Temperament {
 		willSet(newTemperament) {
-			guard let cat = cat else { return }
-			if let data = encode(newTemperament) {
-				setNew(value: data, to: &cat.temperament)
-			}
+			changes["temperament"] = .temperament(newTemperament)
 		}
 	}
 	
-	@Published var strangerFriendly = 1 {
+	@Published var strangerFriendly: Int {
 		willSet(rating) {
-			guard let cat = cat else { return }
-			setNew(value: Int16(rating), to: &cat.strangerFriendly)
+			changes["strangerFriendly"] = .strangerFriendly(Int16(rating))
 		}
 	}
 	
-	@Published var childFriendly = 1 {
+	@Published var childFriendly: Int {
 		willSet(rating) {
-			guard let cat = cat else { return }
-			setNew(value: Int16(rating), to: &cat.childFriendly)
+			changes["childFriendly"] = .childFriendly(Int16(rating))
 		}
 	}
 	
-	@Published var dogFriendly = 1 {
+	@Published var dogFriendly: Int {
 		willSet(rating) {
-			guard let cat = cat else { return }
-			setNew(value: Int16(rating), to: &cat.dogFriendly)
+			changes["dogFriendly"] = .dogFriendly(Int16(rating))
 		}
 	}
 	
-	@Published var additionalInfo = "" {
+	@Published var additionalInfo: String {
 		willSet(newInfo) {
-			guard let cat = cat else { return }
-			setNew(value: newInfo, to: &cat.additionalInfo)
+			changes["additionalInfo"] = .additionalInfo(newInfo)
 		}
 	}
 	
 	@Published var catsImage: UIImage? {
 		willSet(newImage) {
-			guard let image = newImage else { return }
-			setNew(value: image.pngData(), to: &cat.image)
+			if let newImage = newImage, newImage.pngData() != cat.image {
+				changes["image"] = .image(newImage)
+			}
 		}
+	}
+}
+
+// MARK: - Changes tracker
+extension CatsCardsViewModel {
+	
+	private enum Change {
+		case name(String)
+		case dateOfBirth(Date)
+		case gender(String)
+		case breed(String)
+		case physicalSection(Bool)
+		case weight(Float)
+		case castration(Bool)
+		case suppressedTail(Bool)
+		case shortLegs(Bool)
+		case hairless(Bool)
+		case psycologicalSection(Bool)
+		case temperament(Temperament)
+		case strangerFriendly(Int16)
+		case childFriendly(Int16)
+		case dogFriendly(Int16)
+		case additionalInfo(String)
+		case image(UIImage)
 	}
 }
 	
@@ -151,7 +205,7 @@ extension CatsCardsViewModel {
 	
 	/// Saves changes, made to instance of `CatsCard`
 	func save() {
-		guard let _ = cat else { return }
+		setNewValues()
 		
 		do {
 			try managedObjectContext.save()
@@ -159,20 +213,14 @@ extension CatsCardsViewModel {
 			// TODO: Error handling
 			print(error.localizedDescription)
 		}
-		
-		self.cat = nil
-		self.managedObjectContext = nil
 	}
 	
 	/// Deletes `CatsCard` object from Core Data
 	/// Assigns nil to instance of `cat` and `managedObjectContext` of current `CatsCardsViewModel`
 	func delete() {
-		guard let cat = cat else { return }
-		
-		managedObjectContext.delete(cat)
-		
-		self.cat = nil
-		self.managedObjectContext = nil
+		if deleteAfterCancelation {
+			managedObjectContext.delete(cat)
+		}
 	}
 	
 	/// Dismisses `EditingCatsPageView` and discard or submit changes
@@ -205,23 +253,69 @@ extension CatsCardsViewModel {
 	///   - value: New value to assign
 	///   - property: Cat's property to assign to
 	private func setNew<T: Equatable>(value: T, to property: inout T) {
-		if makeChangesIf(value != property) {
-			property = value
-		}
+		property = value
 	}
 	
-	/// Defines if changes were made and changes tracker `wasChanged` respectively
-	/// - Parameters:
-	///   - expression: Expression on which changes track
-	/// - Returns: `true` if changes were made else `false`
-	private func makeChangesIf(_ expression: Bool) -> Bool {
-		if expression {
-			wasChanged = true
-			return true
+	private func setNewValues() {
+		for change in changes.values {
+			guard let change = change else { continue }
 			
-		} else {
-			wasChanged = false
-			return false
+			switch change {
+				case let .name(name):
+					setNew(value: name, to: &cat.name)
+
+				case let .dateOfBirth(dateOfBirth):
+					setNew(value: dateOfBirth, to: &cat.dateOfBirth)
+
+				case let .gender(gender):
+					setNew(value: gender, to: &cat.sex)
+
+				case let .breed(breed):
+					setNew(value: breed, to: &cat.breed)
+
+				case let .physicalSection(isPhysicalSectionEnabled):
+					setNew(value: isPhysicalSectionEnabled, to: &cat.isPhysicalSectionEnabled)
+
+				case let .weight(weight):
+					setNew(value: weight, to: &cat.weight)
+
+				case let .castration(isCastrated):
+					setNew(value: isCastrated, to: &cat.isCastrated)
+
+				case let .suppressedTail(suppressedTail):
+					setNew(value: suppressedTail, to: &cat.suppressedTail)
+
+				case let .shortLegs(shortLegs):
+					setNew(value: shortLegs, to: &cat.shortLegs)
+
+				case let .hairless(hairless):
+					setNew(value: hairless, to: &cat.hairless)
+
+				case let .psycologicalSection(isPhysicalSectionEnabled):
+					setNew(value: isPhysicalSectionEnabled, to: &cat.isPhysicalSectionEnabled)
+
+				case let .temperament(temperament):
+					if let temperamentData = encode(temperament) {
+						setNew(value: temperamentData, to: &cat.temperament)
+					}
+					
+				case let .strangerFriendly(strangerFriendly):
+					setNew(value: strangerFriendly, to: &cat.strangerFriendly)
+
+				case let .childFriendly(childFriendly):
+					setNew(value: childFriendly, to: &cat.childFriendly)
+
+				case let .dogFriendly(dogFriendly):
+					setNew(value: dogFriendly, to: &cat.dogFriendly)
+
+				case let .additionalInfo(additionalInfo):
+					setNew(value: additionalInfo, to: &cat.additionalInfo)
+
+				case let .image(catsImage):
+					if let imageData = catsImage.pngData() {
+						setNew(value: imageData, to: &cat.image)
+					}
+			}
 		}
 	}
 }

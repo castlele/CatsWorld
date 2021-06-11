@@ -10,11 +10,13 @@ import SwiftUI
 struct MainCatsPageView: View {
 	
 	@Environment(\.presentationMode) var presentationMode
+	@Environment(\.managedObjectContext) var managedObjectContext
 	
 	@State var ageType: AgeType = .age
 	
-	@ObservedObject var cat: CatsCard
 	@ObservedObject var catsDescriptionViewModel: CatsDescriptionViewModel
+	
+	@State var isEditingCatsPage = false
 	
 	var body: some View {
 		GeometryReader { geometry in
@@ -47,6 +49,7 @@ struct MainCatsPageView: View {
 							Spacer()
 							
 							Button(action: {
+								isEditingCatsPage.toggle()
 								
 							}, label: {
 								Image3D(
@@ -62,7 +65,7 @@ struct MainCatsPageView: View {
 						}
 						.padding(.top)
 						
-						CatsMainInfoView(cat: cat, age: $ageType, isGender: true)
+						CatsMainInfoView(cat: catsDescriptionViewModel.cat, age: $ageType, isGender: true)
 							.onTapGesture {
 								switch ageType {
 									case .age:
@@ -87,11 +90,11 @@ struct MainCatsPageView: View {
 				.frame(width: geometry.frame(in: .local).width, height: geometry.size.width / 2)
 				
 				TabView(selection: $catsDescriptionViewModel.category) {
-					CatsDescriptionSettings(settings: catsDescriptionViewModel.settingsFor(category: .physical))
+					CatsDescriptionSettingsView(settings: catsDescriptionViewModel.settingsFor(category: .physical))
 						.tag(CatsDescriptionCategory.physical)
-					CatsDescriptionSettings(settings: catsDescriptionViewModel.settingsFor(category: .psycological))
+					CatsDescriptionSettingsView(settings: catsDescriptionViewModel.settingsFor(category: .psycological))
 						.tag(CatsDescriptionCategory.psycological)
-					CatsDescriptionSettings(settings: catsDescriptionViewModel.settingsFor(category: .shows))
+					CatsDescriptionSettingsView(settings: catsDescriptionViewModel.settingsFor(category: .shows))
 						.tag(CatsDescriptionCategory.shows)
 				}
 				.tabViewStyle(PageTabViewStyle())
@@ -99,16 +102,14 @@ struct MainCatsPageView: View {
 				
 				Spacer()
 				
-				if let additionalInfo = cat.additionalInfo, !additionalInfo.isEmpty {
+				if let additionalInfo = catsDescriptionViewModel.cat.additionalInfo, !additionalInfo.isEmpty {
 					Text(additionalInfo)
+						.padding()
 				}
 			}
-			.background(Color(cat.wrappedColor).blur(radius: 200))
-			.onAppear {
-				UIScrollView.appearance().bounces = true
-			}
-			.onDisappear {
-				UIScrollView.appearance().bounces = false
+			.background(Color(catsDescriptionViewModel.cat.wrappedColor).blur(radius: 200))
+			.sheet(isPresented: $isEditingCatsPage) {
+				EditingCatsPageView(catsViewModel: CatsCardsViewModel(cat: catsDescriptionViewModel.cat, managedObjectContext: managedObjectContext))
 			}
 		}
 	}
@@ -116,6 +117,6 @@ struct MainCatsPageView: View {
 
 struct MainCatsPageView_Previews: PreviewProvider {
     static var previews: some View {
-		MainCatsPageView(cat: CatsCard(context: PersistenceController.preview.conteiner.viewContext), catsDescriptionViewModel: CatsDescriptionViewModel(cat: CatsCard(context: PersistenceController.preview.conteiner.viewContext)))
+		MainCatsPageView(catsDescriptionViewModel: CatsDescriptionViewModel(cat: CatsCard(context: PersistenceController.preview.conteiner.viewContext)))
     }
 }

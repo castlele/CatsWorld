@@ -7,19 +7,19 @@
 
 import SwiftUI
 
-struct CatsDescriptionSettings: View {
+struct CatsDescriptionSettingsView: View {
 	
 	@State var settings: [Setting]
 	
     var body: some View {
 		VStack {
-			ForEach(0..<settings.count) { index in
+			ForEach(settings) { setting in
 				HStack {
-					Text(settings[index].name)
+					Text(setting.name)
 					
 					Spacer()
 					
-					switch settings[index].value {
+					switch setting.value {
 						case let .bool(value):
 							value ? Text("Yes") : Text("No")
 							
@@ -51,6 +51,6 @@ struct CatsDescriptionSettings: View {
 
 struct CatsDescriptionSettings_Previews: PreviewProvider {
     static var previews: some View {
-		CatsDescriptionSettings(settings: [(name: "Stranger friendly", value: CatsWorld.CatsDescriptionValue.int(1)), (name: "Child friendly", value: CatsWorld.CatsDescriptionValue.int(2)), (name: "Dog friendly", value: CatsWorld.CatsDescriptionValue.int(3)), (name: "Temperament", value: CatsWorld.CatsDescriptionValue.temperament(CatsWorld.Temperament.choleric))])
+		CatsDescriptionSettingsView(settings: [Setting("Stranger friendly", CatsWorld.CatsDescriptionValue.int(1)), Setting("Child friendly", CatsWorld.CatsDescriptionValue.int(2)), Setting("Dog friendly", CatsWorld.CatsDescriptionValue.int(3)), Setting("Temperament", CatsWorld.CatsDescriptionValue.temperament(CatsWorld.Temperament.choleric))])
     }
 }
