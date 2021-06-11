@@ -140,6 +140,9 @@ struct EditingCatsPageView: View {
 		.sheet(isPresented: $catsViewModel.isImagePicker) {
 			ImagePicker(image: $catsViewModel.catsImage)
 		}
+		.onDisappear {
+			catsViewModel.dismiss(isDiscardChanges: true, presentation: presentation)
+		}
 	}
 }
 
