@@ -38,8 +38,8 @@ struct CatsCardView: View {
 				Spacer()
 				
 				HStack {
-					Text("\(cat.wrappedSex)")
-						.font(.headline)
+					Text("\(cat.genderSign)")
+						.font(.title)
 						.fontWeight(.medium)
 						.padding([.leading, .trailing])
 					

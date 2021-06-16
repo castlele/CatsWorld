@@ -24,12 +24,21 @@ struct CatsMainInfoView: View {
 		}
 	}
 	
-	private var strokeColor: Color {
+	var genderSign: AnyView? {
 		if isGender {
-			return cat.genderColor
+			return AnyView(GeometryReader { geometry in
+				Text(cat.genderSign)
+					.font(.title)
+					.foregroundColor(cat.genderColor)
+					.offset(x: 5, y: -6)
+			})
+			
+		} else {
+			return nil
 		}
-		return .gray
 	}
+	
+	var strokeColor: Color = .gray
 	
     var body: some View {
 		HStack(spacing: 20) {
@@ -39,6 +48,9 @@ struct CatsMainInfoView: View {
 						.stroke(strokeColor, lineWidth: 4)
 				)
 				.frame(minWidth: 40, maxWidth: 100, minHeight: 40, maxHeight: 100)
+				.overlay(
+					genderSign
+				)
 			
 			VStack(alignment: .leading, spacing: 2.5) {
 				Text("\(cat.wrappedName)")

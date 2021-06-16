@@ -116,6 +116,15 @@ extension CatsCard : Identifiable {
 		}
 	}
 	
+	var genderSign: String {
+		switch wrappedSex {
+			case "male":
+				return "♂"
+			default:
+				return "♀"
+		}
+	}
+	
 	var wrappedInfo: String {
 		additionalInfo ?? ""
 	}

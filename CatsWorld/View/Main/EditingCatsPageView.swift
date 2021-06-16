@@ -22,7 +22,7 @@ struct EditingCatsPageView: View {
 						Spacer()
 						
 						CatsAvatar(avatar: catsViewModel.catsImage ?? UIImage(systemName: "person.crop.circle.fill")!)
-							.frame(width: 80, height: 80)
+							.frame(minWidth: 40, maxWidth: 100, minHeight: 40, maxHeight: 100)
 						
 						Spacer()
 					}
