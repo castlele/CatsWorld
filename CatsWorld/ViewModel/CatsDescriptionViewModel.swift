@@ -29,6 +29,21 @@ final class CatsDescriptionViewModel: ObservableObject {
 		determineSettings(for: self.category)
 	}
 	
+	var friendlyCharacteristics: [(String, Int)] {
+		let settings = determineSettings(for: .psycological)
+		var characteristics: [(String, Int)] = []
+		
+		for setting in settings {
+			switch setting.value {
+				case let .int(value):
+					characteristics.append((setting.name, Int(value)))
+				default:
+					continue
+			}
+		}
+		return characteristics
+	}
+	
 	init(cat: CatsCard) {
 		self.cat = cat
 	}
@@ -36,8 +51,24 @@ final class CatsDescriptionViewModel: ObservableObject {
 
 // MARK: - Public methods
 extension CatsDescriptionViewModel {
+	
 	func settingsFor(category: CatsDescriptionCategory) -> [Setting] {
 		determineSettings(for: category)
+	}
+	
+	func reorderDataNames(names: [String]) -> [String] {
+		var index = 0
+		let first = names[index]
+		var result = [String](repeating: "", count: names.count)
+		
+		while index != (names.count - 1) {
+			index += 1
+			let nextName = names[index]
+			result[index] = first
+			result[index - 1] = nextName
+		}
+		
+		return result
 	}
 }
 	

@@ -91,17 +91,33 @@ struct MainCatsPageView: View {
 								.lineLimit(.max)
 								.padding()
 							
-							Spacer()
 						}
 						.padding()
 					}
+					.padding([.leading, .trailing])
 				}
 				
-				CatsDescriptionSettingsView(settings: catsDescriptionViewModel.settingsFor(category: .physical))
-
-				CatsDescriptionSettingsView(settings: catsDescriptionViewModel.settingsFor(category: .psycological))
-
-				CatsDescriptionSettingsView(settings: catsDescriptionViewModel.settingsFor(category: .shows))
+				VStack(alignment: .leading) {
+					
+						RadarChartView(
+							data: catsDescriptionViewModel.friendlyCharacteristics,
+							gridColor: .gray,
+							dataColor: .green,
+							reorder: catsDescriptionViewModel.reorderDataNames(names:)
+						)
+						.frame(width: UIScreen.screenWidth, height: UIScreen.screenWidth / 2)
+						.rotationEffect(Angle(radians: .pi / 3))
+						.padding()
+					
+					
+					Spacer()
+					
+					CatsDescriptionSettingsView(settings: catsDescriptionViewModel.settingsFor(category: .physical))
+					
+					CatsDescriptionSettingsView(settings: catsDescriptionViewModel.settingsFor(category: .psycological))
+					
+					CatsDescriptionSettingsView(settings: catsDescriptionViewModel.settingsFor(category: .shows))
+				}
 			}
 		}
 		.background(Color(catsDescriptionViewModel.cat.wrappedColor).blur(radius: 200))
@@ -112,7 +128,14 @@ struct MainCatsPageView: View {
 }
 
 struct MainCatsPageView_Previews: PreviewProvider {
+	static var cat: CatsCard = {
+		let cat = CatsCard(context: PersistenceController.preview.conteiner.viewContext)
+		cat.childFriendly = 5
+		cat.strangerFriendly = 2
+		cat.dogFriendly = 3
+		return cat
+	}()
     static var previews: some View {
-		MainCatsPageView(catsDescriptionViewModel: CatsDescriptionViewModel(cat: CatsCard(context: PersistenceController.preview.conteiner.viewContext)))
+		MainCatsPageView(catsDescriptionViewModel: CatsDescriptionViewModel(cat: cat))
     }
 }

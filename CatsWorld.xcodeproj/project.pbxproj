@@ -15,6 +15,7 @@
 		7B1AA595264AA4CF002A3774 /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1AA594264AA4CF002A3774 /* MockData.swift */; };
 		7B1AA599264AA798002A3774 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1AA598264AA798002A3774 /* Array.swift */; };
 		7B33A11D267B50BD00C780C0 /* LinearGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B33A11C267B50BD00C780C0 /* LinearGradient.swift */; };
+		7B33A11F267B586600C780C0 /* RadarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B33A11E267B586600C780C0 /* RadarChart.swift */; };
 		7B56A10A2673AE2F00BEF8DD /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B56A1092673AE2F00BEF8DD /* UIImage.swift */; };
 		7B5C83132670E99400B2F6E8 /* CircleButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5C83122670E99400B2F6E8 /* CircleButtonStyle.swift */; };
 		7B5C83182670FF0A00B2F6E8 /* Image3D.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5C83172670FF0A00B2F6E8 /* Image3D.swift */; };
@@ -47,6 +48,7 @@
 		7B968A092653AE48002ECE07 /* Temperament.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B968A082653AE48002ECE07 /* Temperament.swift */; };
 		7B968A0B2653B149002ECE07 /* TemperamentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B968A0A2653B149002ECE07 /* TemperamentTests.swift */; };
 		7BDB149E267281E8005D98DB /* CatsDescriptionSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BDB149D267281E8005D98DB /* CatsDescriptionSettingsView.swift */; };
+		7BE159C2267CA73400A0E846 /* UIScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE159C1267CA73400A0E846 /* UIScreen.swift */; };
 		7BE498932653B9EB004F7F52 /* EditingCatsPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE498922653B9EB004F7F52 /* EditingCatsPageView.swift */; };
 		7BE498952653BC92004F7F52 /* Gender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE498942653BC92004F7F52 /* Gender.swift */; };
 		7BE498972653E322004F7F52 /* CatsCardsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE498962653E322004F7F52 /* CatsCardsViewModel.swift */; };
@@ -74,6 +76,7 @@
 		7B1AA594264AA4CF002A3774 /* MockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
 		7B1AA598264AA798002A3774 /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 		7B33A11C267B50BD00C780C0 /* LinearGradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinearGradient.swift; sourceTree = "<group>"; };
+		7B33A11E267B586600C780C0 /* RadarChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadarChart.swift; sourceTree = "<group>"; };
 		7B56A1092673AE2F00BEF8DD /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		7B5C83122670E99400B2F6E8 /* CircleButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleButtonStyle.swift; sourceTree = "<group>"; };
 		7B5C83172670FF0A00B2F6E8 /* Image3D.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image3D.swift; sourceTree = "<group>"; };
@@ -110,6 +113,7 @@
 		7B968A082653AE48002ECE07 /* Temperament.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Temperament.swift; sourceTree = "<group>"; };
 		7B968A0A2653B149002ECE07 /* TemperamentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemperamentTests.swift; sourceTree = "<group>"; };
 		7BDB149D267281E8005D98DB /* CatsDescriptionSettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CatsDescriptionSettingsView.swift; sourceTree = "<group>"; };
+		7BE159C1267CA73400A0E846 /* UIScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIScreen.swift; sourceTree = "<group>"; };
 		7BE498922653B9EB004F7F52 /* EditingCatsPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingCatsPageView.swift; sourceTree = "<group>"; };
 		7BE498942653BC92004F7F52 /* Gender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gender.swift; sourceTree = "<group>"; };
 		7BE498962653E322004F7F52 /* CatsCardsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatsCardsViewModel.swift; sourceTree = "<group>"; };
@@ -145,6 +149,7 @@
 				7B5C831B26710CE200B2F6E8 /* Date.swift */,
 				7B56A1092673AE2F00BEF8DD /* UIImage.swift */,
 				7B33A11C267B50BD00C780C0 /* LinearGradient.swift */,
+				7BE159C1267CA73400A0E846 /* UIScreen.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -167,6 +172,7 @@
 				7B66A10526556AE100FDC9A7 /* RatingView.swift */,
 				7B5C83172670FF0A00B2F6E8 /* Image3D.swift */,
 				7BDB149D267281E8005D98DB /* CatsDescriptionSettingsView.swift */,
+				7B33A11E267B586600C780C0 /* RadarChart.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -474,8 +480,10 @@
 				7B6E3D4526527DA200B04B62 /* ImagePickerView.swift in Sources */,
 				7B968A092653AE48002ECE07 /* Temperament.swift in Sources */,
 				7B6E3D492652CB4300B04B62 /* CatsMainInfoView.swift in Sources */,
+				7BE159C2267CA73400A0E846 /* UIScreen.swift in Sources */,
 				7BE498972653E322004F7F52 /* CatsCardsViewModel.swift in Sources */,
 				7B33A11D267B50BD00C780C0 /* LinearGradient.swift in Sources */,
+				7B33A11F267B586600C780C0 /* RadarChart.swift in Sources */,
 				7B66A10626556AE100FDC9A7 /* RatingView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
