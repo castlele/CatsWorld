@@ -51,6 +51,7 @@ final class CatsCardsViewModel: ObservableObject {
 		!changes.values.compactMap{ $0 }.isEmpty
 	}
 	
+	/// Holds all changes made
 	private var changes: [String: Change?] = [
 		"name": nil,
 		"dateOfBirth": nil,
@@ -179,6 +180,7 @@ final class CatsCardsViewModel: ObservableObject {
 // MARK: - Changes tracker
 extension CatsCardsViewModel {
 	
+	/// Represents type of changes
 	private enum Change {
 		case name(String)
 		case dateOfBirth(Date)
@@ -256,6 +258,7 @@ extension CatsCardsViewModel {
 		property = value
 	}
 	
+	/// Sets new values if needed
 	private func setNewValues() {
 		for change in changes.values {
 			guard let change = change else { continue }

@@ -18,7 +18,7 @@
 		7B33A11F267B586600C780C0 /* RadarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B33A11E267B586600C780C0 /* RadarChart.swift */; };
 		7B56A10A2673AE2F00BEF8DD /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B56A1092673AE2F00BEF8DD /* UIImage.swift */; };
 		7B5C83132670E99400B2F6E8 /* CircleButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5C83122670E99400B2F6E8 /* CircleButtonStyle.swift */; };
-		7B5C83182670FF0A00B2F6E8 /* Image3D.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5C83172670FF0A00B2F6E8 /* Image3D.swift */; };
+		7B5C83182670FF0A00B2F6E8 /* View3D.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5C83172670FF0A00B2F6E8 /* View3D.swift */; };
 		7B5C831A2671070800B2F6E8 /* AgeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5C83192671070800B2F6E8 /* AgeType.swift */; };
 		7B5C831C26710CE200B2F6E8 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5C831B26710CE200B2F6E8 /* Date.swift */; };
 		7B66A10626556AE100FDC9A7 /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B66A10526556AE100FDC9A7 /* RatingView.swift */; };
@@ -79,7 +79,7 @@
 		7B33A11E267B586600C780C0 /* RadarChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadarChart.swift; sourceTree = "<group>"; };
 		7B56A1092673AE2F00BEF8DD /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		7B5C83122670E99400B2F6E8 /* CircleButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleButtonStyle.swift; sourceTree = "<group>"; };
-		7B5C83172670FF0A00B2F6E8 /* Image3D.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image3D.swift; sourceTree = "<group>"; };
+		7B5C83172670FF0A00B2F6E8 /* View3D.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View3D.swift; sourceTree = "<group>"; };
 		7B5C83192671070800B2F6E8 /* AgeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgeType.swift; sourceTree = "<group>"; };
 		7B5C831B26710CE200B2F6E8 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		7B66A10526556AE100FDC9A7 /* RatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
@@ -143,13 +143,9 @@
 		7B1AA596264AA778002A3774 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				7B1AA598264AA798002A3774 /* Array.swift */,
-				7B6E3D41265272AF00B04B62 /* UIColor.swift */,
-				7B096CA82657B80A00B99D3E /* View.swift */,
-				7B5C831B26710CE200B2F6E8 /* Date.swift */,
-				7B56A1092673AE2F00BEF8DD /* UIImage.swift */,
-				7B33A11C267B50BD00C780C0 /* LinearGradient.swift */,
-				7BE159C1267CA73400A0E846 /* UIScreen.swift */,
+				7BCF801C267CE1820064C6E6 /* SwiftUI */,
+				7BCF801B267CE17B0064C6E6 /* UIKit */,
+				7BCF801A267CE1740064C6E6 /* Foundation */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -170,7 +166,7 @@
 				7B6E3D482652CB4300B04B62 /* CatsMainInfoView.swift */,
 				7B6E3D4C2652D6DC00B04B62 /* CatsAvatar.swift */,
 				7B66A10526556AE100FDC9A7 /* RatingView.swift */,
-				7B5C83172670FF0A00B2F6E8 /* Image3D.swift */,
+				7B5C83172670FF0A00B2F6E8 /* View3D.swift */,
 				7BDB149D267281E8005D98DB /* CatsDescriptionSettingsView.swift */,
 				7B33A11E267B586600C780C0 /* RadarChart.swift */,
 			);
@@ -303,6 +299,34 @@
 				7B8B9A1C2642816D00E98B8E /* JSONParser.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		7BCF801A267CE1740064C6E6 /* Foundation */ = {
+			isa = PBXGroup;
+			children = (
+				7B5C831B26710CE200B2F6E8 /* Date.swift */,
+				7B1AA598264AA798002A3774 /* Array.swift */,
+			);
+			path = Foundation;
+			sourceTree = "<group>";
+		};
+		7BCF801B267CE17B0064C6E6 /* UIKit */ = {
+			isa = PBXGroup;
+			children = (
+				7B6E3D41265272AF00B04B62 /* UIColor.swift */,
+				7B56A1092673AE2F00BEF8DD /* UIImage.swift */,
+				7BE159C1267CA73400A0E846 /* UIScreen.swift */,
+			);
+			path = UIKit;
+			sourceTree = "<group>";
+		};
+		7BCF801C267CE1820064C6E6 /* SwiftUI */ = {
+			isa = PBXGroup;
+			children = (
+				7B096CA82657B80A00B99D3E /* View.swift */,
+				7B33A11C267B50BD00C780C0 /* LinearGradient.swift */,
+			);
+			path = SwiftUI;
 			sourceTree = "<group>";
 		};
 		7BE498902653B7F1004F7F52 /* DataObjects */ = {
@@ -452,7 +476,7 @@
 				7BDB149E267281E8005D98DB /* CatsDescriptionSettingsView.swift in Sources */,
 				7B5C83132670E99400B2F6E8 /* CircleButtonStyle.swift in Sources */,
 				7B5C831C26710CE200B2F6E8 /* Date.swift in Sources */,
-				7B5C83182670FF0A00B2F6E8 /* Image3D.swift in Sources */,
+				7B5C83182670FF0A00B2F6E8 /* View3D.swift in Sources */,
 				7B5C831A2671070800B2F6E8 /* AgeType.swift in Sources */,
 				7B096CAB2657C50E00B99D3E /* CancelButton.swift in Sources */,
 				7B8B99E926427DDC00E98B8E /* BreedsList.swift in Sources */,

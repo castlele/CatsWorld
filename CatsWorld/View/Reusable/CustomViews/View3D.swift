@@ -7,27 +7,27 @@
 
 import SwiftUI
 
-//struct View3D<Content: View>: View {
-//
-//	var topView: Content
-//	var bottomView: Content
-//
-//	var topColor: Color?
-//	var bottomColor: Color?
-//
-//    var body: some View {
-//		ZStack {
-//			bottomView
-//				.foregroundColor(bottomColor)
-//				.padding()
-//
-//			topView
-//				.offset(x: 1, y: -1)
-//				.foregroundColor(topColor)
-//				.padding()
-//		}
-//    }
-//}
+struct View3D<Content: View>: View {
+
+	var topView: Content
+	var bottomView: Content
+
+	var topColor: Color?
+	var bottomColor: Color?
+
+    var body: some View {
+		ZStack {
+			bottomView
+				.foregroundColor(bottomColor)
+				.padding()
+
+			topView
+				.offset(x: 1, y: -1)
+				.foregroundColor(topColor)
+				.padding()
+		}
+    }
+}
 
 struct Image3D: View {
 	

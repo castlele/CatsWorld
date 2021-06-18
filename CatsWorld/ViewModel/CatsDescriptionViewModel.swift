@@ -29,7 +29,11 @@ final class CatsDescriptionViewModel: ObservableObject {
 		determineSettings(for: self.category)
 	}
 	
-	var friendlyCharacteristics: [(String, Int)] {
+	/// Represents friendliness of the cat
+	/// `categoryName` represents, to whome the cat friendly to
+	/// `value` represents how much friendly the cat is
+	/// O(n) where n is amount of settings in category
+	var friendlyCharacteristics: [(categoryName: String, value: Int)] {
 		let settings = determineSettings(for: .psycological)
 		var characteristics: [(String, Int)] = []
 		
@@ -56,6 +60,9 @@ extension CatsDescriptionViewModel {
 		determineSettings(for: category)
 	}
 	
+	/// Reorder names of data for usage in charts
+	/// - Parameter names: Names of values
+	/// - Returns: Reordered array of names
 	func reorderDataNames(names: [String]) -> [String] {
 		var index = 0
 		let first = names[index]
@@ -75,6 +82,9 @@ extension CatsDescriptionViewModel {
 // MARK:- Private methods
 extension CatsDescriptionViewModel {
 	
+	/// Determines Settings with values for certain cat and certain category
+	/// - Parameter category: Category of "settigns" for cat
+	/// - Returns: Array of `Setting`s with name and value
 	private func determineSettings(for category: CatsDescriptionCategory) -> [Setting] {
 		switch category {
 			case .physical:

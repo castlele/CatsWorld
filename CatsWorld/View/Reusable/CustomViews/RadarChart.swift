@@ -7,16 +7,27 @@
 
 import SwiftUI
 
+/// Determines radius of circle in the given rect
+/// - Parameter rect: Rectangle in wich circle should be drawn
+/// - Returns: Radius of circle in rectangle
 fileprivate func determineRadius(in rect: CGRect) -> CGFloat {
 	min(rect.maxX - rect.midX, rect.maxY - rect.midY)
 }
 
+/// Shows data as a radar chard
+/// Should be at least three categories of data
 struct RadarChartView: View {
 	
 	let data: [(categoryName: String, value: Int)]
 	let gridColor: Color
 	let dataColor: Color
 	
+	/// Creates chart with given data and colors of grid and data visualisation
+	/// After initialisation of properties, reorderes `dataNames` with the aim of properly visualize data's  names on chart
+	/// - Parameters:
+	///   - data: Pairs of data's category name and value for this name
+	///   - gridColor: `Color` of grid (axis)
+	///   - dataColor: `Color` of visualised data
 	init(data: [(String, Int)], gridColor: Color, dataColor: Color) {
 		self.data = data
 		self.gridColor = gridColor
@@ -28,6 +39,12 @@ struct RadarChartView: View {
 		reorderDataNames()
 	}
 	
+	/// Creates chart with given data and method of reordering this data, colors of grid and data visualisation
+	/// - Parameters:
+	///   - data: Pairs of data's category name and value for this name
+	///   - gridColor: `Color` of grid (axis)
+	///   - dataColor: `Color` of visualised data
+	///   - reorder: Method of reordering data's names
 	init(data: [(String, Int)], gridColor: Color, dataColor: Color, reorder: ([String]) -> [String]) {
 		self.data = data
 		self.gridColor = gridColor
@@ -70,6 +87,12 @@ struct RadarChartView: View {
 		}
 	}
 	
+	/// Determines offset of axis names
+	/// - Parameters:
+	///   - xAxis: True if determines for axis OX
+	///   - geometryProxy: `GeometryProxy` to help determine mesuarements
+	///   - category: Number of axis (1 ... count +1)
+	/// - Returns: X or Y coordinate
 	private func determineOffset(xAxis: Bool, geometryProxy: GeometryProxy, category: Int) -> CGFloat {
 		let rect = geometryProxy.frame(in: .local)
 		let radius = determineRadius(in: rect)
@@ -79,6 +102,7 @@ struct RadarChartView: View {
 		}
 		
 		switch category {
+			// Last category should be moves futher to be more good looking
 			case count:
 				return (rect.midY + sin(CGFloat(category) * 2 * .pi / CGFloat(count) - .pi / 2) * radius) - 15
 			default:
@@ -87,22 +111,24 @@ struct RadarChartView: View {
 		
 	}
 	
+	/// Reorders `dataNames` by moving all elements left on one
 	mutating private func reorderDataNames() {
 		var index = 0
 		let first = dataNames[index]
 		var result = [String](repeating: "", count: dataNames.count)
-		print(dataNames)
+		
 		while index != (dataNames.count - 1) {
 			index += 1
 			let nextName = dataNames[index]
 			result[index] = first
 			result[index - 1] = nextName
 		}
-		print(result)
+		
 		dataNames = result
 	}
 }
 
+/// Lays data on the grid (axis)
 fileprivate struct RadarChartDataVisualisation: Shape {
 	
 	let data: [Double]
@@ -138,10 +164,12 @@ fileprivate struct RadarChartDataVisualisation: Shape {
 			}
 		}
 		path.closeSubpath()
+		
 		return path
 	}
 }
 
+/// Represents the grid for the radar chart
 fileprivate struct RadarChartGrid: Shape {
 	
 	let categories: Int
