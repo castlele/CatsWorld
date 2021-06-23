@@ -19,12 +19,12 @@ struct View3D<Content: View>: View {
 		ZStack {
 			bottomView
 				.foregroundColor(bottomColor)
-				.padding()
+//				.padding()
 
 			topView
 				.offset(x: 1, y: -1)
 				.foregroundColor(topColor)
-				.padding()
+//				.padding()
 		}
     }
 }

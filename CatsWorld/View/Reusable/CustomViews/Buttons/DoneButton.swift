@@ -7,13 +7,15 @@
 
 import SwiftUI
 
-struct DoneButton: View {
+struct DoneButton<Content: View>: View {
 	
 	var presentationMode: Binding<PresentationMode>
+	var content: Content
 	var action: () -> Void
 	
-	init(presentation: Binding<PresentationMode>, action: @escaping () -> Void) {
+	init(presentation: Binding<PresentationMode>, content: Content, action: @escaping () -> Void) {
 		self.presentationMode = presentation
+		self.content = content
 		self.action = action
 	}
 	
@@ -25,7 +27,7 @@ struct DoneButton: View {
 			}
 			
 		}, label: {
-			Text("Done")
+			content
 		})
     }
 }
@@ -34,6 +36,6 @@ struct DoneButton_Previews: PreviewProvider {
 	@Environment(\.presentationMode) static var presentation
 
     static var previews: some View {
-		DoneButton(presentation: presentation, action: { })
+		DoneButton(presentation: presentation, content: Text("Done"), action: { })
     }
 }

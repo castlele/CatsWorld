@@ -106,7 +106,7 @@ struct MainCatsPageView: View {
 							reorder: catsDescriptionViewModel.reorderDataNames(names:)
 						)
 						.frame(width: UIScreen.screenWidth, height: UIScreen.screenWidth / 2)
-						.rotationEffect(Angle(radians: .pi / 3))
+						
 						.padding()
 					
 					

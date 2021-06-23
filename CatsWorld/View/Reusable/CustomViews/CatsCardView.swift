@@ -77,11 +77,14 @@ struct CatsCardView: View {
 					.accentColor(.black)
 				}
 			}
-			.onLongPressGesture {
-				withAnimation(.spring()) {
-					isCatsPageView.toggle()
-				}
-			}
+			.simultaneousGesture(
+				TapGesture()
+					.onEnded { _ in 
+						withAnimation(.spring()) {
+							isCatsPageView.toggle()
+						}
+					}
+			)
 			
 			if isColorPicker {
 				ColorPicker("Pick card's Color", selection: colorBinding)

@@ -9,10 +9,14 @@ import SwiftUI
 
 struct CatsAvatar: View {
 	
-	var avatar: UIImage
+	var avatar: UIImage?
 	
 	var image: Image {
-		Image(uiImage: avatar)
+		if let avatar = avatar {
+			return Image(uiImage: avatar)
+		} else {
+			return Image(systemName: "person.crop.circle.fill")
+		}
 	}
 	
     var body: some View {

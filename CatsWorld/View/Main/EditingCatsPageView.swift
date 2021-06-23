@@ -14,28 +14,70 @@ struct EditingCatsPageView: View {
 	
 	@StateObject var catsViewModel: CatsCardsViewModel
 	
+	@State var isImageSelected = false
+	@GestureState var imagePressed = false
+	
 	var body: some View {
-		NavigationView {
-			Form {
+		VStack {
+			ZStack {
+				Rectangle()
+					.fill(Color.black.opacity(0.5))
+					.blur(radius: 2)
+					.offset(x: 0, y: 3)
+				Rectangle()
+					.fill(Color.white)
+				
 				VStack {
 					HStack {
+						CancelButton(
+							presentation: presentation,
+							topImage: Image(systemName: "xmark"),
+							bottomImage: Image(systemName: "xmark"),
+							topColor: .white,
+							bottomColor: Color(#colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)),
+							showAlert: $catsViewModel.isAlertShown,
+							wasChanges: catsViewModel.wasChanged) {
+								catsViewModel.dismiss(presentation: presentation)
+							}
+						.frame(width: 50, height: 50)
+						.padding([.top, .leading])
+						
 						Spacer()
 						
-						CatsAvatar(avatar: catsViewModel.catsImage ?? UIImage(systemName: "person.crop.circle.fill")!)
-							.frame(minWidth: 40, maxWidth: 100, minHeight: 40, maxHeight: 100)
-						
-						Spacer()
+						DoneButton(presentation: presentation,
+								   content:	View3D(
+									topView:  PawView().scale(0.8),
+									bottomView:  PawView().scale(0.8),
+									topColor: Color(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)),
+									bottomColor: .gray)
+						) {
+							catsViewModel.dismiss(isDiscardChanges: false, presentation: presentation)
+						}
+						.frame(width: 50, height: 50)
+						.buttonStyle(CircleButtonStyle())
+						.padding([.top, .trailing])
 					}
 					
-					Button("Add photo") {
-						catsViewModel.isImagePicker.toggle()
-					}
 				}
-				.listRowBackground(Color.clear)
-
+			}
+			.frame(height: 100)
+			
+			ScrollView {
+				CatsAvatar(avatar: catsViewModel.catsImage)
+					.frame(width: 150, height: 150)
+					.background(EarsView())
+					.padding(.top)
+					.simultaneousGesture(
+						TapGesture()
+							.onEnded { _ in
+								catsViewModel.isImagePicker.toggle()
+							}
+					)
 				
-				Section(header: Text("General information")) {
+				// MARK:- Main info section
+				CatsDescriptionSection(backgroundColor: .white) {
 					TextField("Name", text: $catsViewModel.name)
+						.disableAutocorrection(true)
 					
 					DatePicker(
 						"Date of birth",
@@ -59,83 +101,67 @@ struct EditingCatsPageView: View {
 					.pickerStyle(InlinePickerStyle())
 				}
 				
-				Section(header: Text("Physical aspects")) {
-					
-					Toggle("Enable the section", isOn: $catsViewModel.isPhysicalSectionEnabled.animation())
-					
-					if catsViewModel.isPhysicalSectionEnabled {
-						HStack {
-							Text("Weight \(catsViewModel.weight, specifier: "%.1f") kg")
-							
-							Spacer()
-							
-							Slider(value: $catsViewModel.weight, in: 0...50)
-						}
-						
-						Toggle("Is castrated", isOn: $catsViewModel.isCastrated)
-						
-						Toggle("Is the tail suppressed", isOn: $catsViewModel.suppressedTail)
-						
-						Toggle("Is the legs are short", isOn: $catsViewModel.shortLegs)
-						
-						Toggle("Is hair less", isOn: $catsViewModel.hairless)
+				// MARK:- Physical section
+				CatsDescriptionSection(backgroundColor: .white) {
+					HStack {
+						Text("Weight \(catsViewModel.weight, specifier: "%.1f") kg")
+
+						Spacer()
+
+						Slider(value: $catsViewModel.weight, in: 0...50)
 					}
+
+					Toggle("Is castrated", isOn: $catsViewModel.isCastrated)
+
+					Toggle("Is the tail suppressed", isOn: $catsViewModel.suppressedTail)
+
+					Toggle("Is the legs are short", isOn: $catsViewModel.shortLegs)
+
+					Toggle("Is hair less", isOn: $catsViewModel.hairless)
 				}
 				
-				Section(header: Text("Psycological aspects")) {
-					Toggle("Enable the section", isOn: $catsViewModel.isPsycolocicalSectionEnabled.animation())
-					
-					if catsViewModel.isPsycolocicalSectionEnabled {
-						Picker("Temperament", selection: $catsViewModel.temperament) {
-							ForEach(Temperament.allCases, id: \.self) { temperament in
-								Text("\(temperament.rawValue.capitalized)")
-							}
+				CatsDescriptionSection(backgroundColor: .white) {
+					Picker("Temperament", selection: $catsViewModel.temperament) {
+						ForEach(Temperament.allCases, id: \.self) { temperament in
+							Text("\(temperament.rawValue.capitalized)")
 						}
-						.pickerStyle(SegmentedPickerStyle())
-						
-						RatingView(rating: $catsViewModel.strangerFriendly,
-								   label: "Stranger friendly",
-								   offImage: Image(systemName: "star"),
-								   onImage: Image(systemName: "star.fill")
-						)
-						
-						RatingView(rating: $catsViewModel.childFriendly,
-								   label: "Child friendly",
-								   offImage: Image(systemName: "star"),
-								   onImage: Image(systemName: "star.fill")
-						)
-						
-						RatingView(rating: $catsViewModel.dogFriendly,
-								   label: "Dog friendly",
-								   offImage: Image(systemName: "star"),
-								   onImage: Image(systemName: "star.fill")
-						)
 					}
+					.pickerStyle(SegmentedPickerStyle())
+
+					RatingView(rating: $catsViewModel.strangerFriendly,
+							   label: "Stranger friendly",
+							   offImage: Image(systemName: "star"),
+							   onImage: Image(systemName: "star.fill")
+					)
+
+					RatingView(rating: $catsViewModel.childFriendly,
+							   label: "Child friendly",
+							   offImage: Image(systemName: "star"),
+							   onImage: Image(systemName: "star.fill")
+					)
+
+					RatingView(rating: $catsViewModel.dogFriendly,
+							   label: "Dog friendly",
+							   offImage: Image(systemName: "star"),
+							   onImage: Image(systemName: "star.fill")
+					)
 				}
 				
-				Section(header: Text("Additional information"), footer: Text("Write anything you want about your fluffy friend!")) {
+				CatsDescriptionSection(backgroundColor: .white) {
 					TextEditor(text: $catsViewModel.additionalInfo)
+						.overlay(catsViewModel.additionalInfo.isEmpty ? Text("Write whatever you want about your cat") : nil)
 				}
-				.listRowInsets(.init())
 			}
-			.navigationBarItems(
-				leading: CancelButton(
-					presentation: presentation,
-					showAlert: $catsViewModel.isAlertShown,
-					wasChanges: catsViewModel.wasChanged) {
-					catsViewModel.dismiss(presentation: presentation)
-					
-				}, trailing: DoneButton(presentation: presentation) {
-					catsViewModel.dismiss(isDiscardChanges: false, presentation: presentation)
-				})
-			.alert(isPresented: $catsViewModel.isAlertShown) {
-				// TODO:- Redo Alert with Error handling
-				Alert(
-					title: Text("Discarding changes"),
-					message: Text("Are you sure you want to discard this new card"),
-					primaryButton: .default(Text("Discard"), action: { catsViewModel.dismiss(presentation: presentation) }),
-					secondaryButton: .cancel())
-			}
+			.frame(width: UIScreen.screenWidth)
+			.volumetricShadows()
+		}
+		.alert(isPresented: $catsViewModel.isAlertShown) {
+			// TODO:- Redo Alert with Error handling
+			Alert(
+				title: Text("Discarding changes"),
+				message: Text("Are you sure you want to discard this new card"),
+				primaryButton: .default(Text("Discard"), action: { catsViewModel.dismiss(presentation: presentation) }),
+				secondaryButton: .cancel())
 		}
 		.sheet(isPresented: $catsViewModel.isImagePicker) {
 			ImagePicker(image: $catsViewModel.catsImage)
