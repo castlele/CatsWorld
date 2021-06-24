@@ -9,11 +9,11 @@ import SwiftUI
 
 struct CircleButtonStyle: ButtonStyle {
 	
-	var backGroundColor: Color
+	let backGroundColor: Color
 	
-	var shadowColor1: Color
-	var shadowColor2: Color
-	var shadowRadius: CGFloat
+	let shadowColor1: Color
+	let shadowColor2: Color
+	let shadowRadius: CGFloat
 	
 	init(
 		backGroundColor: Color = .white,

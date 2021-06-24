@@ -29,7 +29,6 @@ extension CatsCard {
     @NSManaged public var dateOfBirth: Date?
 	
 	// Physical cat properties
-	@NSManaged public var isPhysicalSectionEnabled: Bool
 	@NSManaged public var suppressedTail: Bool
 	@NSManaged public var shortLegs: Bool
 	@NSManaged public var hairless: Bool
@@ -37,14 +36,12 @@ extension CatsCard {
 	@NSManaged public var isCastrated: Bool
 	
 	// Psycological cat properties
-	@NSManaged public var isPsycolocicalSectionEnabled: Bool
 	@NSManaged public var strangerFriendly: Int16
 	@NSManaged public var childFriendly: Int16
 	@NSManaged public var dogFriendly: Int16
 	@NSManaged public var temperament: Data?
 	
 	// Cat's shows properties
-	@NSManaged public var isCatShowsSectionEnabled: Bool
 	@NSManaged public var catShows: Data?
 	
 	// Additional information string

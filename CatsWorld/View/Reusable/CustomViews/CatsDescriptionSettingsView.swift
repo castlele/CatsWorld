@@ -12,39 +12,37 @@ struct CatsDescriptionSettingsView: View {
 	@State var settings: [Setting]
 	
     var body: some View {
-		VStack {
-			ForEach(settings) { setting in
-				HStack {
-					Text(setting.name)
-					
-					Spacer()
-					
-					switch setting.value {
-						case let .bool(value):
-							value ? Text("Yes") : Text("No")
-							
-						case let .int(value):
-							RatingView(rating: .constant(Int(value)),
-													  offImage: Image(systemName: "star"),
-													  onImage: Image(systemName: "star.fill"),
-													  isEditing: false
-							)
-						case let .float(value):
-							Text("\(value, specifier: "%.1f") kg")
-							
-						case let .temperament(value):
-							Text("\(value.rawValue.capitalized)")
-							
-						case let .showsArray(value):
-							List {
-								ForEach(value) { show in
-									Text("\(show.name)")
-								}
+		ForEach(settings) { setting in
+			HStack {
+				Text(setting.name)
+				
+				Spacer()
+				
+				switch setting.value {
+					case let .bool(value):
+						value ? Text("Yes") : Text("No")
+						
+					case let .int(value):
+						RatingView(rating: .constant(Int(value)),
+												  offImage: Image(systemName: "star"),
+												  onImage: Image(systemName: "star.fill"),
+												  isEditing: false
+						)
+					case let .float(value):
+						Text("\(value, specifier: "%.1f") kg")
+						
+					case let .temperament(value):
+						Text("\(value.rawValue.capitalized)")
+						
+					case let .showsArray(value):
+						List {
+							ForEach(value) { show in
+								Text("\(show.name)")
 							}
-					}
+						}
 				}
-				.padding()
 			}
+			.padding()
 		}
     }
 }

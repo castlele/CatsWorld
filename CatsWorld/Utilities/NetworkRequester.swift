@@ -9,23 +9,40 @@ import Foundation
 
 /// Factory class makes network requests
 final class NetworkRequester {
+	
+	static var shared = NetworkRequester()
+	
+	init() {}
+}
+
+// MARK:- Public methods
+extension NetworkRequester {
 	/// Makes request
 	/// - Parameters:
 	///   - url: `URL` where request will be done
 	///   - headers: Headers of the `URLRequest`
 	///   - completion: Action, that will be done after loading data
-	static func makeRequest(url: URL, headers: [String: String], completion: @escaping (Data?, Error?) -> Void) {
+	func makeRequest(url: URL, headers: [String: String], completion: @escaping (Result<Data, CWError>) -> Void) {
 		let request = makeRequestObject(url: url, with: headers)
 		load(request: request, completion: completion)
 	}
-	
+}
+
+// MARK:- Private methods
+extension NetworkRequester {
 	/// Loads data
 	/// - Parameters:
 	///   - request: URL request with which `URLSession` will be done
 	///   - completion: Action, that will be done after loading data
-	private static func load(request: URLRequest, completion: @escaping (Data?, Error?) -> Void) {
+	private func load(request: URLRequest, completion: @escaping (Result<Data, CWError>) -> Void) {
 		URLSession.shared.dataTask(with: request) { data, _, error in
-			completion(data, error)
+			if let _ = error {
+				completion(.failure(.invalidURLRequest))
+			}
+			
+			if let data = data {
+				completion(.success(data))
+			}
 		}.resume()
 	}
 	
@@ -34,7 +51,7 @@ final class NetworkRequester {
 	///   - url: `URL` from which `URLRequest` will be made
 	///   - headers: Headers of the `URLRequest`
 	/// - Returns: Initialized object of `URLRequest` struct
-	private static func makeRequestObject(url: URL, with headers: [String: String]) -> URLRequest {
+	private func makeRequestObject(url: URL, with headers: [String: String]) -> URLRequest {
 		let request = NSMutableURLRequest(url: url, cachePolicy: .returnCacheDataElseLoad, timeoutInterval: 15)
 		add(headers: headers, for: request)
 		return request as URLRequest
@@ -44,7 +61,7 @@ final class NetworkRequester {
 	/// - Parameters:
 	///   - headers: `Dictionary` of headers
 	///   - request: Request for which headers will be added
-	private static func add(headers: [String: String], for request: NSMutableURLRequest) {
+	private func add(headers: [String: String], for request: NSMutableURLRequest) {
 		request.httpMethod = "GET"
 		request.allHTTPHeaderFields = headers
 	}

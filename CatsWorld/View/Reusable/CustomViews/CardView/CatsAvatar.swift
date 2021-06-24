@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CatsAvatar: View {
 	
-	var avatar: UIImage?
+	let avatar: UIImage?
 	
 	var image: Image {
 		if let avatar = avatar {

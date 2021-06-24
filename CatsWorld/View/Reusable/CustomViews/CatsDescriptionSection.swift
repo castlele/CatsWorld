@@ -36,7 +36,7 @@ struct CatsDescriptionSection<Content: View>: View {
 }
 
 extension CatsDescriptionSection where Content: View {
-	init(backgroundColor: Color, @ViewBuilder content: () -> Content) {
+	init(backgroundColor: Color = .white, @ViewBuilder content: () -> Content) {
 		self.backgroundColor = backgroundColor
 		self.content = content()
 	}

@@ -7,37 +7,28 @@
 
 import SwiftUI
 
-struct CancelButton: View {
+struct CancelButton<Content: View>: View {
 	
-	var presentationMode: Binding<PresentationMode>
+	var presentationMode: Binding<PresentationMode>?
 	var showAlert: Binding<Bool>
-	
-	var topImage: Image
-	var bottomImage: Image
-	var topColor: Color?
-	var bottomColor: Color?
 	
 	var wasChanges: Bool = false
 	var action: () -> Void
 	
+	var content: Content
+	
 	init(
-		presentation: Binding<PresentationMode>,
-		topImage: Image,
-		bottomImage: Image,
-		topColor: Color? = nil,
-		bottomColor: Color? = nil,
+		presentation: Binding<PresentationMode>? = nil,
 		showAlert: Binding<Bool> = .constant(false),
 		wasChanges: Bool = false,
-		action: @escaping () -> Void = {}
+		action: @escaping () -> Void = {},
+		@ViewBuilder content: () -> Content
 	) {
 		self.presentationMode = presentation
 		self.showAlert = showAlert
-		self.topImage = topImage
-		self.bottomImage = bottomImage
-		self.topColor = topColor
-		self.bottomColor = bottomColor
 		self.wasChanges = wasChanges
 		self.action = action
+		self.content = content()
 	}
 	
     var body: some View {
@@ -45,18 +36,15 @@ struct CancelButton: View {
 			if wasChanges {
 				showAlert.wrappedValue = true
 			} else {
-				if presentationMode.wrappedValue.isPresented {
-					action()
-					presentationMode.wrappedValue.dismiss()
+				if let presentationMode = presentationMode {
+					if presentationMode.wrappedValue.isPresented {
+						presentationMode.wrappedValue.dismiss()
+					}
 				}
+				action()
 			}
 		}, label: {
-			Image3D(
-				topView: topImage,
-				bottomView: bottomImage,
-				topColor: topColor,
-				bottomColor: bottomColor
-			)
+			content
 		})
 		.buttonStyle(CircleButtonStyle(backGroundColor: Color(#colorLiteral(red: 0.7540688515, green: 0.7540867925, blue: 0.7540771365, alpha: 1))))
     }
@@ -65,6 +53,8 @@ struct CancelButton: View {
 struct CancelButton_Previews: PreviewProvider {
 	@Environment(\.presentationMode) static var presentation
     static var previews: some View {
-		CancelButton(presentation: presentation, topImage: Image(systemName: "pencil"), bottomImage: Image(systemName: "pencil"))
+		CancelButton(presentation: presentation) {
+			Text("")
+		}
     }
 }

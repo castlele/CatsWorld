@@ -12,10 +12,7 @@ struct CatsCardView: View {
 	@Environment(\.managedObjectContext) var managedObjectContext
 	
 	@ObservedObject var cat: CatsCard
-	
-	@State var isCatsPageView = false
-	@State var isEditingCatsPage = false
-	@State var isColorPicker = false
+	@StateObject var catsCardsViewModel = CatsCardsViewModel()
 	
 	var cardColor: Color {
 		let uiColor = cat.wrappedColor
@@ -45,12 +42,12 @@ struct CatsCardView: View {
 					
 					Menu {
 						Button("Edit") {
-							isEditingCatsPage.toggle()
+							catsCardsViewModel.isEditingCatsPage.toggle()
 						}
 						
 						Button("Pick card's color") {
 							withAnimation(.spring()) {
-								isColorPicker.toggle()
+								catsCardsViewModel.isColorPicker.toggle()
 							}
 						}
 						
@@ -81,12 +78,12 @@ struct CatsCardView: View {
 				TapGesture()
 					.onEnded { _ in 
 						withAnimation(.spring()) {
-							isCatsPageView.toggle()
+							catsCardsViewModel.isCatsPageView.toggle()
 						}
 					}
 			)
 			
-			if isColorPicker {
+			if catsCardsViewModel.isColorPicker {
 				ColorPicker("Pick card's Color", selection: colorBinding)
 					.onDisappear {
 						do {
@@ -100,10 +97,10 @@ struct CatsCardView: View {
 					}
 			}
 		}
-		.fullScreenCover(isPresented: $isCatsPageView) {
+		.fullScreenCover(isPresented: $catsCardsViewModel.isCatsPageView) {
 			CatsPageView(cat: cat)
 		}
-		.sheet(isPresented: $isEditingCatsPage) {
+		.sheet(isPresented: $catsCardsViewModel.isEditingCatsPage) {
 			CatsPageView(cat: cat, isEditing: true)
 		}
 		.padding()

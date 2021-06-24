@@ -18,9 +18,7 @@ struct HomeScreenView: View {
 		animation: .spring()
 	) var catsCards: FetchedResults<CatsCard>
 	
-	@State var addCatSheet = false
-	
-	@State var catsPageView: CatsPageView!
+	@StateObject var homeScreenViewModel = HomeScreenViewModel()
 	
     var body: some View {
 		VStack {
@@ -29,8 +27,8 @@ struct HomeScreenView: View {
 				
 				Button(action: {
 					let cat = CatsCard(context: managedObjectContext)
-					catsPageView = CatsPageView(cat: cat, deleteAfterCancelation: true, isEditing: true)
-					addCatSheet.toggle()
+					homeScreenViewModel.catsPageView = CatsPageView(cat: cat, deleteAfterCancelation: true, isEditing: true)
+					homeScreenViewModel.addCatSheet.toggle()
 					
 				}, label: {
 					Image3D(
@@ -59,21 +57,10 @@ struct HomeScreenView: View {
 				}
 			}
 		}
-		.sheet(isPresented: $addCatSheet) {
-			catsPageView
+		.sheet(isPresented: $homeScreenViewModel.addCatSheet) {
+			homeScreenViewModel.catsPageView
 		}
 		.navigationBarHidden(true)
-		.onAppear {
-			if managedObjectContext.hasChanges {
-				managedObjectContext.refreshAllObjects()
-			}
-			catsPageView = nil
-			
-			#if DEBUG
-			print(catsCards)
-			print(catsCards.count)
-			#endif
-		}
     }
 }
 

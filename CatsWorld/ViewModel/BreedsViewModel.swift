@@ -29,10 +29,10 @@ extension BreedsViewModel {
 	public func loadBreeds() {
 		let url = makeURL(endPoint: BreedsViewModel.defaultEndPoint)
 		
-		NetworkRequester.makeRequest(
+		NetworkRequester.shared.makeRequest(
 			url: url!,
 			headers: ["x-api-key": "9fa4592a-db90-46af-93d7-68743bbd52db"],
-			completion: parseJSON(data:error:)
+			completion: parseJSON(result:)
 		)
 	}
 }
@@ -52,27 +52,30 @@ extension BreedsViewModel {
 	///   - data: Optional `Data` which should be parsed
 	///   - error: Optional `Error` which should be handled
 	///   Only one parameter can have `nil` value at the same time
-	private func parseJSON(data: Data?, error: Error?) -> Void {
+	private func parseJSON(result: Result<Data, CWError>) -> Void {
 		DispatchQueue.main.async { [self] in
-			if let data = data {
-				do{
-					try JSONParser.parse(from: data, completion: addBreeds(breeds:))
-				} catch {
-					print(error)
-					// TODO: - Error handling
-				}
+			switch result {
+				case .success(let data):
+					JSONParser.shared.parse(from: data, completion: addBreeds(result:))
+				default:
+					break
 			}
 		}
 	}
 	
 	/// Adds breeds from the array and removes all mock data
 	/// - Parameter breeds: Array of `Breed` which should be added
-	private func addBreeds(breeds: [Breed]) -> Void {
+	private func addBreeds(result: Result<[Breed], CWError>) -> Void {
 		DispatchQueue.main.async { [self] in
-			removeMockData()
-			
-			for breed in breeds {
-				self.breeds.append(breed)
+			switch result {
+				case .success(let breeds):
+					removeMockData()
+					
+					for breed in breeds {
+						self.breeds.append(breed)
+					}
+				default:
+					break
 			}
 		}
 	}

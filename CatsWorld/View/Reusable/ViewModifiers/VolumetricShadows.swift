@@ -9,14 +9,14 @@ import SwiftUI
 
 struct VolumetricShadows: ViewModifier {
 	
-	var color1: Color
-	var color2: Color
+	let color1: Color
+	let color2: Color
 	
-	var radius: CGFloat
+	let radius: CGFloat
 	
-	var isPressed: Bool
+	let isPressed: Bool
 	
-	var isInner: Bool
+	let isInner: Bool
 	
 	init(color1: Color, color2: Color, radius: CGFloat, isPressed: Bool, isInner: Bool) {
 		self.color1 = color1

@@ -11,9 +11,6 @@
         <attribute name="hairless" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="image" optional="YES" attributeType="Binary"/>
         <attribute name="isCastrated" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
-        <attribute name="isCatShowsSectionEnabled" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
-        <attribute name="isPhysicalSectionEnabled" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
-        <attribute name="isPsycolocicalSectionEnabled" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="sex" optional="YES" attributeType="String"/>
         <attribute name="shortLegs" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
@@ -23,6 +20,6 @@
         <attribute name="weight" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
     </entity>
     <elements>
-        <element name="CatsCard" positionX="-63" positionY="-18" width="128" height="329"/>
+        <element name="CatsCard" positionX="-63" positionY="-18" width="128" height="284"/>
     </elements>
 </model>

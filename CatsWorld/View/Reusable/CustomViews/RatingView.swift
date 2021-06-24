@@ -10,16 +10,36 @@ import SwiftUI
 /// View representing Rating system
 struct RatingView: View {
 	
-	@Binding var rating: Int
-	var maxRating = 5
+	var rating: Binding<Int>
+	let maxRating: Int
 	
-	var label: String = ""
-	var offImage: Image
-	var onImage: Image
-	var offColor: Color = .gray
-	var onColor: Color = .yellow
+	let label: String
+	let offImage: Image
+	let onImage: Image
+	let offColor: Color
+	let onColor: Color
 	
-	var isEditing = true
+	let isEditing: Bool
+	
+	init(
+		rating: Binding<Int>,
+		maxRating: Int = 5,
+		label: String = "",
+		offImage: Image,
+		onImage: Image,
+		offColor: Color = .gray,
+		onColor: Color = .yellow,
+		isEditing: Bool = true
+	) {
+		self.rating = rating
+		self.maxRating = maxRating
+		self.label = label
+		self.offImage = offImage
+		self.onImage = onImage
+		self.offColor = offColor
+		self.onColor = onColor
+		self.isEditing = isEditing
+	}
 	
     var body: some View {
 		HStack {
@@ -30,23 +50,23 @@ struct RatingView: View {
 			Spacer()
 			if isEditing {
 				ForEach(1..<maxRating + 1) { rating in
-					if self.rating >= rating {
+					if self.rating.wrappedValue >= rating {
 						onImage
 							.foregroundColor(onColor)
 							.onTapGesture {
-								self.rating = rating
+								self.rating.wrappedValue = rating
 							}
 					} else {
 						offImage
 							.foregroundColor(offColor)
 							.onTapGesture {
-								self.rating = rating
+								self.rating.wrappedValue = rating
 							}
 					}
 				}
 			} else {
 				ForEach(1..<maxRating + 1) { rating in
-					if self.rating >= rating {
+					if self.rating.wrappedValue >= rating {
 						onImage
 							.foregroundColor(onColor)
 					} else {

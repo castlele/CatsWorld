@@ -7,21 +7,22 @@
 
 import SwiftUI
 
-struct EditButton: View {
+struct EditButton<Content: View>: View {
 	
 	@Binding var isEditing: Bool
+	@ViewBuilder var content: Content
 	
     var body: some View {
 		Button(action: {
 			isEditing.toggle()
 		}, label: {
-			Text("Edit")
+			content
 		})
     }
 }
 
 struct EditButton_Previews: PreviewProvider {
     static var previews: some View {
-		EditButton(isEditing: .constant(false))
+		EditButton(isEditing: .constant(false)) { Text("") }
     }
 }

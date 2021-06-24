@@ -24,6 +24,8 @@ final class CatsDescriptionViewModel: ObservableObject {
 	var cat: CatsCard
 	
 	@Published var category: CatsDescriptionCategory = .physical
+	@Published var ageType: AgeType = .age
+	@Published var isEditingCatsPage = false
 	
 	var currentSettings: [Setting] {
 		determineSettings(for: self.category)

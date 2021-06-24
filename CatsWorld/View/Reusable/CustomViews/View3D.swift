@@ -9,8 +9,8 @@ import SwiftUI
 
 struct View3D<Content: View>: View {
 
-	var topView: Content
-	var bottomView: Content
+	let topView: Content
+	let bottomView: Content
 
 	var topColor: Color?
 	var bottomColor: Color?
@@ -19,20 +19,18 @@ struct View3D<Content: View>: View {
 		ZStack {
 			bottomView
 				.foregroundColor(bottomColor)
-//				.padding()
 
 			topView
 				.offset(x: 1, y: -1)
 				.foregroundColor(topColor)
-//				.padding()
 		}
     }
 }
 
 struct Image3D: View {
 	
-	var topView: Image
-	var bottomView: Image
+	let topView: Image
+	let bottomView: Image
 	
 	var topColor: Color?
 	var bottomColor: Color?

@@ -13,13 +13,12 @@ struct CatsPageView: View {
 	
 	@ObservedObject var cat: CatsCard
 	
-	var deleteAfterCancelation = false
-	
+	@State var deleteAfterCancelation = false
 	@State var isEditing = false
 	
     var body: some View {
 		if isEditing {
-			EditingCatsPageView(catsViewModel: CatsCardsViewModel(cat: cat, deleteAfterCancelation: deleteAfterCancelation, managedObjectContext: managedObjectContext))
+			EditingCatsPageView(catsViewModel: CatsCardsPageViewModel(cat: cat, deleteAfterCancelation: deleteAfterCancelation, managedObjectContext: managedObjectContext))
 		} else {
 			MainCatsPageView(catsDescriptionViewModel: CatsDescriptionViewModel(cat: cat))
 		}

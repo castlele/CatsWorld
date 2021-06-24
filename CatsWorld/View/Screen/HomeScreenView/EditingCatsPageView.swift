@@ -12,55 +12,43 @@ struct EditingCatsPageView: View {
 	
 	@Environment(\.presentationMode) var presentation
 	
-	@StateObject var catsViewModel: CatsCardsViewModel
-	
-	@State var isImageSelected = false
-	@GestureState var imagePressed = false
+	@StateObject var catsViewModel: CatsCardsPageViewModel
 	
 	var body: some View {
 		VStack {
-			ZStack {
-				Rectangle()
-					.fill(Color.black.opacity(0.5))
-					.blur(radius: 2)
-					.offset(x: 0, y: 3)
-				Rectangle()
-					.fill(Color.white)
-				
-				VStack {
-					HStack {
-						CancelButton(
-							presentation: presentation,
-							topImage: Image(systemName: "xmark"),
-							bottomImage: Image(systemName: "xmark"),
+			TopBarView(maxHeight: 100, leading: {
+				CancelButton(
+					showAlert: $catsViewModel.isAlertShown,
+					wasChanges: catsViewModel.wasChanged,
+					action: {
+						catsViewModel.dismiss(presentation: presentation)
+					}, content: {
+						Image3D(
+							topView: Image(systemName: "xmark"),
+							bottomView: Image(systemName: "xmark"),
 							topColor: .white,
-							bottomColor: Color(#colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)),
-							showAlert: $catsViewModel.isAlertShown,
-							wasChanges: catsViewModel.wasChanged) {
-								catsViewModel.dismiss(presentation: presentation)
-							}
-						.frame(width: 50, height: 50)
-						.padding([.top, .leading])
-						
-						Spacer()
-						
-						DoneButton(presentation: presentation,
-								   content:	View3D(
-									topView:  PawView().scale(0.8),
-									bottomView:  PawView().scale(0.8),
-									topColor: Color(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)),
-									bottomColor: .gray)
-						) {
-							catsViewModel.dismiss(isDiscardChanges: false, presentation: presentation)
-						}
-						.frame(width: 50, height: 50)
-						.buttonStyle(CircleButtonStyle())
-						.padding([.top, .trailing])
-					}
+							bottomColor: Color(#colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1))
+						)
+					})
+					.frame(width: 50, height: 50)
+					.buttonStyle(CircleButtonStyle())
+					.padding([.top, .leading])
+				
+			}, trailing: {
+				DoneButton(action: {
+					catsViewModel.dismiss(isDiscardChanges: false, presentation: presentation)
 					
-				}
-			}
-			.frame(height: 100)
+				}, content: {
+					View3D(
+					topView:  PawView().scale(0.8),
+					bottomView:  PawView().scale(0.8),
+					topColor: Color(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)),
+					bottomColor: .gray)
+			   })
+				.frame(width: 50, height: 50)
+				.buttonStyle(CircleButtonStyle())
+				.padding([.top, .trailing])
+			})
 			
 			ScrollView {
 				CatsAvatar(avatar: catsViewModel.catsImage)
@@ -120,6 +108,7 @@ struct EditingCatsPageView: View {
 					Toggle("Is hair less", isOn: $catsViewModel.hairless)
 				}
 				
+				// MARK:- Psycological section
 				CatsDescriptionSection(backgroundColor: .white) {
 					Picker("Temperament", selection: $catsViewModel.temperament) {
 						ForEach(Temperament.allCases, id: \.self) { temperament in
@@ -147,6 +136,7 @@ struct EditingCatsPageView: View {
 					)
 				}
 				
+				// MARK:- More info section
 				CatsDescriptionSection(backgroundColor: .white) {
 					TextEditor(text: $catsViewModel.additionalInfo)
 						.overlay(catsViewModel.additionalInfo.isEmpty ? Text("Write whatever you want about your cat") : nil)
@@ -166,15 +156,12 @@ struct EditingCatsPageView: View {
 		.sheet(isPresented: $catsViewModel.isImagePicker) {
 			ImagePicker(image: $catsViewModel.catsImage)
 		}
-		.onDisappear {
-			catsViewModel.dismiss(isDiscardChanges: true, presentation: presentation)
-		}
 	}
 }
 
 struct EditingCatsPageView_Previews: PreviewProvider {
     static var previews: some View {
-		EditingCatsPageView(catsViewModel: CatsCardsViewModel(cat: CatsCard(context: PersistenceController.preview.conteiner.viewContext), managedObjectContext: PersistenceController.preview.conteiner.viewContext))
+		EditingCatsPageView(catsViewModel: CatsCardsPageViewModel(cat: CatsCard(context: PersistenceController.preview.conteiner.viewContext), managedObjectContext: PersistenceController.preview.conteiner.viewContext))
 			.environment(\.managedObjectContext, PersistenceController.preview.conteiner.viewContext)
     }
 }
