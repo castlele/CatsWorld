@@ -39,6 +39,7 @@ struct CatsCardView: View {
 						.font(.title)
 						.fontWeight(.medium)
 						.padding([.leading, .trailing])
+						.foregroundColor(.textColor)
 					
 					Menu {
 						Button("Edit") {
@@ -71,12 +72,12 @@ struct CatsCardView: View {
 						}
 						.padding(.trailing)
 					}
-					.accentColor(.black)
+					.accentColor(.accentColor)
 				}
 			}
 			.simultaneousGesture(
 				TapGesture()
-					.onEnded { _ in 
+					.onEnded { _ in
 						withAnimation(.spring()) {
 							catsCardsViewModel.isCatsPageView.toggle()
 						}
@@ -95,6 +96,7 @@ struct CatsCardView: View {
 							#endif
 						}
 					}
+					.foregroundColor(.textColor)
 			}
 		}
 		.fullScreenCover(isPresented: $catsCardsViewModel.isCatsPageView) {

@@ -16,21 +16,26 @@ struct MainCatsPageView: View {
 	
 	var body: some View {
 		VStack {
-			TopBarView(minHeight: 150, maxHeight: 200, leading: {
+			TopBarView(
+				backgroundColor: Color(catsDescriptionViewModel.cat.wrappedColor),
+				minHeight: 150,
+				maxHeight: 200,
+				leading: {
 				CancelButton(
 					presentation: presentationMode,
 					showAlert: .constant(false),
 					wasChanges: false,
 					content: {
-						Image3D(
-							topView: Image(systemName: "xmark"),
-							bottomView: Image(systemName: "xmark"),
-							topColor: .white,
-							bottomColor: Color(#colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1))
-						)
+						XButton()
 					})
 					.frame(width: 50, height: 50)
-					.buttonStyle(CircleButtonStyle())
+					.buttonStyle(
+						CircleButtonStyle(
+							backgroundColor: Color(#colorLiteral(red: 0.7540688515, green: 0.7540867925, blue: 0.7540771365, alpha: 1)),
+							shadowColor1: Color(catsDescriptionViewModel.catsCardColor).lighter(by: 0.1),
+							shadowColor2: Color(catsDescriptionViewModel.catsCardColor).darker(by: 0.5)
+						)
+					)
 					.padding([.top, .leading])
 				
 				
@@ -39,12 +44,17 @@ struct MainCatsPageView: View {
 					Image3D(
 						topView: Image(systemName: "pencil"),
 						bottomView: Image(systemName: "pencil"),
-						topColor: Color(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)),
-						bottomColor: .gray
+						topColor: .volumeEffectColorTop,
+						bottomColor: .volumeEffectColorBottom
 					)
 				}
 				.frame(width: 50, height: 50)
-				.buttonStyle(CircleButtonStyle())
+				.buttonStyle(
+					CircleButtonStyle(
+						shadowColor1: Color(catsDescriptionViewModel.catsCardColor).lighter(by: 0.1),
+						shadowColor2: Color(catsDescriptionViewModel.catsCardColor).darker(by: 0.5)
+					)
+				)
 				.padding([.top, .trailing])
 				
 			}, content: {
@@ -64,32 +74,28 @@ struct MainCatsPageView: View {
 			
 			ScrollView {
 				if let additionalInfo = catsDescriptionViewModel.cat.additionalInfo, !additionalInfo.isEmpty {
-					ZStack {
-						RoundedRectangle(cornerRadius: 20)
-							.fill(Color.white)
-							.volumetricShadows(color2: .black, isInner: true)
-							.padding()
-						
+					CatsDescriptionSection() {
 						HStack(alignment: .firstTextBaseline) {
 							Text(additionalInfo)
 								.lineLimit(.max)
 								.padding()
+								.foregroundColor(.textColor)
 							
 						}
-						.padding()
+						.padding(.bottom)
 					}
-					.padding([.leading, .trailing])
+					.volumetricShadows()
 				}
 				
 				VStack {
-						RadarChartView(
-							data: catsDescriptionViewModel.friendlyCharacteristics,
-							gridColor: .gray,
-							dataColor: .green,
-							reorder: catsDescriptionViewModel.reorderDataNames(names:)
-						)
-						.frame(width: 200, height: 150)
-						.padding()
+					RadarChartView(
+						data: catsDescriptionViewModel.friendlyCharacteristics,
+						gridColor: .gray,
+						dataColor: .green,
+						reorder: catsDescriptionViewModel.reorderDataNames(names:)
+					)
+					.frame(width: 200, height: 150)
+					.padding()
 					
 					Spacer()
 					
@@ -107,11 +113,11 @@ struct MainCatsPageView: View {
 						}
 					}
 					.volumetricShadows()
-					.
+					.foregroundColor(.textColor)
 				}
 			}
 		}
-		.background(Color(catsDescriptionViewModel.cat.wrappedColor).blur(radius: 200))
+		.background(Color.mainColor)
 		.sheet(isPresented: $catsDescriptionViewModel.isEditingCatsPage) {
 			EditingCatsPageView(catsViewModel: CatsCardsPageViewModel(cat: catsDescriptionViewModel.cat, managedObjectContext: managedObjectContext))
 		}

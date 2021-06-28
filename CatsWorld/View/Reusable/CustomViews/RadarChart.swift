@@ -138,7 +138,8 @@ fileprivate struct RadarChartDataVisualisation: Shape {
 			3 <= data.count,
 			let minimum = data.min(),
 			0 <= minimum,
-			let maximum = data.max()
+			let maximum = data.max(),
+			maximum != 0
 		else { return Path() }
 		
 		let radius = determineRadius(in: rect)

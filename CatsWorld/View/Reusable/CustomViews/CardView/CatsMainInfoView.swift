@@ -28,7 +28,8 @@ struct CatsMainInfoView: View {
 		if isGender {
 			return AnyView(GeometryReader { geometry in
 				Text(cat.genderSign)
-					.font(.title)
+					.font(.largeTitle)
+					.bold()
 					.foregroundColor(cat.genderColor)
 					.offset(x: 5, y: -6)
 			})
@@ -45,12 +46,10 @@ struct CatsMainInfoView: View {
 			CatsAvatar(avatar: cat.wrappedImage)
 				.background(
 					Circle()
-						.stroke(strokeColor, lineWidth: 4)
+						.stroke(Color.accentColor, lineWidth: 4)
 				)
 				.frame(minWidth: 40, maxWidth: 100, minHeight: 40, maxHeight: 100)
-				.overlay(
-					genderSign
-				)
+				.overlay(genderSign)
 			
 			VStack(alignment: .leading, spacing: 2.5) {
 				Text("\(cat.wrappedName)")
@@ -63,6 +62,7 @@ struct CatsMainInfoView: View {
 					.lineLimit(2)
 					.fixedSize(horizontal: false, vertical: true)
 			}
+			.foregroundColor(.textColor)
 		}
     }
 }

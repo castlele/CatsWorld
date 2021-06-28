@@ -9,19 +9,19 @@ import SwiftUI
 
 struct CircleButtonStyle: ButtonStyle {
 	
-	let backGroundColor: Color
+	let backgroundColor: Color
 	
 	let shadowColor1: Color
 	let shadowColor2: Color
 	let shadowRadius: CGFloat
 	
 	init(
-		backGroundColor: Color = .white,
-		shadowColor1: Color = .white,
-		shadowColor2: Color = .gray,
-		shadowRadius: CGFloat = 7
+		backgroundColor: Color = .mainColor,
+		shadowColor1: Color = .volumeEffectShadowColor,
+		shadowColor2: Color = .shadowColor,
+		shadowRadius: CGFloat = 5
 	) {
-		self.backGroundColor = backGroundColor
+		self.backgroundColor = backgroundColor
 		self.shadowColor1 = shadowColor1
 		self.shadowColor2 = shadowColor2
 		self.shadowRadius = shadowRadius
@@ -29,7 +29,7 @@ struct CircleButtonStyle: ButtonStyle {
     
 	func makeBody(configuration: Configuration) -> some View {
 		configuration.label
-			.background(backGroundColor)
+			.background(backgroundColor)
 			.clipShape(Circle())
 			.volumetricShadows(color1: shadowColor1, color2: shadowColor2, radius: shadowRadius, isPressed: configuration.isPressed)
 			.scaleEffect(configuration.isPressed ? 0.95 : 1)

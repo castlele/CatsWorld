@@ -9,6 +9,7 @@ import SwiftUI
 
 struct TopBarView<Leading: View, Trailing: View, Content: View>: View {
 	
+	let backgroundColor: Color
 	let height: CGFloat?
 	let minHeight: CGFloat?
 	let maxHeight: CGFloat?
@@ -17,6 +18,7 @@ struct TopBarView<Leading: View, Trailing: View, Content: View>: View {
 	let content: Content
 	
 	init(
+		backgroundColor: Color = .mainColor,
 		height: CGFloat? = nil,
 		minHeight: CGFloat? = nil,
 		maxHeight: CGFloat? = nil,
@@ -24,6 +26,7 @@ struct TopBarView<Leading: View, Trailing: View, Content: View>: View {
 		@ViewBuilder trailing: () -> Trailing,
 		@ViewBuilder content: () -> Content
 	) {
+		self.backgroundColor = backgroundColor
 		self.height = height
 		self.minHeight = minHeight
 		self.maxHeight = maxHeight
@@ -35,13 +38,13 @@ struct TopBarView<Leading: View, Trailing: View, Content: View>: View {
     var body: some View {
 		ZStack {
 			Rectangle()
-				.fill(Color.black.opacity(0.5))
+				.fill(Color.shadowColor.opacity(0.5))
 				.blur(radius: 2)
 				.offset(x: 0, y: 3)
 				.ignoresSafeArea(edges: .top)
 			
 			Rectangle()
-				.fill(Color.white)
+				.fill(backgroundColor)
 				.ignoresSafeArea(edges: .top)
 			
 			VStack {
@@ -63,16 +66,37 @@ struct TopBarView<Leading: View, Trailing: View, Content: View>: View {
 // MARK:- Content == EmptyView
 extension TopBarView where Leading: View, Trailing: View, Content == EmptyView {
 	init(
+		backgroundColor: Color = .mainColor,
 		height: CGFloat? = nil,
 		minHeight: CGFloat? = nil,
 		maxHeight: CGFloat? = nil,
 		@ViewBuilder leading: () -> Leading,
 		@ViewBuilder trailing: () -> Trailing
 	) {
+		self.backgroundColor = backgroundColor
 		self.height = height
 		self.minHeight = minHeight
 		self.maxHeight = maxHeight
 		self.leading = leading()
+		self.trailing = trailing()
+		self.content = EmptyView()
+	}
+}
+
+// MARK:- Leading == EmptyView, Content == EmptyView
+extension TopBarView where Leading == EmptyView, Trailing: View, Content == EmptyView {
+	init(
+		backgroundColor: Color = .mainColor,
+		height: CGFloat? = nil,
+		minHeight: CGFloat? = nil,
+		maxHeight: CGFloat? = nil,
+		@ViewBuilder trailing: () -> Trailing
+	) {
+		self.backgroundColor = backgroundColor
+		self.height = height
+		self.minHeight = minHeight
+		self.maxHeight = maxHeight
+		self.leading = EmptyView()
 		self.trailing = trailing()
 		self.content = EmptyView()
 	}

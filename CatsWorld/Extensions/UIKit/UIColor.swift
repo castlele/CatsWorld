@@ -5,8 +5,7 @@
 //  Created by Nikita Semenov on 17.05.2021.
 //
 
-import Foundation
-import UIKit
+import SwiftUI
 
 extension UIColor {
 	
@@ -19,7 +18,7 @@ extension UIColor {
 				let uiColor = try NSKeyedUnarchiver.unarchivedObject(ofClass: UIColor.self, from: data)
 				return uiColor ?? .white
 			}
-			return .white
+			return UIColor(Color.mainColor)
 		} catch {
 			fatalError("\(error.localizedDescription)")
 		}

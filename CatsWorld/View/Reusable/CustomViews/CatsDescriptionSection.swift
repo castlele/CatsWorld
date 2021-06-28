@@ -19,7 +19,7 @@ struct CatsDescriptionSection<Content: View>: View {
 			VStack(spacing: 10) {
 				content
 					.padding()
-					.frame(minHeight: 50)
+					
 					.background(
 						VStack {
 							Spacer()
@@ -36,7 +36,7 @@ struct CatsDescriptionSection<Content: View>: View {
 }
 
 extension CatsDescriptionSection where Content: View {
-	init(backgroundColor: Color = .white, @ViewBuilder content: () -> Content) {
+	init(backgroundColor: Color = .mainColor, @ViewBuilder content: () -> Content) {
 		self.backgroundColor = backgroundColor
 		self.content = content()
 	}

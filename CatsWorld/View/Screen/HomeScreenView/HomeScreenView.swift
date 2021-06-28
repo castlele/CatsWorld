@@ -22,9 +22,7 @@ struct HomeScreenView: View {
 	
     var body: some View {
 		VStack {
-			HStack {
-				Spacer()
-				
+			TopBarView(minHeight: 80, maxHeight: 80, trailing: {
 				Button(action: {
 					let cat = CatsCard(context: managedObjectContext)
 					homeScreenViewModel.catsPageView = CatsPageView(cat: cat, deleteAfterCancelation: true, isEditing: true)
@@ -34,15 +32,14 @@ struct HomeScreenView: View {
 					Image3D(
 						topView: Image(systemName: "plus"),
 						bottomView: Image(systemName: "plus"),
-						topColor: Color(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)),
-						bottomColor: .gray
+						topColor: .volumeEffectColorTop,
+						bottomColor: .volumeEffectColorBottom
 					)
 				})
 				.frame(width: 60, height: 60)
 				.buttonStyle(CircleButtonStyle())
 				.padding()
-			}
-			.background(Color.white.opacity(0.3))
+			})
 			
 			Spacer()
 			
@@ -57,10 +54,10 @@ struct HomeScreenView: View {
 				}
 			}
 		}
+		.background(Color.mainColor)
 		.sheet(isPresented: $homeScreenViewModel.addCatSheet) {
 			homeScreenViewModel.catsPageView
 		}
-		.navigationBarHidden(true)
     }
 }
 

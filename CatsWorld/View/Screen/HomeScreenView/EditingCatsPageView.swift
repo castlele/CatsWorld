@@ -16,22 +16,17 @@ struct EditingCatsPageView: View {
 	
 	var body: some View {
 		VStack {
-			TopBarView(maxHeight: 100, leading: {
+			TopBarView(minHeight: 100, maxHeight: 100, leading: {
 				CancelButton(
 					showAlert: $catsViewModel.isAlertShown,
 					wasChanges: catsViewModel.wasChanged,
 					action: {
 						catsViewModel.dismiss(presentation: presentation)
 					}, content: {
-						Image3D(
-							topView: Image(systemName: "xmark"),
-							bottomView: Image(systemName: "xmark"),
-							topColor: .white,
-							bottomColor: Color(#colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1))
-						)
+						XButton()
 					})
 					.frame(width: 50, height: 50)
-					.buttonStyle(CircleButtonStyle())
+					.buttonStyle(CircleButtonStyle(backgroundColor: Color(#colorLiteral(red: 0.7540688515, green: 0.7540867925, blue: 0.7540771365, alpha: 1))))
 					.padding([.top, .leading])
 				
 			}, trailing: {
@@ -40,10 +35,11 @@ struct EditingCatsPageView: View {
 					
 				}, content: {
 					View3D(
-					topView:  PawView().scale(0.8),
-					bottomView:  PawView().scale(0.8),
-					topColor: Color(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)),
-					bottomColor: .gray)
+						topView:  PawView().scale(0.8),
+						bottomView:  PawView().scale(0.8),
+						topColor: .volumeEffectColorTop,
+						bottomColor: .volumeEffectColorBottom	
+					)
 			   })
 				.frame(width: 50, height: 50)
 				.buttonStyle(CircleButtonStyle())
@@ -63,9 +59,10 @@ struct EditingCatsPageView: View {
 					)
 				
 				// MARK:- Main info section
-				CatsDescriptionSection(backgroundColor: .white) {
+				CatsDescriptionSection() {
 					TextField("Name", text: $catsViewModel.name)
 						.disableAutocorrection(true)
+						.accentColor(.mainColor)
 					
 					DatePicker(
 						"Date of birth",
@@ -88,9 +85,11 @@ struct EditingCatsPageView: View {
 					}
 					.pickerStyle(InlinePickerStyle())
 				}
+				.foregroundColor(.textColor)
+				.accentColor(.accentColor)
 				
 				// MARK:- Physical section
-				CatsDescriptionSection(backgroundColor: .white) {
+				CatsDescriptionSection() {
 					HStack {
 						Text("Weight \(catsViewModel.weight, specifier: "%.1f") kg")
 
@@ -99,20 +98,27 @@ struct EditingCatsPageView: View {
 						Slider(value: $catsViewModel.weight, in: 0...50)
 					}
 
-					Toggle("Is castrated", isOn: $catsViewModel.isCastrated)
-
-					Toggle("Is the tail suppressed", isOn: $catsViewModel.suppressedTail)
-
-					Toggle("Is the legs are short", isOn: $catsViewModel.shortLegs)
-
-					Toggle("Is hair less", isOn: $catsViewModel.hairless)
+					Group {
+						Toggle("Is castrated", isOn: $catsViewModel.isCastrated)
+						
+						Toggle("Is the tail suppressed", isOn: $catsViewModel.suppressedTail)
+						
+						Toggle("Is the legs are short", isOn: $catsViewModel.shortLegs)
+						
+						Toggle("Is hair less", isOn: $catsViewModel.hairless)
+					}
+					.toggleStyle(SwitchToggleStyle(tint: .accentColor))
 				}
+				.foregroundColor(.textColor)
+				.accentColor(.accentColor)
 				
 				// MARK:- Psycological section
-				CatsDescriptionSection(backgroundColor: .white) {
+				CatsDescriptionSection() {
 					Picker("Temperament", selection: $catsViewModel.temperament) {
 						ForEach(Temperament.allCases, id: \.self) { temperament in
 							Text("\(temperament.rawValue.capitalized)")
+								.foregroundColor(.textColor)
+								.fontWeight(.ultraLight)
 						}
 					}
 					.pickerStyle(SegmentedPickerStyle())
@@ -135,11 +141,21 @@ struct EditingCatsPageView: View {
 							   onImage: Image(systemName: "star.fill")
 					)
 				}
+				.accentColor(.accentColor)
 				
 				// MARK:- More info section
-				CatsDescriptionSection(backgroundColor: .white) {
-					TextEditor(text: $catsViewModel.additionalInfo)
-						.overlay(catsViewModel.additionalInfo.isEmpty ? Text("Write whatever you want about your cat") : nil)
+				CatsDescriptionSection() {
+					VStack {
+						if catsViewModel.additionalInfo.isEmpty {
+							Text("Write whatever you want about your cat").foregroundColor(.textColor)
+						}
+						
+						TextEditor(text: $catsViewModel.additionalInfo)
+							.disableAutocorrection(true)
+							.foregroundColor(.textColor)
+							.background(Color.mainColor)
+							.accentColor(.accentColor)
+					}
 				}
 			}
 			.frame(width: UIScreen.screenWidth)
@@ -156,6 +172,7 @@ struct EditingCatsPageView: View {
 		.sheet(isPresented: $catsViewModel.isImagePicker) {
 			ImagePicker(image: $catsViewModel.catsImage)
 		}
+		.background(Color.mainColor)
 	}
 }
 

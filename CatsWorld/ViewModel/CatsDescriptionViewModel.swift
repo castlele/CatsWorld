@@ -27,6 +27,8 @@ final class CatsDescriptionViewModel: ObservableObject {
 	@Published var ageType: AgeType = .age
 	@Published var isEditingCatsPage = false
 	
+	var catsCardColor: UIColor { cat.wrappedColor }
+	
 	var currentSettings: [Setting] {
 		determineSettings(for: self.category)
 	}

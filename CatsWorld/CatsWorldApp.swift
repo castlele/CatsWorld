@@ -19,6 +19,20 @@ struct CatsWorldApp: App {
 	init() {
 		UITableViewCell.appearance().backgroundColor = UIColor.clear
 		
+		UITextView.appearance().backgroundColor = .clear
+		
+		UITabBar.appearance().barTintColor = UIColor(Color.mainColor)
+		UITabBar.appearance().isTranslucent = false
+		
+		UISegmentedControl.appearance().selectedSegmentTintColor = Color.accentUIColor()
+		UISegmentedControl.appearance().backgroundColor = Color.semiAccentUIColor()
+		UISegmentedControl.appearance().setTitleTextAttributes(
+			[.foregroundColor: UIColor(Color.volumeEffectShadowColor)],
+			for: .selected)
+		UISegmentedControl.appearance().setTitleTextAttributes(
+			[.foregroundColor: Color.lightUIColor()],
+			for: .disabled)
+
 		BreedsViewModel.shared.loadBreeds()
 	}
 	
@@ -47,6 +61,7 @@ struct CatsWorldApp: App {
 					}
 					.tag(2)
 			}
+			.accentColor(.accentColor)
 		}
 		.onChange(of: scenePhase) { newScenePhase in
 			savePersistenceInBackgroundState(newScenePhase)

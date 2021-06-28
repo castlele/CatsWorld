@@ -12,11 +12,13 @@ struct EarsView: View {
 		ZStack {
 			GeometryReader { geometry in
 				Rectangle()
+					.fill(Color.mainColor)
 					.frame(width: 50, height: 50)
 					.rotationEffect(Angle(degrees: 10))
 					.offset(x: 10, y: 0)
 				
 				Rectangle()
+					.fill(Color.mainColor)
 					.frame(width: 50, height: 50)
 					.rotationEffect(Angle(degrees: -10))
 					.offset(x: geometry.frame(in: .local).maxX - 10 - 50, y: 0)
