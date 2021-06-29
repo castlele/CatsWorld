@@ -13,7 +13,11 @@ struct DoneButton<Content: View>: View {
 	var content: Content
 	var action: () -> Void
 	
-	init(presentation: Binding<PresentationMode>? = nil, action: @escaping () -> Void, @ViewBuilder content: () -> Content) {
+	init(
+		presentation: Binding<PresentationMode>? = nil,
+		action: @escaping () -> Void,
+		@ViewBuilder content: () -> Content
+	) {
 		self.presentationMode = presentation
 		self.action = action
 		self.content = content()

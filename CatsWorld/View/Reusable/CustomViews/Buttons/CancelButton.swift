@@ -46,7 +46,7 @@ struct CancelButton<Content: View>: View {
 		}, label: {
 			content
 		})
-//		.buttonStyle(CircleButtonStyle(backgroundColor: Color(#colorLiteral(red: 0.7540688515, green: 0.7540867925, blue: 0.7540771365, alpha: 1))))
+		.frame(width: 50, height: 50)
     }
 }
 

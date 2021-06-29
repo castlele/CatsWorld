@@ -21,42 +21,90 @@ struct HomeScreenView: View {
 	@StateObject var homeScreenViewModel = HomeScreenViewModel()
 	
     var body: some View {
-		VStack {
-			TopBarView(minHeight: 80, maxHeight: 80, trailing: {
-				Button(action: {
-					let cat = CatsCard(context: managedObjectContext)
-					homeScreenViewModel.catsPageView = CatsPageView(cat: cat, deleteAfterCancelation: true, isEditing: true)
-					homeScreenViewModel.addCatSheet.toggle()
-					
-				}, label: {
-					Image3D(
-						topView: Image(systemName: "plus"),
-						bottomView: Image(systemName: "plus"),
-						topColor: .volumeEffectColorTop,
-						bottomColor: .volumeEffectColorBottom
-					)
-				})
-				.frame(width: 60, height: 60)
-				.buttonStyle(CircleButtonStyle())
-				.padding()
-			})
+		ZStack {
+			Color.mainColor
 			
-			Spacer()
-			
-			GeometryReader { geometry in
-				ScrollView(.vertical, showsIndicators: false) {
-					ForEach(catsCards) { card in
-						CatsCardView(cat: card)
-							.padding([.leading, .trailing, .top])
+			VStack {
+				TopBarView(minHeight: 80, maxHeight: 80, trailing: {
+					Button(action: {
+						let cat = CatsCard(context: managedObjectContext)
+						homeScreenViewModel.catsPageView = CatsPageView(cat: cat, deleteAfterCancelation: true, isEditing: true)
+						homeScreenViewModel.addCatSheet.toggle()
 						
-						Spacer(minLength: 10)
+					}, label: {
+						Image3D(
+							topView: Image(systemName: "plus"),
+							bottomView: Image(systemName: "plus"),
+							topColor: .volumeEffectColorTop,
+							bottomColor: .volumeEffectColorBottom
+						)
+					})
+					.frame(width: 60, height: 60)
+					.buttonStyle(CircleButtonStyle())
+					.padding()
+				})
+				
+				Spacer()
+				
+				GeometryReader { geometry in
+					ScrollView(.vertical, showsIndicators: false) {
+						ForEach(catsCards) { card in
+							CatsCardView(cat: card, isColorPicker: $homeScreenViewModel.isColorPicker)
+								.overlay(
+									HStack {
+										Spacer()
+										
+										HStack(spacing: 5) {
+											ForEach(0..<3) { circle in
+												Circle()
+													.frame(width: 10, height: 10)
+											}
+										}
+										.padding(.trailing)
+										.onTapGesture {
+											homeScreenViewModel.selectCat(card)
+											
+											withAnimation(.linear(duration: 1.2)) {
+												homeScreenViewModel.isColorPicker.toggle()
+											}
+										}
+										.foregroundColor(.accentColor)
+									}
+								)
+								.padding([.leading, .bottom, .trailing])
+							
+							Spacer(minLength: 10)
+						}
 					}
 				}
 			}
-		}
-		.background(Color.mainColor)
-		.sheet(isPresented: $homeScreenViewModel.addCatSheet) {
-			homeScreenViewModel.catsPageView
+			.sheet(isPresented: $homeScreenViewModel.addCatSheet) {
+				homeScreenViewModel.catsPageView
+			}
+			.animation(.spring().delay(1.2))
+			.blur(radius: homeScreenViewModel.isColorPicker ? 20 : 0)
+			.disabled(homeScreenViewModel.isColorPicker)
+			
+			if homeScreenViewModel.isColorPicker {
+				CatsCardsColorPicker(
+					cat: homeScreenViewModel.selectedCat,
+					pickedColor: homeScreenViewModel.catsCardsColor,
+					isColorPicker: $homeScreenViewModel.isColorPicker
+				)
+				.animation(.easeInOut(duration: 1.2))
+				.transition(.move(edge: .bottom))
+				.onDisappear {
+					DispatchQueue.global().async {
+						do {
+							try managedObjectContext.save()
+						} catch {
+							#if DEBUG
+							print("\(error.localizedDescription)")
+							#endif
+						}
+					}
+				}
+			}
 		}
     }
 }
