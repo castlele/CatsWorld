@@ -178,7 +178,7 @@ struct EditingCatsPageView: View {
 			ImagePicker(image: $catsViewModel.catsImage)
 		}
 		.background(Color.mainColor)
-		.preferredColorScheme(settingsViewModel.wrappedColorScheme)
+//		.preferredColorScheme(settingsViewModel.wrappedColorScheme)
 	}
 }
 

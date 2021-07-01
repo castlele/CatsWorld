@@ -122,7 +122,7 @@ struct MainCatsPageView: View {
 		.sheet(isPresented: $catsDescriptionViewModel.isEditingCatsPage) {
 			EditingCatsPageView(catsViewModel: CatsCardsPageViewModel(cat: catsDescriptionViewModel.cat, managedObjectContext: managedObjectContext))
 		}
-		.preferredColorScheme(settingsViewModel.wrappedColorScheme)
+//		.preferredColorScheme(settingsViewModel.wrappedColorScheme)
 	}
 }
 

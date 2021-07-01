@@ -27,17 +27,11 @@ struct CatsMainInfoView: View {
 	
 	var genderSign: AnyView? {
 		if isGender {
-			return AnyView(GeometryReader { geometry in
-				Text(cat.genderSign)
-					.font(.largeTitle)
-					.bold()
-					.foregroundColor(cat.genderColor)
-					.offset(x: 5, y: -6)
-			})
-			
-		} else {
-			return nil
+			return AnyView(GenderSign(genderSign: cat.genderSign, foregroundColor: cat.genderColor)
+							.scaleEffect(1.25)
+			)
 		}
+		return nil
 	}
 	
 	var strokeColor: Color = .gray
@@ -51,7 +45,11 @@ struct CatsMainInfoView: View {
 							.stroke(Color.accentColor, lineWidth: 4)
 					)
 					.frame(minWidth: 50, maxWidth: 100, minHeight: 50, maxHeight: 100)
-					.overlay(genderSign)
+					.overlay(
+						GeometryReader { _ in
+							genderSign
+						}
+					)
 			}
 			
 			VStack(alignment: .leading, spacing: 2.5) {

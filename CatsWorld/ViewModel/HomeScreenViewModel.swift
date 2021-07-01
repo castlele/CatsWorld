@@ -11,6 +11,7 @@ final class HomeScreenViewModel: ObservableObject {
 		
 	@Published var addCatSheet = false
 	@Published var catsPageView: CatsPageView!
+	@Published var isCatsPageView = false
 	
 	@Published var isColorPicker = false
 	@Published var selectedCat: CatsCard!

@@ -33,7 +33,6 @@
 		7B5CD74826839F8F00CFC994 /* CatsDescriptionSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5CD74726839F8F00CFC994 /* CatsDescriptionSection.swift */; };
 		7B5CD74E2683BC8F00CFC994 /* CWError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5CD74D2683BC8F00CFC994 /* CWError.swift */; };
 		7B5CD7502683C10900CFC994 /* HomeScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5CD74F2683C10900CFC994 /* HomeScreenViewModel.swift */; };
-		7B5CD7522683C27E00CFC994 /* CatsCardsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5CD7512683C27E00CFC994 /* CatsCardsViewModel.swift */; };
 		7B650BE5268C629F00691E3B /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 7B650BE7268C629F00691E3B /* Localizable.stringsdict */; };
 		7B650BEA268C652300691E3B /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B650BE9268C652300691E3B /* String.swift */; };
 		7B650BED268C6AA000691E3B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7B650BEF268C6AA000691E3B /* Localizable.strings */; };
@@ -112,7 +111,6 @@
 		7B5CD74726839F8F00CFC994 /* CatsDescriptionSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatsDescriptionSection.swift; sourceTree = "<group>"; };
 		7B5CD74D2683BC8F00CFC994 /* CWError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CWError.swift; sourceTree = "<group>"; };
 		7B5CD74F2683C10900CFC994 /* HomeScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenViewModel.swift; sourceTree = "<group>"; };
-		7B5CD7512683C27E00CFC994 /* CatsCardsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatsCardsViewModel.swift; sourceTree = "<group>"; };
 		7B650BE6268C629F00691E3B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = en; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		7B650BE8268C62A500691E3B /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = ru; path = ru.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		7B650BE9268C652300691E3B /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
@@ -378,7 +376,6 @@
 			isa = PBXGroup;
 			children = (
 				7B5CD74F2683C10900CFC994 /* HomeScreenViewModel.swift */,
-				7B5CD7512683C27E00CFC994 /* CatsCardsViewModel.swift */,
 				7BE498962653E322004F7F52 /* CatsCardsPageViewModel.swift */,
 				7BF2D4AA26721F4900985E88 /* CatsDescriptionViewModel.swift */,
 				7B8B9A1926427EBA00E98B8E /* BreedsViewModel.swift */,
@@ -608,7 +605,6 @@
 				7B874686264B1A35006DC6A7 /* HomeScreenView.swift in Sources */,
 				7B5CD74E2683BC8F00CFC994 /* CWError.swift in Sources */,
 				7B56A10A2673AE2F00BEF8DD /* UIImage.swift in Sources */,
-				7B5CD7522683C27E00CFC994 /* CatsCardsViewModel.swift in Sources */,
 				7B0E47DA268B0EEF00136ABF /* CatsCardsColorPicker.swift in Sources */,
 				7B874684264B19F8006DC6A7 /* MapView.swift in Sources */,
 				7B096CA92657B80A00B99D3E /* View.swift in Sources */,

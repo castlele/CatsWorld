@@ -50,7 +50,7 @@ struct HomeScreenView: View {
 				GeometryReader { geometry in
 					ScrollView(.vertical, showsIndicators: false) {
 						ForEach(catsCards) { card in
-							CatsCardView(cat: card, isColorPicker: $homeScreenViewModel.isColorPicker)
+							CatsCardView(cat: card, homeScreenViewModel: homeScreenViewModel)
 								.overlay(
 									HStack {
 										Spacer()
@@ -78,6 +78,9 @@ struct HomeScreenView: View {
 						}
 					}
 				}
+			}
+			.fullScreenCover(isPresented: $homeScreenViewModel.isCatsPageView) {
+				CatsPageView(cat: homeScreenViewModel.selectedCat)
 			}
 			.sheet(isPresented: $homeScreenViewModel.addCatSheet) {
 				homeScreenViewModel.catsPageView

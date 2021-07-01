@@ -12,8 +12,7 @@ struct CatsCardView: View {
 	@Environment(\.managedObjectContext) var managedObjectContext
 	
 	@ObservedObject var cat: CatsCard
-	@Binding var isColorPicker: Bool
-	@StateObject var catsCardsViewModel = CatsCardsViewModel()
+	@ObservedObject var homeScreenViewModel: HomeScreenViewModel
 	
 	var cardColor: Color {
 		let uiColor = cat.wrappedColor
@@ -40,12 +39,10 @@ struct CatsCardView: View {
 		.simultaneousGesture(
 			TapGesture()
 				.onEnded { _ in
-					catsCardsViewModel.isCatsPageView.toggle()
+					homeScreenViewModel.selectCat(cat)
+					homeScreenViewModel.isCatsPageView.toggle()
 				}
 		)
-		.fullScreenCover(isPresented: $catsCardsViewModel.isCatsPageView) {
-			CatsPageView(cat: cat)
-		}
 //		.sheet(isPresented: $catsCardsViewModel.isEditingCatsPage) {
 //			CatsPageView(cat: cat, isEditing: true)
 //		}
@@ -66,7 +63,7 @@ struct CatsCardView_Previews: PreviewProvider {
 	}()
 	
     static var previews: some View {
-		CatsCardView(cat: cat, isColorPicker: .constant(false))
+		CatsCardView(cat: cat, homeScreenViewModel: HomeScreenViewModel())
 			.overlay(
 				HStack {
 					Spacer()

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct VolumetricShadows<Shape: View>: ViewModifier {
 	
-	let shadowType = SettingsViewModel.shared.wrappedShadows
+	let shadowType: AppShadow = .appDefault //SettingsViewModel.shared.wrappedShadows
 	let shape: Shape
 	
 	let color1: Color
