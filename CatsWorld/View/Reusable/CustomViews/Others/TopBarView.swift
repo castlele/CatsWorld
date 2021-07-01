@@ -122,6 +122,24 @@ extension TopBarView where Leading: View, Trailing == EmptyView, Content: View {
 	}
 }
 
+// MARK: - Leading == EmptyView, Trailing == EmptyView, Content == EmptyView
+extension TopBarView where Leading == EmptyView, Trailing == EmptyView, Content == EmptyView {
+	init(
+		backgroundColor: Color = .mainColor,
+		height: CGFloat? = nil,
+		minHeight: CGFloat? = nil,
+		maxHeight: CGFloat? = nil
+	) {
+		self.backgroundColor = backgroundColor
+		self.height = height
+		self.minHeight = minHeight
+		self.maxHeight = maxHeight
+		self.leading = EmptyView()
+		self.trailing = EmptyView()
+		self.content = EmptyView()
+	}
+}
+
 struct TopBarView_Previews: PreviewProvider {
     static var previews: some View {
 		TopBarView(height: 100, leading: {

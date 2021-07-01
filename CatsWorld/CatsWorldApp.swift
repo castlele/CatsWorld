@@ -14,6 +14,8 @@ struct CatsWorldApp: App {
 	
 	@Environment(\.scenePhase) var scenePhase
 	
+	@StateObject var settingsViewModel = SettingsViewModel()
+	
 	@State var selectedView = 1
 	
 	init() {
@@ -62,8 +64,17 @@ struct CatsWorldApp: App {
 						Text("Breeds")
 					}
 					.tag(2)
+				
+				SettingsView()
+					.tabItem {
+						Image(systemName: "gearshape")
+						Text("Settings")
+					}
+					.tag(3)
 			}
+			.environmentObject(settingsViewModel)
 			.accentColor(.accentColor)
+			.preferredColorScheme(settingsViewModel.wrappedColorScheme)
 		}
 		.onChange(of: scenePhase) { newScenePhase in
 			savePersistenceInBackgroundState(newScenePhase)

@@ -11,6 +11,7 @@ struct MainCatsPageView: View {
 	
 	@Environment(\.presentationMode) var presentationMode
 	@Environment(\.managedObjectContext) var managedObjectContext
+	@EnvironmentObject var settingsViewModel: SettingsViewModel
 	
 	@ObservedObject var catsDescriptionViewModel: CatsDescriptionViewModel
 	
@@ -121,6 +122,7 @@ struct MainCatsPageView: View {
 		.sheet(isPresented: $catsDescriptionViewModel.isEditingCatsPage) {
 			EditingCatsPageView(catsViewModel: CatsCardsPageViewModel(cat: catsDescriptionViewModel.cat, managedObjectContext: managedObjectContext))
 		}
+		.preferredColorScheme(settingsViewModel.wrappedColorScheme)
 	}
 }
 

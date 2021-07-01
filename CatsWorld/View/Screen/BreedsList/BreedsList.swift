@@ -9,10 +9,10 @@ import SwiftUI
 
 struct BreedsList: View {
 	
-	@EnvironmentObject var viewModel: BreedsViewModel
+	@EnvironmentObject var breedsViewModel: BreedsViewModel
 	
     var body: some View {
-		List(viewModel.breeds) { breed in
+		List(breedsViewModel.breeds) { breed in
 			Text(breed.name.localize())
 		}
     }

@@ -9,6 +9,7 @@
 "Map" = "Карта";
 "Home" = "Главная";
 "Breeds" = "Породы";
+"Settings" = "Настройки";
 
 "Name" = "Имя";
 "Date of birth" = "Дата рождения";
@@ -48,6 +49,7 @@
 "Sure wanna discard" = "Вы уверены, что хотите сбросить все изменеия";
 "Discard" = "Сбросить";
 "Cancel" = "Отменить";
+"Save" = "Сохранить";
 
 "Abyssinian" = "Абессинская";
 "Aegean" = "Эгейская";
@@ -116,3 +118,13 @@
 "Turkish Angora" = "Турцкая Ангора";
 "Turkish Van" = "Турецкий Ван";
 "York Chocolate" = "Шоколадный Йорк";
+
+"Color scheme" = "Тема";
+"Match System Mode" = "Системная тема";
+"Light" = "Светлая";
+"Dark" = "Темная";
+"Graphics" = "Графика";
+"Shadows" = "Тени";
+"Default" = "Стандартные";
+"Flat" = "Плоские";
+"Disabled" = "Без теней";

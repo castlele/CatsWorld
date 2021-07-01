@@ -11,6 +11,8 @@ import CoreData
 struct EditingCatsPageView: View {
 	
 	@Environment(\.presentationMode) var presentation
+	@Environment(\.colorScheme) var colorScheme
+	@EnvironmentObject var settingsViewModel: SettingsViewModel
 	
 	@StateObject var catsViewModel: CatsCardsPageViewModel
 	
@@ -176,6 +178,7 @@ struct EditingCatsPageView: View {
 			ImagePicker(image: $catsViewModel.catsImage)
 		}
 		.background(Color.mainColor)
+		.preferredColorScheme(settingsViewModel.wrappedColorScheme)
 	}
 }
 

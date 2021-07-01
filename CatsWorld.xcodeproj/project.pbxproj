@@ -18,6 +18,9 @@
 		7B1AA593264AA018002A3774 /* EndPointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1AA592264AA018002A3774 /* EndPointTests.swift */; };
 		7B1AA595264AA4CF002A3774 /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1AA594264AA4CF002A3774 /* MockData.swift */; };
 		7B1AA599264AA798002A3774 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1AA598264AA798002A3774 /* Array.swift */; };
+		7B1CC15D268DB10F00503A41 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1CC15C268DB10F00503A41 /* SettingsViewModel.swift */; };
+		7B1CC15F268DB26800503A41 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1CC15E268DB26800503A41 /* SettingsView.swift */; };
+		7B1CC161268DCC3800503A41 /* Shadows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1CC160268DCC3800503A41 /* Shadows.swift */; };
 		7B33477D267E5C7500ED6F5F /* PawView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B33477C267E5C7500ED6F5F /* PawView.swift */; };
 		7B33A11D267B50BD00C780C0 /* LinearGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B33A11C267B50BD00C780C0 /* LinearGradient.swift */; };
 		7B33A11F267B586600C780C0 /* RadarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B33A11E267B586600C780C0 /* RadarChart.swift */; };
@@ -94,6 +97,9 @@
 		7B1AA592264AA018002A3774 /* EndPointTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPointTests.swift; sourceTree = "<group>"; };
 		7B1AA594264AA4CF002A3774 /* MockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
 		7B1AA598264AA798002A3774 /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
+		7B1CC15C268DB10F00503A41 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		7B1CC15E268DB26800503A41 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		7B1CC160268DCC3800503A41 /* Shadows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shadows.swift; sourceTree = "<group>"; };
 		7B33477C267E5C7500ED6F5F /* PawView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PawView.swift; sourceTree = "<group>"; };
 		7B33A11C267B50BD00C780C0 /* LinearGradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinearGradient.swift; sourceTree = "<group>"; };
 		7B33A11E267B586600C780C0 /* RadarChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadarChart.swift; sourceTree = "<group>"; };
@@ -180,6 +186,14 @@
 				7BCF801A267CE1740064C6E6 /* Foundation */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		7B1CC15B268DB0E200503A41 /* SettingsView */ = {
+			isa = PBXGroup;
+			children = (
+				7B1CC15E268DB26800503A41 /* SettingsView.swift */,
+			);
+			path = SettingsView;
 			sourceTree = "<group>";
 		};
 		7B5CD7492683BA4D00CFC994 /* MapView */ = {
@@ -368,6 +382,7 @@
 				7BE498962653E322004F7F52 /* CatsCardsPageViewModel.swift */,
 				7BF2D4AA26721F4900985E88 /* CatsDescriptionViewModel.swift */,
 				7B8B9A1926427EBA00E98B8E /* BreedsViewModel.swift */,
+				7B1CC15C268DB10F00503A41 /* SettingsViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -427,6 +442,7 @@
 				7B968A062653A9F1002ECE07 /* Show.swift */,
 				7B968A082653AE48002ECE07 /* Temperament.swift */,
 				7B5C83192671070800B2F6E8 /* AgeType.swift */,
+				7B1CC160268DCC3800503A41 /* Shadows.swift */,
 			);
 			path = DataObjects;
 			sourceTree = "<group>";
@@ -437,6 +453,7 @@
 				7B5CD7492683BA4D00CFC994 /* MapView */,
 				7B5CD74A2683BA6400CFC994 /* HomeScreenView */,
 				7B5CD74B2683BA7500CFC994 /* BreedsList */,
+				7B1CC15B268DB0E200503A41 /* SettingsView */,
 			);
 			path = Screen;
 			sourceTree = "<group>";
@@ -556,6 +573,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7B650BEA268C652300691E3B /* String.swift in Sources */,
+				7B1CC161268DCC3800503A41 /* Shadows.swift in Sources */,
 				7B6B18F7268B621900BACCE4 /* ColorPick.swift in Sources */,
 				7BF2D4AB26721F4900985E88 /* CatsDescriptionViewModel.swift in Sources */,
 				7B02F421268456BC00D18F9A /* TopBarView.swift in Sources */,
@@ -597,9 +615,11 @@
 				7B6E3D42265272AF00B04B62 /* UIColor.swift in Sources */,
 				7B33477D267E5C7500ED6F5F /* PawView.swift in Sources */,
 				7B861434264D1739008616DB /* Stash.xcdatamodeld in Sources */,
+				7B1CC15F268DB26800503A41 /* SettingsView.swift in Sources */,
 				7B861436264D183B008616DB /* PersistenceController.swift in Sources */,
 				7B096CAD2657C51700B99D3E /* DoneButton.swift in Sources */,
 				7B8B9A1A26427EBA00E98B8E /* BreedsViewModel.swift in Sources */,
+				7B1CC15D268DB10F00503A41 /* SettingsViewModel.swift in Sources */,
 				7BF2D4A32671FEBF00985E88 /* MainCatsPageView.swift in Sources */,
 				7B1AA595264AA4CF002A3774 /* MockData.swift in Sources */,
 				7B0E47DC268B186600136ABF /* GenderSign.swift in Sources */,

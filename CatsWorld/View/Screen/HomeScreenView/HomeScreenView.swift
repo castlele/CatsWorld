@@ -10,6 +10,7 @@ import SwiftUI
 struct HomeScreenView: View {
 	
 	@Environment(\.managedObjectContext) var managedObjectContext
+	@EnvironmentObject var settingsViewModel: SettingsViewModel
 	
 	@FetchRequest(
 		entity: CatsCard.entity(),

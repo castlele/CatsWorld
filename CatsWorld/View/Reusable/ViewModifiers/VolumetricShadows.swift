@@ -7,7 +7,10 @@
 
 import SwiftUI
 
-struct VolumetricShadows: ViewModifier {
+struct VolumetricShadows<Shape: View>: ViewModifier {
+	
+	let shadowType = SettingsViewModel.shared.wrappedShadows
+	let shape: Shape
 	
 	let color1: Color
 	let color2: Color
@@ -15,43 +18,48 @@ struct VolumetricShadows: ViewModifier {
 	let radius: CGFloat
 	
 	let isPressed: Bool
-	
-	let isInner: Bool
-	
-	init(color1: Color, color2: Color, radius: CGFloat, isPressed: Bool, isInner: Bool) {
+		
+	init(shape: Shape, color1: Color, color2: Color, radius: CGFloat, isPressed: Bool) {
+		self.shape = shape
 		self.color1 = color1
 		self.color2 = color2
 		self.radius = radius
 		self.isPressed = isPressed
-		self.isInner = isInner
 	}
 	
 	func body(content: Content) -> some View {
-		if !isInner {
-			content
-				.shadow(color: color1, radius: isPressed ? radius : radius + 3, x: isPressed ? -5 : -10, y: isPressed ? -5 : -10)
-				.shadow(color: color2, radius: isPressed ? radius : radius + 3, x: isPressed ? 5 : 10, y: isPressed ? 5 : 10)
-	
-		} else {
-			content
-				.overlay(
-					RoundedRectangle(cornerRadius: 20)
-						.stroke(color2, lineWidth: 4)
-						.blur(radius: isPressed ? radius : radius + 3)
-						.mask(RoundedRectangle(cornerRadius: 20)
-								.fill(LinearGradient(color2, Color.clear)
-								)
-						)
-				)
-				.overlay(
-					RoundedRectangle(cornerRadius: 20)
-						.stroke(color1, lineWidth: 8)
-						.blur(radius: isPressed ? radius : radius + 3)
-						.mask(RoundedRectangle(cornerRadius: 20)
-								.fill(LinearGradient(Color.clear, color2)
-								)
-						)
-				)
+		switch shadowType {
+			case .appDefault:
+				return AnyView(makeDefaultShadows(content: content))
+			case .flat:
+				return AnyView(makeFlatShadows(content: content))
+			case .disabled:
+				return AnyView(disableShadows(content: content))
 		}
+	}
+	
+	private func makeDefaultShadows(content: Content) -> some View {
+		content
+			.shadow(color: color1, radius: isPressed ? radius : radius + 3, x: isPressed ? -5 : -10, y: isPressed ? -5 : -10)
+			.shadow(color: color2, radius: isPressed ? radius : radius + 3, x: isPressed ? 5 : 10, y: isPressed ? 5 : 10)
+	}
+	
+	private func makeFlatShadows(content: Content) -> some View {
+		content
+			.background(
+				shape
+					.foregroundColor(color2)
+					.offset(x: 7, y: 7)
+			)
+	}
+	
+	private func disableShadows(content: Content) -> some View {
+		content
+			.background(
+				shape
+					.foregroundColor(color2)
+					.scaleEffect(1.1)
+
+			)
 	}
 }
