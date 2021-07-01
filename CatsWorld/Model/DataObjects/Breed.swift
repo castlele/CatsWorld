@@ -15,47 +15,45 @@ extension Breed: Equatable {
 
 struct Breed: Codable, Identifiable {
 	
+	var id: String
+	
+	var name: String
+	
 	var adaptability: Int
 	var affectionLevel: Int
 	var childFriendly: Int
-	var countryCode: String
-	var countryCodes: String
-	var description: String
 	var dogFriendly: Int
+	var indoor: Int
+	var intelligence: Int
+	var strangerFriendly: Int
+	var temperament: String
+	
 	var energyLevel: Int
-	var experimental: Int
 	var grooming: Int
 	var hairless: Int
 	var healthIssues: Int
 	var hypoAllergenic: Int
-	var id: String
-	var indoor: Int
-	var intelligence: Int
 	var lifeSpan: String
-	var name: String
-	var natural: Int
-	var origin: String
-	var rare: Int
-	var rex: Int
 	var sheddingLevel: Int
 	var shortLegs: Int
-	var socialNeeds: Int
-	var strangerFriendly: Int
 	var suppressedTail: Int
-	var temperament: String
 	var vocalisation: Int
 	var weight: Weight
+	
+	var natural: Int
+	var description: String
+	var origin: String
+	var rare: Int
+	var socialNeeds: Int
+	
 
 	enum CodingKeys: String, CodingKey {
 		case adaptability
 		case affectionLevel = "affection_level"
 		case childFriendly = "child_friendly"
-		case countryCode = "country_code"
-		case countryCodes = "country_codes"
 		case description
 		case dogFriendly = "dog_friendly"
 		case energyLevel = "energy_level"
-		case experimental
 		case grooming
 		case hairless
 		case healthIssues = "health_issues"
@@ -68,7 +66,6 @@ struct Breed: Codable, Identifiable {
 		case natural
 		case origin
 		case rare
-		case rex
 		case sheddingLevel = "shedding_level"
 		case shortLegs = "short_legs"
 		case socialNeeds = "social_needs"

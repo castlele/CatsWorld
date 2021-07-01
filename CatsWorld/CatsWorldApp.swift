@@ -42,39 +42,46 @@ struct CatsWorldApp: App {
 	
     var body: some Scene {
         WindowGroup {
-			TabView(selection: $selectedView) {
-				MapTabView()
-					.tabItem {
-						Image(systemName: "map")
-						Text("Map")
-					}
-					.tag(0)
-				HomeScreenView()
-					.environment(\.managedObjectContext, persistenceController.conteiner.viewContext)
-					.tabItem {
-						Image(systemName: "house")
-						Text("Home")
-					}
-					.tag(1)
-
-				BreedsList()
-					.environmentObject(BreedsViewModel.shared)
-					.tabItem {
-						Image(systemName: "list.bullet")
-						Text("Breeds")
-					}
-					.tag(2)
-				
-				SettingsView()
-					.tabItem {
-						Image(systemName: "gearshape")
-						Text("Settings")
-					}
-					.tag(3)
+			NavigationView {
+				TabView(selection: $selectedView) {
+					MapTabView()
+						.tabItem {
+							Image(systemName: "map")
+							Text("Map")
+						}
+						.tag(0)
+						.navigationBarHidden(true)
+					
+					HomeScreenView()
+						.environment(\.managedObjectContext, persistenceController.conteiner.viewContext)
+						.tabItem {
+							Image(systemName: "house")
+							Text("Home")
+						}
+						.tag(1)
+						.navigationBarHidden(true)
+					
+					BreedsList()
+						.environmentObject(BreedsViewModel.shared)
+						.tabItem {
+							Image(systemName: "list.bullet")
+							Text("Breeds")
+						}
+						.tag(2)
+						.navigationBarHidden(true)
+					
+					SettingsView()
+						.tabItem {
+							Image(systemName: "gearshape")
+							Text("Settings")
+						}
+						.tag(3)
+						.navigationBarHidden(true)
+				}
+				.environmentObject(settingsViewModel)
+				.accentColor(.accentColor)
+				.preferredColorScheme(settingsViewModel.wrappedColorScheme)
 			}
-			.environmentObject(settingsViewModel)
-			.accentColor(.accentColor)
-			.preferredColorScheme(settingsViewModel.wrappedColorScheme)
 		}
 		.onChange(of: scenePhase) { newScenePhase in
 			savePersistenceInBackgroundState(newScenePhase)

@@ -13,7 +13,7 @@ struct BreedsList: View {
 	
     var body: some View {
 		List(breedsViewModel.breeds) { breed in
-			Text(breed.name.localize())
+			NavigationLink(breed.name.localize(), destination: Text(breed.name.localize()))
 		}
     }
 }
