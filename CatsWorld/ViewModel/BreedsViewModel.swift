@@ -53,13 +53,11 @@ extension BreedsViewModel {
 	///   - error: Optional `Error` which should be handled
 	///   Only one parameter can have `nil` value at the same time
 	private func parseJSON(result: Result<Data, CWError>) -> Void {
-		DispatchQueue.main.async { [self] in
-			switch result {
-				case .success(let data):
-					JSONParser.shared.parse(from: data, completion: addBreeds(result:))
-				default:
-					break
-			}
+		switch result {
+			case .success(let data):
+				JSONParser.shared.parse(from: data, completion: addBreeds(result:))
+			default:
+				break
 		}
 	}
 	

@@ -32,7 +32,7 @@ struct CatsDescriptionSettingsView: View {
 						Text("\(value, specifier: "%.1f") kg")
 						
 					case let .temperament(value):
-						Text("\(value.rawValue.capitalized)")
+						Text(value.rawValue.localize().capitalized)
 						
 					case let .showsArray(value):
 						List {

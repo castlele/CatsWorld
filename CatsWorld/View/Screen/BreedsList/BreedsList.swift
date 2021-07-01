@@ -13,7 +13,7 @@ struct BreedsList: View {
 	
     var body: some View {
 		List(viewModel.breeds) { breed in
-			Text(breed.name)
+			Text(breed.name.localize())
 		}
     }
 }

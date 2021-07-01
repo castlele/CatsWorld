@@ -16,7 +16,6 @@ struct GenderSign: View {
 		Text("\(genderSign)")
 			.font(.title)
 			.fontWeight(.medium)
-			.padding([.leading, .trailing])
 			.foregroundColor(foregroundColor)
     }
 }

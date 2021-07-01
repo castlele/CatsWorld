@@ -1,0 +1,118 @@
+/* 
+  Localizable.strings
+  CatsWorld
+
+  Created by Nikita Semenov on 30.06.2021.
+  
+*/
+
+"Map" = "Карта";
+"Home" = "Главная";
+"Breeds" = "Породы";
+
+"Name" = "Имя";
+"Date of birth" = "Дата рождения";
+"male" = "мальчик";
+"female" = "девочка";
+"Weight %.1f kg" = "Вес %.1f кг";
+"%.1f kg" = "%.1f кг";
+"Is castrated" = "Кастрирован";
+"Is the tail suppressed" = "Короткий хвост";
+"Is the legs are short" = "Короткие лапы";
+"Is hair less" = "Лысый";
+
+"Additional info" = "Здесь можно написать все, что угодно о котике";
+
+"Suppressed tail" = "Короткий хвост";
+"Short legs" = "Короткие лапы";
+"Hairless" = "Лысый";
+"Weight" = "Вес";
+"Castrated" = "Кастрированный";
+
+"Stranger friendly" = "Друж. к посторонним";
+"Child friendly" = "Друж. к деням";
+"Dog friendly" = "Друж. к собакам";
+"Temperament" = "Темперамент";
+"choleric" = "холерик";
+"melancholic" = "меланхолик";
+"phlegmatic" = "флегматик";
+"sanguine" = "сангвиник";
+
+"Cat shows" = "Кошачьи выставки";
+
+"Yes" = "Да";
+"No" = "Нет";
+"None" = "Пусто";
+"Submit" = "Применить";
+"Discarding changes" = "Сбросить изменения";
+"Sure wanna discard" = "Вы уверены, что хотите сбросить все изменеия";
+"Discard" = "Сбросить";
+"Cancel" = "Отменить";
+
+"Abyssinian" = "Абессинская";
+"Aegean" = "Эгейская";
+"American Bobtail" = "Американский Бобтейл";
+"American Curl" = "Американский Кёрл";
+"American Shorthair" = "Американская Короткошорстная";
+"American Wirehair" = "Американская Жесткошерстная";
+"Arabian Mau" = "Арабский Мау";
+"Australian Mist" = "Австралийский Мист";
+"Balinese" = "Балийская";
+"Bambino" = "Бамбино";
+"Bengal" = "Бенгальская";
+"Birman" = "Бирманская";
+"Bombay" = "Бомбейская";
+"British Longhair" = "Британская Длинношерстная";
+"British Shorthair" = "Британская Короткошорстная";
+"Burmese" = "Бурма";
+"Burmilla" = "Бурмилла";
+"California Spangled" = "Калифорнийская Сияющая";
+"Chantilly-Tiffany" = "Шантильи-Тиффани";
+"Chartreux" = "Шартрез";
+"Chausie" = "Хауси";
+"Cheetoh" = "Чито";
+"Colorpoint Shorthair" = "Колорпоинт Короткошорстная";
+"Cornish Rex" = "Корниш Рекс";
+"Cymric" = "Кимрик";
+"Cyprus" = "Кипрская Кошка";
+"Devon Rex" = "Девон Рекс";
+"Donskoy" = "Донской Сфинкс";
+"Dragon Li" = "Дракон Ли";
+"Egyptian Mau" = "Египетская Мау";
+"European Burmese" = "Европейская Бурма";
+"Exotic Shorthair" = "Экзотическая Короткошорстная";
+"Havana Brown" = "Гавана Браун";
+"Himalayan" = "Гималайская";
+"Japanese Bobtail" = "Японский Бобтейл";
+"Javanese" = "Яванская Кошка";
+"Khao Manee" = "Кхао-мани";
+"Korat" = "Корат";
+"Kurilian" = "Курильская Кошка";
+"LaPerm" = "Лаперм";
+"Maine Coon" = "Мейн-кун";
+"Malayan" = "Малайская Кошка";
+"Manx" = "Мэнкс";
+"Munchkin" = "Манчкин";
+"Nebelung" = "Небелунг";
+"Norwegian Forest Cat" = "Норвежская Лесная";
+"Ocicat" = "Оцикет";
+"Oriental" = "Ориентальная";
+"Persian" = "Персидская";
+"Pixie-bob" = "Пиксибоб";
+"Ragamuffin" = "Рагамаффин";
+"Ragdoll" = "Рэгдолл";
+"Russian Blue" = "Русская Голубая";
+"Savannah" = "Саванна";
+"Scottish Fold" = "Шотландская Вислоухая";
+"Selkirk Rex" = "Селкирк Рекс";
+"Siamese" = "Сиамская";
+"Siberian" = "Сибирская";
+"Singapura" = "Сингапурская";
+"Snowshoe" = "Сноу-Шу";
+"Somali" = "Сомали";
+"Sphynx" = "Сфинкс";
+"Tonkinese" = "Тонкийская";
+"Toyger" = "Тойгер";
+"Turkish Angora" = "Турцкая Ангора";
+"Turkish Van" = "Турецкий Ван";
+"York Chocolate" = "Шоколадный Йорк";

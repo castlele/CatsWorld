@@ -14,6 +14,7 @@ struct CatsMainInfoView: View {
 	@Binding var age: AgeType
 	
 	var isGender = false
+	var isAvatar = false
 	
 	var wrappedAge: String {
 		switch age {
@@ -43,32 +44,50 @@ struct CatsMainInfoView: View {
 	
     var body: some View {
 		HStack(spacing: 20) {
-			CatsAvatar(avatar: cat.wrappedImage)
-				.background(
-					Circle()
-						.stroke(Color.accentColor, lineWidth: 4)
-				)
-				.frame(minWidth: 40, maxWidth: 100, minHeight: 40, maxHeight: 100)
-				.overlay(genderSign)
+			if isAvatar {
+				CatsAvatar(avatar: cat.wrappedImage)
+					.background(
+						Circle()
+							.stroke(Color.accentColor, lineWidth: 4)
+					)
+					.frame(minWidth: 50, maxWidth: 100, minHeight: 50, maxHeight: 100)
+					.overlay(genderSign)
+			}
 			
 			VStack(alignment: .leading, spacing: 2.5) {
-				Text("\(cat.wrappedName)")
-					.font(.body)
+				Text(cat.wrappedName)
+					.font(.system(.body, design: .rounded))
 					.fontWeight(.bold)
+					.lineLimit(1)
+				
 				Text("\(wrappedAge)")
-					.font(.footnote)
-				Text("\(cat.wrappedBreed)")
-					.font(.subheadline)
+					.font(.system(size: 12, weight: .light, design: .rounded))
+				
+				Text(cat.wrappedBreed.localize())
+					.font(.system(size: 13, weight: .medium, design: .rounded))
+					
+					.allowsTightening(true)
 					.lineLimit(2)
-					.fixedSize(horizontal: false, vertical: true)
+					
+					
 			}
+			.frame(width: 95, alignment: .leading)
 			.foregroundColor(.textColor)
+			.minimumScaleFactor(0.1)
+			
+			Spacer()
 		}
     }
 }
 
 struct CatsMainInfoView_Previews: PreviewProvider {
+	static var cat: CatsCard = {
+		let cat = CatsCard(context: PersistenceController.preview.conteiner.viewContext)
+		cat.name = "Long Long Name"
+		cat.breed = "Шоколадный Йорк"
+		return cat
+	}()
 	static var previews: some View {
-		CatsMainInfoView(cat: CatsCard(context: PersistenceController.preview.conteiner.viewContext), age: .constant(.age))
+		CatsMainInfoView(cat: cat, age: .constant(.age))
 	}
 }

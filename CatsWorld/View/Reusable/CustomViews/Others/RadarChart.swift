@@ -69,6 +69,11 @@ struct RadarChartView: View {
 			GeometryReader { geometry in
 				ForEach(1..<count + 1) { category in
 					Text(dataNames[category - 1])
+						.font(.system(size: 10, weight: .medium, design: .rounded))
+						.lineLimit(1)
+						.frame(maxWidth: 95)
+						.allowsTightening(true)
+						.minimumScaleFactor(0.75)
 						.offset(
 							x: determineOffset(xAxis: true, geometryProxy: geometry, category: category),
 							y: determineOffset(xAxis: false, geometryProxy: geometry, category: category)
@@ -98,7 +103,7 @@ struct RadarChartView: View {
 		let radius = determineRadius(in: rect)
 		
 		if xAxis {
-			return (rect.midX + cos(CGFloat(category) * 2 * .pi / CGFloat(count) - .pi / 2) * radius) - 60
+			return (rect.midX + cos(CGFloat(category) * 2 * .pi / CGFloat(count) - .pi / 2) * radius) - 45
 		}
 		
 		switch category {

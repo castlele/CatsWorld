@@ -21,7 +21,7 @@ struct CatsWorldApp: App {
 		
 		UITextView.appearance().backgroundColor = .clear
 		
-		UITabBar.appearance().barTintColor = UIColor(Color.mainColor)
+		UITabBar.appearance().barTintColor = Color.mainUIColor()
 		UITabBar.appearance().isTranslucent = false
 		
 		UISegmentedControl.appearance().selectedSegmentTintColor = Color.accentUIColor()
@@ -32,6 +32,8 @@ struct CatsWorldApp: App {
 		UISegmentedControl.appearance().setTitleTextAttributes(
 			[.foregroundColor: Color.lightUIColor()],
 			for: .disabled)
+		
+		UIView.appearance(whenContainedInInstancesOf: [UIAlertController.self]).tintColor = Color.accentUIColor()
 
 		BreedsViewModel.shared.loadBreeds()
 	}

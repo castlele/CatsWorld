@@ -71,7 +71,7 @@ struct HomeScreenView: View {
 										.foregroundColor(.accentColor)
 									}
 								)
-								.padding([.leading, .bottom, .trailing])
+								.padding([.leading, .top, .trailing])
 							
 							Spacer(minLength: 10)
 						}

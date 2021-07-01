@@ -65,22 +65,22 @@ struct EditingCatsPageView: View {
 						.accentColor(.mainColor)
 					
 					DatePicker(
-						"Date of birth",
+						"Date of birth".localize(),
 						selection: $catsViewModel.dateOfBirth, in: ...Date(),
 						displayedComponents: .date
 					)
 					.datePickerStyle(DefaultDatePickerStyle())
 					
-					Picker("What is the wrappedCat's gender", selection: $catsViewModel.gender) {
+					Picker("What is the cats's gender", selection: $catsViewModel.gender) {
 						ForEach(0..<2) { index in
-							Text("\(Gender.allCases[index].rawValue.capitalized)").tag(Gender.allCases[index])
+							Text("\(Gender.allCases[index].rawValue.localize().capitalized)").tag(Gender.allCases[index])
 						}
 					}
 					.pickerStyle(SegmentedPickerStyle())
 					
-					Picker("Breed of the wrappedCat", selection: $catsViewModel.breed) {
+					Picker("Breed of the cat", selection: $catsViewModel.breed) {
 						ForEach(BreedsViewModel.shared.breeds, id: \.name) { breed in
-							Text("\(breed.name)")
+							Text(breed.name.localize())
 						}
 					}
 					.pickerStyle(InlinePickerStyle())
@@ -116,7 +116,7 @@ struct EditingCatsPageView: View {
 				CatsDescriptionSection() {
 					Picker("Temperament", selection: $catsViewModel.temperament) {
 						ForEach(Temperament.allCases, id: \.self) { temperament in
-							Text("\(temperament.rawValue.capitalized)")
+							Text("\(temperament.rawValue.localize().capitalized)")
 								.foregroundColor(.textColor)
 								.fontWeight(.ultraLight)
 						}
@@ -124,19 +124,19 @@ struct EditingCatsPageView: View {
 					.pickerStyle(SegmentedPickerStyle())
 
 					RatingView(rating: $catsViewModel.strangerFriendly,
-							   label: "Stranger friendly",
+							   label: "Stranger friendly".localize(),
 							   offImage: Image(systemName: "star"),
 							   onImage: Image(systemName: "star.fill")
 					)
 
 					RatingView(rating: $catsViewModel.childFriendly,
-							   label: "Child friendly",
+							   label: "Child friendly".localize(),
 							   offImage: Image(systemName: "star"),
 							   onImage: Image(systemName: "star.fill")
 					)
 
 					RatingView(rating: $catsViewModel.dogFriendly,
-							   label: "Dog friendly",
+							   label: "Dog friendly".localize(),
 							   offImage: Image(systemName: "star"),
 							   onImage: Image(systemName: "star.fill")
 					)
@@ -147,7 +147,9 @@ struct EditingCatsPageView: View {
 				CatsDescriptionSection() {
 					VStack {
 						if catsViewModel.additionalInfo.isEmpty {
-							Text("Write whatever you want about your cat").foregroundColor(.textColor)
+							Text("Additional info")
+								.foregroundColor(.textColor)
+								.lineLimit(3)
 						}
 						
 						TextEditor(text: $catsViewModel.additionalInfo)
@@ -165,9 +167,10 @@ struct EditingCatsPageView: View {
 			// TODO:- Redo Alert with Error handling
 			Alert(
 				title: Text("Discarding changes"),
-				message: Text("Are you sure you want to discard this new card"),
+				message: Text("Sure wanna discard"),
 				primaryButton: .default(Text("Discard"), action: { catsViewModel.dismiss(presentation: presentation) }),
-				secondaryButton: .cancel())
+				secondaryButton: .cancel()
+			)
 		}
 		.sheet(isPresented: $catsViewModel.isImagePicker) {
 			ImagePicker(image: $catsViewModel.catsImage)

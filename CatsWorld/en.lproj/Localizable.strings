@@ -1,0 +1,10 @@
+/* 
+  Localizable.strings
+  CatsWorld
+
+  Created by Nikita Semenov on 30.06.2021.
+  
+*/
+
+"Additional info" = "Write whatever you want about your cat";
+"Sure wanna discard" = "Are you sure you want to discard this new card";

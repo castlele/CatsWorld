@@ -43,11 +43,10 @@ struct RatingView: View {
 	
     var body: some View {
 		HStack {
-			if !label.isEmpty {
-				Text(label)
-			}
-			
+			Text(label)
+
 			Spacer()
+			
 			if isEditing {
 				ForEach(1..<maxRating + 1) { rating in
 					if self.rating.wrappedValue >= rating {

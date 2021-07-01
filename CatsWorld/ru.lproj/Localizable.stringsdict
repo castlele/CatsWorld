@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Day count</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@day_count@</string>
+		<key>day_count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>u</string>
+			<key>one</key>
+			<string>%u День</string>
+			<key>two</key>
+			<string>%u Дня</string>
+			<key>few</key>
+			<string>%u Дня</string>
+			<key>many</key>
+			<string>%u Дней</string>
+			<key>other</key>
+			<string>%u День</string>
+		</dict>
+	</dict>
+	<key>Week count</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@week_count@</string>
+		<key>week_count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>i</string>
+			<key>one</key>
+			<string>%i Неделя</string>
+			<key>two</key>
+			<string>%i Недели</string>
+			<key>few</key>
+			<string>%i Недели</string>
+			<key>many</key>
+			<string>%i Недель</string>
+			<key>other</key>
+			<string>%i Неделя</string>
+		</dict>
+	</dict>
+	<key>Month count</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@month_count@</string>
+		<key>month_count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>i</string>
+			<key>one</key>
+			<string>%i Месяц</string>
+			<key>two</key>
+			<string>%i Месяца</string>
+			<key>few</key>
+			<string>%i Месяца</string>
+			<key>many</key>
+			<string>%i Месяцев</string>
+			<key>other</key>
+			<string>%i Месяц</string>
+		</dict>
+	</dict>
+	<key>Year count</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@year_count@</string>
+		<key>year_count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>i</string>
+			<key>one</key>
+			<string>%i Год</string>
+			<key>two</key>
+			<string>%i Года</string>
+			<key>few</key>
+			<string>%i Года</string>
+			<key>many</key>
+			<string>%i Лет</string>
+			<key>other</key>
+			<string>%i Год</string>
+		</dict>
+	</dict>
+</dict>
+</plist>

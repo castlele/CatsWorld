@@ -94,26 +94,26 @@ extension CatsDescriptionViewModel {
 			case .physical:
 				return
 					[
-						Setting("Suppressed tail", .bool(cat.suppressedTail)),
-						Setting("Short legs", .bool(cat.shortLegs)),
-						Setting("Hairless", .bool(cat.hairless)),
-						Setting("Weight", .float(cat.weight)),
-						Setting("Castrated", .bool(cat.isCastrated))
+						Setting("Suppressed tail".localize(), .bool(cat.suppressedTail)),
+						Setting("Short legs".localize(), .bool(cat.shortLegs)),
+						Setting("Hairless".localize(), .bool(cat.hairless)),
+						Setting("Weight".localize(), .float(cat.weight)),
+						Setting("Castrated".localize(), .bool(cat.isCastrated))
 					]
 				
 			case .psycological:
 				return
 					[
-						Setting("Stranger friendly", .int(cat.strangerFriendly)),
-						Setting("Child friendly", .int(cat.childFriendly)),
-						Setting("Dog friendly", .int(cat.dogFriendly)),
-						Setting("Temperament", .temperament(cat.wrappedTemperament)),
+						Setting("Stranger friendly".localize(), .int(cat.strangerFriendly)),
+						Setting("Child friendly".localize(), .int(cat.childFriendly)),
+						Setting("Dog friendly".localize(), .int(cat.dogFriendly)),
+						Setting("Temperament".localize(), .temperament(cat.wrappedTemperament)),
 					]
 				
 			case .shows:
 				return
 					[
-						Setting("Cat shows", .showsArray(cat.wrappedCatShows)),
+						Setting("Cat shows".localize(), .showsArray(cat.wrappedCatShows)),
 					]
 				
 		}

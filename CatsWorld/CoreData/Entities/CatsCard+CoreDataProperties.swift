@@ -56,11 +56,11 @@ extension CatsCard : Identifiable {
 	}
 	
 	var wrappedName: String {
-		name ?? "None"
+		name ?? "None".localize()
 	}
 	
 	var wrappedBreed: String {
-		breed ?? "None"
+		breed ?? "None".localize()
 	}
 	
 	var wrappedImage: UIImage {
@@ -84,7 +84,7 @@ extension CatsCard : Identifiable {
 	
 	var wrappedDateOfBirth: String {
 		guard let dateOfBirth = dateOfBirth else {
-			return "None"
+			return "None".localize()
 		}
 		let format = "d MMM YYYY"
 		
@@ -173,16 +173,16 @@ extension CatsCard {
 	/// - Returns: Age as `String`
 	private func getAge(dateComponents dc: DateComponents) -> String {
 		if let year = dc.year, dc.year != 0 {
-			return makeStringAge(year, measurement: "year")
+			return makeStringAge(year, measurement: "Year")
 			
 		} else if let month = dc.month, dc.month != 0 {
-			return makeStringAge(month, measurement: "month")
+			return makeStringAge(month, measurement: "Month")
 			
 		} else if let week = dc.weekday, dc.weekday != 0 {
-			return makeStringAge(week, measurement: "week")
+			return makeStringAge(week, measurement: "Week")
 			
 		} else if let day = dc.day, dc.day != 0 {
-			return makeStringAge(day, measurement: "day")
+			return makeStringAge(day, measurement: "Day")
 			
 		} else {
 			return "None"
@@ -194,9 +194,8 @@ extension CatsCard {
 	/// - Parameter measurement: In what age measures
 	/// - Returns: Age as`String`
 	private func makeStringAge(_ age: Int, measurement: String) -> String {
-		if age == 1 {
-			return "\(age) \(measurement)"
-		}
-		return "\(age) \(measurement)s"
+		let key = measurement + " count"
+		
+		return key.localize(arguments: age)
 	}
 }

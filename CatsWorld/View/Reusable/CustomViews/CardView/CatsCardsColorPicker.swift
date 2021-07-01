@@ -11,6 +11,7 @@ struct CatsCardsColorPicker: View {
 	
 	private let viewWidth = UIScreen.screenWidth / 1.2
 	private let viewHeight = UIScreen.screenHeight / 1.5
+	private let minViewHeight = UIScreen.screenHeight / 1.75
 	
 	@ObservedObject var cat: CatsCard
 	@State var pickedColor: Color
@@ -21,21 +22,19 @@ struct CatsCardsColorPicker: View {
 			Color.mainColor
 			
 			VStack {
-				GeometryReader { geometry in
-					HStack {
-						CatsMainInfoView(cat: cat, age: .constant(.age))
-						
-						GenderSign(genderSign: cat.genderSign, foregroundColor: .textColor)
-							.scaleEffect(1.25)
-					}
-					.frame(width: geometry.frame(in: .local).width)
-					.padding()
-					.background(pickedColor)
-					.cornerRadius(20)
-					.compositingGroup()
-					.shadow(color: .shadowColor, radius: 8, x: 10, y: 10)
-					.animation(.linear(duration: 0.5))
+				HStack {
+					CatsMainInfoView(cat: cat, age: .constant(.age), isAvatar: true)
+					
+					GenderSign(genderSign: cat.genderSign, foregroundColor: .textColor)
+						.scaleEffect(1.25)
 				}
+				.frame(minWidth: viewWidth, maxWidth: viewWidth + 20)
+				.padding()
+				.background(pickedColor)
+				.cornerRadius(20)
+				.compositingGroup()
+				.shadow(color: .shadowColor, radius: 8, x: 10, y: 10)
+				.animation(.linear(duration: 0.5))
 				
 				Spacer()
 				
@@ -53,6 +52,8 @@ struct CatsCardsColorPicker: View {
 				.volumetricShadows()
 				.padding()
 				.animation(.linear(duration: 0.5))
+				
+				Spacer()
 				
 				DoneButton(action: {
 					cat.setColor(pickedColor)
@@ -77,7 +78,7 @@ struct CatsCardsColorPicker: View {
 				.volumetricShadows(isPressed: false)
 			}
 		}
-		.frame(minWidth: viewWidth, maxWidth: viewWidth + 20, maxHeight: viewHeight)
+		.frame(minWidth: viewWidth, maxWidth: viewWidth + 20, minHeight: minViewHeight, maxHeight: viewHeight)
 		.cornerRadius(25)
 		.offset(x: isColorPicker ? 0 : 100, y: isColorPicker ? 0 : 0)
     }

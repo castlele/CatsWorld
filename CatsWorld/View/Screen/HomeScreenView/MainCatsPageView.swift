@@ -57,7 +57,8 @@ struct MainCatsPageView: View {
 				.padding([.top, .trailing])
 				
 			}, content: {
-				CatsMainInfoView(cat: catsDescriptionViewModel.cat, age: $catsDescriptionViewModel.ageType, isGender: true)
+				CatsMainInfoView(cat: catsDescriptionViewModel.cat, age: $catsDescriptionViewModel.ageType, isGender: true, isAvatar: true)
+					.frame(maxWidth: 240, alignment: .center)
 					.padding(.bottom)
 					.onTapGesture {
 						switch catsDescriptionViewModel.ageType {

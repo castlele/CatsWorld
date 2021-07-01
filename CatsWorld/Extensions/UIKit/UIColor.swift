@@ -16,7 +16,7 @@ extension UIColor {
 		do {
 			if let data = data {
 				let uiColor = try NSKeyedUnarchiver.unarchivedObject(ofClass: UIColor.self, from: data)
-				return uiColor ?? .white
+				return uiColor ?? UIColor(Color.mainColor)
 			}
 			return UIColor(Color.mainColor)
 		} catch {

@@ -21,23 +21,28 @@ struct CatsCardView: View {
 	}
 	
     var body: some View {
-		VStack {
-			HStack {
-				CatsMainInfoView(cat: cat, age: .constant(.age))
+		HStack {
+			CatsAvatar(avatar: cat.wrappedImage)
+				.background(
+					Circle()
+						.stroke(Color.accentColor, lineWidth: 4)
+				)
+				.frame(minWidth: 50, minHeight: 50, maxHeight: 100)
+				.padding(.trailing, 10)
+			
+			CatsMainInfoView(cat: cat, age: .constant(.age))
+			
+			GenderSign(genderSign: cat.genderSign, foregroundColor: .textColor)
+				.frame(maxWidth: 40)
 				
-				GenderSign(genderSign: cat.genderSign, foregroundColor: .textColor)
-					
-				Spacer(minLength: 50)
-			}
-			.simultaneousGesture(
-				TapGesture()
-					.onEnded { _ in
-						
-							catsCardsViewModel.isCatsPageView.toggle()
-						
-					}
-			)
+			Spacer(minLength: 50)
 		}
+		.simultaneousGesture(
+			TapGesture()
+				.onEnded { _ in
+					catsCardsViewModel.isCatsPageView.toggle()
+				}
+		)
 		.fullScreenCover(isPresented: $catsCardsViewModel.isCatsPageView) {
 			CatsPageView(cat: cat)
 		}
@@ -53,7 +58,28 @@ struct CatsCardView: View {
 }
 
 struct CatsCardView_Previews: PreviewProvider {
+	static var cat: CatsCard = {
+		let cat = CatsCard(context: PersistenceController.preview.conteiner.viewContext)
+		cat.name = "Long Long Name"
+		cat.breed = "Шоколадный Йорк"
+		return cat
+	}()
+	
     static var previews: some View {
-		CatsCardView(cat: CatsCard(context: PersistenceController.preview.conteiner.viewContext), isColorPicker: .constant(false))
+		CatsCardView(cat: cat, isColorPicker: .constant(false))
+			.overlay(
+				HStack {
+					Spacer()
+					
+					HStack(spacing: 5) {
+						ForEach(0..<3) { circle in
+							Circle()
+								.frame(width: 10, height: 10)
+						}
+					}
+					.padding(.trailing)
+				}
+			)
+			.padding([.leading, .trailing])
     }
 }
