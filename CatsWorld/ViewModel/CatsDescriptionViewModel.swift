@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct Setting: Identifiable {
+struct Description: Identifiable {
 	var name: String
 	var value: CatsDescriptionValue
 	
@@ -29,16 +29,12 @@ final class CatsDescriptionViewModel: ObservableObject {
 	
 	var catsCardColor: UIColor { cat.wrappedColor }
 	
-	var currentSettings: [Setting] {
-		determineSettings(for: self.category)
-	}
-	
 	/// Represents friendliness of the cat
 	/// `categoryName` represents, to whome the cat friendly to
 	/// `value` represents how much friendly the cat is
 	/// O(n) where n is amount of settings in category
 	var friendlyCharacteristics: [(categoryName: String, value: Int)] {
-		let settings = determineSettings(for: .psycological)
+		let settings = determineDescriptions(for: .psycological)
 		var characteristics: [(String, Int)] = []
 		
 		for setting in settings {
@@ -57,12 +53,54 @@ final class CatsDescriptionViewModel: ObservableObject {
 	}
 }
 
+// MARK: - Describing protocol comformance
+extension CatsDescriptionViewModel: Describable {
+	
+	func getDescriptionsFor(category: CatsDescriptionCategory) -> [Description] {
+		determineDescriptions(for: category)
+	}
+	
+	/// Determines Settings with values for certain cat and certain category
+	/// - Parameter category: Category of "settigns" for cat
+	/// - Returns: Array of `Setting`s with name and value
+	private func determineDescriptions(for category: CatsDescriptionCategory) -> [Description] {
+		switch category {
+			case .physical:
+				return
+					[
+						Description("Suppressed tail".localize(), .bool(cat.suppressedTail)),
+						Description("Short legs".localize(), .bool(cat.shortLegs)),
+						Description("Hairless".localize(), .bool(cat.hairless)),
+						Description("Weight".localize(), .float(cat.weight)),
+						Description("Castrated".localize(), .bool(cat.isCastrated))
+					]
+				
+			case .psycological:
+				return
+					[
+						Description("Stranger friendly".localize(), .int(cat.strangerFriendly)),
+						Description("Child friendly".localize(), .int(cat.childFriendly)),
+						Description("Dog friendly".localize(), .int(cat.dogFriendly)),
+						Description("Temperament".localize(), .temperament(cat.wrappedTemperament)),
+					]
+				
+			case .shows:
+				return
+					[
+						Description("Cat shows".localize(), .showsArray(cat.wrappedCatShows)),
+					]
+				
+			default:
+				return
+					[
+						
+					]
+		}
+	}
+}
+
 // MARK: - Public methods
 extension CatsDescriptionViewModel {
-	
-	func settingsFor(category: CatsDescriptionCategory) -> [Setting] {
-		determineSettings(for: category)
-	}
 	
 	/// Reorder names of data for usage in charts
 	/// - Parameter names: Names of values
@@ -80,42 +118,5 @@ extension CatsDescriptionViewModel {
 		}
 		
 		return result
-	}
-}
-	
-// MARK:- Private methods
-extension CatsDescriptionViewModel {
-	
-	/// Determines Settings with values for certain cat and certain category
-	/// - Parameter category: Category of "settigns" for cat
-	/// - Returns: Array of `Setting`s with name and value
-	private func determineSettings(for category: CatsDescriptionCategory) -> [Setting] {
-		switch category {
-			case .physical:
-				return
-					[
-						Setting("Suppressed tail".localize(), .bool(cat.suppressedTail)),
-						Setting("Short legs".localize(), .bool(cat.shortLegs)),
-						Setting("Hairless".localize(), .bool(cat.hairless)),
-						Setting("Weight".localize(), .float(cat.weight)),
-						Setting("Castrated".localize(), .bool(cat.isCastrated))
-					]
-				
-			case .psycological:
-				return
-					[
-						Setting("Stranger friendly".localize(), .int(cat.strangerFriendly)),
-						Setting("Child friendly".localize(), .int(cat.childFriendly)),
-						Setting("Dog friendly".localize(), .int(cat.dogFriendly)),
-						Setting("Temperament".localize(), .temperament(cat.wrappedTemperament)),
-					]
-				
-			case .shows:
-				return
-					[
-						Setting("Cat shows".localize(), .showsArray(cat.wrappedCatShows)),
-					]
-				
-		}
 	}
 }

@@ -102,15 +102,15 @@ struct MainCatsPageView: View {
 					
 					Group {
 						CatsDescriptionSection() {
-							CatsDescriptionSettingsView(settings: catsDescriptionViewModel.settingsFor(category: .physical))
+							CatsDescriptionView(descriptions: catsDescriptionViewModel.getDescriptionsFor(category: .physical))
 						}
 						
 						CatsDescriptionSection() {
-							CatsDescriptionSettingsView(settings: catsDescriptionViewModel.settingsFor(category: .psycological))
+							CatsDescriptionView(descriptions: catsDescriptionViewModel.getDescriptionsFor(category: .psycological))
 						}
 						
 						CatsDescriptionSection() {
-							CatsDescriptionSettingsView(settings: catsDescriptionViewModel.settingsFor(category: .shows))
+							CatsDescriptionView(descriptions: catsDescriptionViewModel.getDescriptionsFor(category: .shows))
 						}
 					}
 					.volumetricShadows()

@@ -53,13 +53,13 @@ struct CatsWorldApp: App {
 						.navigationBarHidden(true)
 					
 					HomeScreenView()
+						.navigationBarHidden(true)
 						.environment(\.managedObjectContext, persistenceController.conteiner.viewContext)
 						.tabItem {
 							Image(systemName: "house")
 							Text("Home")
 						}
 						.tag(1)
-						.navigationBarHidden(true)
 					
 					BreedsList()
 						.environmentObject(BreedsViewModel.shared)
@@ -82,6 +82,7 @@ struct CatsWorldApp: App {
 				.accentColor(.accentColor)
 				.preferredColorScheme(settingsViewModel.wrappedColorScheme)
 			}
+			.accentColor(.accentColor)
 		}
 		.onChange(of: scenePhase) { newScenePhase in
 			savePersistenceInBackgroundState(newScenePhase)

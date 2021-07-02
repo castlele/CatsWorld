@@ -10,24 +10,15 @@ import Foundation
 enum CatsDescriptionValue {
 	case bool(Bool)
 	case int(Int16)
+	case str(String)
 	case float(Float)
 	case temperament(Temperament)
 	case showsArray([Show])
 }
 
-enum CatsDescriptionCategory: String, CaseIterable, Hashable {
+enum CatsDescriptionCategory: String, CaseIterable {
 	case physical
 	case psycological
 	case shows
-	
-	func hash(into hasher: inout Hasher) {
-		switch self {
-			case .physical:
-				hasher.combine("physical")
-			case .psycological:
-				hasher.combine("psycological")
-			case .shows:
-				hasher.combine("shows")
-		}
-	}
+	case other
 }

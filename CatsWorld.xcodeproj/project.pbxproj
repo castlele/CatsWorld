@@ -13,6 +13,7 @@
 		7B096CAD2657C51700B99D3E /* DoneButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B096CAC2657C51700B99D3E /* DoneButton.swift */; };
 		7B0E47DA268B0EEF00136ABF /* CatsCardsColorPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B0E47D9268B0EEF00136ABF /* CatsCardsColorPicker.swift */; };
 		7B0E47DC268B186600136ABF /* GenderSign.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B0E47DB268B186600136ABF /* GenderSign.swift */; };
+		7B110435268E2D7000955325 /* BreedsDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B110434268E2D7000955325 /* BreedsDetailView.swift */; };
 		7B189F1E2684DA540033EAC4 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B189F1D2684DA540033EAC4 /* Color.swift */; };
 		7B1AA591264A9AFE002A3774 /* NetworkEndPoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1AA590264A9AFE002A3774 /* NetworkEndPoints.swift */; };
 		7B1AA593264AA018002A3774 /* EndPointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1AA592264AA018002A3774 /* EndPointTests.swift */; };
@@ -21,6 +22,7 @@
 		7B1CC15D268DB10F00503A41 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1CC15C268DB10F00503A41 /* SettingsViewModel.swift */; };
 		7B1CC15F268DB26800503A41 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1CC15E268DB26800503A41 /* SettingsView.swift */; };
 		7B1CC161268DCC3800503A41 /* Shadows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1CC160268DCC3800503A41 /* Shadows.swift */; };
+		7B2F5425268EFF1600D587FD /* Describable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2F5424268EFF1600D587FD /* Describable.swift */; };
 		7B33477D267E5C7500ED6F5F /* PawView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B33477C267E5C7500ED6F5F /* PawView.swift */; };
 		7B33A11D267B50BD00C780C0 /* LinearGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B33A11C267B50BD00C780C0 /* LinearGradient.swift */; };
 		7B33A11F267B586600C780C0 /* RadarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B33A11E267B586600C780C0 /* RadarChart.swift */; };
@@ -64,7 +66,7 @@
 		7B968A092653AE48002ECE07 /* Temperament.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B968A082653AE48002ECE07 /* Temperament.swift */; };
 		7B968A0B2653B149002ECE07 /* TemperamentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B968A0A2653B149002ECE07 /* TemperamentTests.swift */; };
 		7BB614662686407D001924F7 /* XButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB614652686407D001924F7 /* XButton.swift */; };
-		7BDB149E267281E8005D98DB /* CatsDescriptionSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BDB149D267281E8005D98DB /* CatsDescriptionSettingsView.swift */; };
+		7BDB149E267281E8005D98DB /* CatsDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BDB149D267281E8005D98DB /* CatsDescriptionView.swift */; };
 		7BE159C2267CA73400A0E846 /* UIScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE159C1267CA73400A0E846 /* UIScreen.swift */; };
 		7BE498932653B9EB004F7F52 /* EditingCatsPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE498922653B9EB004F7F52 /* EditingCatsPageView.swift */; };
 		7BE498952653BC92004F7F52 /* Gender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE498942653BC92004F7F52 /* Gender.swift */; };
@@ -91,6 +93,7 @@
 		7B096CAC2657C51700B99D3E /* DoneButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoneButton.swift; sourceTree = "<group>"; };
 		7B0E47D9268B0EEF00136ABF /* CatsCardsColorPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatsCardsColorPicker.swift; sourceTree = "<group>"; };
 		7B0E47DB268B186600136ABF /* GenderSign.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderSign.swift; sourceTree = "<group>"; };
+		7B110434268E2D7000955325 /* BreedsDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreedsDetailView.swift; sourceTree = "<group>"; };
 		7B189F1D2684DA540033EAC4 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		7B1AA590264A9AFE002A3774 /* NetworkEndPoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkEndPoints.swift; sourceTree = "<group>"; };
 		7B1AA592264AA018002A3774 /* EndPointTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPointTests.swift; sourceTree = "<group>"; };
@@ -99,6 +102,7 @@
 		7B1CC15C268DB10F00503A41 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		7B1CC15E268DB26800503A41 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		7B1CC160268DCC3800503A41 /* Shadows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shadows.swift; sourceTree = "<group>"; };
+		7B2F5424268EFF1600D587FD /* Describable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Describable.swift; sourceTree = "<group>"; };
 		7B33477C267E5C7500ED6F5F /* PawView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PawView.swift; sourceTree = "<group>"; };
 		7B33A11C267B50BD00C780C0 /* LinearGradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinearGradient.swift; sourceTree = "<group>"; };
 		7B33A11E267B586600C780C0 /* RadarChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadarChart.swift; sourceTree = "<group>"; };
@@ -148,7 +152,7 @@
 		7B968A082653AE48002ECE07 /* Temperament.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Temperament.swift; sourceTree = "<group>"; };
 		7B968A0A2653B149002ECE07 /* TemperamentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemperamentTests.swift; sourceTree = "<group>"; };
 		7BB614652686407D001924F7 /* XButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XButton.swift; sourceTree = "<group>"; };
-		7BDB149D267281E8005D98DB /* CatsDescriptionSettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CatsDescriptionSettingsView.swift; sourceTree = "<group>"; };
+		7BDB149D267281E8005D98DB /* CatsDescriptionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CatsDescriptionView.swift; sourceTree = "<group>"; };
 		7BE159C1267CA73400A0E846 /* UIScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIScreen.swift; sourceTree = "<group>"; };
 		7BE498922653B9EB004F7F52 /* EditingCatsPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingCatsPageView.swift; sourceTree = "<group>"; };
 		7BE498942653BC92004F7F52 /* Gender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gender.swift; sourceTree = "<group>"; };
@@ -194,6 +198,14 @@
 			path = SettingsView;
 			sourceTree = "<group>";
 		};
+		7B2F5423268EFEAF00D587FD /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				7B2F5424268EFF1600D587FD /* Describable.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
 		7B5CD7492683BA4D00CFC994 /* MapView */ = {
 			isa = PBXGroup;
 			children = (
@@ -217,6 +229,7 @@
 			isa = PBXGroup;
 			children = (
 				7B8B99E826427DDC00E98B8E /* BreedsList.swift */,
+				7B110434268E2D7000955325 /* BreedsDetailView.swift */,
 			);
 			path = BreedsList;
 			sourceTree = "<group>";
@@ -238,10 +251,10 @@
 			children = (
 				7B66A10526556AE100FDC9A7 /* RatingView.swift */,
 				7B5C83172670FF0A00B2F6E8 /* View3D.swift */,
-				7BDB149D267281E8005D98DB /* CatsDescriptionSettingsView.swift */,
 				7B33A11E267B586600C780C0 /* RadarChart.swift */,
 				7B33477C267E5C7500ED6F5F /* PawView.swift */,
 				7B5CD74526838FB600CFC994 /* EarsView.swift */,
+				7BDB149D267281E8005D98DB /* CatsDescriptionView.swift */,
 				7B5CD74726839F8F00CFC994 /* CatsDescriptionSection.swift */,
 				7B02F420268456BC00D18F9A /* TopBarView.swift */,
 			);
@@ -319,6 +332,7 @@
 				7B650BEF268C6AA000691E3B /* Localizable.strings */,
 				7B650BE7268C629F00691E3B /* Localizable.stringsdict */,
 				7B8B99EF26427DE300E98B8E /* Info.plist */,
+				7B2F5423268EFEAF00D587FD /* Protocols */,
 				7B861437264D1858008616DB /* CoreData */,
 				7B8B9A1226427E6800E98B8E /* Model */,
 				7B8B9A1126427E5500E98B8E /* View */,
@@ -573,6 +587,7 @@
 				7B1CC161268DCC3800503A41 /* Shadows.swift in Sources */,
 				7B6B18F7268B621900BACCE4 /* ColorPick.swift in Sources */,
 				7BF2D4AB26721F4900985E88 /* CatsDescriptionViewModel.swift in Sources */,
+				7B110435268E2D7000955325 /* BreedsDetailView.swift in Sources */,
 				7B02F421268456BC00D18F9A /* TopBarView.swift in Sources */,
 				7B6E3D47265282CE00B04B62 /* CatsPageView.swift in Sources */,
 				7B5CD7502683C10900CFC994 /* HomeScreenViewModel.swift in Sources */,
@@ -582,7 +597,7 @@
 				7B8B9A212642819600E98B8E /* Breed.swift in Sources */,
 				7B6E3D4D2652D6DC00B04B62 /* CatsAvatar.swift in Sources */,
 				7B6E3D4B2652D59E00B04B62 /* EditButton.swift in Sources */,
-				7BDB149E267281E8005D98DB /* CatsDescriptionSettingsView.swift in Sources */,
+				7BDB149E267281E8005D98DB /* CatsDescriptionView.swift in Sources */,
 				7B5C83132670E99400B2F6E8 /* CircleButtonStyle.swift in Sources */,
 				7B5C831C26710CE200B2F6E8 /* Date.swift in Sources */,
 				7B5CD74626838FB600CFC994 /* EarsView.swift in Sources */,
@@ -599,6 +614,7 @@
 				7BE498932653B9EB004F7F52 /* EditingCatsPageView.swift in Sources */,
 				7B8B99E726427DDC00E98B8E /* CatsWorldApp.swift in Sources */,
 				7B8B9A1D2642816D00E98B8E /* JSONParser.swift in Sources */,
+				7B2F5425268EFF1600D587FD /* Describable.swift in Sources */,
 				7B8B9A1F2642818000E98B8E /* NetworkRequester.swift in Sources */,
 				7B1AA599264AA798002A3774 /* Array.swift in Sources */,
 				7B1AA591264A9AFE002A3774 /* NetworkEndPoints.swift in Sources */,
