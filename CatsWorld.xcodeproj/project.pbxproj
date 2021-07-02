@@ -23,6 +23,7 @@
 		7B1CC15F268DB26800503A41 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1CC15E268DB26800503A41 /* SettingsView.swift */; };
 		7B1CC161268DCC3800503A41 /* Shadows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1CC160268DCC3800503A41 /* Shadows.swift */; };
 		7B2F5425268EFF1600D587FD /* Describable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2F5424268EFF1600D587FD /* Describable.swift */; };
+		7B2F5428268F1CCE00D587FD /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2F5427268F1CCE00D587FD /* TabBarView.swift */; };
 		7B33477D267E5C7500ED6F5F /* PawView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B33477C267E5C7500ED6F5F /* PawView.swift */; };
 		7B33A11D267B50BD00C780C0 /* LinearGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B33A11C267B50BD00C780C0 /* LinearGradient.swift */; };
 		7B33A11F267B586600C780C0 /* RadarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B33A11E267B586600C780C0 /* RadarChart.swift */; };
@@ -103,6 +104,7 @@
 		7B1CC15E268DB26800503A41 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		7B1CC160268DCC3800503A41 /* Shadows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shadows.swift; sourceTree = "<group>"; };
 		7B2F5424268EFF1600D587FD /* Describable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Describable.swift; sourceTree = "<group>"; };
+		7B2F5427268F1CCE00D587FD /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
 		7B33477C267E5C7500ED6F5F /* PawView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PawView.swift; sourceTree = "<group>"; };
 		7B33A11C267B50BD00C780C0 /* LinearGradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinearGradient.swift; sourceTree = "<group>"; };
 		7B33A11E267B586600C780C0 /* RadarChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadarChart.swift; sourceTree = "<group>"; };
@@ -204,6 +206,14 @@
 				7B2F5424268EFF1600D587FD /* Describable.swift */,
 			);
 			path = Protocols;
+			sourceTree = "<group>";
+		};
+		7B2F5426268F1CC200D587FD /* TabBarView */ = {
+			isa = PBXGroup;
+			children = (
+				7B2F5427268F1CCE00D587FD /* TabBarView.swift */,
+			);
+			path = TabBarView;
 			sourceTree = "<group>";
 		};
 		7B5CD7492683BA4D00CFC994 /* MapView */ = {
@@ -461,6 +471,7 @@
 		7BE498912653B9A5004F7F52 /* Screen */ = {
 			isa = PBXGroup;
 			children = (
+				7B2F5426268F1CC200D587FD /* TabBarView */,
 				7B5CD7492683BA4D00CFC994 /* MapView */,
 				7B5CD74A2683BA6400CFC994 /* HomeScreenView */,
 				7B5CD74B2683BA7500CFC994 /* BreedsList */,
@@ -623,6 +634,7 @@
 				7B56A10A2673AE2F00BEF8DD /* UIImage.swift in Sources */,
 				7B0E47DA268B0EEF00136ABF /* CatsCardsColorPicker.swift in Sources */,
 				7B874684264B19F8006DC6A7 /* MapView.swift in Sources */,
+				7B2F5428268F1CCE00D587FD /* TabBarView.swift in Sources */,
 				7B096CA92657B80A00B99D3E /* View.swift in Sources */,
 				7B6E3D42265272AF00B04B62 /* UIColor.swift in Sources */,
 				7B33477D267E5C7500ED6F5F /* PawView.swift in Sources */,

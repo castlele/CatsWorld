@@ -200,7 +200,7 @@ extension CatsCard {
 	}
 }
 
-// MARK: - Describable protocol comformance
+// MARK: - Describable protocol conformance
 extension CatsCard: Describable {
 	
 	func getDescriptionsFor(category: CatsDescriptionCategory) -> [Description] {

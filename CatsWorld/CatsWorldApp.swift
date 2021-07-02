@@ -43,44 +43,10 @@ struct CatsWorldApp: App {
     var body: some Scene {
         WindowGroup {
 			NavigationView {
-				TabView(selection: $selectedView) {
-					MapTabView()
-						.tabItem {
-							Image(systemName: "map")
-							Text("Map")
-						}
-						.tag(0)
-						.navigationBarHidden(true)
-					
-					HomeScreenView()
-						.navigationBarHidden(true)
-						.environment(\.managedObjectContext, persistenceController.conteiner.viewContext)
-						.tabItem {
-							Image(systemName: "house")
-							Text("Home")
-						}
-						.tag(1)
-					
-					BreedsList()
-						.environmentObject(BreedsViewModel.shared)
-						.tabItem {
-							Image(systemName: "list.bullet")
-							Text("Breeds")
-						}
-						.tag(2)
-						.navigationBarHidden(true)
-					
-					SettingsView()
-						.tabItem {
-							Image(systemName: "gearshape")
-							Text("Settings")
-						}
-						.tag(3)
-						.navigationBarHidden(true)
-				}
-				.environmentObject(settingsViewModel)
-				.accentColor(.accentColor)
-				.preferredColorScheme(settingsViewModel.wrappedColorScheme)
+				TabBarView()
+					.environment(\.managedObjectContext, persistenceController.conteiner.viewContext)
+					.environmentObject(settingsViewModel)
+					.preferredColorScheme(settingsViewModel.wrappedColorScheme)
 			}
 			.accentColor(.accentColor)
 		}
