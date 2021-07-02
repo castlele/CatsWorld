@@ -199,3 +199,49 @@ extension CatsCard {
 		return key.localize(arguments: age)
 	}
 }
+
+// MARK: - Describable protocol comformance
+extension CatsCard: Describable {
+	
+	func getDescriptionsFor(category: CatsDescriptionCategory) -> [Description] {
+		determineDescriptions(for: category)
+	}
+	
+	/// Determines Settings with values for certain cat and certain category
+	/// - Parameter category: Category of "settigns" for cat
+	/// - Returns: Array of `Setting`s with name and value
+	private func determineDescriptions(for category: CatsDescriptionCategory) -> [Description] {
+		switch category {
+			case .physical:
+				return
+					[
+						Description("Suppressed tail".localize(), .bool(self.suppressedTail)),
+						Description("Short legs".localize(), .bool(self.shortLegs)),
+						Description("Hairless".localize(), .bool(self.hairless)),
+						Description("Weight".localize(), .float(self.weight)),
+						Description("Castrated".localize(), .bool(self.isCastrated))
+					]
+				
+			case .psycological:
+				return
+					[
+						Description("Stranger friendly".localize(), .int(self.strangerFriendly)),
+						Description("Child friendly".localize(), .int(self.childFriendly)),
+						Description("Dog friendly".localize(), .int(self.dogFriendly)),
+						Description("Temperament".localize(), .temperament(self.wrappedTemperament)),
+					]
+				
+			case .shows:
+				return
+					[
+						Description("Cat shows".localize(), .showsArray(self.wrappedCatShows)),
+					]
+				
+			default:
+				return
+					[
+						
+					]
+		}
+	}
+}

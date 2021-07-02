@@ -34,7 +34,7 @@ final class CatsDescriptionViewModel: ObservableObject {
 	/// `value` represents how much friendly the cat is
 	/// O(n) where n is amount of settings in category
 	var friendlyCharacteristics: [(categoryName: String, value: Int)] {
-		let settings = determineDescriptions(for: .psycological)
+		let settings = cat.getDescriptionsFor(category: .psycological)
 		var characteristics: [(String, Int)] = []
 		
 		for setting in settings {
@@ -53,54 +53,12 @@ final class CatsDescriptionViewModel: ObservableObject {
 	}
 }
 
-// MARK: - Describing protocol comformance
-extension CatsDescriptionViewModel: Describable {
-	
-	func getDescriptionsFor(category: CatsDescriptionCategory) -> [Description] {
-		determineDescriptions(for: category)
-	}
-	
-	/// Determines Settings with values for certain cat and certain category
-	/// - Parameter category: Category of "settigns" for cat
-	/// - Returns: Array of `Setting`s with name and value
-	private func determineDescriptions(for category: CatsDescriptionCategory) -> [Description] {
-		switch category {
-			case .physical:
-				return
-					[
-						Description("Suppressed tail".localize(), .bool(cat.suppressedTail)),
-						Description("Short legs".localize(), .bool(cat.shortLegs)),
-						Description("Hairless".localize(), .bool(cat.hairless)),
-						Description("Weight".localize(), .float(cat.weight)),
-						Description("Castrated".localize(), .bool(cat.isCastrated))
-					]
-				
-			case .psycological:
-				return
-					[
-						Description("Stranger friendly".localize(), .int(cat.strangerFriendly)),
-						Description("Child friendly".localize(), .int(cat.childFriendly)),
-						Description("Dog friendly".localize(), .int(cat.dogFriendly)),
-						Description("Temperament".localize(), .temperament(cat.wrappedTemperament)),
-					]
-				
-			case .shows:
-				return
-					[
-						Description("Cat shows".localize(), .showsArray(cat.wrappedCatShows)),
-					]
-				
-			default:
-				return
-					[
-						
-					]
-		}
-	}
-}
-
 // MARK: - Public methods
 extension CatsDescriptionViewModel {
+	
+	func getDescriptionsFor(category: CatsDescriptionCategory) -> [Description] {
+		cat.getDescriptionsFor(category: category)
+	}
 	
 	/// Reorder names of data for usage in charts
 	/// - Parameter names: Names of values
