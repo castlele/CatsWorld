@@ -16,9 +16,10 @@ final class HomeScreenViewModel: CatManipulator {
 	var mainCatsPageView: MainCatsPageView!
 	var catsCardsColorPicker: CatsCardsColorPicker!
 		
-	@Published var isAddCatSheet = false
+	@Published var isEditingCatsSheet = false
 	@Published var isMainCatsPageView = false
 	@Published var isColorPicker = false
+	@Published var isMenu = false
 	
 	var catsCardsColor: Color {
 		Color(selectedCat.wrappedColor)
@@ -54,14 +55,35 @@ extension HomeScreenViewModel {
 		let catsCardsPageViewModel = CatsCardsPageViewModel(cat: cat, deleteAfterCancelation: true, managedObjectContext: context)
 		editingCatsPageView = EditingCatsPageView(catsViewModel: catsCardsPageViewModel)
 		
-		isAddCatSheet.toggle()
+		isEditingCatsSheet.toggle()
+	}
+	
+	func editCat(context: NSManagedObjectContext) {
+		let catsCardsPageViewModel = CatsCardsPageViewModel(cat: selectedCat, deleteAfterCancelation: false, managedObjectContext: context)
+		editingCatsPageView = EditingCatsPageView(catsViewModel: catsCardsPageViewModel)
+		
+		isMenu.toggle()
+		isEditingCatsSheet.toggle()
 	}
 	
 	func changeCatsColor() {
 		catsCardsColorPicker = CatsCardsColorPicker(cat: selectedCat, pickedColor: catsCardsColor, viewModel: self)
 		
+		isMenu.toggle()
 		isColorPicker.toggle()
 	}
+	
+	func deleteCat(context: NSManagedObjectContext) {
+		context.delete(selectedCat)
+		
+		deselectCat()
+		
+		withAnimation() {
+			isMenu.toggle()
+		}
+	}
+	
+	func getCat() -> CatsCard { selectedCat }
 	
 	func selectCat(_ cat: CatsCard) { selectedCat = cat }
 	

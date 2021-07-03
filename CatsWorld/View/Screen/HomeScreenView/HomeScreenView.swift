@@ -9,6 +9,10 @@ import SwiftUI
 
 struct HomeScreenView: View {
 	
+	private let viewWidth = UIScreen.screenWidth / 1.2
+	private let viewHeight = UIScreen.screenHeight / 1.5
+	private let minViewHeight = UIScreen.screenHeight / 1.75
+	
 	@Environment(\.managedObjectContext) var managedObjectContext
 	@EnvironmentObject var settingsViewModel: SettingsViewModel
 	
@@ -20,7 +24,7 @@ struct HomeScreenView: View {
 	) var catsCards: FetchedResults<CatsCard>
 	
 	@StateObject var homeScreenViewModel = HomeScreenViewModel()
-	
+		
     var body: some View {
 		ZStack {
 			Color.mainColor
@@ -51,33 +55,34 @@ struct HomeScreenView: View {
 						CatsCardView(cat: card)
 							.equatable()
 							.overlay(
-								HStack {
-									ZStack {
-										Color.black.opacity(0.001)
-										
-										Spacer()
-									}
-									.simultaneousGesture(
-										TapGesture()
-											.onEnded { _ in
-												homeScreenViewModel.selectCat(card)
-												homeScreenViewModel.observeCat(context: managedObjectContext)
-											}
-									)
-									
-									HStack(spacing: 5) {
-										ForEach(0..<3) { circle in
-											Circle()
-												.frame(width: 10, height: 10)
+								VStack {
+									HStack {
+										ZStack {
+											Color.black.opacity(0.001)
+											
+											Spacer()
 										}
-									}
-									.padding(.trailing)
-									.onTapGesture {
-										homeScreenViewModel.selectCat(card)
+										.simultaneousGesture(
+											TapGesture()
+												.onEnded { _ in
+													homeScreenViewModel.selectCat(card)
+													homeScreenViewModel.observeCat(context: managedObjectContext)
+												}
+										)
 										
-										homeScreenViewModel.changeCatsColor()
+										HStack(spacing: 5) {
+											ForEach(0..<3) { circle in
+												Circle()
+													.frame(width: 10, height: 10)
+											}
+										}
+										.padding(.trailing)
+										.onTapGesture {
+											homeScreenViewModel.selectCat(card)
+											homeScreenViewModel.isMenu.toggle()
+										}
+										.foregroundColor(.accentColor)
 									}
-									.foregroundColor(.accentColor)
 								}
 							)
 							.padding([.leading, .top, .trailing])
@@ -94,7 +99,7 @@ struct HomeScreenView: View {
 						homeScreenViewModel.deselectCat()
 					}
 			}
-			.sheet(isPresented: $homeScreenViewModel.isAddCatSheet) {
+			.sheet(isPresented: $homeScreenViewModel.isEditingCatsSheet) {
 				homeScreenViewModel.editingCatsPageView
 					.preferredColorScheme(settingsViewModel.wrappedColorScheme)
 					.onDisappear {
@@ -103,7 +108,7 @@ struct HomeScreenView: View {
 			}
 			.animation(.easeInOut(duration: 0.2).delay(0.41))
 			.blur(radius: homeScreenViewModel.isColorPicker ? 20 : 0)
-			.disabled(homeScreenViewModel.isColorPicker)
+			.disabled(homeScreenViewModel.isColorPicker || homeScreenViewModel.isMenu)
 			
 			if homeScreenViewModel.isColorPicker {
 				ZStack {
@@ -121,6 +126,46 @@ struct HomeScreenView: View {
 					homeScreenViewModel.deselectCat()
 					homeScreenViewModel.catsCardsColorPicker = nil
 				}
+			}
+			
+			if homeScreenViewModel.isMenu {
+				CatsDescriptionSection {
+					Button("Delete") {
+						homeScreenViewModel.deleteCat(context: managedObjectContext)
+//						managedObjectContext.delete(homeScreenViewModel.getCat())
+//
+//						withAnimation() {
+//							homeScreenViewModel.isMenu.toggle()
+//						}
+					}
+					.frame(minWidth: viewWidth, maxWidth: viewWidth + 20)
+					.foregroundColor(.red)
+
+					Button("Edit") {
+						homeScreenViewModel.editCat(context: managedObjectContext)
+					}
+					.frame(minWidth: viewWidth, maxWidth: viewWidth + 20)
+					.foregroundColor(.accentColor)
+
+					Button("Pick Cards Color") {
+						homeScreenViewModel.changeCatsColor()
+					}
+					.frame(minWidth: viewWidth, maxWidth: viewWidth + 20)
+					.foregroundColor(.accentColor)
+
+					Button("Cancel") {
+						withAnimation(.linear(duration: 0.4)) {
+							homeScreenViewModel.isMenu.toggle()
+						}
+					}
+					.frame(minWidth: viewWidth, maxWidth: viewWidth + 20)
+					.foregroundColor(.accentColor)
+				}
+				.shadow(color: .shadowColor, radius: 7, x: 7, y: 7)
+				.animation(.linear(duration: 0.4))
+				.transition(.move(edge: .bottom))
+				.frame(minWidth: viewWidth, maxWidth: viewWidth + 20, minHeight: 100, maxHeight: 100)
+				.offset(y: UIScreen.screenHeight / 2 - 150)
 			}
 		}
     }
