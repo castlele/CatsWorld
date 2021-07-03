@@ -9,10 +9,10 @@ import Foundation
 import SwiftUI
 import CoreData
 
-final class CatsCardsPageViewModel: ObservableObject {
+final class CatsCardsPageViewModel: CatManipulator {
 	
 	/// Currently edited object of `CatsCard`
-	var cat: CatsCard
+	private var cat: CatsCard!
 	
 	var deleteAfterCancelation: Bool
 	
@@ -187,6 +187,14 @@ extension CatsCardsPageViewModel {
 // MARK:- Public methods
 extension CatsCardsPageViewModel {
 	
+	func selectCat(_ cat: CatsCard) {
+		self.cat = cat
+	}
+	
+	func deselectCat() {
+		self.cat = nil
+	}
+	
 	/// Saves changes, made to instance of `CatsCard`
 	func save() {
 		setNewValues()
@@ -213,6 +221,7 @@ extension CatsCardsPageViewModel {
 	///   - presentation: `PresentationMode` to dismiss view
 	func dismiss(isDiscardChanges: Bool = true, presentation: Binding<PresentationMode>) {
 		isDiscardChanges ? delete() : save()
+		deselectCat()
 		presentation.wrappedValue.dismiss()
 	}
 }
@@ -291,7 +300,7 @@ extension CatsCardsPageViewModel {
 					setNew(value: additionalInfo, to: &cat.additionalInfo)
 
 				case let .image(catsImage):
-					if let imageData = catsImage.pngData() {
+					if let imageData = catsImage.jpegData(compressionQuality: 0.5) {
 						setNew(value: imageData, to: &cat.image)
 					}
 			}

@@ -11,8 +11,6 @@ import CoreData
 struct EditingCatsPageView: View {
 	
 	@Environment(\.presentationMode) var presentation
-	@Environment(\.colorScheme) var colorScheme
-	@EnvironmentObject var settingsViewModel: SettingsViewModel
 	
 	@StateObject var catsViewModel: CatsCardsPageViewModel
 	
@@ -42,6 +40,7 @@ struct EditingCatsPageView: View {
 						topColor: .volumeEffectColorTop,
 						bottomColor: .volumeEffectColorBottom	
 					)
+					.equatable()
 			   })
 				.frame(width: 50, height: 50)
 				.buttonStyle(CircleButtonStyle())
@@ -63,8 +62,9 @@ struct EditingCatsPageView: View {
 				// MARK:- Main info section
 				CatsDescriptionSection() {
 					TextField("Name", text: $catsViewModel.name)
+						.frame(minWidth: 150, maxWidth: UIScreen.screenWidth)
 						.disableAutocorrection(true)
-						.accentColor(.mainColor)
+						.accentColor(.accentColor)
 					
 					DatePicker(
 						"Date of birth".localize(),
@@ -145,7 +145,7 @@ struct EditingCatsPageView: View {
 				}
 				.accentColor(.accentColor)
 				
-				// MARK:- More info section
+				// MARK:- Additional info section
 				CatsDescriptionSection() {
 					VStack {
 						if catsViewModel.additionalInfo.isEmpty {
@@ -178,7 +178,6 @@ struct EditingCatsPageView: View {
 			ImagePicker(image: $catsViewModel.catsImage)
 		}
 		.background(Color.mainColor)
-//		.preferredColorScheme(settingsViewModel.wrappedColorScheme)
 	}
 }
 

@@ -9,43 +9,52 @@ import SwiftUI
 
 struct TabBarView: View {
 	
+	@StateObject var settingsViewModel = SettingsViewModel()
+	
 	@State var selectedTab = 1
 	
     var body: some View {
-		TabView {
+		TabView(selection: $selectedTab) {
 			MapTabView()
+				.environmentObject(settingsViewModel)
 				.tabItem {
 					Image(systemName: "map")
 					Text("Map")
 				}
-				.navigationBarHidden(true)
 				.tag(0)
+			NavigationView {
+				HomeScreenView()
+					.environmentObject(settingsViewModel)
+					.navigationBarHidden(true)
+			}
+			.tag(1)
+			.tabItem {
+				Image(systemName: "house")
+				Text("Home")
+			}
 			
-			HomeScreenView()
-				.tabItem {
-					Image(systemName: "house")
-					Text("Home")
-				}
-				.navigationBarHidden(true)
-				.tag(1)
-			
-			BreedsList()
-				.environmentObject(BreedsViewModel.shared)
-				.tabItem {
-					Image(systemName: "list.bullet")
-					Text("Breeds")
-				}
-				.navigationBarHidden(true)
-				.tag(2)
+			NavigationView {
+				BreedsList()
+					.environmentObject(BreedsViewModel.shared)
+					.environmentObject(settingsViewModel)
+					.navigationBarHidden(true)
+					.accentColor(.accentColor)
+			}
+			.tag(2)
+			.tabItem {
+				Image(systemName: "list.bullet")
+				Text("Breeds")
+			}
 			
 			SettingsView()
+				.environmentObject(settingsViewModel)
 				.tabItem {
 					Image(systemName: "gearshape")
 					Text("Settings")
 				}
-				.navigationBarHidden(true)
 				.tag(3)
 		}
+		.preferredColorScheme(settingsViewModel.wrappedColorScheme)
 		.accentColor(.accentColor)
     }
 }

@@ -13,9 +13,10 @@ struct CatsCardsColorPicker: View {
 	private let viewHeight = UIScreen.screenHeight / 1.5
 	private let minViewHeight = UIScreen.screenHeight / 1.75
 	
-	@ObservedObject var cat: CatsCard
+	let cat: CatsCard
+	
 	@State var pickedColor: Color
-	@Binding var isColorPicker: Bool
+	@ObservedObject var viewModel: HomeScreenViewModel
 	
     var body: some View {
 		ZStack {
@@ -24,8 +25,10 @@ struct CatsCardsColorPicker: View {
 			VStack {
 				HStack {
 					CatsMainInfoView(cat: cat, age: .constant(.age), isAvatar: true)
+						.equatable()
 					
 					GenderSign(genderSign: cat.genderSign, foregroundColor: .textColor)
+						.equatable()
 						.scaleEffect(1.25)
 				}
 				.frame(minWidth: viewWidth, maxWidth: viewWidth + 20)
@@ -34,14 +37,15 @@ struct CatsCardsColorPicker: View {
 				.cornerRadius(20)
 				.compositingGroup()
 				.shadow(color: .shadowColor, radius: 8, x: 10, y: 10)
-				.animation(.linear(duration: 0.5))
 				
 				Spacer()
 				
 				VStack(spacing: 15) {
 					ColorPickerView(colors: ColorPick.firstHalf, pickedColor: $pickedColor)
+						.equatable()
 					
 					ColorPickerView(colors: ColorPick.secondHalf, pickedColor: $pickedColor)
+						.equatable()
 				}
 				.padding()
 				.background(
@@ -51,7 +55,6 @@ struct CatsCardsColorPicker: View {
 				.compositingGroup()
 				.volumetricShadows()
 				.padding()
-				.animation(.linear(duration: 0.5))
 				
 				Spacer()
 				
@@ -59,7 +62,7 @@ struct CatsCardsColorPicker: View {
 					cat.setColor(pickedColor)
 					
 					withAnimation(.spring()) {
-						isColorPicker.toggle()
+						viewModel.isColorPicker.toggle()
 					}
 				}, content: {
 					Text("Submit")
@@ -80,11 +83,10 @@ struct CatsCardsColorPicker: View {
 		}
 		.frame(minWidth: viewWidth, maxWidth: viewWidth + 20, minHeight: minViewHeight, maxHeight: viewHeight)
 		.cornerRadius(25)
-		.offset(x: isColorPicker ? 0 : 100, y: isColorPicker ? 0 : 0)
     }
 }
 
-struct ColorPickerView: View {
+fileprivate struct ColorPickerView: View, Equatable {
 	
 	let colors: [ColorPick]
 	@Binding var pickedColor: Color
@@ -93,7 +95,7 @@ struct ColorPickerView: View {
 		HStack(spacing: 15) {
 			ForEach(colors) { color in
 				Circle()
-					.stroke(Color(color.rawValue) == pickedColor ? Color.semiAccentColor : Color.white, lineWidth: 4)
+					.stroke(Color(color.rawValue).compareColorComponentsWith(pickedColor) ? Color.semiAccentColor : Color.white, lineWidth: 4)
 					.overlay(
 						Color(color.rawValue)
 							.clipShape(Circle())
@@ -107,10 +109,14 @@ struct ColorPickerView: View {
 			}
 		}
 	}
+	
+	static func == (lhs: Self, rhs: Self) -> Bool {
+		lhs.pickedColor.compareColorComponentsWith(rhs.pickedColor) && lhs.colors.count == rhs.colors.count
+	}
 }
 
 struct CatsCardsColorPicker_Previews: PreviewProvider {
     static var previews: some View {
-		CatsCardsColorPicker(cat: CatsCard(context: PersistenceController.preview.conteiner.viewContext), pickedColor: .mainColor, isColorPicker: .constant(true))
+		CatsCardsColorPicker(cat: CatsCard(context: PersistenceController.preview.conteiner.viewContext), pickedColor: .mainColor, viewModel: HomeScreenViewModel())
     }
 }

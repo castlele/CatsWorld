@@ -6,28 +6,23 @@
 //
 
 import SwiftUI
+import CoreData
 
-struct Description: Identifiable {
-	var name: String
-	var value: CatsDescriptionValue
+final class CatsDescriptionViewModel: CatManipulator {
 	
-	var id = UUID()
+	private var cat: CatsCard!
+	private var context: NSManagedObjectContext
 	
-	init(_ name: String, _ value: CatsDescriptionValue) {
-		self.name = name
-		self.value = value
-	}
-}
-
-final class CatsDescriptionViewModel: ObservableObject {
+	var editingCatsPageView: EditingCatsPageView!
 	
-	var cat: CatsCard
-	
-	@Published var category: CatsDescriptionCategory = .physical
 	@Published var ageType: AgeType = .age
 	@Published var isEditingCatsPage = false
 	
-	var catsCardColor: UIColor { cat.wrappedColor }
+	var catsCardColor: Color { Color(cat.wrappedColor) }
+	
+	var additionInfo: String { cat.wrappedInfo }
+	
+	var isAdditionInfo: Bool { !additionInfo.isEmpty }
 	
 	/// Represents friendliness of the cat
 	/// `categoryName` represents, to whome the cat friendly to
@@ -48,13 +43,30 @@ final class CatsDescriptionViewModel: ObservableObject {
 		return characteristics
 	}
 	
-	init(cat: CatsCard) {
-		self.cat = cat
+	init(cat: CatsCard, context: NSManagedObjectContext) {
+		self.context = context
+		selectCat(cat)
 	}
 }
 
 // MARK: - Public methods
 extension CatsDescriptionViewModel {
+	
+	func changeAgeType() {
+		switch ageType {
+			case .age:
+				ageType = .dateOfBirth
+			case .dateOfBirth:
+				ageType = .age
+		}
+	}
+	
+	func editCat() {
+		let catsViewModel = CatsCardsPageViewModel(cat: getCat(), deleteAfterCancelation: false, managedObjectContext: context)
+		editingCatsPageView = EditingCatsPageView(catsViewModel: catsViewModel)
+		
+		isEditingCatsPage.toggle()
+	}
 	
 	func getDescriptionsFor(category: CatsDescriptionCategory) -> [Description] {
 		cat.getDescriptionsFor(category: category)
@@ -77,4 +89,10 @@ extension CatsDescriptionViewModel {
 		
 		return result
 	}
+	
+	func getCat() -> CatsCard { cat }
+	
+	func selectCat(_ cat: CatsCard) { self.cat = cat }
+	
+	func deselectCat() { self.cat = nil }
 }

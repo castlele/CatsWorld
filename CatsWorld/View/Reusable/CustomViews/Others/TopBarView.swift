@@ -10,7 +10,6 @@ import SwiftUI
 struct TopBarView<Leading: View, Trailing: View, Content: View>: View {
 	
 	let backgroundColor: Color
-	let height: CGFloat?
 	let minHeight: CGFloat?
 	let maxHeight: CGFloat?
 	let leading: Leading
@@ -19,7 +18,6 @@ struct TopBarView<Leading: View, Trailing: View, Content: View>: View {
 	
 	init(
 		backgroundColor: Color = .mainColor,
-		height: CGFloat? = nil,
 		minHeight: CGFloat? = nil,
 		maxHeight: CGFloat? = nil,
 		@ViewBuilder leading: () -> Leading,
@@ -27,7 +25,6 @@ struct TopBarView<Leading: View, Trailing: View, Content: View>: View {
 		@ViewBuilder content: () -> Content
 	) {
 		self.backgroundColor = backgroundColor
-		self.height = height
 		self.minHeight = minHeight
 		self.maxHeight = maxHeight
 		self.leading = leading()
@@ -59,7 +56,7 @@ struct TopBarView<Leading: View, Trailing: View, Content: View>: View {
 				content
 			}
 		}
-		.frame(minHeight: minHeight, idealHeight: height, maxHeight: maxHeight)
+		.frame(minHeight: minHeight, maxHeight: maxHeight)
     }
 }
 
@@ -67,14 +64,12 @@ struct TopBarView<Leading: View, Trailing: View, Content: View>: View {
 extension TopBarView where Leading: View, Trailing: View, Content == EmptyView {
 	init(
 		backgroundColor: Color = .mainColor,
-		height: CGFloat? = nil,
 		minHeight: CGFloat? = nil,
 		maxHeight: CGFloat? = nil,
 		@ViewBuilder leading: () -> Leading,
 		@ViewBuilder trailing: () -> Trailing
 	) {
 		self.backgroundColor = backgroundColor
-		self.height = height
 		self.minHeight = minHeight
 		self.maxHeight = maxHeight
 		self.leading = leading()
@@ -87,13 +82,11 @@ extension TopBarView where Leading: View, Trailing: View, Content == EmptyView {
 extension TopBarView where Leading == EmptyView, Trailing: View, Content == EmptyView {
 	init(
 		backgroundColor: Color = .mainColor,
-		height: CGFloat? = nil,
 		minHeight: CGFloat? = nil,
 		maxHeight: CGFloat? = nil,
 		@ViewBuilder trailing: () -> Trailing
 	) {
 		self.backgroundColor = backgroundColor
-		self.height = height
 		self.minHeight = minHeight
 		self.maxHeight = maxHeight
 		self.leading = EmptyView()
@@ -113,7 +106,6 @@ extension TopBarView where Leading: View, Trailing == EmptyView, Content: View {
 		@ViewBuilder content: () -> Content
 	) {
 		self.backgroundColor = backgroundColor
-		self.height = height
 		self.minHeight = minHeight
 		self.maxHeight = maxHeight
 		self.leading = leading()
@@ -131,7 +123,6 @@ extension TopBarView where Leading == EmptyView, Trailing == EmptyView, Content 
 		maxHeight: CGFloat? = nil
 	) {
 		self.backgroundColor = backgroundColor
-		self.height = height
 		self.minHeight = minHeight
 		self.maxHeight = maxHeight
 		self.leading = EmptyView()
@@ -142,7 +133,7 @@ extension TopBarView where Leading == EmptyView, Trailing == EmptyView, Content 
 
 struct TopBarView_Previews: PreviewProvider {
     static var previews: some View {
-		TopBarView(height: 100, leading: {
+		TopBarView(leading: {
 			Text("")
 		}, trailing: {
 			Text("")

@@ -13,18 +13,11 @@ struct CatsWorldApp: App {
 	let persistenceController = PersistenceController.shared
 	
 	@Environment(\.scenePhase) var scenePhase
-	
-	@StateObject var settingsViewModel = SettingsViewModel()
-	
-	@State var selectedView = 1
-	
+			
 	init() {
-		UITableViewCell.appearance().backgroundColor = UIColor.clear
-		
 		UITextView.appearance().backgroundColor = .clear
 		
 		UITabBar.appearance().barTintColor = Color.mainUIColor()
-		UITabBar.appearance().isTranslucent = false
 		
 		UISegmentedControl.appearance().selectedSegmentTintColor = Color.accentUIColor()
 		UISegmentedControl.appearance().backgroundColor = Color.semiAccentUIColor()
@@ -42,13 +35,8 @@ struct CatsWorldApp: App {
 	
     var body: some Scene {
         WindowGroup {
-			NavigationView {
-				TabBarView()
-					.environment(\.managedObjectContext, persistenceController.conteiner.viewContext)
-					.environmentObject(settingsViewModel)
-					.preferredColorScheme(settingsViewModel.wrappedColorScheme)
-			}
-			.accentColor(.accentColor)
+			TabBarView()
+				.environment(\.managedObjectContext, persistenceController.conteiner.viewContext)
 		}
 		.onChange(of: scenePhase) { newScenePhase in
 			savePersistenceInBackgroundState(newScenePhase)

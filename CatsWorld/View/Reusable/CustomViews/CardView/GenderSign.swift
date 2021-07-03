@@ -20,6 +20,13 @@ struct GenderSign: View {
     }
 }
 
+// MARK: - Equatable comformance
+extension GenderSign: Equatable {
+	static func == (lhs: Self, rhs: Self) -> Bool {
+		lhs.genderSign == rhs.genderSign
+	}
+}
+
 struct GenderSign_Previews: PreviewProvider {
     static var previews: some View {
 		GenderSign(genderSign: "", foregroundColor: .textColor)

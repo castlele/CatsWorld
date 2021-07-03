@@ -42,6 +42,7 @@ extension Color {
 	}
 }
 
+// MARK: - Public methods
 extension Color {
 	
 	/// Returns `Color.mainColor` as `UIColor`
@@ -69,8 +70,17 @@ extension Color {
 	func darker(by rate: Double) -> Color {
 		adjust(by: -1 * abs(rate))
 	}
+	
+	/// Compares self color components with anothor
+	/// - Parameter color: `Color` to check equality
+	/// - Returns: true if `Self` color components are equal to `color` color components
+	/// otherwise returns false
+	func compareColorComponentsWith(_ color: Color) -> Bool {
+		self.colorComponents == color.colorComponents
+	}
 }
 
+// MARK: - Private methods
 extension Color {
 	
 	/// Adjust `self` by given rate and return new `Color`

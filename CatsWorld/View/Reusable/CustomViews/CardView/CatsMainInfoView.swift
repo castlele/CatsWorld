@@ -7,9 +7,19 @@
 
 import SwiftUI
 
+extension CatsMainInfoView: Equatable {
+	static func == (lhs: Self, rhs: Self) -> Bool {
+		lhs.age == rhs.age &&
+			lhs.cat.name == rhs.cat.name &&
+			lhs.cat.wrappedBreed == rhs.cat.wrappedBreed &&
+			lhs.cat.dateOfBirth == rhs.cat.dateOfBirth &&
+			lhs.cat.image == rhs.cat.image
+	}
+}
+
 struct CatsMainInfoView: View {
 	
-	@ObservedObject var cat: CatsCard
+	let cat: CatsCard
 	
 	@Binding var age: AgeType
 	
@@ -28,14 +38,13 @@ struct CatsMainInfoView: View {
 	var genderSign: AnyView? {
 		if isGender {
 			return AnyView(GenderSign(genderSign: cat.genderSign, foregroundColor: cat.genderColor)
+							.equatable()
 							.scaleEffect(1.25)
 			)
 		}
 		return nil
 	}
-	
-	var strokeColor: Color = .gray
-	
+		
     var body: some View {
 		HStack(spacing: 20) {
 			if isAvatar {

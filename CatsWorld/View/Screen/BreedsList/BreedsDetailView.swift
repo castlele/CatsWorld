@@ -8,9 +8,7 @@
 import SwiftUI
 
 struct BreedsDetailView: View {
-	
-	@Environment(\.presentationMode) var presentationMode
-	
+		
 	let breed: Breed
 	
     var body: some View {

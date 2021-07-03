@@ -7,12 +7,20 @@
 
 import SwiftUI
 
+extension CatsCardView: Equatable {
+	
+	static func == (lhs: Self, rhs: Self) -> Bool {
+		lhs.cat.name == rhs.cat.name &&
+			lhs.cat.wrappedBreed == rhs.cat.wrappedBreed &&
+			lhs.cat.dateOfBirth == rhs.cat.dateOfBirth &&
+			lhs.cardColor.compareColorComponentsWith(rhs.cardColor) &&
+			lhs.cat.image == rhs.cat.image
+	}
+}
+
 struct CatsCardView: View {
-	
-	@Environment(\.managedObjectContext) var managedObjectContext
-	
-	@ObservedObject var cat: CatsCard
-	@ObservedObject var homeScreenViewModel: HomeScreenViewModel
+		
+	var cat: CatsCard
 	
 	var cardColor: Color {
 		let uiColor = cat.wrappedColor
@@ -30,22 +38,14 @@ struct CatsCardView: View {
 				.padding(.trailing, 10)
 			
 			CatsMainInfoView(cat: cat, age: .constant(.age))
+				.equatable()
 			
 			GenderSign(genderSign: cat.genderSign, foregroundColor: .textColor)
+				.equatable()
 				.frame(maxWidth: 40)
 				
 			Spacer(minLength: 50)
 		}
-		.simultaneousGesture(
-			TapGesture()
-				.onEnded { _ in
-					homeScreenViewModel.selectCat(cat)
-					homeScreenViewModel.isCatsPageView.toggle()
-				}
-		)
-//		.sheet(isPresented: $catsCardsViewModel.isEditingCatsPage) {
-//			CatsPageView(cat: cat, isEditing: true)
-//		}
 		.padding()
 		.frame(minHeight: 100)
 		.background(cardColor)
@@ -63,7 +63,7 @@ struct CatsCardView_Previews: PreviewProvider {
 	}()
 	
     static var previews: some View {
-		CatsCardView(cat: cat, homeScreenViewModel: HomeScreenViewModel())
+		CatsCardView(cat: cat)
 			.overlay(
 				HStack {
 					Spacer()

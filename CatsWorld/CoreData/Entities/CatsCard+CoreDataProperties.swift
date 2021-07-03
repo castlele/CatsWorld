@@ -49,7 +49,7 @@ extension CatsCard {
 }
 
 // MARK:- Wrapped properties
-extension CatsCard : Identifiable {
+extension CatsCard: Identifiable {
 	
 	public var id: UUID {
 		UUID()

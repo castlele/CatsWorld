@@ -16,7 +16,7 @@ struct HomeScreenView: View {
 		entity: CatsCard.entity(),
 		sortDescriptors: [],
 		predicate: nil,
-		animation: .spring()
+		animation: nil
 	) var catsCards: FetchedResults<CatsCard>
 	
 	@StateObject var homeScreenViewModel = HomeScreenViewModel()
@@ -28,9 +28,7 @@ struct HomeScreenView: View {
 			VStack {
 				TopBarView(minHeight: 80, maxHeight: 80, trailing: {
 					Button(action: {
-						let cat = CatsCard(context: managedObjectContext)
-						homeScreenViewModel.catsPageView = CatsPageView(cat: cat, deleteAfterCancelation: true, isEditing: true)
-						homeScreenViewModel.addCatSheet.toggle()
+						homeScreenViewModel.makeNewCat(context: managedObjectContext)
 						
 					}, label: {
 						Image3D(
@@ -39,6 +37,7 @@ struct HomeScreenView: View {
 							topColor: .volumeEffectColorTop,
 							bottomColor: .volumeEffectColorBottom
 						)
+						.equatable()
 					})
 					.frame(width: 60, height: 60)
 					.buttonStyle(CircleButtonStyle())
@@ -47,66 +46,80 @@ struct HomeScreenView: View {
 				
 				Spacer()
 				
-				GeometryReader { geometry in
-					ScrollView(.vertical, showsIndicators: false) {
-						ForEach(catsCards) { card in
-							CatsCardView(cat: card, homeScreenViewModel: homeScreenViewModel)
-								.overlay(
-									HStack {
-										Spacer()
+				ScrollView(.vertical, showsIndicators: false) {
+					ForEach(catsCards) { card in
+						CatsCardView(cat: card)
+							.equatable()
+							.overlay(
+								HStack {
+									ZStack {
+										Color.black.opacity(0.001)
 										
-										HStack(spacing: 5) {
-											ForEach(0..<3) { circle in
-												Circle()
-													.frame(width: 10, height: 10)
-											}
-										}
-										.padding(.trailing)
-										.onTapGesture {
-											homeScreenViewModel.selectCat(card)
-											
-											withAnimation(.linear(duration: 1.2)) {
-												homeScreenViewModel.isColorPicker.toggle()
-											}
-										}
-										.foregroundColor(.accentColor)
+										Spacer()
 									}
-								)
-								.padding([.leading, .top, .trailing])
-							
-							Spacer(minLength: 10)
-						}
+									.simultaneousGesture(
+										TapGesture()
+											.onEnded { _ in
+												homeScreenViewModel.selectCat(card)
+												homeScreenViewModel.observeCat(context: managedObjectContext)
+											}
+									)
+									
+									HStack(spacing: 5) {
+										ForEach(0..<3) { circle in
+											Circle()
+												.frame(width: 10, height: 10)
+										}
+									}
+									.padding(.trailing)
+									.onTapGesture {
+										homeScreenViewModel.selectCat(card)
+										
+										homeScreenViewModel.changeCatsColor()
+									}
+									.foregroundColor(.accentColor)
+								}
+							)
+							.padding([.leading, .top, .trailing])
+						
+						Spacer(minLength: 10)
 					}
 				}
 			}
-			.fullScreenCover(isPresented: $homeScreenViewModel.isCatsPageView) {
-				CatsPageView(cat: homeScreenViewModel.selectedCat)
+			.fullScreenCover(isPresented: $homeScreenViewModel.isMainCatsPageView) {
+				homeScreenViewModel.mainCatsPageView
+					.preferredColorScheme(settingsViewModel.wrappedColorScheme)
+					.onDisappear {
+						homeScreenViewModel.mainCatsPageView = nil
+						homeScreenViewModel.deselectCat()
+					}
 			}
-			.sheet(isPresented: $homeScreenViewModel.addCatSheet) {
-				homeScreenViewModel.catsPageView
+			.sheet(isPresented: $homeScreenViewModel.isAddCatSheet) {
+				homeScreenViewModel.editingCatsPageView
+					.preferredColorScheme(settingsViewModel.wrappedColorScheme)
+					.onDisappear {
+						homeScreenViewModel.editingCatsPageView = nil
+					}
 			}
-			.animation(.spring().delay(1.2))
+			.animation(.easeInOut(duration: 0.2).delay(0.41))
 			.blur(radius: homeScreenViewModel.isColorPicker ? 20 : 0)
 			.disabled(homeScreenViewModel.isColorPicker)
 			
 			if homeScreenViewModel.isColorPicker {
-				CatsCardsColorPicker(
-					cat: homeScreenViewModel.selectedCat,
-					pickedColor: homeScreenViewModel.catsCardsColor,
-					isColorPicker: $homeScreenViewModel.isColorPicker
-				)
-				.animation(.easeInOut(duration: 1.2))
+				ZStack {
+					homeScreenViewModel.catsCardsColorPicker
+						.preferredColorScheme(settingsViewModel.wrappedColorScheme)
+				}
+				.animation(.linear(duration: 0.4))
 				.transition(.move(edge: .bottom))
 				.onDisappear {
-					DispatchQueue.global().async {
-						do {
-							try managedObjectContext.save()
-						} catch {
-							#if DEBUG
-							print("\(error.localizedDescription)")
-							#endif
-						}
-					}
+					let isChanges = homeScreenViewModel.catsCardsColor.compareColorComponentsWith(
+						homeScreenViewModel.catsCardsColorPicker.pickedColor
+					)
+					homeScreenViewModel.saveChangesIf(!isChanges, context: managedObjectContext)
+					
+					homeScreenViewModel.deselectCat()
+					homeScreenViewModel.catsCardsColorPicker = nil
 				}
 			}
 		}

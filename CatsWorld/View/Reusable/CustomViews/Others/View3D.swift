@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct View3D<Content: View>: View {
+struct View3D<Content: View>: View, Equatable {
 
 	let topView: Content
 	let bottomView: Content
@@ -24,10 +24,12 @@ struct View3D<Content: View>: View {
 				.offset(x: 1, y: -1)
 				.foregroundColor(topColor)
 		}
-    }
+	}
+	
+	static func == (lhs: Self, rhs: Self) -> Bool { false }
 }
 
-struct Image3D: View {
+struct Image3D: View, Equatable {
 	
 	let topView: Image
 	let bottomView: Image
@@ -49,6 +51,8 @@ struct Image3D: View {
 				.padding()
 		}
 	}
+	
+	static func == (lhs: Self, rhs: Self) -> Bool { false }
 }
 
 struct View3D_Previews: PreviewProvider {

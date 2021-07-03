@@ -27,6 +27,8 @@ final class BreedsViewModel: ObservableObject {
 extension BreedsViewModel {
 	/// Starts making `URLRequest` and loads breeds
 	public func loadBreeds() {
+		isLoading = true
+		
 		let url = makeURL(endPoint: BreedsViewModel.defaultEndPoint)
 		
 		NetworkRequester.shared.makeRequest(
@@ -69,9 +71,10 @@ extension BreedsViewModel {
 				case .success(let breeds):
 					removeMockData()
 					
-					for breed in breeds {
-						self.breeds.append(breed)
-					}
+					self.breeds = breeds
+					
+					isLoading = false
+					
 				default:
 					break
 			}

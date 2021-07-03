@@ -10,7 +10,7 @@ import SwiftUI
 struct CatsDescriptionSection<Content: View>: View {
 	
 	var content: Content
-	var backgroundColor: Color
+	var backgroundColor: Color = .mainColor
 	
     var body: some View {
 		ZStack {

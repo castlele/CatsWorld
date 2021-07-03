@@ -10,15 +10,15 @@ import SwiftUI
 struct MainCatsPageView: View {
 	
 	@Environment(\.presentationMode) var presentationMode
-	@Environment(\.managedObjectContext) var managedObjectContext
-	@EnvironmentObject var settingsViewModel: SettingsViewModel
 	
-	@ObservedObject var catsDescriptionViewModel: CatsDescriptionViewModel
+	@Environment(\.colorScheme) var colorScheme
+	
+	@StateObject var catsDescriptionViewModel: CatsDescriptionViewModel
 	
 	var body: some View {
 		VStack {
 			TopBarView(
-				backgroundColor: Color(catsDescriptionViewModel.cat.wrappedColor),
+				backgroundColor: catsDescriptionViewModel.catsCardColor,
 				minHeight: 150,
 				maxHeight: 200,
 				leading: {
@@ -32,52 +32,49 @@ struct MainCatsPageView: View {
 					.buttonStyle(
 						CircleButtonStyle(
 							backgroundColor: Color(#colorLiteral(red: 0.7540688515, green: 0.7540867925, blue: 0.7540771365, alpha: 1)),
-							shadowColor1: Color(catsDescriptionViewModel.catsCardColor).lighter(by: 0.1),
-							shadowColor2: Color(catsDescriptionViewModel.catsCardColor).darker(by: 0.5)
+							shadowColor1: catsDescriptionViewModel.catsCardColor.lighter(by: 0.1),
+							shadowColor2: catsDescriptionViewModel.catsCardColor.darker(by: 0.5)
 						)
 					)
 					.padding([.top, .leading])
 				
 				
 			}, trailing: {
-				EditButton(isEditing: $catsDescriptionViewModel.isEditingCatsPage) {
+				EditButton(action: catsDescriptionViewModel.editCat) {
 					Image3D(
 						topView: Image(systemName: "pencil"),
 						bottomView: Image(systemName: "pencil"),
 						topColor: .volumeEffectColorTop,
 						bottomColor: .volumeEffectColorBottom
 					)
+					.equatable()
 				}
 				.frame(width: 50, height: 50)
 				.buttonStyle(
 					CircleButtonStyle(
-						shadowColor1: Color(catsDescriptionViewModel.catsCardColor).lighter(by: 0.1),
-						shadowColor2: Color(catsDescriptionViewModel.catsCardColor).darker(by: 0.5)
+						shadowColor1: catsDescriptionViewModel.catsCardColor.lighter(by: 0.1),
+						shadowColor2: catsDescriptionViewModel.catsCardColor.darker(by: 0.5)
 					)
 				)
 				.padding([.top, .trailing])
 				
 			}, content: {
-				CatsMainInfoView(cat: catsDescriptionViewModel.cat, age: $catsDescriptionViewModel.ageType, isGender: true, isAvatar: true)
+				CatsMainInfoView(cat: catsDescriptionViewModel.getCat(), age: $catsDescriptionViewModel.ageType, isGender: true, isAvatar: true)
+					.equatable()
 					.frame(maxWidth: 240, alignment: .center)
 					.padding(.bottom)
 					.onTapGesture {
-						switch catsDescriptionViewModel.ageType {
-							case .age:
-								catsDescriptionViewModel.ageType = .dateOfBirth
-							case .dateOfBirth:
-								catsDescriptionViewModel.ageType = .age
-						}
+						catsDescriptionViewModel.changeAgeType()
 					}
 			})
 			
 			Spacer()
 			
 			ScrollView {
-				if let additionalInfo = catsDescriptionViewModel.cat.additionalInfo, !additionalInfo.isEmpty {
+				if catsDescriptionViewModel.isAdditionInfo {
 					CatsDescriptionSection() {
 						HStack(alignment: .firstTextBaseline) {
-							Text(additionalInfo)
+							Text(catsDescriptionViewModel.additionInfo)
 								.lineLimit(.max)
 								.padding()
 								.foregroundColor(.textColor)
@@ -95,6 +92,7 @@ struct MainCatsPageView: View {
 						dataColor: .green,
 						reorder: catsDescriptionViewModel.reorderDataNames(names:)
 					)
+					.equatable()
 					.frame(width: 200, height: 150)
 					.padding()
 					
@@ -120,9 +118,12 @@ struct MainCatsPageView: View {
 		}
 		.background(Color.mainColor)
 		.sheet(isPresented: $catsDescriptionViewModel.isEditingCatsPage) {
-			EditingCatsPageView(catsViewModel: CatsCardsPageViewModel(cat: catsDescriptionViewModel.cat, managedObjectContext: managedObjectContext))
+			catsDescriptionViewModel.editingCatsPageView
+				.preferredColorScheme(colorScheme)
+				.onDisappear {
+					catsDescriptionViewModel.editingCatsPageView = nil
+				}
 		}
-//		.preferredColorScheme(settingsViewModel.wrappedColorScheme)
 	}
 }
 
@@ -135,6 +136,6 @@ struct MainCatsPageView_Previews: PreviewProvider {
 		return cat
 	}()
     static var previews: some View {
-		MainCatsPageView(catsDescriptionViewModel: CatsDescriptionViewModel(cat: cat))
+		MainCatsPageView(catsDescriptionViewModel: CatsDescriptionViewModel(cat: cat, context: PersistenceController.preview.conteiner.viewContext))
     }
 }

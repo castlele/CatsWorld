@@ -16,11 +16,19 @@ fileprivate func determineRadius(in rect: CGRect) -> CGFloat {
 
 /// Shows data as a radar chard
 /// Should be at least three categories of data
-struct RadarChartView: View {
+struct RadarChartView: View, Equatable {
 	
-	let data: [(categoryName: String, value: Int)]
-	let gridColor: Color
-	let dataColor: Color
+	private let data: [(categoryName: String, value: Int)]
+	private let gridColor: Color
+	private let dataColor: Color
+	
+	private var dataValues: [Double]
+	
+	private var dataNames: [String]
+	
+	private var scale = 5
+	
+	private var count: Int { data.count }
 	
 	/// Creates chart with given data and colors of grid and data visualisation
 	/// After initialisation of properties, reorderes `dataNames` with the aim of properly visualize data's  names on chart
@@ -55,14 +63,6 @@ struct RadarChartView: View {
 		let names = self.data.map { $0.categoryName }
 		self.dataNames = reorder(names)
 	}
-	
-	private var dataValues: [Double]
-	
-	@State private var dataNames: [String]
-	
-	private var scale = 5
-	
-	private var count: Int { data.count }
 	
 	var body: some View {
 		ZStack(alignment: .center) {
@@ -130,6 +130,11 @@ struct RadarChartView: View {
 		}
 		
 		dataNames = result
+	}
+	
+	// MARK: - Equatable comformance
+	static func == (lhs: Self, rhs: Self) -> Bool {
+		lhs.count == rhs.count
 	}
 }
 

@@ -8,14 +8,14 @@
 import SwiftUI
 
 /// View representing Rating system
-struct RatingView: View {
+struct RatingView<Content: View>: View {
 	
 	var rating: Binding<Int>
 	let maxRating: Int
 	
 	let label: String
-	let offImage: Image
-	let onImage: Image
+	let offImage: Content
+	let onImage: Content
 	let offColor: Color
 	let onColor: Color
 	
@@ -25,8 +25,8 @@ struct RatingView: View {
 		rating: Binding<Int>,
 		maxRating: Int = 5,
 		label: String = "",
-		offImage: Image,
-		onImage: Image,
+		offImage: Content,
+		onImage: Content,
 		offColor: Color = .gray,
 		onColor: Color = .yellow,
 		isEditing: Bool = true

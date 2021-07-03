@@ -9,12 +9,28 @@ import SwiftUI
 
 struct EditButton<Content: View>: View {
 	
-	@Binding var isEditing: Bool
+	var isEditing: Binding<Bool>
+	var action: () -> Void
 	@ViewBuilder var content: Content
+	
+	init(isEditing: Binding<Bool>, @ViewBuilder content: () -> Content) {
+		self.isEditing = isEditing
+		self.action = {}
+		self.content = content()
+	}
+	
+	init(action: @escaping () -> Void, @ViewBuilder content: () -> Content) {
+		self.isEditing = .constant(false)
+		self.action = action
+		self.content = content()
+	}
 	
     var body: some View {
 		Button(action: {
-			isEditing.toggle()
+			action()
+			
+			isEditing.wrappedValue.toggle()
+			
 		}, label: {
 			content
 		})

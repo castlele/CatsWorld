@@ -2,28 +2,92 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>StringKey</key>
+	<key>Day count</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>
-		<string>%#@VARIABLE@</string>
-		<key>VARIABLE</key>
+		<string>%#@day_count@</string>
+		<key>day_count</key>
 		<dict>
 			<key>NSStringFormatSpecTypeKey</key>
 			<string>NSStringPluralRuleType</string>
 			<key>NSStringFormatValueTypeKey</key>
-			<string></string>
-			<key>zero</key>
-			<string></string>
+			<string>u</string>
 			<key>one</key>
-			<string></string>
+			<string>%u day</string>
 			<key>two</key>
-			<string></string>
+			<string>%u days</string>
 			<key>few</key>
-			<string></string>
+			<string>%u days</string>
 			<key>many</key>
-			<string></string>
+			<string>%u days</string>
 			<key>other</key>
-			<string></string>
+			<string>%u days</string>
+		</dict>
+	</dict>
+	<key>Week count</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@week_count@</string>
+		<key>week_count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>i</string>
+			<key>one</key>
+			<string>%i week</string>
+			<key>two</key>
+			<string>%i weeks</string>
+			<key>few</key>
+			<string>%i weeks</string>
+			<key>many</key>
+			<string>%i weeks</string>
+			<key>other</key>
+			<string>%i weeks</string>
+		</dict>
+	</dict>
+	<key>Month count</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@month_count@</string>
+		<key>month_count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>i</string>
+			<key>one</key>
+			<string>%i month</string>
+			<key>two</key>
+			<string>%i months</string>
+			<key>few</key>
+			<string>%i months</string>
+			<key>many</key>
+			<string>%i months</string>
+			<key>other</key>
+			<string>%i months</string>
+		</dict>
+	</dict>
+	<key>Year count</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@year_count@</string>
+		<key>year_count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>i</string>
+			<key>one</key>
+			<string>%i year</string>
+			<key>two</key>
+			<string>%i years</string>
+			<key>few</key>
+			<string>%i years</string>
+			<key>many</key>
+			<string>%i years</string>
+			<key>other</key>
+			<string>%i years</string>
 		</dict>
 	</dict>
 </dict>
