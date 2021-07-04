@@ -32,7 +32,7 @@ struct SettingsView: View {
 						}
 					}
 					.volumetricShadows()
-					.padding(.top)
+					.sectionPadding()
 					
 					CatsDescriptionSection {
 						Text("Graphics")
@@ -56,21 +56,10 @@ struct SettingsView: View {
 							}
 							.pickerStyle(SegmentedPickerStyle())
 						}
-//						.overlay(
-//							GeometryReader { _ in
-//								Button(action: {
-//									settingsViewModel.showShadowsInfo()
-//
-//								}, label: {
-//									Image(systemName: "info.circle")
-//										.foregroundColor(.accentColor)
-//								})
-//								.offset(x: -8, y: -8)
-//							}
-//						)
 					}
+					
 					.volumetricShadows()
-					.padding(.top)
+					.sectionPadding()
 				}
 			}
 			.alert(isPresented: $settingsViewModel.isShadowInfo) {

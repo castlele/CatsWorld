@@ -7,10 +7,16 @@
 
 import SwiftUI
 
-struct VolumetricShadows<Shape: View>: ViewModifier {
+struct VolumetricShadows: ViewModifier {
 	
-	let shadowType: AppShadow = .appDefault //SettingsViewModel.shared.wrappedShadows
-	let shape: Shape
+	enum ShapeType {
+		case circle
+		case roundedRect
+	}
+	
+	let shadowType: AppShadow = SettingsViewModel.shared.wrappedShadows
+	
+	let shape: ShapeType
 	
 	let color1: Color
 	let color2: Color
@@ -19,12 +25,30 @@ struct VolumetricShadows<Shape: View>: ViewModifier {
 	
 	let isPressed: Bool
 		
-	init(shape: Shape, color1: Color, color2: Color, radius: CGFloat, isPressed: Bool) {
+	init(shape: VolumetricShadows.ShapeType, color1: Color, color2: Color, radius: CGFloat, isPressed: Bool) {
 		self.shape = shape
 		self.color1 = color1
 		self.color2 = color2
 		self.radius = radius
 		self.isPressed = isPressed
+	}
+	
+	var wrappedShapeForFlatShadows: some View {
+		switch shape {
+			case .circle:
+				return AnyView(Circle().fill(color2))
+			case .roundedRect:
+				return AnyView(RoundedRectangle(cornerRadius: 20).fill(color2))
+		}
+	}
+	
+	var wrappedShapeForDisablesShadows: some View {
+		switch shape {
+			case .circle:
+				return AnyView(Circle().stroke(color2, lineWidth: 2.5))
+			case .roundedRect:
+				return AnyView(RoundedRectangle(cornerRadius: 20).stroke(color2, lineWidth: 2.5))
+		}
 	}
 	
 	func body(content: Content) -> some View {
@@ -47,19 +71,18 @@ struct VolumetricShadows<Shape: View>: ViewModifier {
 	private func makeFlatShadows(content: Content) -> some View {
 		content
 			.background(
-				shape
-					.foregroundColor(color2)
-					.offset(x: 7, y: 7)
+				wrappedShapeForFlatShadows
+					.offset(x: 5, y: 5)
 			)
 	}
 	
 	private func disableShadows(content: Content) -> some View {
 		content
-			.background(
-				shape
-					.foregroundColor(color2)
-					.scaleEffect(1.1)
-
+			.overlay(
+				GeometryReader { geometry in
+					wrappedShapeForDisablesShadows
+						.frame(width: geometry.frame(in: .local).width, height: geometry.frame(in: .local).height)
+				}
 			)
 	}
 }

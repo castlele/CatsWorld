@@ -17,7 +17,6 @@ struct BreedsDetailView: View {
 				.frame(width: 150, height: 150)
 				.background(EarsView())
 				.padding([.top, .bottom])
-				.volumetricShadows()
 			
 			Group {
 				CatsDescriptionSection {
@@ -35,6 +34,7 @@ struct BreedsDetailView: View {
 				}
 			}
 			.volumetricShadows()
+			.sectionPadding()
 		}
 		.background(Color.mainColor.ignoresSafeArea())
     }

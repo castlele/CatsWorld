@@ -87,6 +87,8 @@ struct EditingCatsPageView: View {
 					}
 					.pickerStyle(InlinePickerStyle())
 				}
+				.volumetricShadows()
+				.sectionPadding()
 				.foregroundColor(.textColor)
 				.accentColor(.accentColor)
 				
@@ -111,6 +113,8 @@ struct EditingCatsPageView: View {
 					}
 					.toggleStyle(SwitchToggleStyle(tint: .accentColor))
 				}
+				.volumetricShadows()
+				.sectionPadding()
 				.foregroundColor(.textColor)
 				.accentColor(.accentColor)
 				
@@ -143,6 +147,8 @@ struct EditingCatsPageView: View {
 							   onImage: Image(systemName: "star.fill")
 					)
 				}
+				.volumetricShadows()
+				.sectionPadding()
 				.accentColor(.accentColor)
 				
 				// MARK:- Additional info section
@@ -161,9 +167,10 @@ struct EditingCatsPageView: View {
 							.accentColor(.accentColor)
 					}
 				}
+				.volumetricShadows()
+				.sectionPadding()
 			}
 			.frame(width: UIScreen.screenWidth)
-			.volumetricShadows()
 		}
 		.alert(isPresented: $catsViewModel.isAlertShown) {
 			// TODO:- Redo Alert with Error handling

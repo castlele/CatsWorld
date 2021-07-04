@@ -31,7 +31,6 @@ struct CatsDescriptionSection<Content: View>: View {
 				
 		}
 		.cornerRadius(20)
-		.padding([.leading, .trailing, .bottom])
     }
 }
 

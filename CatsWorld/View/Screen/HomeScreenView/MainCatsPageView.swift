@@ -83,6 +83,7 @@ struct MainCatsPageView: View {
 						.padding(.bottom)
 					}
 					.volumetricShadows()
+					.sectionPadding()
 				}
 				
 				VStack {
@@ -112,6 +113,7 @@ struct MainCatsPageView: View {
 						}
 					}
 					.volumetricShadows()
+					.sectionPadding()
 					.foregroundColor(.textColor)
 				}
 			}

@@ -31,7 +31,7 @@ struct CircleButtonStyle: ButtonStyle {
 		configuration.label
 			.background(backgroundColor)
 			.clipShape(Circle())
-			.volumetricShadows(color1: shadowColor1, color2: shadowColor2, radius: shadowRadius, isPressed: configuration.isPressed)
+			.volumetricShadows(shape: .circle, color1: shadowColor1, color2: shadowColor2, radius: shadowRadius, isPressed: configuration.isPressed)
 			.scaleEffect(configuration.isPressed ? 0.95 : 1)
 			.animation(.spring())
 	}

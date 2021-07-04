@@ -9,7 +9,7 @@ import SwiftUI
 
 final class SettingsViewModel: ObservableObject {
 	
-	
+	static var shared = SettingsViewModel()
 	
 	// MARK: - Color Scheme
 	
