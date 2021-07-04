@@ -116,7 +116,7 @@ struct MainCatsPageView: View {
 				}
 			}
 		}
-		.background(Color.mainColor)
+		.background(Color.mainColor.ignoresSafeArea())
 		.sheet(isPresented: $catsDescriptionViewModel.isEditingCatsPage) {
 			catsDescriptionViewModel.editingCatsPageView
 				.preferredColorScheme(colorScheme)

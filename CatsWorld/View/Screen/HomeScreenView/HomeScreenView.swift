@@ -9,9 +9,7 @@ import SwiftUI
 
 struct HomeScreenView: View {
 	
-	private let viewWidth = UIScreen.screenWidth / 1.2
-	private let viewHeight = UIScreen.screenHeight / 1.5
-	private let minViewHeight = UIScreen.screenHeight / 1.75
+	private let menuWidth = UIScreen.screenWidth / 1.2
 	
 	@Environment(\.managedObjectContext) var managedObjectContext
 	@EnvironmentObject var settingsViewModel: SettingsViewModel
@@ -129,43 +127,40 @@ struct HomeScreenView: View {
 			}
 			
 			if homeScreenViewModel.isMenu {
-				CatsDescriptionSection {
-					Button("Delete") {
-						homeScreenViewModel.deleteCat(context: managedObjectContext)
-//						managedObjectContext.delete(homeScreenViewModel.getCat())
-//
-//						withAnimation() {
-//							homeScreenViewModel.isMenu.toggle()
-//						}
-					}
-					.frame(minWidth: viewWidth, maxWidth: viewWidth + 20)
-					.foregroundColor(.red)
-
-					Button("Edit") {
-						homeScreenViewModel.editCat(context: managedObjectContext)
-					}
-					.frame(minWidth: viewWidth, maxWidth: viewWidth + 20)
-					.foregroundColor(.accentColor)
-
-					Button("Pick Cards Color") {
-						homeScreenViewModel.changeCatsColor()
-					}
-					.frame(minWidth: viewWidth, maxWidth: viewWidth + 20)
-					.foregroundColor(.accentColor)
-
-					Button("Cancel") {
-						withAnimation(.linear(duration: 0.4)) {
-							homeScreenViewModel.isMenu.toggle()
+				GeometryReader { geometry in
+					CatsDescriptionSection {
+						Button("Delete") {
+							homeScreenViewModel.deleteCat(context: managedObjectContext)
 						}
+						.frame(minWidth: menuWidth, maxWidth: menuWidth + 20)
+						.foregroundColor(.red)
+						
+						Button("Edit") {
+							homeScreenViewModel.editCat(context: managedObjectContext)
+						}
+						.frame(minWidth: menuWidth, maxWidth: menuWidth + 20)
+						.foregroundColor(.accentColor)
+						
+						Button("Pick Cards Color") {
+							homeScreenViewModel.changeCatsColor()
+						}
+						.frame(minWidth: menuWidth, maxWidth: menuWidth + 20)
+						.foregroundColor(.accentColor)
+						
+						Button("Cancel") {
+							withAnimation(.linear(duration: 0.4)) {
+								homeScreenViewModel.isMenu.toggle()
+							}
+						}
+						.frame(minWidth: menuWidth, maxWidth: menuWidth + 20)
+						.foregroundColor(.accentColor)
 					}
-					.frame(minWidth: viewWidth, maxWidth: viewWidth + 20)
-					.foregroundColor(.accentColor)
+					.shadow(color: .shadowColor, radius: 7, x: 7, y: 7)
+					.animation(.linear(duration: 0.4))
+					.transition(.move(edge: .bottom))
+					.frame(minWidth: menuWidth, maxWidth: menuWidth, minHeight: 100, maxHeight: 100)
+					.offset(x: (geometry.size.width - menuWidth) / 2, y: geometry.frame(in: .local).maxY - 180)
 				}
-				.shadow(color: .shadowColor, radius: 7, x: 7, y: 7)
-				.animation(.linear(duration: 0.4))
-				.transition(.move(edge: .bottom))
-				.frame(minWidth: viewWidth, maxWidth: viewWidth + 20, minHeight: 100, maxHeight: 100)
-				.offset(y: UIScreen.screenHeight / 2 - 150)
 			}
 		}
     }

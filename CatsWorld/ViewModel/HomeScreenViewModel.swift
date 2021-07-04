@@ -31,7 +31,6 @@ extension HomeScreenViewModel {
 	
 	func saveChangesIf(_ expression: Bool, context: NSManagedObjectContext) {
 		if expression {
-			print("Save")
 			DispatchQueue.global().async {
 				do {
 					try context.save()

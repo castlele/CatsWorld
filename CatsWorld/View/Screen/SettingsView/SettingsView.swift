@@ -39,6 +39,15 @@ struct SettingsView: View {
 						
 						HStack {
 							Text("Shadows")
+								.allowsTightening(true)
+							
+							Button(action: {
+								settingsViewModel.showShadowsInfo()
+								
+							}, label: {
+								Image(systemName: "info.circle")
+									.foregroundColor(.accentColor)
+							})
 							
 							Picker("", selection: $settingsViewModel.shadows) {
 								Text("Default").tag(0)
@@ -47,10 +56,25 @@ struct SettingsView: View {
 							}
 							.pickerStyle(SegmentedPickerStyle())
 						}
+//						.overlay(
+//							GeometryReader { _ in
+//								Button(action: {
+//									settingsViewModel.showShadowsInfo()
+//
+//								}, label: {
+//									Image(systemName: "info.circle")
+//										.foregroundColor(.accentColor)
+//								})
+//								.offset(x: -8, y: -8)
+//							}
+//						)
 					}
 					.volumetricShadows()
 					.padding(.top)
 				}
+			}
+			.alert(isPresented: $settingsViewModel.isShadowInfo) {
+				settingsViewModel.alert
 			}
 		}
 		.ignoresSafeArea()

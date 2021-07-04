@@ -9,7 +9,7 @@ import SwiftUI
 
 final class SettingsViewModel: ObservableObject {
 	
-	static var shared = SettingsViewModel()
+	
 	
 	// MARK: - Color Scheme
 	
@@ -35,6 +35,10 @@ final class SettingsViewModel: ObservableObject {
 	
 	// MARK: - Graphics
 	
+	var alert: Alert!
+	
+	@Published var isShadowInfo = false
+	
 	/// Represents shadow style as `Int` number
 	/// - 0: - Default shadows
 	/// - 1: - Flat shadows
@@ -59,6 +63,12 @@ extension SettingsViewModel {
 	/// Saves everything to `UserDefaults`
 	func save() {
 		saveColorScheme()
+	}
+	
+	func showShadowsInfo() {
+		alert = Alert(title: Text("Shadow optimization"), message: Text("Shadow optimization info"), dismissButton: .cancel(Text("OK")))
+		
+		isShadowInfo.toggle()
 	}
 }
 
