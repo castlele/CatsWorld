@@ -21,8 +21,8 @@ struct CatsAvatar: View {
 	
     var body: some View {
         image
-			.interpolation(.high)
 			.resizable()
+			.scaledToFit()
 			.background(Color.mainColor)
 			.clipShape(Circle())
     }

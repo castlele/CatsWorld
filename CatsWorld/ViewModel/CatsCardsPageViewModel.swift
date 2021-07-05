@@ -154,8 +154,10 @@ final class CatsCardsPageViewModel: CatManipulator {
 	
 	@Published var catsImage: UIImage? {
 		willSet(newImage) {
-			if let newImage = newImage, newImage.pngData() != cat.image {
-				changes["image"] = .image(newImage)
+			if let imageData = validateImage(newImage) {
+				if let downsampledImage = downsampleImage(image: imageData) {
+					changes["image"] = .image(downsampledImage)
+				}
 			}
 		}
 	}
@@ -249,6 +251,36 @@ extension CatsCardsPageViewModel {
 		property = value
 	}
 	
+	private func validateImage(_ newImage: UIImage?) -> Data? {
+		if let image = newImage {
+			let imageData = image.jpegData(compressionQuality: 0.65)
+			
+			if imageData != cat.image {
+				return imageData
+			}
+		}
+		return nil
+	}
+	
+	private func downsampleImage(image: Data) -> UIImage? {
+		let pointSize = CGSize(width: UIScreen.screenWidth, height: UIScreen.screenHeight)
+		let imageSourceOptions = [kCGImageSourceShouldCache: false] as CFDictionary
+		
+		guard let imageSource = CGImageSourceCreateWithData(image as CFData, imageSourceOptions) else { return nil }
+		
+		let maxDimensionInPixels = max(pointSize.width, pointSize.height) * UIScreen.main.scale
+		
+		let downsampleOptions = [kCGImageSourceCreateThumbnailFromImageAlways: true,
+								 kCGImageSourceShouldCacheImmediately: true,
+								 kCGImageSourceCreateThumbnailWithTransform: true,
+								 kCGImageSourceThumbnailMaxPixelSize: maxDimensionInPixels
+		] as CFDictionary
+		
+		guard let downsampledImage = CGImageSourceCreateThumbnailAtIndex(imageSource, 0, downsampleOptions) else { return nil }
+		
+		return UIImage(cgImage: downsampledImage)
+	}
+	
 	/// Sets new values if needed
 	private func setNewValues() {
 		for change in changes.values {
@@ -300,7 +332,7 @@ extension CatsCardsPageViewModel {
 					setNew(value: additionalInfo, to: &cat.additionalInfo)
 
 				case let .image(catsImage):
-					if let imageData = catsImage.jpegData(compressionQuality: 0.5) {
+					if let imageData = catsImage.jpegData(compressionQuality: 0.65) {
 						setNew(value: imageData, to: &cat.image)
 					}
 			}
