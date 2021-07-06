@@ -10,6 +10,7 @@ import CoreData
 
 final class HomeScreenViewModel: CatManipulator {
 	
+	private var wasChanged = false
 	private var selectedCat: CatsCard!
 	
 	var editingCatsPageView: EditingCatsPageView!
@@ -21,6 +22,14 @@ final class HomeScreenViewModel: CatManipulator {
 	@Published var isColorPicker = false
 	@Published var isMenu = false
 	
+	@Published var pickedColor = Color.mainColor {
+		willSet(newColor) {
+			if !newColor.compareColorComponentsWith(pickedColor) {
+				makeChanges()
+			}
+		}
+	}
+	
 	var catsCardsColor: Color {
 		Color(selectedCat.wrappedColor)
 	}
@@ -29,8 +38,8 @@ final class HomeScreenViewModel: CatManipulator {
 // MARK:- Public methods
 extension HomeScreenViewModel {
 	
-	func saveChangesIf(_ expression: Bool, context: NSManagedObjectContext) {
-		if expression {
+	func saveChanges(context: NSManagedObjectContext) {
+		if wasChanged {
 			DispatchQueue.global().async {
 				do {
 					try context.save()
@@ -41,6 +50,10 @@ extension HomeScreenViewModel {
 				}
 			}
 		}
+	}
+	
+	func resetChanges() {
+		wasChanged = false
 	}
 	
 	func observeCat(context: NSManagedObjectContext) {
@@ -66,7 +79,7 @@ extension HomeScreenViewModel {
 	}
 	
 	func changeCatsColor() {
-		catsCardsColorPicker = CatsCardsColorPicker(cat: selectedCat, pickedColor: catsCardsColor, viewModel: self)
+		catsCardsColorPicker = CatsCardsColorPicker(viewModel: self)
 		
 		isMenu.toggle()
 		isColorPicker.toggle()
@@ -87,4 +100,12 @@ extension HomeScreenViewModel {
 	func selectCat(_ cat: CatsCard) { selectedCat = cat }
 	
 	func deselectCat() { selectedCat = nil }
+}
+
+// MARK: - Private methods
+extension HomeScreenViewModel {
+	
+	private func makeChanges() {
+		wasChanged = true
+	}
 }

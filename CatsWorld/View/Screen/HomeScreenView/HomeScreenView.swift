@@ -116,13 +116,11 @@ struct HomeScreenView: View {
 				.animation(.linear(duration: 0.4))
 				.transition(.move(edge: .bottom))
 				.onDisappear {
-					let isChanges = homeScreenViewModel.catsCardsColor.compareColorComponentsWith(
-						homeScreenViewModel.catsCardsColorPicker.pickedColor
-					)
-					homeScreenViewModel.saveChangesIf(!isChanges, context: managedObjectContext)
+					homeScreenViewModel.saveChanges(context: managedObjectContext)
 					
 					homeScreenViewModel.deselectCat()
 					homeScreenViewModel.catsCardsColorPicker = nil
+					homeScreenViewModel.resetChanges()
 				}
 			}
 			
