@@ -12,6 +12,8 @@ struct CatsCardsColorPicker: View {
 	private let viewWidth = UIScreen.screenWidth / 1.2
 	private let viewHeight = UIScreen.screenHeight / 1.5
 	private let minViewHeight = UIScreen.screenHeight / 1.75
+	
+	let cat: CatsCard
 		
 	@ObservedObject var viewModel: HomeScreenViewModel
 	
@@ -21,10 +23,10 @@ struct CatsCardsColorPicker: View {
 			
 			VStack {
 				HStack {
-					CatsMainInfoView(cat: viewModel.getCat(), age: .constant(.age), isAvatar: true)
+					CatsMainInfoView(cat: cat, age: .constant(.age), isAvatar: true)
 						.equatable()
 					
-					GenderSign(genderSign: viewModel.getCat().genderSign, foregroundColor: .textColor)
+					GenderSign(genderSign: cat.genderSign, foregroundColor: .textColor)
 						.equatable()
 						.scaleEffect(1.25)
 				}
@@ -33,16 +35,15 @@ struct CatsCardsColorPicker: View {
 				.background(viewModel.pickedColor)
 				.cornerRadius(20)
 				.compositingGroup()
-				.shadow(color: .shadowColor, radius: 8, x: 10, y: 10)
+//				.shadow(color: .shadowColor, radius: 8, x: 10, y: 10)
+				.volumetricShadows(color1: .clear)
 				
 				Spacer()
 				
 				VStack(spacing: 15) {
 					ColorPickerView(colors: ColorPick.firstHalf, pickedColor: $viewModel.pickedColor)
-						.equatable()
 					
 					ColorPickerView(colors: ColorPick.secondHalf, pickedColor: $viewModel.pickedColor)
-						.equatable()
 				}
 				.padding()
 				.background(
@@ -56,7 +57,7 @@ struct CatsCardsColorPicker: View {
 				Spacer()
 				
 				DoneButton(action: {
-					viewModel.getCat().setColor(viewModel.pickedColor)
+					cat.setColor(viewModel.pickedColor)
 					
 					withAnimation(.spring()) {
 						viewModel.isColorPicker.toggle()
@@ -64,29 +65,29 @@ struct CatsCardsColorPicker: View {
 				}, content: {
 					Text("Submit")
 						.foregroundColor(.volumeEffectShadowColor)
-						.font(.title)
+						.font(.system(.title, design: .rounded))
 						.bold()
-						.frame(width: viewWidth * 3/4, height: 50)
-						.background(
-							RoundedRectangle(cornerRadius: 20, style: .continuous)
-								.fill(Color.semiAccentColor)
-						)
-						.padding([.bottom, .top])
 				})
-				.padding(.bottom)
+				.frame(width: viewWidth * 3/4, height: 50)
+				.background(Color.semiAccentColor)
+				.clipShape(RoundedRectangle(cornerRadius: 20))
 				.compositingGroup()
 				.volumetricShadows(isPressed: false)
-				.onAppear {
-					viewModel.pickedColor = viewModel.catsCardsColor
-				}
+				.padding([.top, .bottom])
 			}
 		}
 		.frame(minWidth: viewWidth, maxWidth: viewWidth + 20, minHeight: minViewHeight, maxHeight: viewHeight)
-		.cornerRadius(25)
+		.cornerRadius(20)
+		.onAppear {
+			viewModel.pickedColor = viewModel.catsCardsColor
+		}
+		.onDisappear {
+			viewModel.isColorPicker = false
+		}
     }
 }
 
-fileprivate struct ColorPickerView: View, Equatable {
+fileprivate struct ColorPickerView: View {
 	
 	let colors: [ColorPick]
 	@Binding var pickedColor: Color
@@ -109,14 +110,10 @@ fileprivate struct ColorPickerView: View, Equatable {
 			}
 		}
 	}
-	
-	static func == (lhs: Self, rhs: Self) -> Bool {
-		lhs.pickedColor.compareColorComponentsWith(rhs.pickedColor) && lhs.colors.count == rhs.colors.count
-	}
 }
 
 struct CatsCardsColorPicker_Previews: PreviewProvider {
     static var previews: some View {
-		CatsCardsColorPicker(viewModel: HomeScreenViewModel())
+		CatsCardsColorPicker(cat: CatsCard(context: PersistenceController.preview.conteiner.viewContext), viewModel: HomeScreenViewModel())
     }
 }

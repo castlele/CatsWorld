@@ -18,7 +18,7 @@ struct HomeScreenView: View {
 		entity: CatsCard.entity(),
 		sortDescriptors: [],
 		predicate: nil,
-		animation: nil
+		animation: .spring()
 	) var catsCards: FetchedResults<CatsCard>
 	
 	@StateObject var homeScreenViewModel = HomeScreenViewModel()
@@ -130,18 +130,21 @@ struct HomeScreenView: View {
 						Button("Delete") {
 							homeScreenViewModel.deleteCat(context: managedObjectContext)
 						}
+						.font(.system(.body, design: .rounded))
 						.frame(minWidth: menuWidth, maxWidth: menuWidth + 20)
 						.foregroundColor(.red)
 						
 						Button("Edit") {
 							homeScreenViewModel.editCat(context: managedObjectContext)
 						}
+						.font(.system(.body, design: .rounded))
 						.frame(minWidth: menuWidth, maxWidth: menuWidth + 20)
 						.foregroundColor(.accentColor)
 						
 						Button("Pick Cards Color") {
 							homeScreenViewModel.changeCatsColor()
 						}
+						.font(.system(.body, design: .rounded))
 						.frame(minWidth: menuWidth, maxWidth: menuWidth + 20)
 						.foregroundColor(.accentColor)
 						
@@ -150,6 +153,7 @@ struct HomeScreenView: View {
 								homeScreenViewModel.isMenu.toggle()
 							}
 						}
+						.font(.system(.body, design: .rounded))
 						.frame(minWidth: menuWidth, maxWidth: menuWidth + 20)
 						.foregroundColor(.accentColor)
 					}

@@ -79,7 +79,7 @@ extension HomeScreenViewModel {
 	}
 	
 	func changeCatsColor() {
-		catsCardsColorPicker = CatsCardsColorPicker(viewModel: self)
+		catsCardsColorPicker = CatsCardsColorPicker(cat: getCat(), viewModel: self)
 		
 		isMenu.toggle()
 		isColorPicker.toggle()
