@@ -20,7 +20,7 @@ struct BreedsDetailView: View {
 			
 			Group {
 				CatsDescriptionSection {
-					Text(breed.name)
+					Text(breed.name.localize())
 					
 					CatsDescriptionView(descriptions: breed.getDescriptionsFor(category: .psycological))
 				}

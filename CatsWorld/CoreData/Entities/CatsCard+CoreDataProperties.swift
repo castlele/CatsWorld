@@ -215,7 +215,7 @@ extension CatsCard: Describable {
 			case .physical:
 				return
 					[
-						Description("Suppressed tail".localize(), .bool(self.suppressedTail)),
+						Description("Suppressed Tail".localize(), .bool(self.suppressedTail)),
 						Description("Short legs".localize(), .bool(self.shortLegs)),
 						Description("Hairless".localize(), .bool(self.hairless)),
 						Description("Weight".localize(), .float(self.weight)),
@@ -225,9 +225,9 @@ extension CatsCard: Describable {
 			case .psycological:
 				return
 					[
-						Description("Stranger friendly".localize(), .int(self.strangerFriendly)),
-						Description("Child friendly".localize(), .int(self.childFriendly)),
-						Description("Dog friendly".localize(), .int(self.dogFriendly)),
+						Description("Stranger Friendly".localize(), .int(self.strangerFriendly)),
+						Description("Child Friendly".localize(), .int(self.childFriendly)),
+						Description("Dog Friendly".localize(), .int(self.dogFriendly)),
 						Description("Temperament".localize(), .temperament(self.wrappedTemperament)),
 					]
 				

@@ -95,44 +95,52 @@ extension Breed: Describable {
 			case .psycological:
 				return
 					[
-						Description("Temperament", .str(self.temperament)),
-						Description("Adaptability", .int(Int16(self.adaptability))),
-						Description("Affection Level", .int(Int16(self.affectionLevel))),
-						Description("Stranger Friendly", .int(Int16(self.strangerFriendly))),
-						Description("Child Friendly", .int(Int16(self.childFriendly))),
-						Description("Dog Friendly", .int(Int16(self.dogFriendly))),
-						Description("Social Needs", .int(Int16(self.socialNeeds))),
-						Description("Intelligence", .int(Int16(self.intelligence)))
+						Description("Temperament".localize(), .str(makeTemperament(self.temperament))),
+						Description("Adaptability".localize(), .int(Int16(self.adaptability))),
+						Description("Affection Level".localize(), .int(Int16(self.affectionLevel))),
+						Description("Stranger Friendly".localize(), .int(Int16(self.strangerFriendly))),
+						Description("Child Friendly".localize(), .int(Int16(self.childFriendly))),
+						Description("Dog Friendly".localize(), .int(Int16(self.dogFriendly))),
+						Description("Social Needs".localize(), .int(Int16(self.socialNeeds))),
+						Description("Intelligence".localize(), .int(Int16(self.intelligence)))
 					]
 				
 			case .physical:
 				return
 					[
-						Description("Standard Weight", .str(self.weight.imperial)),
-						Description("Standard Metrics", .str(self.weight.metric)),
-						Description("Health Issues", .int(Int16(self.healthIssues))),
-						Description("Energy Level", .int(Int16(self.energyLevel))),
-						Description("Grooming", .int(Int16(self.grooming))),
-						Description("Shedding Level", .int(Int16(self.sheddingLevel))),
-						Description("Hairless", .bool(self.hairless == 1 ? true : false)),
-						Description("Hypoallergic", .bool(self.hypoAllergenic == 1 ? true : false)),
-						Description("Life Span", .str(self.lifeSpan)),
-						Description("Short legs", .bool(self.shortLegs == 1 ? true : false)),
-						Description("Suppressed Tail", .bool(self.suppressedTail == 1 ? true : false)),
-						Description("Vocalisation", .bool(self.vocalisation == 1 ? true : false))
+						Description("Standard Weight".localize(), .str(self.weight.imperial)),
+						Description("Standard Metrics".localize(), .str(self.weight.metric)),
+						Description("Health Issues".localize(), .int(Int16(self.healthIssues))),
+						Description("Energy Level".localize(), .int(Int16(self.energyLevel))),
+						Description("Grooming".localize(), .int(Int16(self.grooming))),
+						Description("Shedding Level".localize(), .int(Int16(self.sheddingLevel))),
+						Description("Hairless".localize(), .bool(self.hairless == 1 ? true : false)),
+						Description("Hypoallergenic".localize(), .bool(self.hypoAllergenic == 1 ? true : false)),
+						Description("Life Span".localize(), .str(self.lifeSpan)),
+						Description("Short legs".localize(), .bool(self.shortLegs == 1 ? true : false)),
+						Description("Suppressed Tail".localize(), .bool(self.suppressedTail == 1 ? true : false)),
+						Description("Vocalization".localize(), .bool(self.vocalisation == 1 ? true : false))
 					]
 				
 			case .other:
 				return
 					[
-						Description("Natural", .bool(self.natural == 1 ? true : false)),
-						Description("Rare", .bool(self.rare == 1 ? true : false)),
-						Description("Origin", .str(self.origin)),
-						Description("Description", .str(self.description))
+						Description("Natural".localize(), .bool(self.natural == 1 ? true : false)),
+						Description("Rare".localize(), .bool(self.rare == 1 ? true : false)),
+						Description("Origin".localize(), .str(self.origin.localize())),
+						Description("Description".localize(), .str("\(self.name) disc".localize()))
 					]
 				
 			default:
 				return []
 		}
+	}
+	
+	private func makeTemperament(_ originalStr: String) -> String {
+		let localizedArray = originalStr
+			.split(separator: ",")
+			.map { String($0).trimmingCharacters(in: .whitespacesAndNewlines).lowercased().localize() }
+		
+		return localizedArray.joined(separator: ", ")
 	}
 }
