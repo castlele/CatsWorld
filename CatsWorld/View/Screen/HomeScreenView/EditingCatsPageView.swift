@@ -99,7 +99,8 @@ struct EditingCatsPageView: View {
 
 						Spacer()
 
-						Slider(value: $catsViewModel.weight, in: 0...50)
+						Stepper("Weight stepper", value: $catsViewModel.weight, in: 0...50, step: 0.1)
+							.labelsHidden()
 					}
 
 					Group {
