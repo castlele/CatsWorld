@@ -49,10 +49,6 @@ struct CatsMainInfoView: View {
 		HStack(spacing: 20) {
 			if isAvatar {
 				CatsAvatar(avatar: cat.wrappedImage)
-					.background(
-						Circle()
-							.stroke(Color.accentColor, lineWidth: 4)
-					)
 					.frame(minWidth: 50, maxWidth: 100, minHeight: 50, maxHeight: 100)
 					.overlay(
 						GeometryReader { _ in

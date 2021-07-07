@@ -51,7 +51,7 @@ struct EditingCatsPageView: View {
 				CatsAvatar(avatar: catsViewModel.catsImage)
 					.frame(width: 150, height: 150)
 					.background(EarsView())
-					.padding(.top)
+						.padding([.top, .bottom])
 					.simultaneousGesture(
 						TapGesture()
 							.onEnded { _ in

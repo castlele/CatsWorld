@@ -25,6 +25,10 @@ struct CatsAvatar: View {
 			.scaledToFit()
 			.background(Color.mainColor)
 			.clipShape(Circle())
+			.background(
+				Circle()
+					.stroke(Color.accentColor, lineWidth: 4)
+			)
     }
 }
 
