@@ -9,8 +9,8 @@ import Foundation
 
 enum EndPoint {
 	
-	case breedsAPI([CatAPIQuery])
-	case imagesAPI([CatAPIQuery])
+	case breedsAPI([(query: CatAPIQuery, value: String)])
+	case imagesAPI([(query: CatAPIQuery, value: String)])
 	
 	/// Makes URL from with queries
 	/// O(n) complexity, where n - amount of queries
@@ -21,7 +21,7 @@ enum EndPoint {
 				stringURL = "https://api.thecatapi.com/v1/breeds"
 				addQuery(for: &stringURL, queries: queries)
 			case let .imagesAPI(queries):
-				stringURL = "https://api.thecatapi.com/v1/breeds"
+				stringURL = "https://api.thecatapi.com/v1/images/search"
 				addQuery(for: &stringURL, queries: queries)
 		}
 		return URL(string: stringURL)
@@ -31,17 +31,19 @@ enum EndPoint {
 	/// - Parameters:
 	///   - url: inout URL as string
 	///   - queries: array of `CatAPIQuery`
-	private func addQuery(for url: inout String, queries: [CatAPIQuery]) {
+	private func addQuery(for url: inout String, queries: [(query: CatAPIQuery, value: String)]) {
 		guard !queries.isEmpty else { return }
 		
 		url += "?"
 		
-		for query in queries {
-			url += query.rawValue
+		for (query, value) in queries {
+			url += "&"
+			url += query.rawValue + value
 		}
 	}
 }
 
 enum CatAPIQuery: String {
-	case attachBreed = "attach_breed=0"
+	case breedID = "breed_ids="
+	case attachBreed = "attach_breed="
 }
