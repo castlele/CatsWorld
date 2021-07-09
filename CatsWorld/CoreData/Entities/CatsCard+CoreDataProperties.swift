@@ -91,8 +91,8 @@ extension CatsCard: Identifiable {
 		return dateOfBirth.getFormattedDate(format: format)
 	}
 
-	var wrappedColor: UIColor {
-		UIColor.color(withData: color)
+	var wrappedColor: Color {
+		Color.color(withData: color)
 	}
 	
 	var genderColor: Color {
@@ -129,7 +129,7 @@ extension CatsCard: Identifiable {
 	var wrappedCatShows: [Show] {
 		if let data = catShows {
 			do {
-				let shows: [Show] = try JSONParser.parse(from: data)
+				let shows: [Show] = try JSONParser.shared.parse(from: data)
 				return shows
 			} catch {
 				return []
@@ -143,7 +143,7 @@ extension CatsCard: Identifiable {
 		
 		if let data = temperament {
 			do {
-				return try JSONParser.parse(from: data)
+				return try JSONParser.shared.parse(from: data)
 			} catch {
 				return defaultValue
 			}
@@ -158,8 +158,7 @@ extension CatsCard {
 	/// Converts `Color` to data and assigns it to `self.color` property
 	/// - Parameter color: `SwiftUI` `Color` instance
 	func setColor(_ color: Color) {
-		let uiColor = UIColor(color)
-		let data = uiColor.encode()
+		let data = color.encode()
 		
 		self.color = data
 	}

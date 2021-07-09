@@ -27,6 +27,7 @@
 		7B33477D267E5C7500ED6F5F /* PawView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B33477C267E5C7500ED6F5F /* PawView.swift */; };
 		7B33A11D267B50BD00C780C0 /* LinearGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B33A11C267B50BD00C780C0 /* LinearGradient.swift */; };
 		7B33A11F267B586600C780C0 /* RadarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B33A11E267B586600C780C0 /* RadarChart.swift */; };
+		7B43FF512697633C00EC60B6 /* ImageProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B43FF502697633C00EC60B6 /* ImageProcessor.swift */; };
 		7B52B021269068E90065B7CB /* Description.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B52B020269068E90065B7CB /* Description.swift */; };
 		7B52B023269069B10065B7CB /* CatManipulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B52B022269069B10065B7CB /* CatManipulator.swift */; };
 		7B56A10A2673AE2F00BEF8DD /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B56A1092673AE2F00BEF8DD /* UIImage.swift */; };
@@ -44,7 +45,6 @@
 		7B650BED268C6AA000691E3B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7B650BEF268C6AA000691E3B /* Localizable.strings */; };
 		7B66A10626556AE100FDC9A7 /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B66A10526556AE100FDC9A7 /* RatingView.swift */; };
 		7B6B18F7268B621900BACCE4 /* ColorPick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6B18F6268B621900BACCE4 /* ColorPick.swift */; };
-		7B6E3D42265272AF00B04B62 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6E3D41265272AF00B04B62 /* UIColor.swift */; };
 		7B6E3D4526527DA200B04B62 /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6E3D4426527DA200B04B62 /* ImagePickerView.swift */; };
 		7B6E3D492652CB4300B04B62 /* CatsMainInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6E3D482652CB4300B04B62 /* CatsMainInfoView.swift */; };
 		7B6E3D4B2652D59E00B04B62 /* EditButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6E3D4A2652D59E00B04B62 /* EditButton.swift */; };
@@ -109,6 +109,7 @@
 		7B33477C267E5C7500ED6F5F /* PawView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PawView.swift; sourceTree = "<group>"; };
 		7B33A11C267B50BD00C780C0 /* LinearGradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinearGradient.swift; sourceTree = "<group>"; };
 		7B33A11E267B586600C780C0 /* RadarChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadarChart.swift; sourceTree = "<group>"; };
+		7B43FF502697633C00EC60B6 /* ImageProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageProcessor.swift; sourceTree = "<group>"; };
 		7B52B020269068E90065B7CB /* Description.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Description.swift; sourceTree = "<group>"; };
 		7B52B022269069B10065B7CB /* CatManipulator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatManipulator.swift; sourceTree = "<group>"; };
 		7B56A1092673AE2F00BEF8DD /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
@@ -128,7 +129,6 @@
 		7B650BF0268C6AA200691E3B /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		7B66A10526556AE100FDC9A7 /* RatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
 		7B6B18F6268B621900BACCE4 /* ColorPick.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPick.swift; sourceTree = "<group>"; };
-		7B6E3D41265272AF00B04B62 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		7B6E3D4426527DA200B04B62 /* ImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
 		7B6E3D482652CB4300B04B62 /* CatsMainInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatsMainInfoView.swift; sourceTree = "<group>"; };
 		7B6E3D4A2652D59E00B04B62 /* EditButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditButton.swift; sourceTree = "<group>"; };
@@ -425,6 +425,7 @@
 			children = (
 				7B8B9A1E2642818000E98B8E /* NetworkRequester.swift */,
 				7B8B9A1C2642816D00E98B8E /* JSONParser.swift */,
+				7B43FF502697633C00EC60B6 /* ImageProcessor.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -442,7 +443,6 @@
 		7BCF801B267CE17B0064C6E6 /* UIKit */ = {
 			isa = PBXGroup;
 			children = (
-				7B6E3D41265272AF00B04B62 /* UIColor.swift */,
 				7B56A1092673AE2F00BEF8DD /* UIImage.swift */,
 				7BE159C1267CA73400A0E846 /* UIScreen.swift */,
 			);
@@ -640,7 +640,6 @@
 				7B874684264B19F8006DC6A7 /* MapView.swift in Sources */,
 				7B2F5428268F1CCE00D587FD /* TabBarView.swift in Sources */,
 				7B096CA92657B80A00B99D3E /* View.swift in Sources */,
-				7B6E3D42265272AF00B04B62 /* UIColor.swift in Sources */,
 				7B33477D267E5C7500ED6F5F /* PawView.swift in Sources */,
 				7B861434264D1739008616DB /* Stash.xcdatamodeld in Sources */,
 				7B1CC15F268DB26800503A41 /* SettingsView.swift in Sources */,
@@ -656,6 +655,7 @@
 				7B6E3D492652CB4300B04B62 /* CatsMainInfoView.swift in Sources */,
 				7BE159C2267CA73400A0E846 /* UIScreen.swift in Sources */,
 				7BE498972653E322004F7F52 /* CatsCardsPageViewModel.swift in Sources */,
+				7B43FF512697633C00EC60B6 /* ImageProcessor.swift in Sources */,
 				7B33A11D267B50BD00C780C0 /* LinearGradient.swift in Sources */,
 				7BB614662686407D001924F7 /* XButton.swift in Sources */,
 				7B33A11F267B586600C780C0 /* RadarChart.swift in Sources */,

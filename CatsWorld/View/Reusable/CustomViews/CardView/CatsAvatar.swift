@@ -9,18 +9,18 @@ import SwiftUI
 
 struct CatsAvatar: View {
 	
-	let avatar: UIImage?
+	let avatar: Image
 	
-	var image: Image {
-		if let avatar = avatar {
-			return Image(uiImage: avatar)
-		} else {
-			return Image(systemName: "person.crop.circle.fill")
-		}
+	init(avatar: UIImage) {
+		self.avatar = Image(uiImage: avatar)
+	}
+	
+	init(avatar: Image) {
+		self.avatar = avatar
 	}
 	
     var body: some View {
-        image
+        avatar
 			.resizable()
 			.scaledToFit()
 			.background(Color.mainColor)

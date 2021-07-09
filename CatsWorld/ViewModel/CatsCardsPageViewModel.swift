@@ -155,7 +155,7 @@ final class CatsCardsPageViewModel: CatManipulator {
 	@Published var catsImage: UIImage? {
 		willSet(newImage) {
 			if let imageData = validateImage(newImage) {
-				if let downsampledImage = downsampleImage(image: imageData) {
+				if let downsampledImage = ImageProcessor.shared.downsampleImage(image: imageData) {
 					changes["image"] = .image(downsampledImage)
 				}
 			}
@@ -260,25 +260,6 @@ extension CatsCardsPageViewModel {
 			}
 		}
 		return nil
-	}
-	
-	private func downsampleImage(image: Data) -> UIImage? {
-		let pointSize = CGSize(width: UIScreen.screenWidth, height: UIScreen.screenHeight)
-		let imageSourceOptions = [kCGImageSourceShouldCache: false] as CFDictionary
-		
-		guard let imageSource = CGImageSourceCreateWithData(image as CFData, imageSourceOptions) else { return nil }
-		
-		let maxDimensionInPixels = max(pointSize.width, pointSize.height) * UIScreen.main.scale
-		
-		let downsampleOptions = [kCGImageSourceCreateThumbnailFromImageAlways: true,
-								 kCGImageSourceShouldCacheImmediately: true,
-								 kCGImageSourceCreateThumbnailWithTransform: true,
-								 kCGImageSourceThumbnailMaxPixelSize: maxDimensionInPixels
-		] as CFDictionary
-		
-		guard let downsampledImage = CGImageSourceCreateThumbnailAtIndex(imageSource, 0, downsampleOptions) else { return nil }
-		
-		return UIImage(cgImage: downsampledImage)
 	}
 	
 	/// Sets new values if needed

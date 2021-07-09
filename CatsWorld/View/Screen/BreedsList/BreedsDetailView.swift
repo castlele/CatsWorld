@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct BreedsDetailView: View {
-		
+			
 	let breed: Breed
 	
     var body: some View {
 		ScrollView {
-			CatsAvatar(avatar: UIImage(systemName: "person.crop.circle.fill")!)
+			CatsAvatar(avatar: Image(systemName: "person.crop.circle.fill"))
 				.frame(width: 150, height: 150)
 				.background(EarsView())
 				.padding([.top, .bottom])

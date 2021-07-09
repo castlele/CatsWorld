@@ -22,8 +22,15 @@ extension NetworkRequester {
 	///   - url: `URL` where request will be done
 	///   - headers: Headers of the `URLRequest`
 	///   - completion: Action, that will be done after loading data
-	func makeRequest(url: URL, headers: [String: String], completion: @escaping (Result<Data, CWError>) -> Void) {
-		let request = makeRequestObject(url: url, with: headers)
+	func makeRequest(url: URL, headers: [String: String]?, completion: @escaping (Result<Data, CWError>) -> Void) {
+		var request: URLRequest
+		
+		if let headers = headers {
+			request = makeRequestObject(url: url, with: headers)
+		} else {
+			request = makeRequestObject(url: url)
+		}
+		
 		load(request: request, completion: completion)
 	}
 }
@@ -54,6 +61,11 @@ extension NetworkRequester {
 	private func makeRequestObject(url: URL, with headers: [String: String]) -> URLRequest {
 		let request = NSMutableURLRequest(url: url, cachePolicy: .returnCacheDataElseLoad, timeoutInterval: 15)
 		add(headers: headers, for: request)
+		return request as URLRequest
+	}
+	
+	private func makeRequestObject(url: URL) -> URLRequest {
+		let request = NSMutableURLRequest(url: url, cachePolicy: .returnCacheDataElseLoad, timeoutInterval: 15)
 		return request as URLRequest
 	}
 	

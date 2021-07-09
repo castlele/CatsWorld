@@ -17,6 +17,7 @@ final class JSONParser {
 
 // MARK:- Public methods
 extension JSONParser {
+	
 	/// Parse JSON from `Data`
 	/// - Parameters:
 	///   - data: Data from which JSON will be parsed
@@ -32,11 +33,29 @@ extension JSONParser {
 		}
 	}
 	
+	func parseWithSerialization(from data: Data, argument: String, completion: @escaping (Result<Any, CWError>) -> Void) {
+		do {
+			guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {
+				completion(.failure(.decodeError))
+				return
+			}
+			guard let result = json[argument] else {
+				completion(.failure(.decodeError))
+				return
+			}
+			
+			completion(.success(result))
+			
+		} catch {
+			completion(.failure(.decodeError))
+		}
+	}
+	
 	/// Parse JSON from `Data` and return array of objects, which were parsed
 	/// - Parameter data: Data from which JSON will be parsed
 	/// - Throws: Standard `JSONDecoder.decode(_:from:)` errors
 	/// - Returns: `Array` of objects which were parsed
-	static func parse<T: Decodable>(from data: Data) throws -> T {
+	func parse<T: Decodable>(from data: Data) throws -> T {
 		let decoder = JSONDecoder()
 		let decodedJSON = try decoder.decode(T.self, from: data)
 		return decodedJSON
@@ -46,7 +65,7 @@ extension JSONParser {
 	/// - Parameter obj: `Encodable` object to encode
 	/// - Throws: Standard `JSONEncoder.encode(_:)` errors
 	/// - Returns: Encoded object as `Data`
-	static func encode<T: Encodable>(_ obj: T) throws -> Data {
+	func encode<T: Encodable>(_ obj: T) throws -> Data {
 		let encoder = JSONEncoder()
 		let data = try encoder.encode(obj)
 		return data

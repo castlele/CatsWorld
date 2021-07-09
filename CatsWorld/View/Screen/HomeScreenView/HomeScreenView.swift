@@ -134,19 +134,26 @@ struct HomeScreenView: View {
 						.frame(minWidth: menuWidth, maxWidth: menuWidth + 20)
 						.foregroundColor(.red)
 						
+						Button("More info") {
+							homeScreenViewModel.editCat(context: managedObjectContext)
+						}
+						.font(.system(.body, design: .rounded))
+						.frame(minWidth: menuWidth, maxWidth: menuWidth + 20)
+						.foregroundColor(.primary)
+						
 						Button("Edit") {
 							homeScreenViewModel.editCat(context: managedObjectContext)
 						}
 						.font(.system(.body, design: .rounded))
 						.frame(minWidth: menuWidth, maxWidth: menuWidth + 20)
-						.foregroundColor(.accentColor)
+						.foregroundColor(.primary)
 						
 						Button("Pick Cards Color") {
 							homeScreenViewModel.changeCatsColor()
 						}
 						.font(.system(.body, design: .rounded))
 						.frame(minWidth: menuWidth, maxWidth: menuWidth + 20)
-						.foregroundColor(.accentColor)
+						.foregroundColor(.primary)
 						
 						Button("Cancel") {
 							withAnimation(.linear(duration: 0.4)) {
@@ -155,13 +162,13 @@ struct HomeScreenView: View {
 						}
 						.font(.system(.body, design: .rounded))
 						.frame(minWidth: menuWidth, maxWidth: menuWidth + 20)
-						.foregroundColor(.accentColor)
+						.foregroundColor(.primary)
 					}
 					.shadow(color: .shadowColor, radius: 7, x: 7, y: 7)
 					.animation(.linear(duration: 0.4))
 					.transition(.move(edge: .bottom))
 					.frame(minWidth: menuWidth, maxWidth: menuWidth, minHeight: 100, maxHeight: 100)
-					.offset(x: (geometry.size.width - menuWidth) / 2, y: geometry.frame(in: .local).maxY - 180)
+					.offset(x: (geometry.size.width - menuWidth) / 2, y: geometry.frame(in: .local).maxY - 205)
 				}
 			}
 		}

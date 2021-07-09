@@ -26,7 +26,7 @@ struct CatsCardsColorPicker: View {
 					CatsMainInfoView(cat: cat, age: .constant(.age), isAvatar: true)
 						.equatable()
 					
-					GenderSign(genderSign: cat.genderSign, foregroundColor: .textColor)
+					GenderSign(genderSign: cat.genderSign, foregroundColor: .primary)
 						.equatable()
 						.scaleEffect(1.25)
 				}
@@ -35,7 +35,6 @@ struct CatsCardsColorPicker: View {
 				.background(viewModel.pickedColor)
 				.cornerRadius(20)
 				.compositingGroup()
-//				.shadow(color: .shadowColor, radius: 8, x: 10, y: 10)
 				.volumetricShadows(color1: .clear)
 				
 				Spacer()

@@ -29,6 +29,6 @@ extension GenderSign: Equatable {
 
 struct GenderSign_Previews: PreviewProvider {
     static var previews: some View {
-		GenderSign(genderSign: "", foregroundColor: .textColor)
+		GenderSign(genderSign: "", foregroundColor: .primary)
     }
 }

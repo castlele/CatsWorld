@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// MARK: - Initialisations
 extension Color {
 	
 	private typealias ColorComponents = (red: Double, green: Double, blue: Double, alpha: Double)
@@ -21,8 +22,8 @@ extension Color {
 	}
 }
 
+// MARK: - Properties
 extension Color {
-	static let textColor = Color.black
 	static let accentColor = Color("accentColor")
 	static let semiAccentColor = Color("semiAccentColor")
 	static let volumeEffectColorTop = Color("3DEffectColorTop")
@@ -49,7 +50,7 @@ extension Color {
 	static func mainUIColor() -> UIColor { UIColor(Color.mainColor) }
 	
 	/// Returns `Color.accentColor` as `UIColor`
-	static func accentUIColor() -> UIColor { UIColor(Color.accentColor) }
+	static func accentUIColor() -> UIColor { UIColor(named: "accentColor")! }
 	
 	/// Returns `Color.semiAccentColor` as `UIColor`
 	static func semiAccentUIColor() -> UIColor { UIColor(Color.semiAccentColor) }
@@ -96,5 +97,36 @@ extension Color {
 												   )
 		
 		return Color(adjustedComponents)
+	}
+}
+
+// MARK: - Encode and Decode Color
+extension Color {
+	
+	/// Decode `UIColor` from `Data`
+	/// - Parameter data: Optional data that represents color
+	/// - Returns: Decoded `UIColor` if succseed or default `.white`
+	static func color(withData data: Data?) -> Color {
+		do {
+			if let data = data {
+				let uiColor = try NSKeyedUnarchiver.unarchivedObject(ofClass: UIColor.self, from: data)
+				return Color(uiColor ?? UIColor(named: "mainColor")!)
+			}
+			return Color("mainColor")
+		} catch {
+			fatalError("\(error.localizedDescription)")
+		}
+	}
+	
+	/// Encode `UIColor` to `Data`
+	/// - Returns: `Data` that represents `UIColor`
+	func encode() -> Data {
+		do {
+			let uiColor = UIColor(self)
+			let data = try NSKeyedArchiver.archivedData(withRootObject: uiColor, requiringSecureCoding: false)
+			return data
+		} catch {
+			fatalError("\(error.localizedDescription)")
+		}
 	}
 }

@@ -48,7 +48,7 @@ struct EditingCatsPageView: View {
 			})
 			
 			ScrollView {
-				CatsAvatar(avatar: catsViewModel.catsImage)
+				CatsAvatar(avatar: catsViewModel.catsImage ?? UIImage(systemName: "person.crop.circle.fill")!)
 					.frame(width: 150, height: 150)
 					.background(EarsView())
 						.padding([.top, .bottom])
@@ -65,6 +65,7 @@ struct EditingCatsPageView: View {
 						.frame(minWidth: 150, maxWidth: UIScreen.screenWidth)
 						.disableAutocorrection(true)
 						.accentColor(.accentColor)
+						.font(.system(.body, design: .rounded))
 					
 					DatePicker(
 						"Date of birth".localize(),
@@ -72,10 +73,12 @@ struct EditingCatsPageView: View {
 						displayedComponents: .date
 					)
 					.datePickerStyle(DefaultDatePickerStyle())
+					.font(.system(.body, design: .rounded))
 					
 					Picker("What is the cats's gender", selection: $catsViewModel.gender) {
 						ForEach(0..<2) { index in
 							Text("\(Gender.allCases[index].rawValue.localize().capitalized)").tag(Gender.allCases[index])
+								.font(.system(.body, design: .rounded))
 						}
 					}
 					.pickerStyle(SegmentedPickerStyle())
@@ -83,40 +86,45 @@ struct EditingCatsPageView: View {
 					Picker("Breed of the cat", selection: $catsViewModel.breed) {
 						ForEach(BreedsViewModel.shared.breeds, id: \.name) { breed in
 							Text(breed.name.localize())
+								.font(.system(.body, design: .rounded))
 						}
 					}
 					.pickerStyle(InlinePickerStyle())
 				}
 				.volumetricShadows()
 				.sectionPadding()
-				.foregroundColor(.textColor)
 				.accentColor(.accentColor)
 				
 				// MARK:- Physical section
 				CatsDescriptionSection() {
 					HStack {
 						Text("Weight \(catsViewModel.weight, specifier: "%.1f") kg")
+							.font(.system(.body, design: .rounded))
 
 						Spacer()
 
 						Stepper("Weight stepper", value: $catsViewModel.weight, in: 0...50, step: 0.1)
 							.labelsHidden()
+							.font(.system(.body, design: .rounded))
 					}
 
 					Group {
 						Toggle("Is castrated", isOn: $catsViewModel.isCastrated)
+							.font(.system(.body, design: .rounded))
 						
 						Toggle("Is the tail suppressed", isOn: $catsViewModel.suppressedTail)
+							.font(.system(.body, design: .rounded))
 						
 						Toggle("Is the legs are short", isOn: $catsViewModel.shortLegs)
+							.font(.system(.body, design: .rounded))
 						
 						Toggle("Is hair less", isOn: $catsViewModel.hairless)
+							.font(.system(.body, design: .rounded))
 					}
 					.toggleStyle(SwitchToggleStyle(tint: .accentColor))
 				}
 				.volumetricShadows()
 				.sectionPadding()
-				.foregroundColor(.textColor)
 				.accentColor(.accentColor)
 				
 				// MARK:- Psycological section
@@ -124,29 +132,31 @@ struct EditingCatsPageView: View {
 					Picker("Temperament", selection: $catsViewModel.temperament) {
 						ForEach(Temperament.allCases, id: \.self) { temperament in
 							Text("\(temperament.rawValue.localize().capitalized)")
-								.foregroundColor(.textColor)
-								.fontWeight(.ultraLight)
+								.font(.system(.title, design: .rounded))
 						}
 					}
-					.pickerStyle(SegmentedPickerStyle())
+					.pickerStyle(DefaultPickerStyle())
 
 					RatingView(rating: $catsViewModel.strangerFriendly,
 							   label: "Stranger friendly".localize(),
 							   offImage: Image(systemName: "star"),
 							   onImage: Image(systemName: "star.fill")
 					)
+					.font(.system(.body, design: .rounded))
 
 					RatingView(rating: $catsViewModel.childFriendly,
 							   label: "Child friendly".localize(),
 							   offImage: Image(systemName: "star"),
 							   onImage: Image(systemName: "star.fill")
 					)
+					.font(.system(.body, design: .rounded))
 
 					RatingView(rating: $catsViewModel.dogFriendly,
 							   label: "Dog friendly".localize(),
 							   offImage: Image(systemName: "star"),
 							   onImage: Image(systemName: "star.fill")
 					)
+					.font(.system(.body, design: .rounded))
 				}
 				.volumetricShadows()
 				.sectionPadding()
@@ -157,15 +167,15 @@ struct EditingCatsPageView: View {
 					VStack {
 						if catsViewModel.additionalInfo.isEmpty {
 							Text("Additional info")
-								.foregroundColor(.textColor)
 								.lineLimit(3)
+								.font(.system(.body, design: .rounded))
 						}
 						
 						TextEditor(text: $catsViewModel.additionalInfo)
 							.disableAutocorrection(true)
-							.foregroundColor(.textColor)
 							.background(Color.mainColor)
 							.accentColor(.accentColor)
+							.font(.system(.body, design: .rounded))
 					}
 				}
 				.volumetricShadows()

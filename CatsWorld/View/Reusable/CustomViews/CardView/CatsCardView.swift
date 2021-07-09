@@ -13,19 +13,16 @@ extension CatsCardView: Equatable {
 		lhs.cat.name == rhs.cat.name &&
 			lhs.cat.wrappedBreed == rhs.cat.wrappedBreed &&
 			lhs.cat.dateOfBirth == rhs.cat.dateOfBirth &&
-			lhs.cardColor.compareColorComponentsWith(rhs.cardColor) &&
+			lhs.cat.wrappedColor.compareColorComponentsWith(rhs.cat.wrappedColor) &&
 			lhs.cat.image == rhs.cat.image
 	}
 }
 
 struct CatsCardView: View {
+	
+	@Environment(\.colorScheme) var colorScheme
 		
 	var cat: CatsCard
-	
-	var cardColor: Color {
-		let uiColor = cat.wrappedColor
-		return Color(uiColor)
-	}
 	
     var body: some View {
 		HStack {
@@ -40,7 +37,7 @@ struct CatsCardView: View {
 			CatsMainInfoView(cat: cat, age: .constant(.age))
 				.equatable()
 			
-			GenderSign(genderSign: cat.genderSign, foregroundColor: .textColor)
+			GenderSign(genderSign: cat.genderSign, foregroundColor: .primary)
 				.equatable()
 				.frame(maxWidth: 40)
 				
@@ -48,9 +45,10 @@ struct CatsCardView: View {
 		}
 		.padding()
 		.frame(minHeight: 100)
-		.background(cardColor)
+		.background(cat.wrappedColor)
 		.clipShape(RoundedRectangle(cornerRadius: 20))
 		.volumetricShadows()
+		.preferredColorScheme(colorScheme)
 	}
 }
 

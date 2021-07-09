@@ -18,7 +18,7 @@ final class CatsDescriptionViewModel: CatManipulator {
 	@Published var ageType: AgeType = .age
 	@Published var isEditingCatsPage = false
 	
-	var catsCardColor: Color { Color(cat.wrappedColor) }
+	var catsCardColor: Color { cat.wrappedColor }
 	
 	var additionInfo: String { cat.wrappedInfo }
 	

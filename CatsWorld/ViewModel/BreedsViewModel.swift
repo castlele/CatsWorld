@@ -21,9 +21,7 @@ final class BreedsViewModel: ObservableObject {
 	lazy var breeds: [Breed] = {
 		MockData.breeds
 	}()
-	
-	@Published var images: [String: Image] = [:]
-	
+		
 	@Published var isLoading = false
 }
 
@@ -39,19 +37,6 @@ extension BreedsViewModel {
 			url: url!,
 			headers: defaultHeader,
 			completion: parseJSON(result:)
-		)
-	}
-	
-	func loadImage(forBreed breed: Breed) {
-		let breedID = breed.id
-		let endPoint = EndPoint.imagesAPI([(.breedID, breedID)])
-		
-		let url = makeURL(endPoint: endPoint)
-		
-		NetworkRequester.shared.makeRequest(
-			url: url!,
-			headers: defaultHeader,
-			completion: loadImage(result:)
 		)
 	}
 }
@@ -92,7 +77,7 @@ extension BreedsViewModel {
 					self.breeds = breeds
 					
 					isLoading = false
-					
+										
 				default:
 					break
 			}
@@ -102,9 +87,5 @@ extension BreedsViewModel {
 	/// Removes mock data from the `breeds` array
 	private func removeMockData() {
 		breeds.removeAllOccurances(MockData.breeds[0])
-	}
-	
-	private func loadImage(result: Result<Data, CWError>) -> Void {
-		
 	}
 }

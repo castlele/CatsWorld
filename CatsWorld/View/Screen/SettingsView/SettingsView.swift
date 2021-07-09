@@ -12,61 +12,57 @@ struct SettingsView: View {
 	@EnvironmentObject var settingsViewModel: SettingsViewModel
 	
     var body: some View {
-		ZStack {
-			Color.mainColor
-			
-			VStack {
-				TopBarView(minHeight: 60, maxHeight: 60)
-				
-				ScrollView(showsIndicators: false) {
-					CatsDescriptionSection {
-						Toggle("Match System Mode", isOn: $settingsViewModel.isSystemModeColorScheme)
-							.toggleStyle(SwitchToggleStyle(tint: .accentColor))
+		VStack {
+			TopBarView(minHeight: 60, maxHeight: 60)
 						
-						if !settingsViewModel.isSystemModeColorScheme {
-							Picker("Color scheme", selection: $settingsViewModel.colorScheme) {
-								Text("Light").tag(1)
-								Text("Dark").tag(2)
-							}
-							.pickerStyle(SegmentedPickerStyle())
-						}
-					}
-					.volumetricShadows()
-					.sectionPadding()
+			ScrollView(showsIndicators: false) {
+				CatsDescriptionSection {
+					Toggle("Match System Mode", isOn: $settingsViewModel.isSystemModeColorScheme)
+						.toggleStyle(SwitchToggleStyle(tint: .accentColor))
 					
-					CatsDescriptionSection {
-						Text("Graphics")
-						
-						HStack {
-							Text("Shadows")
-								.allowsTightening(true)
-							
-							Button(action: {
-								settingsViewModel.showShadowsInfo()
-								
-							}, label: {
-								Image(systemName: "info.circle")
-									.foregroundColor(.accentColor)
-							})
-							
-							Picker("", selection: $settingsViewModel.shadows) {
-								Text("Default").tag(0)
-								Text("Flat").tag(1)
-								Text("Disabled").tag(2)
-							}
-							.pickerStyle(SegmentedPickerStyle())
+					if !settingsViewModel.isSystemModeColorScheme {
+						Picker("Color scheme", selection: $settingsViewModel.colorScheme) {
+							Text("Light").tag(1)
+							Text("Dark").tag(2)
 						}
+						.pickerStyle(SegmentedPickerStyle())
 					}
-					
-					.volumetricShadows()
-					.sectionPadding()
 				}
-			}
-			.alert(isPresented: $settingsViewModel.isShadowInfo) {
-				settingsViewModel.alert
+				.volumetricShadows()
+				.sectionPadding()
+				.padding(.top)
+				
+				CatsDescriptionSection {
+					Text("Graphics")
+					
+					HStack {
+						Text("Shadows")
+							.allowsTightening(true)
+						
+						Button(action: {
+							settingsViewModel.showShadowsInfo()
+							
+						}, label: {
+							Image(systemName: "info.circle")
+								.foregroundColor(.accentColor)
+						})
+						
+						Picker("", selection: $settingsViewModel.shadows) {
+							Text("Default").tag(0)
+							Text("Flat").tag(1)
+							Text("Disabled").tag(2)
+						}
+						.pickerStyle(SegmentedPickerStyle())
+					}
+				}
+				.volumetricShadows()
+				.sectionPadding()
 			}
 		}
-		.ignoresSafeArea()
+		.alert(isPresented: $settingsViewModel.isShadowInfo) {
+			settingsViewModel.alert
+		}
+		.background(Color.mainColor.ignoresSafeArea())
     }
 }
 

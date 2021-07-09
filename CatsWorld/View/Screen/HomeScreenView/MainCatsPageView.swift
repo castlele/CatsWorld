@@ -77,7 +77,6 @@ struct MainCatsPageView: View {
 							Text(catsDescriptionViewModel.additionInfo)
 								.lineLimit(.max)
 								.padding()
-								.foregroundColor(.textColor)
 							
 						}
 						.padding(.bottom)
@@ -114,7 +113,6 @@ struct MainCatsPageView: View {
 					}
 					.volumetricShadows()
 					.sectionPadding()
-					.foregroundColor(.textColor)
 				}
 			}
 		}

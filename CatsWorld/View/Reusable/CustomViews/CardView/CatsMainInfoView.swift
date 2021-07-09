@@ -75,7 +75,6 @@ struct CatsMainInfoView: View {
 					
 			}
 			.frame(width: 95, alignment: .leading)
-			.foregroundColor(.textColor)
 			.minimumScaleFactor(0.1)
 			
 			Spacer()

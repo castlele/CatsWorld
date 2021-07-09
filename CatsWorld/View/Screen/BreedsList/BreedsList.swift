@@ -13,7 +13,7 @@ struct BreedsList: View {
 	
     var body: some View {
 		List(breedsViewModel.breeds) { breed in
-			NavigationLink(breed.name.localize(), destination: BreedsDetailView(breed: breed))
+			NavigationLink(breed.name.localize(), destination: BreedsDetailView(breed: breed).environmentObject(breedsViewModel))
 		}
 		.background(Color.mainColor)
     }

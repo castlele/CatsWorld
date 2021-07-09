@@ -31,7 +31,7 @@ final class HomeScreenViewModel: CatManipulator {
 	}
 	
 	var catsCardsColor: Color {
-		Color(selectedCat.wrappedColor)
+		selectedCat.wrappedColor
 	}
 }
 
