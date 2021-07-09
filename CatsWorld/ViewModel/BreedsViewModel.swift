@@ -74,7 +74,7 @@ extension BreedsViewModel {
 				case .success(let breeds):
 					removeMockData()
 					
-					self.breeds = breeds
+					self.breeds = breeds.sorted(by: { $0.name.localize() < $1.name.localize() } )
 					
 					isLoading = false
 										
