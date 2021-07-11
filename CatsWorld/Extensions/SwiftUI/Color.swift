@@ -47,13 +47,19 @@ extension Color {
 extension Color {
 	
 	/// Returns `Color.mainColor` as `UIColor`
-	static func mainUIColor() -> UIColor { UIColor(Color.mainColor) }
+	static func mainUIColor() -> UIColor { UIColor(named: "mainColor")! }
 	
 	/// Returns `Color.accentColor` as `UIColor`
 	static func accentUIColor() -> UIColor { UIColor(named: "accentColor")! }
 	
+	/// Returns `Color.lightAccent` as `UIColor`
+	static func lightAccentUIColor() -> UIColor { UIColor(named: "lightAccent")! }
+	
+	/// Returns `Color.darkAccent` as `UIColor`
+	static func darkAccentUIColor() -> UIColor { UIColor(named: "darkAccent")! }
+	
 	/// Returns `Color.semiAccentColor` as `UIColor`
-	static func semiAccentUIColor() -> UIColor { UIColor(Color.semiAccentColor) }
+	static func semiAccentUIColor() -> UIColor { UIColor(named: "semiAccentColor")! }
 	
 	/// Returns `Color.volumeEffectShadowColor` as `UIColor`
 	static func lightUIColor() -> UIColor { UIColor(Color.volumeEffectShadowColor) }

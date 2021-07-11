@@ -21,7 +21,7 @@ class EndPointTests: XCTestCase {
     }
 
     func testBreedsURLMakerWithQuery() throws {
-		endPoint = EndPoint.breedsAPI([.attachBreed])
+		endPoint = EndPoint.breedsAPI([(.attachBreed, "0")])
 		let url = endPoint.url
 		
 		let expectedStringURL = "https://api.thecatapi.com/v1/breeds?attach_breed=0"
@@ -38,5 +38,14 @@ class EndPointTests: XCTestCase {
 		let expectedURL = URL(string: expectedStringURL)
 		
 		XCTAssertEqual(url, expectedURL)
+	}
+
+	func testCatsImageEndPoint() throws {
+		endPoint = EndPoint.imagesAPI([(.breedID, "curl")])
+		
+		let url = endPoint.url
+		let expectedURL = URL(string: "https://api.thecatapi.com/v1/images/search?breed_ids=curl")
+		
+		XCTAssertEqual(expectedURL!, url!)
 	}
 }

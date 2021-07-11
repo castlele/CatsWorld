@@ -70,6 +70,7 @@
 		7B968A0B2653B149002ECE07 /* TemperamentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B968A0A2653B149002ECE07 /* TemperamentTests.swift */; };
 		7BB614662686407D001924F7 /* XButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB614652686407D001924F7 /* XButton.swift */; };
 		7BDB149E267281E8005D98DB /* CatsDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BDB149D267281E8005D98DB /* CatsDescriptionView.swift */; };
+		7BDF557126994CE800A734E7 /* BreedsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BDF557026994CE800A734E7 /* BreedsViewModelTests.swift */; };
 		7BE159C2267CA73400A0E846 /* UIScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE159C1267CA73400A0E846 /* UIScreen.swift */; };
 		7BE498952653BC92004F7F52 /* Gender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE498942653BC92004F7F52 /* Gender.swift */; };
 		7BE498972653E322004F7F52 /* CatsCardsPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE498962653E322004F7F52 /* CatsCardsPageViewModel.swift */; };
@@ -158,6 +159,7 @@
 		7B968A0A2653B149002ECE07 /* TemperamentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemperamentTests.swift; sourceTree = "<group>"; };
 		7BB614652686407D001924F7 /* XButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XButton.swift; sourceTree = "<group>"; };
 		7BDB149D267281E8005D98DB /* CatsDescriptionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CatsDescriptionView.swift; sourceTree = "<group>"; };
+		7BDF557026994CE800A734E7 /* BreedsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreedsViewModelTests.swift; sourceTree = "<group>"; };
 		7BE159C1267CA73400A0E846 /* UIScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIScreen.swift; sourceTree = "<group>"; };
 		7BE498942653BC92004F7F52 /* Gender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gender.swift; sourceTree = "<group>"; };
 		7BE498962653E322004F7F52 /* CatsCardsPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatsCardsPageViewModel.swift; sourceTree = "<group>"; };
@@ -369,6 +371,7 @@
 			children = (
 				7B1AA592264AA018002A3774 /* EndPointTests.swift */,
 				7B968A0A2653B149002ECE07 /* TemperamentTests.swift */,
+				7BDF557026994CE800A734E7 /* BreedsViewModelTests.swift */,
 				7B8B99FA26427DE400E98B8E /* Info.plist */,
 			);
 			path = CatsWorldTests;
@@ -667,6 +670,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7BDF557126994CE800A734E7 /* BreedsViewModelTests.swift in Sources */,
 				7B968A0B2653B149002ECE07 /* TemperamentTests.swift in Sources */,
 				7B1AA593264AA018002A3774 /* EndPointTests.swift in Sources */,
 			);

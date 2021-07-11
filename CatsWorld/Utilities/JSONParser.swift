@@ -35,11 +35,11 @@ extension JSONParser {
 	
 	func parseWithSerialization(from data: Data, argument: String, completion: @escaping (Result<Any, CWError>) -> Void) {
 		do {
-			guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {
+			guard let json = try JSONSerialization.jsonObject(with: data) as? [[String: Any]] else {
 				completion(.failure(.decodeError))
 				return
 			}
-			guard let result = json[argument] else {
+			guard let result = json[0][argument] else {
 				completion(.failure(.decodeError))
 				return
 			}
@@ -47,6 +47,7 @@ extension JSONParser {
 			completion(.success(result))
 			
 		} catch {
+			print("\(error.localizedDescription)")
 			completion(.failure(.decodeError))
 		}
 	}

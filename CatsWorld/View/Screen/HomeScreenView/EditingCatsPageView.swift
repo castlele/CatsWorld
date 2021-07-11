@@ -132,7 +132,7 @@ struct EditingCatsPageView: View {
 					Picker("Temperament", selection: $catsViewModel.temperament) {
 						ForEach(Temperament.allCases, id: \.self) { temperament in
 							Text("\(temperament.rawValue.localize().capitalized)")
-								.font(.system(.title, design: .rounded))
+								.font(.system(.body, design: .rounded))
 						}
 					}
 					.pickerStyle(DefaultPickerStyle())

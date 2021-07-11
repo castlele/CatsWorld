@@ -36,8 +36,8 @@ enum EndPoint {
 		
 		url += "?"
 		
-		for (query, value) in queries {
-			url += "&"
+		for (index, (query, value)) in queries.enumerated() {
+			if index > 0 { url += "&" }
 			url += query.rawValue + value
 		}
 	}

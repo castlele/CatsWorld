@@ -8,15 +8,26 @@
 import SwiftUI
 
 struct BreedsDetailView: View {
+	
+	@EnvironmentObject var breedsViewModel: BreedsViewModel
 			
 	let breed: Breed
 	
     var body: some View {
 		ScrollView {
-			CatsAvatar(avatar: Image(systemName: "person.crop.circle.fill"))
-				.frame(width: 150, height: 150)
-				.background(EarsView())
-				.padding([.top, .bottom])
+		breedsViewModel.wrappedImage
+			.resizable()
+			.scaledToFit()
+			.background(Color.mainColor)
+			.cornerRadius(20)
+			.background(
+				RoundedRectangle(cornerRadius: 20)
+					.stroke(Color.accentColor, lineWidth: 4)
+			)
+			.frame(maxWidth: UIScreen.screenWidth - 50, minHeight: 250)
+			.padding()
+			
+			Spacer()
 			
 			Group {
 				CatsDescriptionSection {
@@ -37,14 +48,10 @@ struct BreedsDetailView: View {
 			.sectionPadding()
 		}
 		.background(Color.mainColor.ignoresSafeArea())
+		.onAppear {
+			breedsViewModel.loadImage(forBreed: breed)
+		}
     }
-}
-
-// MARK: - Equatable conformance
-extension BreedsDetailView: Equatable {
-	static func == (lhs: Self, rhs: Self) -> Bool {
-		lhs.breed == rhs.breed
-	}
 }
 
 struct BreedsDetailView_Previews: PreviewProvider {

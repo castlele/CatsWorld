@@ -22,7 +22,7 @@ struct CatsAvatar: View {
     var body: some View {
         avatar
 			.resizable()
-			.scaledToFit()
+			.scaledToFill()
 			.background(Color.mainColor)
 			.clipShape(Circle())
 			.background(
@@ -30,6 +30,23 @@ struct CatsAvatar: View {
 					.stroke(Color.accentColor, lineWidth: 4)
 			)
     }
+}
+
+struct BreedsAvatar: View {
+	
+	@State var avatar: Image
+	
+	var body: some View {
+		avatar
+			.resizable()
+			.scaledToFill()
+			.background(Color.mainColor)
+			.cornerRadius(20)
+			.background(
+				RoundedRectangle(cornerRadius: 20)
+					.stroke(Color.accentColor, lineWidth: 4)
+			)
+	}
 }
 
 struct CatsAvatar_Previews: PreviewProvider {
