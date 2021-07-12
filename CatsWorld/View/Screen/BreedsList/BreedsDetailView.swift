@@ -15,17 +15,17 @@ struct BreedsDetailView: View {
 	
     var body: some View {
 		ScrollView {
-		breedsViewModel.wrappedImage
-			.resizable()
-			.scaledToFit()
-			.background(Color.mainColor)
-			.cornerRadius(20)
-			.background(
-				RoundedRectangle(cornerRadius: 20)
-					.stroke(Color.accentColor, lineWidth: 4)
-			)
-			.frame(maxWidth: UIScreen.screenWidth - 50, minHeight: 250)
-			.padding()
+			breedsViewModel.wrappedImage
+				.resizable()
+				.scaledToFit()
+				.background(Color.mainColor)
+				.cornerRadius(20)
+				.background(
+					RoundedRectangle(cornerRadius: 20)
+						.stroke(Color.accentColor, lineWidth: 4)
+				)
+				.frame(height: 200)
+				.padding()
 			
 			Spacer()
 			

@@ -206,6 +206,8 @@
 "Australia" = "Австралия";
 "United Kingdom" = "Британия";
 "Iran (Persia)" = "Иран (Персия)";
+"Isle of Man" = "Остров Мэн";
+
 "Burma" = "Бирма";
 "Singapore" = "Сингапур";
 "Somalia" = "Сомали";
@@ -255,7 +257,7 @@
 "calm" = "спокойный";
 "independent" = "независимый";
 "warm" = "разгоряченный";
-"quite" = "тихий";
+"quiet" = "тихий";
 "sweet" = "ласковый";
 "loving" = "любящий";
 "patient" = "терпеливый";

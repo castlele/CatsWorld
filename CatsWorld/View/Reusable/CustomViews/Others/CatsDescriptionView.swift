@@ -15,7 +15,7 @@ struct CatsDescriptionView: View {
 		ForEach(descriptions) { description in
 			if description.name != "Description" {
 				HStack {
-					Text(description.name)
+					Text(description.name).lineLimit(2)
 					
 					Spacer()
 					
@@ -34,9 +34,13 @@ struct CatsDescriptionView: View {
 							
 						case let .str(value):
 							Text(value.capitalized)
+								.allowsTightening(true)
+								.lineLimit(nil)
 							
 						case let .temperament(value):
 							Text(value.rawValue.localize().capitalized)
+								.allowsTightening(true)
+								.lineLimit(nil)
 							
 						case let .showsArray(value):
 							List {
