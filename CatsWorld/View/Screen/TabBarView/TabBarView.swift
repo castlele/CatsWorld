@@ -56,6 +56,9 @@ struct TabBarView: View {
 		}
 		.preferredColorScheme(settingsViewModel.wrappedColorScheme)
 		.accentColor(.accentColor)
+		.onAppear {
+			UITabBar.appearance().barTintColor = Color.mainUIColor()
+		}
     }
 }
 

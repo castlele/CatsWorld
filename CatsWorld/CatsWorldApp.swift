@@ -17,8 +17,6 @@ struct CatsWorldApp: App {
 	init() {
 		UITextView.appearance().backgroundColor = .clear
 		
-		UITabBar.appearance().barTintColor = Color.mainUIColor()
-		
 		UISegmentedControl.appearance().selectedSegmentTintColor = Color.accentUIColor()
 		UISegmentedControl.appearance().setTitleTextAttributes(
 			[.foregroundColor:	UIColor.white],
