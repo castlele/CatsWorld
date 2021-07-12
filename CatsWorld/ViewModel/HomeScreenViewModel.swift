@@ -9,30 +9,35 @@ import SwiftUI
 import CoreData
 
 final class HomeScreenViewModel: CatManipulator {
-	
+		
 	private var wasChanged = false
 	private var selectedCat: CatsCard!
-	
+		
 	var editingCatsPageView: EditingCatsPageView!
 	var mainCatsPageView: MainCatsPageView!
 	var catsCardsColorPicker: CatsCardsColorPicker!
-		
+	
 	@Published var isEditingCatsSheet = false
 	@Published var isMainCatsPageView = false
 	@Published var isColorPicker = false
 	@Published var isMenu = false
 	
-	@Published var pickedColor = Color.mainColor {
+	@Published var pickedColor: ColorPick = .none {
 		willSet(newColor) {
-			if !newColor.compareColorComponentsWith(pickedColor) {
+			if newColor == pickedColor {
 				makeChanges()
 			}
 		}
 	}
 	
-	var catsCardsColor: Color {
-		selectedCat.wrappedColor
+	var catsCardsColor: String {
+		if let color = selectedCat.color {
+			return color
+		}
+		return "mainColor"
 	}
+	
+	var cardsColorPallete = (firstHalf: ColorPick.firstHalf, secondHalf: ColorPick.secondHalf)
 }
 
 // MARK:- Public methods

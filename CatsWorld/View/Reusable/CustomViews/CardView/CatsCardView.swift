@@ -19,9 +19,7 @@ extension CatsCardView: Equatable {
 }
 
 struct CatsCardView: View {
-	
-	@Environment(\.colorScheme) var colorScheme
-		
+			
 	var cat: CatsCard
 	
     var body: some View {
@@ -48,7 +46,6 @@ struct CatsCardView: View {
 		.background(cat.wrappedColor)
 		.clipShape(RoundedRectangle(cornerRadius: 20))
 		.volumetricShadows()
-		.preferredColorScheme(colorScheme)
 	}
 }
 

@@ -32,7 +32,7 @@ struct CatsCardsColorPicker: View {
 				}
 				.frame(minWidth: viewWidth, maxWidth: viewWidth + 20)
 				.padding()
-				.background(viewModel.pickedColor)
+				.background(Color(viewModel.pickedColor.rawValue))
 				.cornerRadius(20)
 				.compositingGroup()
 				.volumetricShadows(color1: .clear)
@@ -40,9 +40,9 @@ struct CatsCardsColorPicker: View {
 				Spacer()
 				
 				VStack(spacing: 15) {
-					ColorPickerView(colors: ColorPick.firstHalf, pickedColor: $viewModel.pickedColor)
+					ColorPickerView(colors: viewModel.cardsColorPallete.firstHalf, pickedColor: $viewModel.pickedColor)
 					
-					ColorPickerView(colors: ColorPick.secondHalf, pickedColor: $viewModel.pickedColor)
+					ColorPickerView(colors: viewModel.cardsColorPallete.secondHalf, pickedColor: $viewModel.pickedColor)
 				}
 				.padding()
 				.background(
@@ -56,7 +56,7 @@ struct CatsCardsColorPicker: View {
 				Spacer()
 				
 				DoneButton(action: {
-					cat.setColor(viewModel.pickedColor)
+					cat.setColor(viewModel.pickedColor.rawValue)
 					
 					withAnimation(.spring()) {
 						viewModel.isColorPicker.toggle()
@@ -78,7 +78,7 @@ struct CatsCardsColorPicker: View {
 		.frame(minWidth: viewWidth, maxWidth: viewWidth + 20, minHeight: minViewHeight, maxHeight: viewHeight)
 		.cornerRadius(20)
 		.onAppear {
-			viewModel.pickedColor = viewModel.catsCardsColor
+			viewModel.pickedColor = ColorPick(rawValue: viewModel.catsCardsColor)!
 		}
 		.onDisappear {
 			viewModel.isColorPicker = false
@@ -89,13 +89,13 @@ struct CatsCardsColorPicker: View {
 fileprivate struct ColorPickerView: View {
 	
 	let colors: [ColorPick]
-	@Binding var pickedColor: Color
+	@Binding var pickedColor: ColorPick
 	
 	var body: some View {
 		HStack(spacing: 15) {
 			ForEach(colors) { color in
 				Circle()
-					.stroke(Color(color.rawValue).compareColorComponentsWith(pickedColor) ? Color.semiAccentColor : Color.white, lineWidth: 4)
+					.stroke(Color(color.rawValue).compareColorComponentsWith(Color(pickedColor.rawValue)) ? Color.semiAccentColor : Color.white, lineWidth: 4)
 					.overlay(
 						Color(color.rawValue)
 							.clipShape(Circle())
@@ -103,7 +103,7 @@ fileprivate struct ColorPickerView: View {
 					.frame(width: 60, height: 60)
 					.onTapGesture {
 						withAnimation(.spring()) {
-							pickedColor = Color(color.rawValue)
+							pickedColor = color
 						}
 					}
 			}

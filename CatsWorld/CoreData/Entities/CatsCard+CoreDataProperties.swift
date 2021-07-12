@@ -20,7 +20,7 @@ extension CatsCard {
 
 	// Properties needed for the card
 	@NSManaged public var image: Data?
-	@NSManaged public var color: Data?
+	@NSManaged public var color: String?
 	
 	// General cat properties
     @NSManaged public var name: String?
@@ -92,7 +92,10 @@ extension CatsCard: Identifiable {
 	}
 
 	var wrappedColor: Color {
-		Color.color(withData: color)
+		if let color = color {
+			return Color(color)
+		}
+		return Color("mainColor")
 	}
 	
 	var genderColor: Color {
@@ -157,10 +160,8 @@ extension CatsCard {
 	
 	/// Converts `Color` to data and assigns it to `self.color` property
 	/// - Parameter color: `SwiftUI` `Color` instance
-	func setColor(_ color: Color) {
-		let data = color.encode()
-		
-		self.color = data
+	func setColor(_ color: String) {
+		self.color = color
 	}
 }
 

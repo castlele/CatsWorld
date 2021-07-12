@@ -20,14 +20,10 @@ struct CatsWorldApp: App {
 		UITabBar.appearance().barTintColor = Color.mainUIColor()
 		
 		UISegmentedControl.appearance().selectedSegmentTintColor = Color.accentUIColor()
-		UISegmentedControl.appearance().backgroundColor = Color.semiAccentUIColor()
 		UISegmentedControl.appearance().setTitleTextAttributes(
-			[.foregroundColor: UIColor(Color.volumeEffectShadowColor)],
+			[.foregroundColor:	UIColor.white],
 			for: .selected)
-		UISegmentedControl.appearance().setTitleTextAttributes(
-			[.foregroundColor: Color.lightUIColor()],
-			for: .disabled)
-		
+				
 		UIView.appearance(whenContainedInInstancesOf: [UIAlertController.self]).tintColor = Color.accentUIColor()
 
 		BreedsViewModel.shared.loadBreeds()

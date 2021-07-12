@@ -5,7 +5,7 @@
         <attribute name="breed" optional="YES" attributeType="String"/>
         <attribute name="catShows" optional="YES" attributeType="Binary"/>
         <attribute name="childFriendly" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="color" optional="YES" attributeType="Binary"/>
+        <attribute name="color" optional="YES" attributeType="String"/>
         <attribute name="dateOfBirth" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="dogFriendly" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="hairless" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>

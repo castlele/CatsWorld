@@ -105,34 +105,3 @@ extension Color {
 		return Color(adjustedComponents)
 	}
 }
-
-// MARK: - Encode and Decode Color
-extension Color {
-	
-	/// Decode `UIColor` from `Data`
-	/// - Parameter data: Optional data that represents color
-	/// - Returns: Decoded `UIColor` if succseed or default `.white`
-	static func color(withData data: Data?) -> Color {
-		do {
-			if let data = data {
-				let uiColor = try NSKeyedUnarchiver.unarchivedObject(ofClass: UIColor.self, from: data)
-				return Color(uiColor ?? UIColor(named: "mainColor")!)
-			}
-			return Color("mainColor")
-		} catch {
-			fatalError("\(error.localizedDescription)")
-		}
-	}
-	
-	/// Encode `UIColor` to `Data`
-	/// - Returns: `Data` that represents `UIColor`
-	func encode() -> Data {
-		do {
-			let uiColor = UIColor(self)
-			let data = try NSKeyedArchiver.archivedData(withRootObject: uiColor, requiringSecureCoding: false)
-			return data
-		} catch {
-			fatalError("\(error.localizedDescription)")
-		}
-	}
-}
