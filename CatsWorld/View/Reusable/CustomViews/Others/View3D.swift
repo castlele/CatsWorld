@@ -21,7 +21,7 @@ struct View3D<Content: View>: View, Equatable {
 				.foregroundColor(bottomColor)
 
 			topView
-				.offset(x: 2.2, y: -2.2)
+				.offset(x: 1.1, y: -1.1)
 				.foregroundColor(topColor)
 		}
 	}
@@ -46,7 +46,7 @@ struct Image3D: View, Equatable {
 			
 			topView
 				.resizable()
-				.offset(x: 2.2, y: -2.2)
+				.offset(x: 1.1, y: -1.1)
 				.foregroundColor(topColor)
 				.padding()
 		}

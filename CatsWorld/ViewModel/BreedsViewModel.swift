@@ -23,6 +23,7 @@ final class BreedsViewModel: ObservableObject {
 		MockData.breeds
 	}()
 		
+	@Published var textToSearch = ""
 	@Published var isLoading = false
 	@Published var currentImage: Image! = nil
 		
@@ -59,6 +60,10 @@ extension BreedsViewModel {
 			headers: defaultHeader,
 			completion: parseImageURL(result:)
 		)
+	}
+	
+	func validateBreeds(breed: Breed) -> Bool {
+		textToSearch == "" || breed.name.localize().hasPrefix(textToSearch) || breed.origin.localize().hasPrefix(textToSearch)
 	}
 }
 

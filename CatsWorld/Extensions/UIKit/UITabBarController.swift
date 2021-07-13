@@ -13,7 +13,6 @@ extension UITabBarController {
 		let standardAppearance = UITabBarAppearance()
 		
 		standardAppearance.backgroundColor = Color.mainUIColor()
-		standardAppearance.shadowColor = UIColor(named: "shadowColor")
 		
 		tabBar.standardAppearance = standardAppearance
 	}

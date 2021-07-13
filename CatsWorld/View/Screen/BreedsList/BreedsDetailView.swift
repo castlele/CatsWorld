@@ -24,7 +24,7 @@ struct BreedsDetailView: View {
 					RoundedRectangle(cornerRadius: 20)
 						.stroke(Color.accentColor, lineWidth: 4)
 				)
-				.frame(height: 200)
+				.frame(height: 300)
 				.padding()
 			
 			Spacer()
