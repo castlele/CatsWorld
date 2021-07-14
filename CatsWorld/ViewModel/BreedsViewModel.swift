@@ -26,7 +26,8 @@ final class BreedsViewModel: ObservableObject {
 	@Published var favBreeds: [String: Bool] = UserDefaults.standard.dictionary(forKey: "favBreeds") as? [String: Bool] ?? [:]
 		
 	@Published var textToSearch = ""
-	@Published var isLoading = false
+	@Published var isLoadingBreeds = false
+	@Published var isLoadingImage = false
 	@Published var currentImage: Image! = nil
 	@Published var isToggledAddToFavourite = false
 		
@@ -42,7 +43,7 @@ final class BreedsViewModel: ObservableObject {
 extension BreedsViewModel {
 	/// Starts making `URLRequest` and loads breeds
 	func loadBreeds() {
-		isLoading = true
+		isLoadingBreeds = true
 		
 		let url = makeURL(endPoint: BreedsViewModel.breedsEndPoint)
 		
@@ -54,6 +55,7 @@ extension BreedsViewModel {
 	}
 	
 	func loadImage(forBreed breed: Breed) {
+		isLoadingImage = true
 		fetchingImageForBreedID = breed.id
 		
 		let url = makeURL(endPoint: EndPoint.imagesAPI([(.breedID, fetchingImageForBreedID)]))
@@ -136,7 +138,7 @@ extension BreedsViewModel {
 					
 					self.breeds = breeds.sorted(by: { $0.name.localize() < $1.name.localize() } )
 					
-					isLoading = false
+					isLoadingBreeds = false
 										
 				default:
 					break
@@ -187,7 +189,11 @@ extension BreedsViewModel {
 			switch result {
 				case .success(let data):
 					guard let uiImage = ImageProcessor.shared.downsampleImage(image: data) else { break }
+					
 					currentImage = Image(uiImage: uiImage)
+					
+					isLoadingImage = false
+					
 				default:
 					break
 			}

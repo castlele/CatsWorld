@@ -49,6 +49,16 @@ struct BreedsList: View {
 						}
 				)
 			}
+			
+			if breedsViewModel.isLoadingBreeds {
+				ZStack {
+					Color.mainColor.ignoresSafeArea()
+					
+					ProgressView()
+						.progressViewStyle(CircularProgressViewStyle(tint: .accentColor))
+						.scaleEffect(3)
+				}
+			}
 		}
     }
 }

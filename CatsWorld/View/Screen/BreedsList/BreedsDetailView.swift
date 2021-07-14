@@ -44,6 +44,16 @@ struct BreedsDetailView: View {
 						} else {
 							EmptyView()
 						}
+						
+						if breedsViewModel.isLoadingImage {
+							ZStack {
+								Color.mainColor.ignoresSafeArea()
+								
+								ProgressView()
+									.progressViewStyle(CircularProgressViewStyle(tint: .accentColor))
+									.scaleEffect(2)
+							}
+						}
 					}
 				)
 				.cornerRadius(20)
