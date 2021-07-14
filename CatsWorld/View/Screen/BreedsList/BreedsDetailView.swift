@@ -21,6 +21,16 @@ struct BreedsDetailView: View {
 				.background(Color.mainColor)
 				.overlay(
 					ZStack {
+						if breedsViewModel.isLoadingImage {
+							ZStack {
+								Color.mainColor.ignoresSafeArea()
+								
+								ProgressView()
+									.progressViewStyle(CircularProgressViewStyle(tint: .accentColor))
+									.scaleEffect(2)
+							}
+						}
+						
 						VStack {
 							Spacer()
 							
@@ -43,16 +53,6 @@ struct BreedsDetailView: View {
 								.frame(width: 40, height: 40)
 						} else {
 							EmptyView()
-						}
-						
-						if breedsViewModel.isLoadingImage {
-							ZStack {
-								Color.mainColor.ignoresSafeArea()
-								
-								ProgressView()
-									.progressViewStyle(CircularProgressViewStyle(tint: .accentColor))
-									.scaleEffect(2)
-							}
 						}
 					}
 				)
