@@ -19,10 +19,44 @@ struct BreedsDetailView: View {
 				.resizable()
 				.scaledToFit()
 				.background(Color.mainColor)
+				.overlay(
+					ZStack {
+						VStack {
+							Spacer()
+							
+							HStack {
+								Text("Add to favourite")
+									.foregroundColor(.white)
+									.padding()
+								
+								Spacer()
+								
+								FavouriteBreedView(breed: breed, viewModel: breedsViewModel)
+							}
+							.background(Color.black.opacity(0.4))
+						}
+						
+						if breedsViewModel.isToggledAddToFavourite {
+							Image(systemName: "heart.fill")
+								.resizable()
+								.interpolation(.high)
+								.frame(width: 40, height: 40)
+						} else {
+							EmptyView()
+						}
+					}
+				)
 				.cornerRadius(20)
 				.background(
 					RoundedRectangle(cornerRadius: 20)
 						.stroke(Color.accentColor, lineWidth: 4)
+				)
+				.gesture(
+					TapGesture(count: 2)
+						.onEnded {
+							breedsViewModel.makeBreedFavourite(breed, value: true)
+							breedsViewModel.toggleAddToFavouriteAnimation()
+						}
 				)
 				.frame(height: 300)
 				.padding()
@@ -50,6 +84,9 @@ struct BreedsDetailView: View {
 		.background(Color.mainColor.ignoresSafeArea())
 		.onAppear {
 			breedsViewModel.loadImage(forBreed: breed)
+		}
+		.onDisappear {
+			breedsViewModel.currentImage = nil
 		}
     }
 }

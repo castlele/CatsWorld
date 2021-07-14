@@ -22,10 +22,13 @@ final class BreedsViewModel: ObservableObject {
 	lazy var breeds: [Breed] = {
 		MockData.breeds
 	}()
+	
+	@Published var favBreeds: [String: Bool] = UserDefaults.standard.dictionary(forKey: "favBreeds") as? [String: Bool] ?? [:]
 		
 	@Published var textToSearch = ""
 	@Published var isLoading = false
 	@Published var currentImage: Image! = nil
+	@Published var isToggledAddToFavourite = false
 		
 	var wrappedImage: Image {
 		if currentImage != nil {
@@ -63,7 +66,38 @@ extension BreedsViewModel {
 	}
 	
 	func validateBreeds(breed: Breed) -> Bool {
-		textToSearch == "" || breed.name.localize().hasPrefix(textToSearch) || breed.origin.localize().hasPrefix(textToSearch)
+		let searchingText = textToSearch.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+		
+		return searchingText == "" || breed.name.localize().lowercased().hasPrefix(searchingText) || breed.origin.localize().lowercased().hasPrefix(searchingText)
+	}
+	
+	func makeBreedFavourite(_ breed: Breed, value v: Bool? = nil) {
+		let breedID = breed.id
+		var value = v
+		
+		if let isFavourite = favBreeds[breedID] {
+			if value == nil {
+				value = isFavourite ? false : true
+			}
+			
+			favBreeds[breedID] = value
+		} else {
+			favBreeds[breedID] = true
+		}
+		
+		UserDefaults.standard.set(favBreeds, forKey: "favBreeds")
+	}
+	
+	func toggleAddToFavouriteAnimation() {
+		withAnimation(.linear(duration: 0.3)) {
+			isToggledAddToFavourite = true
+		}
+		
+		DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) { [self] in
+			withAnimation(.linear(duration: 0.3)) {
+				isToggledAddToFavourite = false
+			}
+		}
 	}
 }
 

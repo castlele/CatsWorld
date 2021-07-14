@@ -7,6 +7,22 @@
 
 import SwiftUI
 
+fileprivate struct BreedsRowView: View {
+	let breed: Breed
+	@ObservedObject var viewModel: BreedsViewModel
+	
+	var body: some View {
+		HStack {
+			Text(breed.name.localize())
+				.allowsTightening(true)
+			
+			Spacer()
+			
+			FavouriteBreedView(breed: breed, viewModel: viewModel)
+		}
+	}
+}
+
 struct BreedsList: View {
 	
 	@EnvironmentObject var breedsViewModel: BreedsViewModel
@@ -14,43 +30,27 @@ struct BreedsList: View {
     var body: some View {
 		ZStack {
 			Color.mainColor.ignoresSafeArea()
-			GeometryReader { geometry in
-				VStack {
-					SearchBarView(placeholder: "Search placeholder", text: $breedsViewModel.textToSearch)
-					
-					List {
-						ForEach(breedsViewModel.breeds.filter { breedsViewModel.validateBreeds(breed: $0) }) { breed in
-							NavigationLink(destination: BreedsDetailView(breed: breed).environmentObject(breedsViewModel)) {
-								BreedsRowView(name: breed.name)
-							}
+			
+			VStack {
+				SearchBarView(placeholder: "Search placeholder", text: $breedsViewModel.textToSearch)
+				
+				List {
+					ForEach(breedsViewModel.breeds.filter { breedsViewModel.validateBreeds(breed: $0) }) { breed in
+						NavigationLink(destination: BreedsDetailView(breed: breed).environmentObject(breedsViewModel)) {
+							BreedsRowView(breed: breed, viewModel: breedsViewModel)
 						}
-						.listRowBackground(Color.mainColor)
 					}
-					.gesture(
-						DragGesture()
-							.onChanged { _ in
-								UIApplication.shared.endEditing(true)
-							}
-					)
+					.listRowBackground(Color.mainColor)
 				}
+				.gesture(
+					DragGesture()
+						.onChanged { _ in
+							UIApplication.shared.endEditing(true)
+						}
+				)
 			}
 		}
     }
-}
-
-fileprivate struct BreedsRowView: View {
-	let name: String
-	
-	var body: some View {
-		HStack {
-			Text(name.localize())
-				.allowsTightening(true)
-			
-			Spacer()
-			
-			Image(systemName: "suit.heart")
-		}
-	}
 }
 
 struct ContentView_Previews: PreviewProvider {

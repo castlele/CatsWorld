@@ -71,6 +71,7 @@
 		7B968A072653A9F1002ECE07 /* Show.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B968A062653A9F1002ECE07 /* Show.swift */; };
 		7B968A092653AE48002ECE07 /* Temperament.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B968A082653AE48002ECE07 /* Temperament.swift */; };
 		7B968A0B2653B149002ECE07 /* TemperamentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B968A0A2653B149002ECE07 /* TemperamentTests.swift */; };
+		7BB5FB93269F116B005DBDC1 /* FavouriteBreedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB5FB92269F116B005DBDC1 /* FavouriteBreedView.swift */; };
 		7BB614662686407D001924F7 /* XButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB614652686407D001924F7 /* XButton.swift */; };
 		7BDB149E267281E8005D98DB /* CatsDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BDB149D267281E8005D98DB /* CatsDescriptionView.swift */; };
 		7BDF557126994CE800A734E7 /* BreedsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BDF557026994CE800A734E7 /* BreedsViewModelTests.swift */; };
@@ -163,6 +164,7 @@
 		7B968A062653A9F1002ECE07 /* Show.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Show.swift; sourceTree = "<group>"; };
 		7B968A082653AE48002ECE07 /* Temperament.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Temperament.swift; sourceTree = "<group>"; };
 		7B968A0A2653B149002ECE07 /* TemperamentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemperamentTests.swift; sourceTree = "<group>"; };
+		7BB5FB92269F116B005DBDC1 /* FavouriteBreedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteBreedView.swift; sourceTree = "<group>"; };
 		7BB614652686407D001924F7 /* XButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XButton.swift; sourceTree = "<group>"; };
 		7BDB149D267281E8005D98DB /* CatsDescriptionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CatsDescriptionView.swift; sourceTree = "<group>"; };
 		7BDF557026994CE800A734E7 /* BreedsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreedsViewModelTests.swift; sourceTree = "<group>"; };
@@ -278,6 +280,7 @@
 				7B5CD74726839F8F00CFC994 /* CatsDescriptionSection.swift */,
 				7B02F420268456BC00D18F9A /* TopBarView.swift */,
 				7B254D0E269D5707006DA692 /* SearchBarView.swift */,
+				7BB5FB92269F116B005DBDC1 /* FavouriteBreedView.swift */,
 			);
 			path = Others;
 			sourceTree = "<group>";
@@ -635,6 +638,7 @@
 				7B968A072653A9F1002ECE07 /* Show.swift in Sources */,
 				7B52B021269068E90065B7CB /* Description.swift in Sources */,
 				7B86143B264D27AA008616DB /* CatsCardView.swift in Sources */,
+				7BB5FB93269F116B005DBDC1 /* FavouriteBreedView.swift in Sources */,
 				7B5CD74826839F8F00CFC994 /* CatsDescriptionSection.swift in Sources */,
 				7BE498952653BC92004F7F52 /* Gender.swift in Sources */,
 				7B86143F264D2953008616DB /* CatsCard+CoreDataProperties.swift in Sources */,
