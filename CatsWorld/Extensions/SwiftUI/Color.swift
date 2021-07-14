@@ -10,9 +10,9 @@ import SwiftUI
 // MARK: - Initialisations
 extension Color {
 	
-	private typealias ColorComponents = (red: Double, green: Double, blue: Double, alpha: Double)
+	typealias ColorComponents = (red: Double, green: Double, blue: Double, alpha: Double)
 	
-	private init(_ colorComponents: ColorComponents) {
+	init(_ colorComponents: ColorComponents) {
 		self.init(.sRGB,
 				  red: colorComponents.red,
 				  green: colorComponents.green,

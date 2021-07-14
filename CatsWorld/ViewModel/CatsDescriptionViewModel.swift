@@ -12,13 +12,14 @@ final class CatsDescriptionViewModel: CatManipulator {
 	
 	private var cat: CatsCard!
 	private var context: NSManagedObjectContext
+	private var colorScheme: ColorScheme!
 	
 	var editingCatsPageView: EditingCatsPageView!
 	
 	@Published var ageType: AgeType = .age
 	@Published var isEditingCatsPage = false
 	
-	var catsCardColor: Color { cat.wrappedColor }
+	var catsCardColor: Color { determineCatsCardsColor() }
 	
 	var additionInfo: String { cat.wrappedInfo }
 	
@@ -51,6 +52,14 @@ final class CatsDescriptionViewModel: CatManipulator {
 
 // MARK: - Public methods
 extension CatsDescriptionViewModel {
+	
+	func setColorScheme(_ colorScheme: ColorScheme) {
+		self.colorScheme = colorScheme
+	}
+	
+	func removeColorScheme() {
+		self.colorScheme = nil
+	}
 	
 	func changeAgeType() {
 		switch ageType {
@@ -95,4 +104,78 @@ extension CatsDescriptionViewModel {
 	func selectCat(_ cat: CatsCard) { self.cat = cat }
 	
 	func deselectCat() { self.cat = nil }
+}
+
+// MARK: - Private methods
+extension CatsDescriptionViewModel {
+	
+	private func determineCatsCardsColor() -> Color {
+		var colorComponents: Color.ColorComponents
+		
+		guard let colorScheme = colorScheme else {
+			colorComponents = determineLightColorComponents()
+			return Color(colorComponents)
+		}
+		
+		switch colorScheme {
+			case .dark:
+				colorComponents = determineDarkColorComponents()
+			case .light:
+				colorComponents = determineLightColorComponents()
+			default:
+				colorComponents = determineLightColorComponents()
+		}
+		
+		return Color(colorComponents)
+	}
+	
+	private func determineDarkColorComponents() -> Color.ColorComponents {
+		var colorComponents: Color.ColorComponents
+		
+		switch cat.color {
+			case "Banana":
+				colorComponents = (0.550, 0.526, 0.010, 1)
+			case "Cantaloupe":
+				colorComponents = (0.470, 0.347, 0, 1)
+			case "Flora":
+				colorComponents = (0.220, 0.340, 0.092, 1)
+			case "Ice":
+				colorComponents = (0, 0.305, 0.396, 1)
+			case "Lavender":
+				colorComponents = (0.269, 0.053, 0.346, 1)
+			case "Orchid":
+				colorComponents = (0.105, 0.043, 0.319, 1)
+			case "Salmon":
+				colorComponents = (0.512, 0.068, 0.001, 1)
+			default:
+				colorComponents = (0.090, 0.090, 0.090, 1)
+		}
+		
+		return colorComponents
+	}
+	
+	private func determineLightColorComponents() -> Color.ColorComponents {
+		var colorComponents: Color.ColorComponents
+		
+		switch cat.color {
+			case "Banana":
+				colorComponents = (0.993, 0.986, 0.865, 1)
+			case "Cantaloupe":
+				colorComponents = (0.994, 0.923, 0.826, 1)
+			case "Flora":
+				colorComponents = (0.873, 0.931, 0.836, 1)
+			case "Ice":
+				colorComponents = (0.796, 0.937, 0.996, 1)
+			case "Lavender":
+				colorComponents = (0.936, 0.787, 0.998, 1)
+			case "Orchid":
+				colorComponents = (0.852, 0.784, 0.991, 1)
+			case "Salmon":
+				colorComponents = (0.999, 0.854, 0.849, 1)
+			default:
+				colorComponents = (0.894, 0.984, 1, 1)
+		}
+		
+		return colorComponents
+	}
 }

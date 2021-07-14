@@ -116,6 +116,11 @@ struct MainCatsPageView: View {
 				}
 			}
 		}
+		.onAppear { catsDescriptionViewModel.setColorScheme(colorScheme) }
+		.onDisappear { catsDescriptionViewModel.removeColorScheme() }
+		.onChange(of: colorScheme) { newScheme in
+			catsDescriptionViewModel.setColorScheme(newScheme)
+		}
 		.background(Color.mainColor.ignoresSafeArea())
 		.sheet(isPresented: $catsDescriptionViewModel.isEditingCatsPage) {
 			catsDescriptionViewModel.editingCatsPageView
