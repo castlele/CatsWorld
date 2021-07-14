@@ -9,9 +9,15 @@ import SwiftUI
 
 struct TabBarView: View {
 	
+	@Environment(\.colorScheme) var colorScheme
+	
 	@StateObject var settingsViewModel = SettingsViewModel()
 	
 	@State var selectedTab = 1
+	
+	init() {
+		BreedsViewModel.shared.loadBreeds()
+	}
 	
     var body: some View {
 		TabView(selection: $selectedTab) {
@@ -55,6 +61,12 @@ struct TabBarView: View {
 				.tag(3)
 		}
 		.preferredColorScheme(settingsViewModel.wrappedColorScheme)
+		.onAppear {
+			UIView.appearance(whenContainedInInstancesOf: [UIAlertController.self]).tintColor = colorScheme == .dark ? Color.darkAccentUIColor() : Color.lightAccentUIColor()
+		}
+		.onChange(of: colorScheme) { newScheme in
+			UIView.appearance(whenContainedInInstancesOf: [UIAlertController.self]).tintColor = newScheme == .dark ? Color.darkAccentUIColor() : Color.lightAccentUIColor()
+		}
 		.accentColor(.accentColor)
     }
 }

@@ -23,10 +23,6 @@ struct CatsWorldApp: App {
 		UISegmentedControl.appearance().setTitleTextAttributes(
 			[.foregroundColor:	UIColor.white],
 			for: .selected)
-				
-		UIView.appearance(whenContainedInInstancesOf: [UIAlertController.self]).tintColor = Color.accentUIColor()
-
-		BreedsViewModel.shared.loadBreeds()
 	}
 	
     var body: some Scene {
