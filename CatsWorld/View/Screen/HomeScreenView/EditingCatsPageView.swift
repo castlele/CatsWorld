@@ -10,6 +10,8 @@ import CoreData
 
 struct EditingCatsPageView: View {
 	
+	@Environment(\.colorScheme) var colorScheme
+	
 	@Environment(\.presentationMode) var presentation
 	
 	@StateObject var catsViewModel: CatsCardsPageViewModel
@@ -192,8 +194,10 @@ struct EditingCatsPageView: View {
 				secondaryButton: .cancel()
 			)
 		}
+		// MARK: - Image Picker
 		.sheet(isPresented: $catsViewModel.isImagePicker) {
 			ImagePicker(image: $catsViewModel.catsImage)
+				.preferredColorScheme(colorScheme)
 		}
 		.background(Color.mainColor)
 	}
