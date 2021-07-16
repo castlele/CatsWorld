@@ -179,7 +179,7 @@ struct HomeScreenView: View {
 					}
 			}
 			.animation(.easeInOut(duration: 0.2).delay(0.41))
-			.blur(radius: homeScreenViewModel.isColorPicker ? 20 : 0)
+			.blur(radius: homeScreenViewModel.isColorPicker ? 10 : 0)
 			.disabled(homeScreenViewModel.isColorPicker || homeScreenViewModel.isMenu)
 			
 			// MARK: - ColorPicker
@@ -188,6 +188,10 @@ struct HomeScreenView: View {
 					homeScreenViewModel.catsCardsColorPicker
 						.preferredColorScheme(settingsViewModel.wrappedColorScheme)
 				}
+				.background(
+					RoundedRectangle(cornerRadius: 20)
+						.stroke(Color.shadowColor)
+				)
 				.animation(.linear(duration: 0.4))
 				.transition(.move(edge: .bottom))
 				.onDisappear {
