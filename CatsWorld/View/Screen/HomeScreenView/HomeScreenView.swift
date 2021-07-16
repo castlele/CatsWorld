@@ -19,7 +19,7 @@ struct HomeScreenView: View {
 		entity: CatsCard.entity(),
 		sortDescriptors: [],
 		predicate: nil,
-		animation: .spring()
+		animation: nil
 	) var catsCards: FetchedResults<CatsCard>
 	
 	@StateObject var homeScreenViewModel = HomeScreenViewModel()

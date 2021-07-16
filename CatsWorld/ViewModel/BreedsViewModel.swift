@@ -29,6 +29,7 @@ final class BreedsViewModel: ObservableObject {
 	/// Text, which is typed in `SearchBarView`
 	/// It is used to search though the `breeds`
 	@Published var textToSearch = ""
+	@Published var isShowOnlyFavourites = false
 	@Published var isLoadingBreeds = false
 	@Published var isLoadingImage = false
 	
@@ -79,10 +80,17 @@ extension BreedsViewModel {
 		)
 	}
 	
-	/// Filter breeds by `textToSearch`
+	/// Filter breeds by `textToSearch`.
+	/// If isShowOnlyFavourites is true, only favourite breeds will be shown
 	/// - Parameter breed: Breed, which will be validated
 	/// - Returns: True if `textToSearch` is emtpy or if breed is validated by `textToSearch`
 	func validateBreeds(breed: Breed) -> Bool {
+		if isShowOnlyFavourites {
+			guard let value = favBreeds[breed.id], value else {
+				return false
+			}
+		}
+		
 		let searchingText = textToSearch.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
 		
 		return searchingText == "" || breed.name.localize().lowercased().hasPrefix(searchingText) || breed.origin.localize().lowercased().hasPrefix(searchingText)

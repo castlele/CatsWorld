@@ -32,7 +32,46 @@ struct BreedsList: View {
 			Color.mainColor.ignoresSafeArea()
 			
 			VStack {
-				SearchBarView(placeholder: "Search placeholder", text: $breedsViewModel.textToSearch)
+				// MARK: - TopBarView
+				TopBarView(
+					minHeight: 80,
+					maxHeight: 90,
+					content: {
+						HStack {
+							RoundedRectangle(cornerRadius: 20)
+								.fill(Color.mainColor)
+								.overlay(
+									HStack {
+										SearchBarView(placeholder: "Search placeholder", text: $breedsViewModel.textToSearch)
+											.padding([.top, .bottom, .leading])
+										
+										Button(action: {
+											withAnimation(.linear(duration: 0.25)) {
+												breedsViewModel.isShowOnlyFavourites.toggle()
+											}
+											
+										}, label: {
+											Image3D(
+												topView: breedsViewModel.isShowOnlyFavourites ? Image(systemName: "heart.fill") : Image(systemName: "heart"),
+												bottomView: breedsViewModel.isShowOnlyFavourites ? Image(systemName: "heart.fill") : Image(systemName: "heart"),
+												topColor: .volumeEffectColorTop,
+												bottomColor: .volumeEffectColorBottom,
+												isPadding: false
+											)
+											.equatable()
+											.scaleEffect(1.4)
+											.aspectRatio(contentMode: .fit)
+											
+										})
+										.padding()
+									}
+								)
+								.frame(height: 50)
+								.volumetricShadows()
+								.padding()
+						}
+						.padding(.bottom)
+					})
 				
 				List {
 					ForEach(breedsViewModel.breeds.filter { breedsViewModel.validateBreeds(breed: $0) }) { breed in
