@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// MARK: - Leading: View, Trailing: View, Content: View
 struct TopBarView<Leading: View, Trailing: View, Content: View>: View {
 	
 	let backgroundColor: Color
@@ -34,15 +35,15 @@ struct TopBarView<Leading: View, Trailing: View, Content: View>: View {
 	
     var body: some View {
 		ZStack {
+			backgroundColor.ignoresSafeArea(edges: .top)
+			
 			Rectangle()
 				.fill(Color.shadowColor.opacity(0.5))
 				.blur(radius: 2)
 				.offset(x: 0, y: 3)
-				.ignoresSafeArea(edges: .top)
 			
 			Rectangle()
 				.fill(backgroundColor)
-				.ignoresSafeArea(edges: .top)
 			
 			VStack {
 				HStack {
@@ -128,6 +129,23 @@ extension TopBarView where Leading == EmptyView, Trailing == EmptyView, Content 
 		self.leading = EmptyView()
 		self.trailing = EmptyView()
 		self.content = EmptyView()
+	}
+}
+
+// MARK: - Leading == Empty View, Trailing == EmptyView, Content: View
+extension TopBarView where Leading == EmptyView, Trailing == EmptyView, Content: View {
+	init(
+		backgroundColor: Color = .mainColor,
+		minHeight: CGFloat? = nil,
+		maxHeight: CGFloat? = nil,
+		@ViewBuilder content: () -> Content
+	) {
+		self.backgroundColor = backgroundColor
+		self.minHeight = minHeight
+		self.maxHeight = maxHeight
+		self.leading = EmptyView()
+		self.trailing = EmptyView()
+		self.content = content()
 	}
 }
 

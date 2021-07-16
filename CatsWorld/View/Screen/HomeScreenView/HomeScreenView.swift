@@ -29,27 +29,84 @@ struct HomeScreenView: View {
 			Color.mainColor
 			
 			VStack {
-				TopBarView(minHeight: 80, maxHeight: 80, trailing: {
-					Button(action: {
-						homeScreenViewModel.makeNewCat(context: managedObjectContext)
-						
-					}, label: {
-						Image3D(
-							topView: Image(systemName: "plus"),
-							bottomView: Image(systemName: "plus"),
-							topColor: .volumeEffectColorTop,
-							bottomColor: .volumeEffectColorBottom
-						)
-						.equatable()
+				TopBarView(
+					minHeight: 80,
+					maxHeight: 90,
+					content: {
+						HStack {
+							RoundedRectangle(cornerRadius: 20)
+								.fill(Color.mainColor)
+								.overlay(
+									HStack {
+										SearchBarView(placeholder: "Search", text: .constant(""))
+											.padding(.leading, 10)
+											.padding([.top, .bottom])
+										
+										Button(action: {
+											print("sorted")
+											
+										}, label: {
+											Image3D(
+												topView: Image(systemName: "line.horizontal.3.decrease.circle"),
+												bottomView: Image(systemName: "line.horizontal.3.decrease.circle"),
+												topColor: .volumeEffectColorTop,
+												bottomColor: .volumeEffectColorBottom
+											)
+											.equatable()
+											.scaleEffect(1.5)
+											.aspectRatio(contentMode: .fit)
+										})
+									}
+								)
+								.frame(height: 50)
+								.volumetricShadows()
+								.padding()
+							
+							Spacer()
+							
+							Button(action: {
+								homeScreenViewModel.makeNewCat(context: managedObjectContext)
+								
+							}, label: {
+								Image3D(
+									topView: Image(systemName: "plus"),
+									bottomView: Image(systemName: "plus"),
+									topColor: .volumeEffectColorTop,
+									bottomColor: .volumeEffectColorBottom
+								)
+								.equatable()
+							})
+							.frame(width: 50, height: 50)
+							.buttonStyle(CircleButtonStyle())
+							.padding()
+						}
+						.padding(.bottom)
 					})
-					.frame(width: 50, height: 50)
-					.buttonStyle(CircleButtonStyle())
-					.padding()
-				})
 				
 				Spacer()
 				
+				// MARK: - ScrollView
 				ScrollView(.vertical, showsIndicators: false) {
+					PullActionView() {
+						homeScreenViewModel.makeNewCat(context: managedObjectContext)
+						
+					} viewToShow: {
+						RoundedRectangle(cornerRadius: 20)
+							.fill(Color.mainColor)
+							.overlay(
+								Image3D(
+									topView: Image(systemName: "plus"),
+									bottomView: Image(systemName: "plus"),
+									topColor: .volumeEffectColorTop,
+									bottomColor: .volumeEffectColorBottom
+								)
+								.equatable()
+								.frame(width: 50, height: 50)
+							)
+							.volumetricShadows()
+							.padding()
+					}
+					
 					ForEach(catsCards) { card in
 						CatsCardView(cat: card)
 							.equatable()
@@ -88,6 +145,18 @@ struct HomeScreenView: View {
 						
 						Spacer(minLength: 10)
 					}
+					
+					// MARK: - Zero cat's cards text
+					if catsCards.isEmpty {
+						VStack {
+							Text("Empty CatsCards")
+								.font(.system(.body, design: .rounded))
+								.multilineTextAlignment(.center)
+								.padding([.leading, .trailing, .top])
+							
+							Spacer()
+						}
+					}
 				}
 			}
 			.fullScreenCover(isPresented: $homeScreenViewModel.isMainCatsPageView) {
@@ -109,6 +178,7 @@ struct HomeScreenView: View {
 			.blur(radius: homeScreenViewModel.isColorPicker ? 20 : 0)
 			.disabled(homeScreenViewModel.isColorPicker || homeScreenViewModel.isMenu)
 			
+			// MARK: - ColorPicker
 			if homeScreenViewModel.isColorPicker {
 				ZStack {
 					homeScreenViewModel.catsCardsColorPicker
@@ -125,6 +195,7 @@ struct HomeScreenView: View {
 				}
 			}
 			
+			// MARK: - MenuView
 			if homeScreenViewModel.isMenu {
 				GeometryReader { geometry in
 					CatsDescriptionSection {
@@ -172,6 +243,9 @@ struct HomeScreenView: View {
 					.offset(x: (geometry.size.width - menuWidth) / 2, y: geometry.frame(in: .local).maxY - 205)
 				}
 			}
+		}
+		.onDisappear {
+			homeScreenViewModel.saveChanges(context: managedObjectContext)
 		}
     }
 }

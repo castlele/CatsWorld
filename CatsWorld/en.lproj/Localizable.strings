@@ -6,6 +6,8 @@
   
 */
 
+"Empty CatsCards" = "Tap Plus button or swipe down to add new card of the cat";
+
 "Additional info" = "Write whatever you want about your cat";
 "Sure wanna discard" = "Are you sure you want to discard this new card";
 "Shadow optimization info" = "Shadows can be demanding on the processing power of your device. Especially for older devices. We want to make your experience as smooth and pleasant as possible, so you can choose different shadow types, which fits you. If the app laggs sometimes, you can try to choose Flat or Disabled options";

@@ -111,6 +111,8 @@ extension HomeScreenViewModel {
 	func deleteCat(context: NSManagedObjectContext) {
 		context.delete(selectedCat)
 		
+		makeChanges()
+		
 		deselectCat()
 		
 		withAnimation() {

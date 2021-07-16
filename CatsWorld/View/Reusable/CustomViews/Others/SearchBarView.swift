@@ -39,7 +39,6 @@ struct SearchBarView: View {
 			RoundedRectangle(cornerRadius: 20)
 				.stroke(Color.semiAccentColor)
 		)
-		.padding([.leading, .top, .trailing])
     }
 }
 
