@@ -8,6 +8,7 @@
 import UIKit
 
 extension UIImage {
+	
 	convenience init?(data: Data?) {
 		guard let data = data else { return nil }
 		

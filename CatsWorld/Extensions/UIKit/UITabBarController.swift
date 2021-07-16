@@ -8,6 +8,7 @@
 import SwiftUI
 
 extension UITabBarController {
+	
 	override open func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
 		let standardAppearance = UITabBarAppearance()

@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// View Model of `SettingsView`
 final class SettingsViewModel: ObservableObject {
 	
 	static var shared = SettingsViewModel()
@@ -65,6 +66,7 @@ extension SettingsViewModel {
 		saveColorScheme()
 	}
 	
+	/// Show alert withc infor about why shadows cat be optimized, toggle `isShadowInfo`
 	func showShadowsInfo() {
 		alert = Alert(title: Text("Shadow optimization"), message: Text("Shadow optimization info"), dismissButton: .cancel(Text("OK")))
 		

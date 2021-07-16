@@ -9,47 +9,16 @@ import Foundation
 import SwiftUI
 import CoreData
 
+/// View Model of `EditingCatsPageView`
 final class CatsCardsPageViewModel: CatManipulator {
 	
 	/// Currently edited object of `CatsCard`
 	private var cat: CatsCard!
 	
-	var deleteAfterCancelation: Bool
-	
-	var managedObjectContext: NSManagedObjectContext
-	
-	public init(cat: CatsCard, deleteAfterCancelation: Bool = false, managedObjectContext moc: NSManagedObjectContext) {
-		self.cat = cat
-		self.deleteAfterCancelation = deleteAfterCancelation
-		self.managedObjectContext = moc
-		
-		self.name = cat.name ?? ""
-		self.dateOfBirth = cat.dateOfBirth ?? Date()
-		self.gender = Gender(rawValue: cat.wrappedSex)!
-		self.breed = cat.breed ?? BreedsViewModel.defaultBreed.name
-		self.weight = cat.weight
-		self.isCastrated = cat.isCastrated
-		self.suppressedTail = cat.suppressedTail
-		self.shortLegs = cat.shortLegs
-		self.hairless = cat.hairless
-		self.temperament = cat.wrappedTemperament
-		self.strangerFriendly = Int(cat.strangerFriendly)
-		self.childFriendly = Int(cat.childFriendly)
-		self.dogFriendly = Int(cat.dogFriendly)
-		self.additionalInfo = cat.wrappedInfo
-		self.catsImage = UIImage(data: cat.image)
-	}
-	
-	@Published var isAlertShown = false
-	
-	@Published var isImagePicker = false
-	
-	/// Track if changes was made to cat entity
-	var wasChanged: Bool {
-		!changes.values.compactMap{ $0 }.isEmpty
-	}
-	
-	/// Holds all changes made
+	/// Holds all changes to private `cat` property
+	/// The format of traking changes is key-value pairs
+	/// Key is a property name of `CatsCard` instance
+	/// Value is optional representation of changes of type `CatsCardsPageViewModel.Change`
 	private var changes: [String: Change?] = [
 		"name": nil,
 		"dateOfBirth": nil,
@@ -67,6 +36,14 @@ final class CatsCardsPageViewModel: CatManipulator {
 		"additionalInfo": nil,
 		"image": nil
 	]
+	
+	/// If true, after cancelation of `EditingCatsPageView` private `cat` property will be deleted
+	/// Otherwise, it will be saved
+	var deleteAfterCancelation: Bool
+	var managedObjectContext: NSManagedObjectContext
+	
+	@Published var isAlertShown = false
+	@Published var isImagePicker = false
 	
 	@Published var name: String {
 		willSet(newName) {
@@ -161,12 +138,42 @@ final class CatsCardsPageViewModel: CatManipulator {
 			}
 		}
 	}
+	
+	/// Track if changes were made to private `cat` property
+	/// True means that values of private `changes` dictionary are all have nil value
+	var wasChanged: Bool {
+		!changes.values.compactMap{ $0 }.isEmpty
+	}
+	
+	// MARK: - Initialization
+	public init(cat: CatsCard, deleteAfterCancelation: Bool = false, managedObjectContext moc: NSManagedObjectContext) {
+		self.cat = cat
+		self.deleteAfterCancelation = deleteAfterCancelation
+		self.managedObjectContext = moc
+		
+		// Setting up of @Published properties
+		self.name = cat.name ?? ""
+		self.dateOfBirth = cat.dateOfBirth ?? Date()
+		self.gender = Gender(rawValue: cat.wrappedSex)! // It is safe to force unwrap
+		self.breed = cat.breed ?? BreedsViewModel.defaultBreed.name
+		self.weight = cat.weight
+		self.isCastrated = cat.isCastrated
+		self.suppressedTail = cat.suppressedTail
+		self.shortLegs = cat.shortLegs
+		self.hairless = cat.hairless
+		self.temperament = cat.wrappedTemperament
+		self.strangerFriendly = Int(cat.strangerFriendly)
+		self.childFriendly = Int(cat.childFriendly)
+		self.dogFriendly = Int(cat.dogFriendly)
+		self.additionalInfo = cat.wrappedInfo
+		self.catsImage = UIImage(data: cat.image)
+	}
 }
 
 // MARK: - Changes tracker
 extension CatsCardsPageViewModel {
 	
-	/// Represents type of changes
+	/// Represents changes, that can be done to every property of `CatsCard` instance
 	private enum Change {
 		case name(String)
 		case dateOfBirth(Date)
@@ -189,14 +196,6 @@ extension CatsCardsPageViewModel {
 // MARK:- Public methods
 extension CatsCardsPageViewModel {
 	
-	func selectCat(_ cat: CatsCard) {
-		self.cat = cat
-	}
-	
-	func deselectCat() {
-		self.cat = nil
-	}
-	
 	/// Saves changes, made to instance of `CatsCard`
 	func save() {
 		setNewValues()
@@ -210,14 +209,13 @@ extension CatsCardsPageViewModel {
 	}
 	
 	/// Deletes `CatsCard` object from Core Data
-	/// Assigns nil to instance of `cat` and `managedObjectContext` of current `CatsCardsViewModel`
 	func delete() {
 		if deleteAfterCancelation {
 			managedObjectContext.delete(cat)
 		}
 	}
 	
-	/// Dismisses `EditingCatsPageView` and discard or submit changes
+	/// Dismisses `EditingCatsPageView`
 	/// - Parameters:
 	///   - isDiscardChanges: If changes should be discarded
 	///   - presentation: `PresentationMode` to dismiss view
@@ -225,6 +223,16 @@ extension CatsCardsPageViewModel {
 		isDiscardChanges ? delete() : save()
 		deselectCat()
 		presentation.wrappedValue.dismiss()
+	}
+	
+	// MARK: - CatManipulator comformance
+	
+	func selectCat(_ cat: CatsCard) {
+		self.cat = cat
+	}
+	
+	func deselectCat() {
+		self.cat = nil
 	}
 }
 
@@ -243,7 +251,7 @@ extension CatsCardsPageViewModel {
 		}
 	}
 	
-	/// Set new value to cat's property
+	/// Set new value to `cat`'s property
 	/// - Parameters:
 	///   - value: New value to assign
 	///   - property: Cat's property to assign to
@@ -251,6 +259,9 @@ extension CatsCardsPageViewModel {
 		property = value
 	}
 	
+	/// Check if new image is valid, compresses new image's data and checks if new image isn't equal to old value of `cat.image`
+	/// - Parameter newImage: New image, which is assigning to `cat.image` property
+	/// - Returns: `Data` if image is valid and isn't equal to old image, otherwise, nil
 	private func validateImage(_ newImage: UIImage?) -> Data? {
 		if let image = newImage {
 			let imageData = image.jpegData(compressionQuality: 0.65)
@@ -262,7 +273,7 @@ extension CatsCardsPageViewModel {
 		return nil
 	}
 	
-	/// Sets new values if needed
+	/// Sets new values to `CatsCard` corresponding properties if needed
 	private func setNewValues() {
 		for change in changes.values {
 			guard let change = change else { continue }

@@ -32,7 +32,7 @@ struct CatsCardView: View {
 				.frame(minWidth: 50, minHeight: 50, maxHeight: 100)
 				.padding(.trailing, 10)
 			
-			CatsMainInfoView(cat: cat, age: .constant(.age))
+			CatsMainInfoView(cat: cat, ageType: .constant(.age))
 				.equatable()
 			
 			GenderSign(genderSign: cat.genderSign, foregroundColor: .primary)

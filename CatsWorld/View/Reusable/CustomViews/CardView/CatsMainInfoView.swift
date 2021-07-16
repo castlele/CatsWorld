@@ -9,35 +9,42 @@ import SwiftUI
 
 extension CatsMainInfoView: Equatable {
 	static func == (lhs: Self, rhs: Self) -> Bool {
-		lhs.age == rhs.age &&
-			lhs.cat.name == rhs.cat.name &&
-			lhs.cat.wrappedBreed == rhs.cat.wrappedBreed &&
-			lhs.cat.dateOfBirth == rhs.cat.dateOfBirth &&
+		lhs.ageType == rhs.ageType &&
+			lhs.catsName == rhs.catsName &&
+			lhs.catsBreed == rhs.catsBreed &&
+			lhs.catsDateOfBirth == rhs.catsDateOfBirth &&
 			lhs.cat.image == rhs.cat.image
 	}
 }
 
 struct CatsMainInfoView: View {
 	
-	let cat: CatsCard
+	@ObservedObject var cat: CatsCard
 	
-	@Binding var age: AgeType
+	@Binding var ageType: AgeType
 	
 	var isGender = false
 	var isAvatar = false
 	
 	var wrappedAge: String {
-		switch age {
+		switch ageType {
 			case .age:
-				return cat.age
+				return catsAge
 			case .dateOfBirth:
-				return cat.wrappedDateOfBirth
+				return catsDateOfBirth
 		}
 	}
 	
+	var catsName: String { cat.wrappedName }
+	var catsGenderSign: String { cat.genderSign }
+	var catsGenderColor: Color { cat.genderColor }
+	var catsAge: String { cat.age }
+	var catsDateOfBirth: String { cat.wrappedDateOfBirth }
+	var catsBreed: String { cat.wrappedBreed.localize() }
+	
 	var genderSign: AnyView? {
 		if isGender {
-			return AnyView(GenderSign(genderSign: cat.genderSign, foregroundColor: cat.genderColor)
+			return AnyView(GenderSign(genderSign: catsGenderSign, foregroundColor: catsGenderColor)
 							.equatable()
 							.scaleEffect(1.25)
 			)
@@ -58,17 +65,16 @@ struct CatsMainInfoView: View {
 			}
 			
 			VStack(alignment: .leading, spacing: 2.5) {
-				Text(cat.wrappedName)
+				Text(catsName)
 					.font(.system(.body, design: .rounded))
 					.fontWeight(.bold)
 					.lineLimit(1)
 				
-				Text("\(wrappedAge)")
+				Text(wrappedAge)
 					.font(.system(size: 12, weight: .light, design: .rounded))
 				
-				Text(cat.wrappedBreed.localize())
+				Text(catsBreed)
 					.font(.system(size: 13, weight: .medium, design: .rounded))
-					
 					.allowsTightening(true)
 					.lineLimit(2)
 					
@@ -90,6 +96,6 @@ struct CatsMainInfoView_Previews: PreviewProvider {
 		return cat
 	}()
 	static var previews: some View {
-		CatsMainInfoView(cat: cat, age: .constant(.age))
+		CatsMainInfoView(cat: cat, ageType: .constant(.age))
 	}
 }

@@ -8,15 +8,20 @@
 import SwiftUI
 import CoreData
 
+/// VIew Model of `MainCatsPageView`
 final class CatsDescriptionViewModel: CatManipulator {
 	
+	/// Instance of `CatsCard` which properties should be translated to SwiftUI Views
 	private var cat: CatsCard!
 	private var context: NSManagedObjectContext
-	private var colorScheme: ColorScheme!
+	/// Currently selected color scheme of the app to track shadows' color and `CatsMainInfoView`'s background color
+	@Published private var colorScheme: ColorScheme!
 	
 	var editingCatsPageView: EditingCatsPageView!
 	
+	/// Format of representing age in `CatsMainInfoView`
 	@Published var ageType: AgeType = .age
+	/// Represent if `EditingCatsPageView` should be shown
 	@Published var isEditingCatsPage = false
 	
 	var catsCardColor: Color { determineCatsCardsColor() }
@@ -44,6 +49,7 @@ final class CatsDescriptionViewModel: CatManipulator {
 		return characteristics
 	}
 	
+	// MARK: - Initialization
 	init(cat: CatsCard, context: NSManagedObjectContext) {
 		self.context = context
 		selectCat(cat)
@@ -53,14 +59,18 @@ final class CatsDescriptionViewModel: CatManipulator {
 // MARK: - Public methods
 extension CatsDescriptionViewModel {
 	
+	/// Assign new value to private `colorScheme` property
+	/// - Parameter colorScheme: New color scheme
 	func setColorScheme(_ colorScheme: ColorScheme) {
 		self.colorScheme = colorScheme
 	}
 	
+	/// Assign nil to private `colorScheme` property
 	func removeColorScheme() {
 		self.colorScheme = nil
 	}
 	
+	/// Changes value of property `ageType`
 	func changeAgeType() {
 		switch ageType {
 			case .age:
@@ -70,6 +80,7 @@ extension CatsDescriptionViewModel {
 		}
 	}
 	
+	/// Set up `EditingCatsPageView` and toggle `isEditingCatsPage`
 	func editCat() {
 		let catsViewModel = CatsCardsPageViewModel(cat: getCat(), deleteAfterCancelation: false, managedObjectContext: context)
 		editingCatsPageView = EditingCatsPageView(catsViewModel: catsViewModel)
@@ -77,6 +88,10 @@ extension CatsDescriptionViewModel {
 		isEditingCatsPage.toggle()
 	}
 	
+	/// Get array of descriptions of the cat for certain category
+	/// Used to transform `CatsCard`'s properties to SwiftUI Views
+	/// - Parameter category: Category, which properties should be transformed to `Description`
+	/// - Returns: Array of `Description`
 	func getDescriptionsFor(category: CatsDescriptionCategory) -> [Description] {
 		cat.getDescriptionsFor(category: category)
 	}
@@ -99,6 +114,8 @@ extension CatsDescriptionViewModel {
 		return result
 	}
 	
+	// MARK: - CatManipulator comformance
+	
 	func getCat() -> CatsCard { cat }
 	
 	func selectCat(_ cat: CatsCard) { self.cat = cat }
@@ -109,10 +126,13 @@ extension CatsDescriptionViewModel {
 // MARK: - Private methods
 extension CatsDescriptionViewModel {
 	
+	/// Determine color of `CatsCard` depending on current color scheme
+	/// - Returns: Current `CatsCard` color
 	private func determineCatsCardsColor() -> Color {
 		var colorComponents: Color.ColorComponents
 		
 		guard let colorScheme = colorScheme else {
+			// By default light color scheme is used
 			colorComponents = determineLightColorComponents()
 			return Color(colorComponents)
 		}
@@ -120,15 +140,19 @@ extension CatsDescriptionViewModel {
 		switch colorScheme {
 			case .dark:
 				colorComponents = determineDarkColorComponents()
+				
 			case .light:
 				colorComponents = determineLightColorComponents()
-			default:
+				
+			default: // Default case should never be executed
 				colorComponents = determineLightColorComponents()
 		}
 		
 		return Color(colorComponents)
 	}
 	
+	/// Determine color components for dark color scheme
+	/// - Returns: Tuple of 4 values which repesents components of color (red, green, blue, alpha)
 	private func determineDarkColorComponents() -> Color.ColorComponents {
 		var colorComponents: Color.ColorComponents
 		
@@ -154,6 +178,8 @@ extension CatsDescriptionViewModel {
 		return colorComponents
 	}
 	
+	/// Determine color components for light color scheme
+	/// - Returns: Tuple of 4 values which repesents components of color (red, green, blue, alpha)
 	private func determineLightColorComponents() -> Color.ColorComponents {
 		var colorComponents: Color.ColorComponents
 		

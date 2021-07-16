@@ -7,27 +7,32 @@
 
 import SwiftUI
 
+/// View Model of `BreedsList`
 final class BreedsViewModel: ObservableObject {
 	
 	private let defaultHeader = ["x-api-key": "9fa4592a-db90-46af-93d7-68743bbd52db"]
+	/// ID of breed, which image is fetching righ now
 	private var fetchingImageForBreedID = ""
 	
 	static let shared = BreedsViewModel()
-	static let breedsEndPoint = EndPoint.breedsAPI([(.attachBreed, "0")])
 	
 	static var defaultBreed: Breed {
 		shared.breeds[0]
 	}
-		
-	lazy var breeds: [Breed] = {
-		MockData.breeds
-	}()
 	
+	/// Dictionary, which holds favourite breeds.
+	/// Property is stored in `UserDefatults`.
+	/// Key is a breed id property, value is a boolean value.
+	/// Breed isn't favourite if value for curresponding key (`breed.id`) is false of if key-value pair is absent
 	@Published var favBreeds: [String: Bool] = UserDefaults.standard.dictionary(forKey: "favBreeds") as? [String: Bool] ?? [:]
-		
+	
+	/// Text, which is typed in `SearchBarView`
+	/// It is used to search though the `breeds`
 	@Published var textToSearch = ""
 	@Published var isLoadingBreeds = false
 	@Published var isLoadingImage = false
+	
+	/// Current breed's image, which is shown in `BreedsDetailView`
 	@Published var currentImage: Image! = nil
 	@Published var isToggledAddToFavourite = false
 		
@@ -37,15 +42,20 @@ final class BreedsViewModel: ObservableObject {
 		}
 		return Image(systemName: "person.crop.circle.fill")
 	}
+	
+	lazy var breeds: [Breed] = {
+		MockData.breeds
+	}()
 }
 
 // MARK:- Public methods
 extension BreedsViewModel {
-	/// Starts making `URLRequest` and loads breeds
+	
+	/// Load Breeds
 	func loadBreeds() {
 		isLoadingBreeds = true
 		
-		let url = makeURL(endPoint: BreedsViewModel.breedsEndPoint)
+		let url = makeURL(endPoint: EndPoint.breedsAPI([(.attachBreed, "0")]))
 		
 		NetworkRequester.shared.makeRequest(
 			url: url!,
@@ -54,6 +64,8 @@ extension BreedsViewModel {
 		)
 	}
 	
+	/// Load Image for certain breed (breed, which is shown in `BreedsDetailView`)
+	/// - Parameter breed: Breed, for which image should be loaded
 	func loadImage(forBreed breed: Breed) {
 		isLoadingImage = true
 		fetchingImageForBreedID = breed.id
@@ -67,12 +79,20 @@ extension BreedsViewModel {
 		)
 	}
 	
+	/// Filter breeds by `textToSearch`
+	/// - Parameter breed: Breed, which will be validated
+	/// - Returns: True if `textToSearch` is emtpy or if breed is validated by `textToSearch`
 	func validateBreeds(breed: Breed) -> Bool {
 		let searchingText = textToSearch.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
 		
 		return searchingText == "" || breed.name.localize().lowercased().hasPrefix(searchingText) || breed.origin.localize().lowercased().hasPrefix(searchingText)
 	}
 	
+	/// Make breed favourite and saves that in `UserDefaults`
+	/// - Parameters:
+	///   - breed: Breed, which should be added to favourite
+	///   - v: Optional boolean value, which should represents wheather the breed is favourite or not.
+	///   If equals to nil, value will be true, if there was no such key-value pair previousely, and,if key-value exists, opposite to current value
 	func makeBreedFavourite(_ breed: Breed, value v: Bool? = nil) {
 		let breedID = breed.id
 		var value = v
@@ -90,6 +110,7 @@ extension BreedsViewModel {
 		UserDefaults.standard.set(favBreeds, forKey: "favBreeds")
 	}
 	
+	/// Instagram like animation of appearing and disapearing heart
 	func toggleAddToFavouriteAnimation() {
 		withAnimation(.linear(duration: 0.3)) {
 			isToggledAddToFavourite = true
@@ -151,6 +172,8 @@ extension BreedsViewModel {
 		breeds.removeAllOccurances(MockData.breeds[0])
 	}
 	
+	/// Use `JSONSerialization` to parse URL from JSON Data
+	/// - Parameter result: JSON data if success or `CWERrror` if fail
 	private func parseImageURL(result: Result<Data, CWError>) -> Void {
 		switch result {
 			case .success(let data):
@@ -164,11 +187,14 @@ extension BreedsViewModel {
 		}
 	}
 	
+	/// Validate Any result type to `URL`
+	/// - Parameter result: `Any` if success or `CWError` if fail
 	private func getDataFromImageURL(result: Result<Any, CWError>) -> Void {
 		switch result {
 			case .success(let data):
 				guard let stringURL = data as? String else { break }
 				guard let url = URL(string: stringURL) else { break }
+				
 				loadImageFromImageURL(url: url)
 				
 			default:
@@ -176,6 +202,8 @@ extension BreedsViewModel {
 		}
 	}
 	
+	/// Load image
+	/// - Parameter url: `ULR` of the image
 	private func loadImageFromImageURL(url: URL) {
 		NetworkRequester.shared.makeRequest(
 			url: url,
@@ -184,6 +212,8 @@ extension BreedsViewModel {
 		)
 	}
 	
+	/// Downsample image and assign it to `currentImage` property
+	/// - Parameter result: Image `Data` if success, `CWError` if fail
 	private func convertDataToImage(result: Result<Data, CWError>) -> Void {
 		DispatchQueue.main.async { [self] in
 			switch result {

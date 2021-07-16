@@ -11,6 +11,7 @@ struct HomeScreenView: View {
 	
 	private let menuWidth = UIScreen.screenWidth / 1.2
 	
+	@Environment(\.colorScheme) var colorScheme
 	@Environment(\.managedObjectContext) var managedObjectContext
 	@EnvironmentObject var settingsViewModel: SettingsViewModel
 	
@@ -135,7 +136,7 @@ struct HomeScreenView: View {
 						.foregroundColor(.red)
 						
 						Button("More info") {
-							homeScreenViewModel.editCat(context: managedObjectContext)
+							homeScreenViewModel.observeCat(context: managedObjectContext)
 						}
 						.font(.system(.body, design: .rounded))
 						.frame(minWidth: menuWidth, maxWidth: menuWidth + 20)

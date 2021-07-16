@@ -8,6 +8,8 @@
 import UIKit
 
 extension UIApplication {
+	
+	/// Dismiss keyboard 
 	func endEditing(_ force: Bool) {
 		self.windows
 			.filter { $0.isKeyWindow }

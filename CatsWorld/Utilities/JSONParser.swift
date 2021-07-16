@@ -33,6 +33,11 @@ extension JSONParser {
 		}
 	}
 	
+	/// Parse JSON wich `JSONSerialization` from `Data` with given argument
+	/// - Parameters:
+	///   - data: Data from which JSON will be parsed
+	///   - argument: Key in JSON, which value should be fetched
+	///   - completion: Action, that will be done after parsing
 	func parseWithSerialization(from data: Data, argument: String, completion: @escaping (Result<Any, CWError>) -> Void) {
 		do {
 			guard let json = try JSONSerialization.jsonObject(with: data) as? [[String: Any]] else {

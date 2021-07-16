@@ -136,6 +136,7 @@ extension Breed: Describable {
 		}
 	}
 	
+	/// Localize temperament
 	private func makeTemperament(_ originalStr: String) -> String {
 		let localizedArray = originalStr
 			.split(separator: ",")

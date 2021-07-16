@@ -12,6 +12,7 @@ extension Color {
 	
 	typealias ColorComponents = (red: Double, green: Double, blue: Double, alpha: Double)
 	
+	/// Initialization in `.sRGB` Color space with withc given color components
 	init(_ colorComponents: ColorComponents) {
 		self.init(.sRGB,
 				  red: colorComponents.red,
@@ -32,6 +33,7 @@ extension Color {
 	static let shadowColor = Color("shadowColor")
 	static let volumeEffectShadowColor = Color("3DEffectShadowColor")
 	
+	/// Represent color components of `Self`
 	private var colorComponents: (red: Double, green: Double, blue: Double, alpha: Double) {
 		let uiColor = UIColor(self)
 		

@@ -23,7 +23,7 @@ struct CatsCardsColorPicker: View {
 			
 			VStack {
 				HStack {
-					CatsMainInfoView(cat: cat, age: .constant(.age), isAvatar: true)
+					CatsMainInfoView(cat: cat, ageType: .constant(.age), isAvatar: true)
 						.equatable()
 					
 					GenderSign(genderSign: cat.genderSign, foregroundColor: .primary)

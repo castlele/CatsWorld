@@ -59,7 +59,7 @@ struct MainCatsPageView: View {
 				.padding([.top, .trailing])
 				
 			}, content: {
-				CatsMainInfoView(cat: catsDescriptionViewModel.getCat(), age: $catsDescriptionViewModel.ageType, isGender: true, isAvatar: true)
+				CatsMainInfoView(cat: catsDescriptionViewModel.getCat(), ageType: $catsDescriptionViewModel.ageType, isGender: true, isAvatar: true)
 					.equatable()
 					.frame(maxWidth: 240, alignment: .center)
 					.padding(.bottom)

@@ -14,6 +14,8 @@ extension View {
 		self.modifier(VolumetricShadows(shape: shape, color1: color1, color2: color2, radius: radius, isPressed: isPressed))
 	}
 	
+	/// Apply padding to leading, trailing and bottom edges of the view.
+	/// Padding for `CatsDescriptionSection`
 	func sectionPadding() -> some View {
 		self.padding([.leading, .trailing, .bottom])
 	}
