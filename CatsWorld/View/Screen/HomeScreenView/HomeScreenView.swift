@@ -29,6 +29,7 @@ struct HomeScreenView: View {
 			Color.mainColor
 			
 			VStack {
+				// MARK: - TopBarView
 				TopBarView(
 					minHeight: 80,
 					maxHeight: 90,
@@ -39,8 +40,7 @@ struct HomeScreenView: View {
 								.overlay(
 									HStack {
 										SearchBarView(placeholder: "Search", text: .constant(""))
-											.padding(.leading, 10)
-											.padding([.top, .bottom])
+											.padding([.top, .bottom, .leading])
 										
 										Button(action: {
 											print("sorted")
@@ -50,12 +50,15 @@ struct HomeScreenView: View {
 												topView: Image(systemName: "line.horizontal.3.decrease.circle"),
 												bottomView: Image(systemName: "line.horizontal.3.decrease.circle"),
 												topColor: .volumeEffectColorTop,
-												bottomColor: .volumeEffectColorBottom
+												bottomColor: .volumeEffectColorBottom,
+												isPadding: false
 											)
 											.equatable()
-											.scaleEffect(1.5)
+											.scaleEffect(1.4)
 											.aspectRatio(contentMode: .fit)
+											
 										})
+										.padding()
 									}
 								)
 								.frame(height: 50)
@@ -153,6 +156,7 @@ struct HomeScreenView: View {
 								.font(.system(.body, design: .rounded))
 								.multilineTextAlignment(.center)
 								.padding([.leading, .trailing, .top])
+								.padding(.top, 30)
 							
 							Spacer()
 						}

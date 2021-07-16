@@ -37,18 +37,22 @@ struct Image3D: View, Equatable {
 	var topColor: Color?
 	var bottomColor: Color?
 	
+	var isPadding = true
+	
 	var body: some View {
 		ZStack {
 			bottomView
 				.resizable()
+				.interpolation(.high)
 				.foregroundColor(bottomColor)
-				.padding()
+				.padding(.all, isPadding ? nil : 0)
 			
 			topView
 				.resizable()
+				.interpolation(.high)
 				.offset(x: 1.1, y: -1.1)
 				.foregroundColor(topColor)
-				.padding()
+				.padding(.all, isPadding ? nil : 0)
 		}
 	}
 	
