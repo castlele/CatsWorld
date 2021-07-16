@@ -17,6 +17,22 @@ struct SettingsView: View {
 						
 			ScrollView(showsIndicators: false) {
 				CatsDescriptionSection {
+					Text("Starter screen")
+					
+					Picker("", selection: $settingsViewModel.starterScreen) {
+						Text("Map").tag(0)
+						Text("Home").tag(1)
+						Text("Breeds").tag(2)
+					}
+					.pickerStyle(SegmentedPickerStyle())
+				}
+				.volumetricShadows()
+				.sectionPadding()
+				.padding(.top)
+				
+				CatsDescriptionSection {
+					Text("Color scheme")
+					
 					Toggle("Match System Mode", isOn: $settingsViewModel.isSystemModeColorScheme)
 						.toggleStyle(SwitchToggleStyle(tint: .accentColor))
 					
@@ -30,7 +46,6 @@ struct SettingsView: View {
 				}
 				.volumetricShadows()
 				.sectionPadding()
-				.padding(.top)
 				
 				CatsDescriptionSection {
 					Text("Graphics")

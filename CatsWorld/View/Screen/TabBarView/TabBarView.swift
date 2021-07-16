@@ -13,7 +13,7 @@ struct TabBarView: View {
 	
 	@StateObject var settingsViewModel = SettingsViewModel()
 	
-	@State var selectedTab = 1
+	@State var selectedTab = UserDefaults.standard.integer(forKey: "starterScreen")
 	
 	init() {
 		BreedsViewModel.shared.loadBreeds()

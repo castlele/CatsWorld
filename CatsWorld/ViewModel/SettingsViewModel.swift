@@ -12,6 +12,9 @@ final class SettingsViewModel: ObservableObject {
 	
 	static var shared = SettingsViewModel()
 	
+	// MARK: - Starter screen
+	@AppStorage("starterScreen") var starterScreen = 1
+	
 	// MARK: - Color Scheme
 	
 	/// Represents color scheme as `Int` numbers
