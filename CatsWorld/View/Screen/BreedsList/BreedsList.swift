@@ -43,7 +43,7 @@ struct BreedsList: View {
 								.fill(Color.mainColor)
 								.overlay(
 									HStack {
-										SearchBarView(placeholder: "Search placeholder", text: $breedsViewModel.textToSearch)
+										SearchBarView(placeholder: "Search placeholder Breed", text: $breedsViewModel.textToSearch)
 											.padding([.top, .bottom, .leading])
 										
 										Button(action: {
@@ -74,6 +74,7 @@ struct BreedsList: View {
 						.padding(.bottom)
 					})
 				
+				// MARK: - List View
 				List {
 					ForEach(breedsViewModel.breeds.filter { breedsViewModel.validateBreeds(breed: $0) }) { breed in
 						NavigationLink(destination: BreedsDetailView(breed: breed).environmentObject(breedsViewModel)) {
@@ -90,6 +91,7 @@ struct BreedsList: View {
 				)
 			}
 			
+			// MARK: - Loading View
 			if breedsViewModel.isLoadingBreeds {
 				ZStack {
 					Color.mainColor.ignoresSafeArea()

@@ -19,6 +19,7 @@ final class HomeScreenViewModel: CatManipulator {
 	var mainCatsPageView: MainCatsPageView!
 	var catsCardsColorPicker: CatsCardsColorPicker!
 	
+	@Published var textToSearch = ""
 	@Published var isSortingMenu = false
 	@Published var sortingKey = "name"
 	@Published var isSortingAssending = true
@@ -47,6 +48,12 @@ final class HomeScreenViewModel: CatManipulator {
 
 // MARK:- Public methods
 extension HomeScreenViewModel {
+	
+	func validateCatsCards(cat: CatsCard) -> Bool {
+		let searchingText = textToSearch.trimmingCharacters(in: .whitespacesAndNewlines)
+		
+		return searchingText.isEmpty || cat.wrappedName.hasPrefix(searchingText) || cat.wrappedBreed.localize().hasPrefix(searchingText) || cat.age.localize().hasPrefix(searchingText) || cat.wrappedDateOfBirth.hasPrefix(searchingText)
+	}
 	
 	/// Save changes of `context` if changes were made
 	/// To determine weather changes were made there is a private property `wasChanged`

@@ -34,7 +34,8 @@ struct HomeScreenView: View {
 								.fill(Color.mainColor)
 								.overlay(
 									HStack {
-										SearchBarView(placeholder: "Search", text: .constant(""))
+										// MARK: - Search Bar View
+										SearchBarView(placeholder: "Search placeholder Card", text: $homeScreenViewModel.textToSearch)
 											.padding([.top, .bottom, .leading])
 										
 										Image3D(
@@ -111,9 +112,12 @@ struct HomeScreenView: View {
 							.padding()
 					}
 
+					// MARK: - CatCards
 					CoreDataEntityFetcher(
-						sortingDescriptor: NSSortDescriptor(key: homeScreenViewModel.sortingKey, ascending: homeScreenViewModel.isSortingAssending)
+						sortingDescriptor: NSSortDescriptor(key: homeScreenViewModel.sortingKey, ascending: homeScreenViewModel.isSortingAssending),
+						filter: homeScreenViewModel.validateCatsCards(cat:)
 					) { (card: CatsCard)  in
+						
 						CatsCardView(cat: card)
 							.equatable()
 							.overlay(

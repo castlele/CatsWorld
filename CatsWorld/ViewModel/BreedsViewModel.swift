@@ -93,7 +93,7 @@ extension BreedsViewModel {
 		
 		let searchingText = textToSearch.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
 		
-		return searchingText == "" || breed.name.localize().lowercased().hasPrefix(searchingText) || breed.origin.localize().lowercased().hasPrefix(searchingText)
+		return searchingText.isEmpty || breed.name.localize().lowercased().hasPrefix(searchingText) || breed.origin.localize().lowercased().hasPrefix(searchingText)
 	}
 	
 	/// Make breed favourite and saves that in `UserDefaults`

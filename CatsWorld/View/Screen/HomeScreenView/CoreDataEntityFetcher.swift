@@ -12,19 +12,21 @@ struct CoreDataEntityFetcher<Object: NSManagedObject & Identifiable, Content: Vi
 	
 	var fetchedRequest: FetchRequest<Object>
 	var entities: FetchedResults<Object>  { fetchedRequest.wrappedValue }
+	var filter: (Object) -> Bool
 	
 	var content: (Object) -> Content
 	
     var body: some View {
 		VStack {
-			ForEach(entities) { entity in
+			ForEach(entities.filter { filter($0) }) { entity in
 				content(entity)
 			}
 		}
     }
 	
-	init(sortingDescriptor: NSSortDescriptor, @ViewBuilder content: @escaping (Object) -> Content) {
+	init(sortingDescriptor: NSSortDescriptor, filter: @escaping (Object) -> Bool, @ViewBuilder content: @escaping (Object) -> Content) {
 		self.fetchedRequest = FetchRequest<Object>(entity: Object.entity(), sortDescriptors: [sortingDescriptor])
 		self.content = content
+		self.filter = filter
 	}
 }
