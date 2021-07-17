@@ -34,6 +34,7 @@ struct BreedsList: View {
 			VStack {
 				// MARK: - TopBarView
 				TopBarView(
+					isVolume: false,
 					minHeight: 80,
 					maxHeight: 90,
 					content: {

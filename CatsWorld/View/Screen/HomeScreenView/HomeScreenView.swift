@@ -13,14 +13,8 @@ struct HomeScreenView: View {
 	
 	@Environment(\.colorScheme) var colorScheme
 	@Environment(\.managedObjectContext) var managedObjectContext
-	@EnvironmentObject var settingsViewModel: SettingsViewModel
 	
-	@FetchRequest(
-		entity: CatsCard.entity(),
-		sortDescriptors: [],
-		predicate: nil,
-		animation: nil
-	) var catsCards: FetchedResults<CatsCard>
+	@EnvironmentObject var settingsViewModel: SettingsViewModel
 	
 	@StateObject var homeScreenViewModel = HomeScreenViewModel()
 		
@@ -31,6 +25,7 @@ struct HomeScreenView: View {
 			VStack {
 				// MARK: - TopBarView
 				TopBarView(
+					isVolume: false,
 					minHeight: 80,
 					maxHeight: 90,
 					content: {
@@ -42,23 +37,29 @@ struct HomeScreenView: View {
 										SearchBarView(placeholder: "Search", text: .constant(""))
 											.padding([.top, .bottom, .leading])
 										
-										Button(action: {
-											print("sorted")
-											
-										}, label: {
-											Image3D(
-												topView: Image(systemName: "line.horizontal.3.decrease.circle"),
-												bottomView: Image(systemName: "line.horizontal.3.decrease.circle"),
-												topColor: .volumeEffectColorTop,
-												bottomColor: .volumeEffectColorBottom,
-												isPadding: false
-											)
-											.equatable()
-											.scaleEffect(1.4)
-											.aspectRatio(contentMode: .fit)
-											
-										})
+										Image3D(
+											topView: Image(systemName: "line.horizontal.3.decrease.circle"),
+											bottomView: Image(systemName: "line.horizontal.3.decrease.circle"),
+											topColor: .volumeEffectColorTop,
+											bottomColor: .volumeEffectColorBottom,
+											isPadding: false
+										)
+										.equatable()
+										.scaleEffect(1.4)
+										.aspectRatio(contentMode: .fit)
 										.padding()
+										.rotationEffect(.degrees(homeScreenViewModel.isSortingAssending ? 0 : 180))
+										.onLongPressGesture {
+											withAnimation(.linear(duration: 0.2)) {
+												homeScreenViewModel.isSortingMenu.toggle()
+											}
+										}
+										.simultaneousGesture(
+											TapGesture()
+												.onEnded {
+													homeScreenViewModel.isSortingAssending.toggle()
+												}
+										)
 									}
 								)
 								.frame(height: 50)
@@ -109,8 +110,10 @@ struct HomeScreenView: View {
 							.volumetricShadows()
 							.padding()
 					}
-					
-					ForEach(catsCards) { card in
+
+					CoreDataEntityFetcher(
+						sortingDescriptor: NSSortDescriptor(key: homeScreenViewModel.sortingKey, ascending: homeScreenViewModel.isSortingAssending)
+					) { (card: CatsCard)  in
 						CatsCardView(cat: card)
 							.equatable()
 							.overlay(
@@ -150,14 +153,14 @@ struct HomeScreenView: View {
 					}
 					
 					// MARK: - Zero cat's cards text
-					if catsCards.isEmpty {
+					if try! managedObjectContext.count(for: CatsCard.fetchRequest()) == 0 {
 						VStack {
 							Text("Empty CatsCards")
 								.font(.system(.body, design: .rounded))
 								.multilineTextAlignment(.center)
 								.padding([.leading, .trailing, .top])
 								.padding(.top, 30)
-							
+
 							Spacer()
 						}
 					}
@@ -200,6 +203,40 @@ struct HomeScreenView: View {
 					homeScreenViewModel.deselectCat()
 					homeScreenViewModel.catsCardsColorPicker = nil
 					homeScreenViewModel.resetChanges()
+				}
+			}
+			
+			// MARK: - Sorting MenuView
+			if homeScreenViewModel.isSortingMenu {
+				GeometryReader { geometry in
+					CatsDescriptionSection {
+						Button("Sort by names") {
+							homeScreenViewModel.sortingKey = "name"
+							
+							withAnimation(.linear(duration: 0.2)) {
+								homeScreenViewModel.isSortingMenu.toggle()
+							}
+						}
+						.font(.system(.body, design: .rounded))
+						.frame(minWidth: menuWidth, maxWidth: menuWidth + 20)
+						.foregroundColor(.primary)
+						
+						Button("Sort by age") {
+							homeScreenViewModel.sortingKey = "dateOfBirth"
+							
+							withAnimation(.linear(duration: 0.2)) {
+								homeScreenViewModel.isSortingMenu.toggle()
+							}
+						}
+						.font(.system(.body, design: .rounded))
+						.frame(minWidth: menuWidth, maxWidth: menuWidth + 20)
+						.foregroundColor(.primary)
+					}
+					.shadow(color: .shadowColor, radius: 7, x: 7, y: 7)
+					.animation(.linear(duration: 0.4))
+					.transition(.move(edge: .bottom))
+					.frame(minWidth: menuWidth, maxWidth: menuWidth, minHeight: 100, maxHeight: 100)
+					.offset(x: (geometry.size.width - menuWidth) / 2, y: geometry.frame(in: .local).maxY - 112)
 				}
 			}
 			

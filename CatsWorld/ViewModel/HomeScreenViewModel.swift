@@ -19,6 +19,9 @@ final class HomeScreenViewModel: CatManipulator {
 	var mainCatsPageView: MainCatsPageView!
 	var catsCardsColorPicker: CatsCardsColorPicker!
 	
+	@Published var isSortingMenu = false
+	@Published var sortingKey = "name"
+	@Published var isSortingAssending = true
 	@Published var isMenu = false
 	@Published var isEditingCatsSheet = false
 	@Published var isMainCatsPageView = false

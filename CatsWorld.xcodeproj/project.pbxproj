@@ -81,6 +81,7 @@
 		7BF2D4A32671FEBF00985E88 /* MainCatsPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF2D4A22671FEBF00985E88 /* MainCatsPageView.swift */; };
 		7BF2D4A52672094E00985E88 /* CatsDescriptionCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF2D4A42672094E00985E88 /* CatsDescriptionCategory.swift */; };
 		7BF2D4AB26721F4900985E88 /* CatsDescriptionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF2D4AA26721F4900985E88 /* CatsDescriptionViewModel.swift */; };
+		7BF7073926A2C2B3008A6562 /* CoreDataEntityFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF7073826A2C2B3008A6562 /* CoreDataEntityFetcher.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -174,6 +175,7 @@
 		7BF2D4A22671FEBF00985E88 /* MainCatsPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCatsPageView.swift; sourceTree = "<group>"; };
 		7BF2D4A42672094E00985E88 /* CatsDescriptionCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatsDescriptionCategory.swift; sourceTree = "<group>"; };
 		7BF2D4AA26721F4900985E88 /* CatsDescriptionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatsDescriptionViewModel.swift; sourceTree = "<group>"; };
+		7BF7073826A2C2B3008A6562 /* CoreDataEntityFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataEntityFetcher.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -243,6 +245,7 @@
 				7B874685264B1A35006DC6A7 /* HomeScreenView.swift */,
 				7B5A3899268F6DDB00F1487D /* EditingCatsPageView.swift */,
 				7BF2D4A22671FEBF00985E88 /* MainCatsPageView.swift */,
+				7BF7073826A2C2B3008A6562 /* CoreDataEntityFetcher.swift */,
 			);
 			path = HomeScreenView;
 			sourceTree = "<group>";
@@ -679,6 +682,7 @@
 				7BB614662686407D001924F7 /* XButton.swift in Sources */,
 				7B33A11F267B586600C780C0 /* RadarChart.swift in Sources */,
 				7B66A10626556AE100FDC9A7 /* RatingView.swift in Sources */,
+				7BF7073926A2C2B3008A6562 /* CoreDataEntityFetcher.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
