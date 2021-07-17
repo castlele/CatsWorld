@@ -43,7 +43,9 @@ final class CatsCardsPageViewModel: CatManipulator {
 	var managedObjectContext: NSManagedObjectContext
 	
 	@Published var isAlertShown = false
+	@Published var isImagePickerStyle = false
 	@Published var isImagePicker = false
+	@Published var sourceType: UIImagePickerController.SourceType = .photoLibrary
 	
 	@Published var name: String {
 		willSet(newName) {
