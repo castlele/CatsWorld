@@ -15,6 +15,8 @@ struct CatsWorldApp: App {
 	@Environment(\.scenePhase) var scenePhase
 			
 	init() {
+		UINavigationBar.appearance().backgroundColor = .clear
+		
 		UITextView.appearance().backgroundColor = .clear
 		
 		UITableView.appearance().backgroundColor = Color.mainUIColor()

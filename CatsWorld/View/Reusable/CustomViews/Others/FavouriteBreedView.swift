@@ -21,6 +21,7 @@ struct FavouriteBreedView: View {
 			} else {
 				Image(systemName: "heart")
 					.padding()
+					.foregroundColor(.primary)
 			}
 		}
 		.onTapGesture {

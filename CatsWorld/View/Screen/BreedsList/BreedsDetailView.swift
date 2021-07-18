@@ -51,6 +51,7 @@ struct BreedsDetailView: View {
 								.resizable()
 								.interpolation(.high)
 								.frame(width: 40, height: 40)
+								.foregroundColor(.primary)
 						} else {
 							EmptyView()
 						}
