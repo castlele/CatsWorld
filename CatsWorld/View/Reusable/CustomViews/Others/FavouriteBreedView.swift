@@ -11,6 +11,7 @@ struct FavouriteBreedView: View {
 	
 	let breed: Breed
 	@ObservedObject var viewModel: BreedsViewModel
+	let fgColor: Color
 	
 	var body: some View {
 		Group {
@@ -21,7 +22,7 @@ struct FavouriteBreedView: View {
 			} else {
 				Image(systemName: "heart")
 					.padding()
-					.foregroundColor(.primary)
+					.foregroundColor(fgColor)
 			}
 		}
 		.onTapGesture {
@@ -32,6 +33,6 @@ struct FavouriteBreedView: View {
 
 struct FavouriteBreedView_Previews: PreviewProvider {
     static var previews: some View {
-		FavouriteBreedView(breed: MockData.sampleBreed, viewModel: BreedsViewModel.shared)
+		FavouriteBreedView(breed: MockData.sampleBreed, viewModel: BreedsViewModel.shared, fgColor: .white)
     }
 }

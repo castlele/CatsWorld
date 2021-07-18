@@ -202,7 +202,7 @@ struct EditingCatsPageView: View {
 				ImagePicker(pickerSource: catsViewModel.sourceType, image: $catsViewModel.catsImage)
 					.preferredColorScheme(colorScheme)
 			}
-			.background(Color.mainColor)
+			.background(Color.mainColor.ignoresSafeArea())
 			.disabled(catsViewModel.isImagePickerStyle)
 			
 			// MARK: - ImagePicker Source type

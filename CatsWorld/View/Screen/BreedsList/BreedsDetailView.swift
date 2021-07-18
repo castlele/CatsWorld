@@ -41,7 +41,7 @@ struct BreedsDetailView: View {
 								
 								Spacer()
 								
-								FavouriteBreedView(breed: breed, viewModel: breedsViewModel)
+								FavouriteBreedView(breed: breed, viewModel: breedsViewModel, fgColor: .white)
 							}
 							.background(Color.black.opacity(0.4))
 						}
@@ -51,7 +51,7 @@ struct BreedsDetailView: View {
 								.resizable()
 								.interpolation(.high)
 								.frame(width: 40, height: 40)
-								.foregroundColor(.primary)
+								.foregroundColor(.white)
 						} else {
 							EmptyView()
 						}

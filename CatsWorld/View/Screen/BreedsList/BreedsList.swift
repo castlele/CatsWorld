@@ -18,7 +18,7 @@ fileprivate struct BreedsRowView: View {
 			
 			Spacer()
 			
-			FavouriteBreedView(breed: breed, viewModel: viewModel)
+			FavouriteBreedView(breed: breed, viewModel: viewModel, fgColor: .primary)
 		}
 	}
 }
