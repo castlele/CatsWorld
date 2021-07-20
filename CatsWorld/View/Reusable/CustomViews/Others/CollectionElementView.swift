@@ -11,7 +11,7 @@ struct CollectionElementView: View {
 	
 	let text: String
 	let bgColor: Color = .semiAccentColor
-	let fgColor: Color = .primary
+	let fgColor: Color = .black
 	
     var body: some View {
         Text(text.localize().capitalized)
