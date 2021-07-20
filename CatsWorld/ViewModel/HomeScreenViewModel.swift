@@ -90,6 +90,7 @@ extension HomeScreenViewModel {
 	/// - Parameter context: View context with `CatsCard` to set up `CatsCardsPageViewModel` and new instance of `CatsCard`
 	func makeNewCat(context: NSManagedObjectContext) {
 		let cat = CatsCard(context: context)
+		cat.id = UUID()
 		let catsCardsPageViewModel = CatsCardsPageViewModel(cat: cat, deleteAfterCancelation: true, managedObjectContext: context)
 		editingCatsPageView = EditingCatsPageView(catsViewModel: catsCardsPageViewModel)
 		

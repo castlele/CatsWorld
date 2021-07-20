@@ -68,6 +68,8 @@ struct HomeScreenView: View {
 							
 							Spacer()
 							
+							
+							// MARK: - Make New Cat
 							Button(action: {
 								homeScreenViewModel.makeNewCat(context: managedObjectContext)
 								
@@ -119,6 +121,7 @@ struct HomeScreenView: View {
 						
 						CatsCardView(cat: card)
 							.equatable()
+							.volumetricShadows()
 							.overlay(
 								VStack {
 									HStack {
@@ -235,7 +238,7 @@ struct HomeScreenView: View {
 						.frame(minWidth: menuWidth, maxWidth: menuWidth + 20)
 						.foregroundColor(.primary)
 					}
-					.shadow(color: .shadowColor, radius: 7, x: 7, y: 7)
+					.volumetricShadows(color1: .clear, color2: .shadowColor)
 					.animation(.linear(duration: 0.4))
 					.transition(.move(edge: .bottom))
 					.frame(minWidth: menuWidth, maxWidth: menuWidth, minHeight: 100, maxHeight: 100)
@@ -284,7 +287,7 @@ struct HomeScreenView: View {
 						.frame(minWidth: menuWidth, maxWidth: menuWidth + 20)
 						.foregroundColor(.primary)
 					}
-					.shadow(color: .shadowColor, radius: 7, x: 7, y: 7)
+					.volumetricShadows(color1: .clear, color2: .shadowColor)
 					.animation(.linear(duration: 0.4))
 					.transition(.move(edge: .bottom))
 					.frame(minWidth: menuWidth, maxWidth: menuWidth, minHeight: 100, maxHeight: 100)

@@ -272,6 +272,7 @@
 			isa = PBXGroup;
 			children = (
 				7B86143A264D27AA008616DB /* CatsCardView.swift */,
+				7BF7073826A2C2B3008A6562 /* CoreDataEntityFetcher.swift */,
 				7B0E47D9268B0EEF00136ABF /* CatsCardsColorPicker.swift */,
 				7B6E3D482652CB4300B04B62 /* CatsMainInfoView.swift */,
 				7B6E3D4C2652D6DC00B04B62 /* CatsAvatar.swift */,
@@ -283,7 +284,6 @@
 		7B650BF1268C6B9300691E3B /* Others */ = {
 			isa = PBXGroup;
 			children = (
-				7BF7073826A2C2B3008A6562 /* CoreDataEntityFetcher.swift */,
 				7B66A10526556AE100FDC9A7 /* RatingView.swift */,
 				7B5C83172670FF0A00B2F6E8 /* View3D.swift */,
 				7B33A11E267B586600C780C0 /* RadarChart.swift */,

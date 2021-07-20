@@ -13,14 +13,14 @@ extension CatsCardView: Equatable {
 		lhs.cat.name == rhs.cat.name &&
 			lhs.cat.wrappedBreed == rhs.cat.wrappedBreed &&
 			lhs.cat.dateOfBirth == rhs.cat.dateOfBirth &&
-			lhs.cat.wrappedColor.compareColorComponentsWith(rhs.cat.wrappedColor) &&
+			lhs.cat.wrappedStringColor == rhs.cat.wrappedStringColor &&
 			lhs.cat.image == rhs.cat.image
 	}
 }
 
 struct CatsCardView: View {
 			
-	var cat: CatsCard
+	@ObservedObject var cat: CatsCard
 	
     var body: some View {
 		HStack {
@@ -45,7 +45,6 @@ struct CatsCardView: View {
 		.frame(minHeight: 100)
 		.background(cat.wrappedColor)
 		.clipShape(RoundedRectangle(cornerRadius: 20))
-		.volumetricShadows()
 	}
 }
 

@@ -194,6 +194,7 @@ struct EditingCatsPageView: View {
 								Button(action: {
 									catsViewModel.character.append(catsViewModel.currentCharacter.trimmingCharacters(in: .whitespaces))
 									catsViewModel.currentCharacter = ""
+									
 									UIApplication.shared.endEditing(true)
 									
 								}, label: {
