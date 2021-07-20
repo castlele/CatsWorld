@@ -19,6 +19,7 @@ struct EditingCatsPageView: View {
 	var body: some View {
 		ZStack {
 			VStack {
+				// MARK: - TopBarView
 				TopBarView(minHeight: 100, maxHeight: 100, leading: {
 					CancelButton(
 						showAlert: $catsViewModel.isAlertShown,
@@ -50,6 +51,7 @@ struct EditingCatsPageView: View {
 					.padding([.top, .trailing])
 				})
 				
+				// MARK: - ScrollView
 				ScrollView {
 					CatsAvatar(avatar: catsViewModel.catsImage ?? UIImage(systemName: "person.crop.circle.fill")!)
 						.frame(width: 150, height: 150)
@@ -264,6 +266,21 @@ struct EditingCatsPageView: View {
 					}
 					.volumetricShadows()
 					.sectionPadding()
+					
+					Spacer()
+					
+					// MARK: - Delete button
+					Button(action: {
+						catsViewModel.deleteCat(presentation: presentationMode)
+						
+					}, label: {
+						Text("Delete")
+							.bold()
+							.standardText()
+							.padding(.horizontal, 10)
+					})
+					.buttonStyle(OvalButtonStyle(backgroundColor: .red))
+					.padding([.leading, .trailing, .bottom])
 				}
 				.frame(width: UIScreen.screenWidth)
 			}

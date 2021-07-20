@@ -238,6 +238,12 @@ extension CatsCardsPageViewModel {
 		presentation.wrappedValue.dismiss()
 	}
 	
+	func deleteCat(presentation: Binding<PresentationMode>) {
+		managedObjectContext.delete(cat)
+		deselectCat()
+		presentation.wrappedValue.dismiss()
+	}
+	
 	// MARK: - CatManipulator comformance
 	
 	func selectCat(_ cat: CatsCard) {

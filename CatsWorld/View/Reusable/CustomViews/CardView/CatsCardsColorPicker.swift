@@ -58,20 +58,17 @@ struct CatsCardsColorPicker: View {
 				DoneButton(action: {
 					cat.setColor(viewModel.pickedColor.rawValue)
 					
-					withAnimation(.spring()) {
+					withAnimation(.linear(duration: 0.5)) {
 						viewModel.isColorPicker.toggle()
 					}
 				}, content: {
 					Text("Submit")
-						.foregroundColor(.volumeEffectShadowColor)
-						.font(.system(.title, design: .rounded))
 						.bold()
+						.standardText()
+						.padding(.horizontal, 10)
 				})
 				.frame(width: viewWidth * 3/4, height: 50)
-				.background(Color.semiAccentColor)
-				.clipShape(RoundedRectangle(cornerRadius: 20))
-				.compositingGroup()
-				.volumetricShadows(isPressed: false)
+				.buttonStyle(OvalButtonStyle(backgroundColor: .semiAccentColor))
 				.padding([.top, .bottom])
 			}
 		}

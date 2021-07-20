@@ -114,6 +114,13 @@ extension CatsDescriptionViewModel {
 		return result
 	}
 	
+	func dismissIfCatDeleted(presentation: Binding<PresentationMode>) {
+		if try! !context.fetch(CatsCard.fetchRequest()).contains(where: { $0 == cat }) {
+			deselectCat()
+			presentation.wrappedValue.dismiss()
+		}
+	}
+	
 	// MARK: - CatManipulator comformance
 	
 	func getCat() -> CatsCard { cat }

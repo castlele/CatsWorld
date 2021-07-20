@@ -127,6 +127,7 @@ struct MainCatsPageView: View {
 				.preferredColorScheme(colorScheme)
 				.onDisappear {
 					catsDescriptionViewModel.editingCatsPageView = nil
+					catsDescriptionViewModel.dismissIfCatDeleted(presentation: presentationMode)
 				}
 		}
 	}

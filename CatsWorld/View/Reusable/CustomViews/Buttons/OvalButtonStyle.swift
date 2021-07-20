@@ -1,13 +1,13 @@
 //
-//  CircleButton.swift
+//  OvalButtonStyle.swift
 //  CatsWorld
 //
-//  Created by Nikita Semenov on 09.06.2021.
+//  Created by Nikita Semenov on 20.07.2021.
 //
 
 import SwiftUI
 
-struct CircleButtonStyle: ButtonStyle {
+struct OvalButtonStyle: ButtonStyle {
 	
 	let backgroundColor: Color
 	
@@ -26,12 +26,12 @@ struct CircleButtonStyle: ButtonStyle {
 		self.shadowColor2 = shadowColor2
 		self.shadowRadius = shadowRadius
 	}
-    
+	
 	func makeBody(configuration: Configuration) -> some View {
 		configuration.label
 			.background(backgroundColor)
-			.clipShape(Circle())
-			.volumetricShadows(shape: .circle, color1: shadowColor1, color2: shadowColor2, radius: shadowRadius, isPressed: configuration.isPressed)
+			.clipShape(RoundedRectangle(cornerRadius: 20))
+			.volumetricShadows(shape: .roundedRect, color1: shadowColor1, color2: shadowColor2, radius: shadowRadius, isPressed: configuration.isPressed)
 			.scaleEffect(configuration.isPressed ? 0.85 : 1)
 			.animation(.linear(duration: 0.5))
 	}

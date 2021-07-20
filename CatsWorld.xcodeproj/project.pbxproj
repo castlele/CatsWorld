@@ -34,6 +34,7 @@
 		7B56A10A2673AE2F00BEF8DD /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B56A1092673AE2F00BEF8DD /* UIImage.swift */; };
 		7B59150226A6BB3E00C4E6AF /* Gloabal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B59150126A6BB3E00C4E6AF /* Gloabal.swift */; };
 		7B59150426A6BE4500C4E6AF /* EnvironmentValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B59150326A6BE4500C4E6AF /* EnvironmentValues.swift */; };
+		7B59150626A6BFE700C4E6AF /* OvalButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B59150526A6BFE700C4E6AF /* OvalButtonStyle.swift */; };
 		7B5A389A268F6DDB00F1487D /* EditingCatsPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5A3899268F6DDB00F1487D /* EditingCatsPageView.swift */; };
 		7B5C83132670E99400B2F6E8 /* CircleButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5C83122670E99400B2F6E8 /* CircleButtonStyle.swift */; };
 		7B5C83182670FF0A00B2F6E8 /* View3D.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5C83172670FF0A00B2F6E8 /* View3D.swift */; };
@@ -126,6 +127,7 @@
 		7B56A1092673AE2F00BEF8DD /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		7B59150126A6BB3E00C4E6AF /* Gloabal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gloabal.swift; sourceTree = "<group>"; };
 		7B59150326A6BE4500C4E6AF /* EnvironmentValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentValues.swift; sourceTree = "<group>"; };
+		7B59150526A6BFE700C4E6AF /* OvalButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OvalButtonStyle.swift; sourceTree = "<group>"; };
 		7B5A3899268F6DDB00F1487D /* EditingCatsPageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditingCatsPageView.swift; sourceTree = "<group>"; };
 		7B5C83122670E99400B2F6E8 /* CircleButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleButtonStyle.swift; sourceTree = "<group>"; };
 		7B5C83172670FF0A00B2F6E8 /* View3D.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View3D.swift; sourceTree = "<group>"; };
@@ -517,6 +519,7 @@
 			isa = PBXGroup;
 			children = (
 				7B5C83122670E99400B2F6E8 /* CircleButtonStyle.swift */,
+				7B59150526A6BFE700C4E6AF /* OvalButtonStyle.swift */,
 				7B6E3D4A2652D59E00B04B62 /* EditButton.swift */,
 				7B096CAA2657C50E00B99D3E /* CancelButton.swift */,
 				7B096CAC2657C51700B99D3E /* DoneButton.swift */,
@@ -629,6 +632,7 @@
 			files = (
 				7B650BEA268C652300691E3B /* String.swift in Sources */,
 				7B1CC161268DCC3800503A41 /* Shadows.swift in Sources */,
+				7B59150626A6BFE700C4E6AF /* OvalButtonStyle.swift in Sources */,
 				7B6B18F7268B621900BACCE4 /* ColorPick.swift in Sources */,
 				7BF2D4AB26721F4900985E88 /* CatsDescriptionViewModel.swift in Sources */,
 				7B110435268E2D7000955325 /* BreedsDetailView.swift in Sources */,
