@@ -195,7 +195,7 @@ extension CatsCard {
 			return makeStringAge(day, measurement: "Day")
 			
 		} else {
-			return "None"
+			return "None".localize()
 		}
 	}
 	

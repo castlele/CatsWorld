@@ -20,9 +20,9 @@ extension View {
 		self.padding([.leading, .trailing, .bottom])
 	}
 	
-	func standardText(fgColor: Color = .volumeEffectShadowColor) -> some View {
+	func standardText(fgColor: Color = .volumeEffectShadowColor, style: Font.TextStyle = .title) -> some View {
 		self.foregroundColor(fgColor)
-			.font(.system(.title, design: .rounded))
+			.font(.system(style, design: .rounded))
 			.padding(10)
 	}
 }

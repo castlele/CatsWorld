@@ -27,6 +27,8 @@ final class HomeScreenViewModel: CatManipulator {
 	@Published var isEditingCatsSheet = false
 	@Published var isMainCatsPageView = false
 	@Published var isColorPicker = false
+	@Published var isSelectedMode = false
+	@Published var selectedCats: Set<CatsCard> = []
 	
 	@Published var pickedColor: ColorPick = .none {
 		willSet(newColor) {
@@ -35,6 +37,10 @@ final class HomeScreenViewModel: CatManipulator {
 			}
 		}
 	}
+
+	var cardsColorPallete = (firstHalf: ColorPick.firstHalf, secondHalf: ColorPick.secondHalf)
+	
+	var isSelectedCatsCard: Bool { !selectedCats.isEmpty }
 	
 	var catsCardsColor: String {
 		if let color = selectedCat.color {
@@ -42,8 +48,6 @@ final class HomeScreenViewModel: CatManipulator {
 		}
 		return "mainColor"
 	}
-	
-	var cardsColorPallete = (firstHalf: ColorPick.firstHalf, secondHalf: ColorPick.secondHalf)
 }
 
 // MARK:- Public methods
@@ -131,6 +135,56 @@ extension HomeScreenViewModel {
 		}
 	}
 	
+	func selectAllCats(context: NSManagedObjectContext) {
+		do {
+			let cats: [CatsCard] = try context.fetch(CatsCard.fetchRequest())
+			
+			for cat in cats {
+				doOnSelect(cat: cat)
+			}
+			
+		} catch {
+			fatalError("Can't pase CoreData entities")
+		}
+	}
+	
+	func toggleSelectionMode() {
+		withAnimation(.linear(duration: 0.5)) {
+			isSelectedMode.toggle()
+		}
+		
+		removeSelectedCats()
+	}
+	
+	func isCatSelected(cat: CatsCard) -> Double {
+		isSelected(cat: cat) ? 1 : 0
+	}
+	
+	func doOnSelect(cat: CatsCard) {
+		if isSelected(cat: cat) {
+			selectedCats.remove(cat)
+		} else {
+			selectedCats.insert(cat)
+		}
+	}
+	
+	func deleteAllSelectedCats(context: NSManagedObjectContext) {
+		if isSelectedCatsCard {
+			
+			for cat in selectedCats {
+				context.delete(cat)
+			}
+			
+			selectedCats.removeAll()
+			
+			toggleSelectionMode()
+		}
+	}
+	
+	func isSelected(cat: CatsCard) -> Bool {
+		selectedCats.contains(cat)
+	}
+	
 	// MARK: - CatsManipulator protocol comformance
 	
 	/// Return currently selected cat
@@ -147,6 +201,8 @@ extension HomeScreenViewModel {
 
 // MARK: - Private methods
 extension HomeScreenViewModel {
+	
+	private func removeSelectedCats() { selectedCats.removeAll() }
 	
 	private func makeChanges() {
 		wasChanged = true

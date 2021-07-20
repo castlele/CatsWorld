@@ -15,6 +15,8 @@ struct HomeScreenView: View {
 	
 	@EnvironmentObject var settingsViewModel: SettingsViewModel
 	
+	@FetchRequest(entity: CatsCard.entity(), sortDescriptors: []) var catsCards: FetchedResults<CatsCard>
+	
 	@StateObject var homeScreenViewModel = HomeScreenViewModel()
 		
     var body: some View {
@@ -123,34 +125,54 @@ struct HomeScreenView: View {
 							.equatable()
 							.volumetricShadows()
 							.overlay(
-								VStack {
-									HStack {
-										ZStack {
-											Color.black.opacity(0.001)
-											
-											Spacer()
-										}
-										.simultaneousGesture(
-											TapGesture()
-												.onEnded { _ in
+								HStack {
+									ZStack {
+										Color.black.opacity(0.001)
+									}
+									.simultaneousGesture(
+										TapGesture()
+											.onEnded { _ in
+												if homeScreenViewModel.isSelectedMode {
+													homeScreenViewModel.doOnSelect(cat: card)
+
+												} else {
 													homeScreenViewModel.selectCat(card)
 													homeScreenViewModel.observeCat(context: managedObjectContext)
 												}
-										)
-										
-										HStack(spacing: 5) {
-											ForEach(0..<3) { circle in
-												Circle()
-													.frame(width: 10, height: 10)
 											}
+									)
+									.onLongPressGesture { homeScreenViewModel.toggleSelectionMode() }
+									
+									HStack(spacing: 5) {
+										ForEach(0..<3) { circle in
+											Circle()
+												.frame(width: 10, height: 10)
 										}
-										.padding(.trailing)
-										.onTapGesture {
-											homeScreenViewModel.selectCat(card)
-											homeScreenViewModel.isMenu.toggle()
-										}
-										.foregroundColor(.accentColor)
 									}
+									.padding(.trailing)
+									.overlay(
+										RoundedRectangle(cornerRadius: 20)
+											.fill(Color.green)
+											.overlay(
+												Image(systemName: "checkmark")
+													.foregroundColor(.white)
+													.padding()
+											)
+											.scaledToFill()
+											.opacity(homeScreenViewModel.isCatSelected(cat: card))
+									)
+									.simultaneousGesture(
+										TapGesture()
+											.onEnded { _ in
+												if !homeScreenViewModel.isSelectedMode {
+													homeScreenViewModel.selectCat(card)
+													homeScreenViewModel.isMenu.toggle()
+												} else {
+													homeScreenViewModel.doOnSelect(cat: card)
+												}
+											}
+									)
+									.foregroundColor(.accentColor)
 								}
 							)
 							.padding([.leading, .top, .trailing])
@@ -159,7 +181,7 @@ struct HomeScreenView: View {
 					}
 					
 					// MARK: - Zero cat's cards text
-					if try! managedObjectContext.count(for: CatsCard.fetchRequest()) == 0 {
+					if catsCards.isEmpty {
 						VStack {
 							Text("Empty CatsCards")
 								.font(.system(.body, design: .rounded))
@@ -190,6 +212,62 @@ struct HomeScreenView: View {
 			.animation(.easeInOut(duration: 0.2).delay(0.41))
 			.blur(radius: homeScreenViewModel.isColorPicker ? 10 : 0)
 			.disabled(homeScreenViewModel.isColorPicker || homeScreenViewModel.isMenu)
+			
+			// MARK: - Selected cards
+			if homeScreenViewModel.isSelectedMode {
+				GeometryReader { geometry in
+					
+					VStack {
+						HStack {
+							Spacer()
+							
+							Button(action: {
+								homeScreenViewModel.deleteAllSelectedCats(context: managedObjectContext)
+								
+							}, label: {
+								Text("Delete")
+									.standardText(fgColor: .white, style: .body)
+									.padding(.horizontal, 5)
+							})
+							.buttonStyle(OvalButtonStyle(
+											backgroundColor: homeScreenViewModel.isSelectedCatsCard ? .red : Color(#colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)),
+											shadowColor1: .clear
+										)
+							)
+							.padding(.trailing)
+							.padding(.bottom, 5)
+						}
+						
+						HStack {
+							Button(action: {
+								homeScreenViewModel.toggleSelectionMode()
+								
+							}, label: {
+								Text("Cancel")
+									.standardText(fgColor: .white, style: .body)
+									.padding(.horizontal, 5)
+							})
+							.buttonStyle(OvalButtonStyle(backgroundColor: Color(#colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)), shadowColor1: .clear))
+							.padding(.leading)
+							
+							Spacer()
+							
+							Button(action: {
+								homeScreenViewModel.selectAllCats(context: managedObjectContext)
+								
+							}, label: {
+								Text("Select all")
+									.standardText(fgColor: .white, style: .body)
+									.padding(.horizontal, 5)
+							})
+							.buttonStyle(OvalButtonStyle(backgroundColor: Color(#colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)), shadowColor1: .clear))
+							.padding(.trailing)
+						}
+					}
+					.frame(width: UIScreen.screenWidth)
+					.offset(x: (geometry.size.width - UIScreen.screenWidth) / 2, y: geometry.frame(in: .local).maxY - 98)
+				}
+			}
 			
 			// MARK: - ColorPicker
 			if homeScreenViewModel.isColorPicker {
