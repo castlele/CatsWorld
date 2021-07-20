@@ -32,6 +32,8 @@
 		7B52B021269068E90065B7CB /* Description.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B52B020269068E90065B7CB /* Description.swift */; };
 		7B52B023269069B10065B7CB /* CatManipulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B52B022269069B10065B7CB /* CatManipulator.swift */; };
 		7B56A10A2673AE2F00BEF8DD /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B56A1092673AE2F00BEF8DD /* UIImage.swift */; };
+		7B59150226A6BB3E00C4E6AF /* Gloabal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B59150126A6BB3E00C4E6AF /* Gloabal.swift */; };
+		7B59150426A6BE4500C4E6AF /* EnvironmentValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B59150326A6BE4500C4E6AF /* EnvironmentValues.swift */; };
 		7B5A389A268F6DDB00F1487D /* EditingCatsPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5A3899268F6DDB00F1487D /* EditingCatsPageView.swift */; };
 		7B5C83132670E99400B2F6E8 /* CircleButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5C83122670E99400B2F6E8 /* CircleButtonStyle.swift */; };
 		7B5C83182670FF0A00B2F6E8 /* View3D.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5C83172670FF0A00B2F6E8 /* View3D.swift */; };
@@ -122,6 +124,8 @@
 		7B52B020269068E90065B7CB /* Description.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Description.swift; sourceTree = "<group>"; };
 		7B52B022269069B10065B7CB /* CatManipulator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatManipulator.swift; sourceTree = "<group>"; };
 		7B56A1092673AE2F00BEF8DD /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
+		7B59150126A6BB3E00C4E6AF /* Gloabal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gloabal.swift; sourceTree = "<group>"; };
+		7B59150326A6BE4500C4E6AF /* EnvironmentValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentValues.swift; sourceTree = "<group>"; };
 		7B5A3899268F6DDB00F1487D /* EditingCatsPageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditingCatsPageView.swift; sourceTree = "<group>"; };
 		7B5C83122670E99400B2F6E8 /* CircleButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleButtonStyle.swift; sourceTree = "<group>"; };
 		7B5C83172670FF0A00B2F6E8 /* View3D.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View3D.swift; sourceTree = "<group>"; };
@@ -362,6 +366,7 @@
 			isa = PBXGroup;
 			children = (
 				7B8B99E626427DDC00E98B8E /* CatsWorldApp.swift */,
+				7B59150126A6BB3E00C4E6AF /* Gloabal.swift */,
 				7B8B99EA26427DE300E98B8E /* Assets.xcassets */,
 				7B650BEF268C6AA000691E3B /* Localizable.strings */,
 				7B650BE7268C629F00691E3B /* Localizable.stringsdict */,
@@ -479,6 +484,7 @@
 			children = (
 				7B096CA82657B80A00B99D3E /* View.swift */,
 				7B189F1D2684DA540033EAC4 /* Color.swift */,
+				7B59150326A6BE4500C4E6AF /* EnvironmentValues.swift */,
 			);
 			path = SwiftUI;
 			sourceTree = "<group>";
@@ -628,6 +634,7 @@
 				7B110435268E2D7000955325 /* BreedsDetailView.swift in Sources */,
 				7B02F421268456BC00D18F9A /* TopBarView.swift in Sources */,
 				7B5CD7502683C10900CFC994 /* HomeScreenViewModel.swift in Sources */,
+				7B59150426A6BE4500C4E6AF /* EnvironmentValues.swift in Sources */,
 				7BF2D4A52672094E00985E88 /* CatsDescriptionCategory.swift in Sources */,
 				7B959AA4266F7B73001CB4FE /* VolumetricShadows.swift in Sources */,
 				7B86143E264D2953008616DB /* CatsCard+CoreDataClass.swift in Sources */,
@@ -673,6 +680,7 @@
 				7B33477D267E5C7500ED6F5F /* PawView.swift in Sources */,
 				7B861434264D1739008616DB /* Stash.xcdatamodeld in Sources */,
 				7B1CC15F268DB26800503A41 /* SettingsView.swift in Sources */,
+				7B59150226A6BB3E00C4E6AF /* Gloabal.swift in Sources */,
 				7B861436264D183B008616DB /* PersistenceController.swift in Sources */,
 				7B096CAD2657C51700B99D3E /* DoneButton.swift in Sources */,
 				7B8B9A1A26427EBA00E98B8E /* BreedsViewModel.swift in Sources */,

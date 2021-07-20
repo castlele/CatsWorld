@@ -10,11 +10,9 @@ import CoreData
 
 struct EditingCatsPageView: View {
 	
-	private let menuWidth = UIScreen.screenWidth / 1.2
-	
+	@Environment(\.menuWidth) var menuWidth
 	@Environment(\.colorScheme) var colorScheme
-	
-	@Environment(\.presentationMode) var presentation
+	@Environment(\.presentationMode) var presentationMode
 	
 	@StateObject var catsViewModel: CatsCardsPageViewModel
 	
@@ -26,7 +24,7 @@ struct EditingCatsPageView: View {
 						showAlert: $catsViewModel.isAlertShown,
 						wasChanges: catsViewModel.wasChanged,
 						action: {
-							catsViewModel.dismiss(presentation: presentation)
+							catsViewModel.dismiss(presentation: presentationMode)
 						}, content: {
 							XButton()
 						})
@@ -36,7 +34,7 @@ struct EditingCatsPageView: View {
 					
 				}, trailing: {
 					DoneButton(action: {
-						catsViewModel.dismiss(isDiscardChanges: false, presentation: presentation)
+						catsViewModel.dismiss(isDiscardChanges: false, presentation: presentationMode)
 						
 					}, content: {
 						View3D(
@@ -274,7 +272,7 @@ struct EditingCatsPageView: View {
 				Alert(
 					title: Text("Discarding changes"),
 					message: Text("Sure wanna discard"),
-					primaryButton: .default(Text("Discard"), action: { catsViewModel.dismiss(presentation: presentation) }),
+					primaryButton: .default(Text("Discard"), action: { catsViewModel.dismiss(presentation: presentationMode) }),
 					secondaryButton: .cancel()
 				)
 			}

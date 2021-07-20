@@ -10,9 +10,9 @@ import SwiftUI
 struct PullActionView<Content: View>: View {
 	
 	private let minTimeToDoAction = TimeInterval(0.5)
-	private let triggerHeight = CGFloat(50)
+	private let triggerHeight = CGFloat(30)
 	private let viewHeight = CGFloat(80)
-	private let fullHeight = CGFloat(130)
+	private let fullHeight = CGFloat(110)
 	
 	let action: () -> Void
 	@ViewBuilder var viewToShow: Content
@@ -29,6 +29,7 @@ struct PullActionView<Content: View>: View {
 						withAnimation(.linear) {
 							isViewShown = true
 						}
+						makeMediumHaptics()
 						
 						timeOfPulling = Date()
 					}

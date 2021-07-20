@@ -9,8 +9,7 @@ import SwiftUI
 
 struct HomeScreenView: View {
 	
-	private let menuWidth = UIScreen.screenWidth / 1.2
-	
+	@Environment(\.menuWidth) var menuWidth
 	@Environment(\.colorScheme) var colorScheme
 	@Environment(\.managedObjectContext) var managedObjectContext
 	
