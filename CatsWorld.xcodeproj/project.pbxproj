@@ -51,6 +51,7 @@
 		7B6E3D492652CB4300B04B62 /* CatsMainInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6E3D482652CB4300B04B62 /* CatsMainInfoView.swift */; };
 		7B6E3D4B2652D59E00B04B62 /* EditButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6E3D4A2652D59E00B04B62 /* EditButton.swift */; };
 		7B6E3D4D2652D6DC00B04B62 /* CatsAvatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6E3D4C2652D6DC00B04B62 /* CatsAvatar.swift */; };
+		7B7EA2A326A4521600D70E74 /* CollectionElementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7EA2A226A4521600D70E74 /* CollectionElementView.swift */; };
 		7B861434264D1739008616DB /* Stash.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7B861432264D1739008616DB /* Stash.xcdatamodeld */; };
 		7B861436264D183B008616DB /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B861435264D183B008616DB /* PersistenceController.swift */; };
 		7B86143B264D27AA008616DB /* CatsCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B86143A264D27AA008616DB /* CatsCardView.swift */; };
@@ -73,6 +74,7 @@
 		7B968A0B2653B149002ECE07 /* TemperamentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B968A0A2653B149002ECE07 /* TemperamentTests.swift */; };
 		7BB5FB93269F116B005DBDC1 /* FavouriteBreedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB5FB92269F116B005DBDC1 /* FavouriteBreedView.swift */; };
 		7BB614662686407D001924F7 /* XButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB614652686407D001924F7 /* XButton.swift */; };
+		7BCFA34026A46D17009569D7 /* RandomArrangementCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCFA33F26A46D17009569D7 /* RandomArrangementCollectionView.swift */; };
 		7BDB149E267281E8005D98DB /* CatsDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BDB149D267281E8005D98DB /* CatsDescriptionView.swift */; };
 		7BDF557126994CE800A734E7 /* BreedsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BDF557026994CE800A734E7 /* BreedsViewModelTests.swift */; };
 		7BE159C2267CA73400A0E846 /* UIScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE159C1267CA73400A0E846 /* UIScreen.swift */; };
@@ -141,6 +143,7 @@
 		7B6E3D482652CB4300B04B62 /* CatsMainInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatsMainInfoView.swift; sourceTree = "<group>"; };
 		7B6E3D4A2652D59E00B04B62 /* EditButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditButton.swift; sourceTree = "<group>"; };
 		7B6E3D4C2652D6DC00B04B62 /* CatsAvatar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatsAvatar.swift; sourceTree = "<group>"; };
+		7B7EA2A226A4521600D70E74 /* CollectionElementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionElementView.swift; sourceTree = "<group>"; };
 		7B861433264D1739008616DB /* Stash.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Stash.xcdatamodel; sourceTree = "<group>"; };
 		7B861435264D183B008616DB /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
 		7B86143A264D27AA008616DB /* CatsCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatsCardView.swift; sourceTree = "<group>"; };
@@ -167,6 +170,7 @@
 		7B968A0A2653B149002ECE07 /* TemperamentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemperamentTests.swift; sourceTree = "<group>"; };
 		7BB5FB92269F116B005DBDC1 /* FavouriteBreedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteBreedView.swift; sourceTree = "<group>"; };
 		7BB614652686407D001924F7 /* XButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XButton.swift; sourceTree = "<group>"; };
+		7BCFA33F26A46D17009569D7 /* RandomArrangementCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomArrangementCollectionView.swift; sourceTree = "<group>"; };
 		7BDB149D267281E8005D98DB /* CatsDescriptionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CatsDescriptionView.swift; sourceTree = "<group>"; };
 		7BDF557026994CE800A734E7 /* BreedsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreedsViewModelTests.swift; sourceTree = "<group>"; };
 		7BE159C1267CA73400A0E846 /* UIScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIScreen.swift; sourceTree = "<group>"; };
@@ -245,7 +249,6 @@
 				7B874685264B1A35006DC6A7 /* HomeScreenView.swift */,
 				7B5A3899268F6DDB00F1487D /* EditingCatsPageView.swift */,
 				7BF2D4A22671FEBF00985E88 /* MainCatsPageView.swift */,
-				7BF7073826A2C2B3008A6562 /* CoreDataEntityFetcher.swift */,
 			);
 			path = HomeScreenView;
 			sourceTree = "<group>";
@@ -274,6 +277,7 @@
 		7B650BF1268C6B9300691E3B /* Others */ = {
 			isa = PBXGroup;
 			children = (
+				7BF7073826A2C2B3008A6562 /* CoreDataEntityFetcher.swift */,
 				7B66A10526556AE100FDC9A7 /* RatingView.swift */,
 				7B5C83172670FF0A00B2F6E8 /* View3D.swift */,
 				7B33A11E267B586600C780C0 /* RadarChart.swift */,
@@ -285,6 +289,8 @@
 				7B254D0E269D5707006DA692 /* SearchBarView.swift */,
 				7BB5FB92269F116B005DBDC1 /* FavouriteBreedView.swift */,
 				7B32B6A326A1AE3B0002C014 /* PullActionView.swift */,
+				7B7EA2A226A4521600D70E74 /* CollectionElementView.swift */,
+				7BCFA33F26A46D17009569D7 /* RandomArrangementCollectionView.swift */,
 			);
 			path = Others;
 			sourceTree = "<group>";
@@ -659,6 +665,7 @@
 				7B5CD74E2683BC8F00CFC994 /* CWError.swift in Sources */,
 				7B56A10A2673AE2F00BEF8DD /* UIImage.swift in Sources */,
 				7B0E47DA268B0EEF00136ABF /* CatsCardsColorPicker.swift in Sources */,
+				7BCFA34026A46D17009569D7 /* RandomArrangementCollectionView.swift in Sources */,
 				7B32B6A426A1AE3B0002C014 /* PullActionView.swift in Sources */,
 				7B874684264B19F8006DC6A7 /* MapView.swift in Sources */,
 				7B2F5428268F1CCE00D587FD /* TabBarView.swift in Sources */,
@@ -674,6 +681,7 @@
 				7B1AA595264AA4CF002A3774 /* MockData.swift in Sources */,
 				7B0E47DC268B186600136ABF /* GenderSign.swift in Sources */,
 				7B6E3D4526527DA200B04B62 /* ImagePickerView.swift in Sources */,
+				7B7EA2A326A4521600D70E74 /* CollectionElementView.swift in Sources */,
 				7B968A092653AE48002ECE07 /* Temperament.swift in Sources */,
 				7B6E3D492652CB4300B04B62 /* CatsMainInfoView.swift in Sources */,
 				7BE159C2267CA73400A0E846 /* UIScreen.swift in Sources */,

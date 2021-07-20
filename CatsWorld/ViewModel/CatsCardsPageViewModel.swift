@@ -29,6 +29,7 @@ final class CatsCardsPageViewModel: CatManipulator {
 		"suppressedTail": nil,
 		"shortLegs": nil,
 		"hairless": nil,
+		"character": nil,
 		"temperament": nil,
 		"strangerFriendly": nil,
 		"childFriendly": nil,
@@ -42,6 +43,8 @@ final class CatsCardsPageViewModel: CatManipulator {
 	var deleteAfterCancelation: Bool
 	var managedObjectContext: NSManagedObjectContext
 	
+	@Published var currentCharacter = ""
+	@Published var isOnDeleteCharacter = false
 	@Published var isAlertShown = false
 	@Published var isImagePickerStyle = false
 	@Published var isImagePicker = false
@@ -98,6 +101,12 @@ final class CatsCardsPageViewModel: CatManipulator {
 	@Published var hairless: Bool {
 		willSet(isHairless) {
 			changes["hairless"] = .hairless(isHairless)
+		}
+	}
+	
+	@Published var character: [String] {
+		didSet {
+			changes["character"] = .character(character)
 		}
 	}
 	
@@ -163,6 +172,7 @@ final class CatsCardsPageViewModel: CatManipulator {
 		self.suppressedTail = cat.suppressedTail
 		self.shortLegs = cat.shortLegs
 		self.hairless = cat.hairless
+		self.character = cat.getListOfCharacter()
 		self.temperament = cat.wrappedTemperament
 		self.strangerFriendly = Int(cat.strangerFriendly)
 		self.childFriendly = Int(cat.childFriendly)
@@ -186,6 +196,7 @@ extension CatsCardsPageViewModel {
 		case suppressedTail(Bool)
 		case shortLegs(Bool)
 		case hairless(Bool)
+		case character([String])
 		case temperament(Temperament)
 		case strangerFriendly(Int16)
 		case childFriendly(Int16)
@@ -308,6 +319,10 @@ extension CatsCardsPageViewModel {
 				case let .hairless(hairless):
 					setNew(value: hairless, to: &cat.hairless)
 
+				case let .character(listOfCharacter):
+					let strCharacter = listOfCharacter.joined(separator: ", ")
+					setNew(value: strCharacter, to: &cat.character)
+					
 				case let .temperament(temperament):
 					if let temperamentData = encode(temperament) {
 						setNew(value: temperamentData, to: &cat.temperament)

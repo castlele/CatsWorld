@@ -4,6 +4,7 @@
         <attribute name="additionalInfo" optional="YES" attributeType="String"/>
         <attribute name="breed" optional="YES" attributeType="String"/>
         <attribute name="catShows" optional="YES" attributeType="Binary"/>
+        <attribute name="character" optional="YES" attributeType="String"/>
         <attribute name="childFriendly" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="color" optional="YES" attributeType="String"/>
         <attribute name="dateOfBirth" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
@@ -20,6 +21,6 @@
         <attribute name="weight" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
     </entity>
     <elements>
-        <element name="CatsCard" positionX="-63" positionY="-18" width="128" height="284"/>
+        <element name="CatsCard" positionX="-63" positionY="-18" width="128" height="299"/>
     </elements>
 </model>

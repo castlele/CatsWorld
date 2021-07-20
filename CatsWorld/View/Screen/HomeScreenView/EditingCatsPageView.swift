@@ -133,14 +133,95 @@ struct EditingCatsPageView: View {
 					.accentColor(.accentColor)
 					
 					// MARK:- Psycological section
-					CatsDescriptionSection() {
-						Picker("Temperament", selection: $catsViewModel.temperament) {
-							ForEach(Temperament.allCases, id: \.self) { temperament in
-								Text("\(temperament.rawValue.localize().capitalized)")
-									.font(.system(.body, design: .rounded))
+					CatsDescriptionSection {
+						if !catsViewModel.character.isEmpty {
+							ScrollView(.horizontal, showsIndicators: false) {
+								HStack(spacing: catsViewModel.isOnDeleteCharacter ? 12 : 5) {
+									ForEach(catsViewModel.character, id: \.self) { character in
+										CollectionElementView(text: character)
+											.overlay(
+												GeometryReader { geometry in
+													Button(action: {
+														catsViewModel.character.removeAllOccurances(character)
+														
+													}, label: {
+														Image(systemName: "xmark")
+															.resizable()
+															.foregroundColor(.white)
+															.padding(5)
+													})
+													.background(Color.red)
+													.frame(width: 20, height: 20)
+													.clipShape(Circle())
+													.offset(x: geometry.frame(in: .local).maxX - 10, y: geometry.frame(in: .local).minY)
+													.opacity(catsViewModel.isOnDeleteCharacter ? 1 : 0)
+												}
+											)
+											.simultaneousGesture(
+												TapGesture()
+													.onEnded {
+														withAnimation(.linear) {
+															catsViewModel.isOnDeleteCharacter.toggle()
+														}
+													}
+											)
+									}
+								}
+							}
+							.cornerRadius(20)
+						}
+						
+						HStack(spacing: 15) {
+							TextField("Describe character", text: $catsViewModel.currentCharacter)
+								.frame(minWidth: 150, maxWidth: UIScreen.screenWidth)
+								.disableAutocorrection(true)
+								.accentColor(.accentColor)
+								.font(.system(.body, design: .rounded))
+							
+							if !catsViewModel.currentCharacter.isEmpty {
+								Button(action: {
+									catsViewModel.currentCharacter = ""
+									
+								}, label: {
+									Image(systemName: "xmark")
+										.resizable()
+										.foregroundColor(.white)
+										.padding(10)
+								})
+								.frame(width: 34, height: 35)
+								.buttonStyle(CircleButtonStyle(backgroundColor: .red))
+								
+								Button(action: {
+									catsViewModel.character.append(catsViewModel.currentCharacter.trimmingCharacters(in: .whitespaces))
+									catsViewModel.currentCharacter = ""
+									UIApplication.shared.endEditing(true)
+									
+								}, label: {
+									Image(systemName: "checkmark")
+										.resizable()
+										.foregroundColor(.white)
+										.padding(10)
+								})
+								.frame(width: 34, height: 35)
+								.buttonStyle(CircleButtonStyle(backgroundColor: .green))
 							}
 						}
-						.pickerStyle(DefaultPickerStyle())
+						
+						HStack {
+							Text("Temperament")
+								.font(.system(.body, design: .rounded))
+							
+							Spacer()
+							
+							Picker("\(catsViewModel.temperament.rawValue.localize().capitalized)", selection: $catsViewModel.temperament) {
+								ForEach(Temperament.allCases, id: \.self) { temperament in
+									Text("\(temperament.rawValue.localize().capitalized)")
+										.font(.system(.body, design: .rounded))
+								}
+							}
+							.labelsHidden()
+							.pickerStyle(MenuPickerStyle())
+						}
 						
 						RatingView(rating: $catsViewModel.strangerFriendly,
 								   label: "Stranger Friendly".localize(),
@@ -248,6 +329,16 @@ struct EditingCatsPageView: View {
 				}
 			}
 		}
+		.simultaneousGesture(
+			TapGesture()
+				.onEnded {
+					if catsViewModel.isOnDeleteCharacter {
+						withAnimation(.linear) {
+							catsViewModel.isOnDeleteCharacter.toggle()
+						}
+					}
+				}
+		)
 	}
 }
 

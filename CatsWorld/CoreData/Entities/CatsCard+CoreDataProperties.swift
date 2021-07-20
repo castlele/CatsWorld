@@ -40,6 +40,7 @@ extension CatsCard {
 	@NSManaged public var childFriendly: Int16
 	@NSManaged public var dogFriendly: Int16
 	@NSManaged public var temperament: Data?
+	@NSManaged public var character: String?
 	
 	// Cat's shows properties
 	@NSManaged public var catShows: Data?
@@ -153,6 +154,10 @@ extension CatsCard: Identifiable {
 		}
 		return defaultValue
 	}
+	
+	var wrappedCharacter: String {
+		character ?? ""
+	}
 }
 
 // MARK:- Public functions
@@ -162,6 +167,12 @@ extension CatsCard {
 	/// - Parameter color: `SwiftUI` `Color` instance
 	func setColor(_ color: String) {
 		self.color = color
+	}
+	
+	func getListOfCharacter() -> [String] {
+		wrappedCharacter
+			.split(separator: ",")
+			.map { $0.trimmingCharacters(in: .whitespaces) }
 	}
 }
 
@@ -229,6 +240,7 @@ extension CatsCard: Describable {
 						Description("Child Friendly".localize(), .int(self.childFriendly)),
 						Description("Dog Friendly".localize(), .int(self.dogFriendly)),
 						Description("Temperament".localize(), .temperament(self.wrappedTemperament)),
+						Description("Character".localize(), .str(wrappedCharacter))
 					]
 				
 			case .shows:
