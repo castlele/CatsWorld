@@ -7,12 +7,14 @@
 
 import Foundation
 
+// MARK: - Breed Equatable Comformance
 extension Breed: Equatable {
 	static func == (lhs: Breed, rhs: Breed) -> Bool {
 		lhs.id == rhs.id || lhs.name == rhs.name
 	}
 }
 
+// MARK: - Breed
 struct Breed: Codable, Identifiable {
 	
 	var id: String
@@ -45,7 +47,6 @@ struct Breed: Codable, Identifiable {
 	var origin: String
 	var rare: Int
 	
-
 	enum CodingKeys: String, CodingKey {
 		case adaptability
 		case affectionLevel = "affection_level"
@@ -75,6 +76,7 @@ struct Breed: Codable, Identifiable {
 	}
 }
 
+// MARK: - Weight
 struct Weight: Codable {
 	var imperial: String
 	var metric: String
@@ -108,15 +110,14 @@ extension Breed: Describable {
 			case .physical:
 				return
 					[
-						Description("Standard Weight".localize(), .str(self.weight.imperial)),
-						Description("Standard Metrics".localize(), .str(self.weight.metric)),
+						Description("Standard Weight".localize(), .str("\(self.weight.imperial) " + "Kg".localize())),
 						Description("Health Issues".localize(), .int(Int16(self.healthIssues))),
 						Description("Energy Level".localize(), .int(Int16(self.energyLevel))),
 						Description("Grooming".localize(), .int(Int16(self.grooming))),
 						Description("Shedding Level".localize(), .int(Int16(self.sheddingLevel))),
 						Description("Hairless".localize(), .bool(self.hairless == 1 ? true : false)),
 						Description("Hypoallergenic".localize(), .bool(self.hypoAllergenic == 1 ? true : false)),
-						Description("Life Span".localize(), .str(self.lifeSpan)),
+						Description("Life Span".localize(), .str("\(self.lifeSpan) " + "years".localize())),
 						Description("Short legs".localize(), .bool(self.shortLegs == 1 ? true : false)),
 						Description("Suppressed Tail".localize(), .bool(self.suppressedTail == 1 ? true : false)),
 						Description("Vocalization".localize(), .bool(self.vocalisation == 1 ? true : false))

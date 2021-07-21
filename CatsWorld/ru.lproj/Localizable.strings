@@ -25,8 +25,10 @@
 "Date of birth" = "Дата рождения";
 "male" = "мальчик";
 "female" = "девочка";
+"Add image" = "Добавить фото";
 "Weight %.1f kg" = "Вес %.1f кг";
 "%.1f kg" = "%.1f кг";
+"Kg" = "Кг";
 "Is castrated" = "Кастрирован";
 "Is the tail suppressed" = "Короткий хвост";
 "Is the legs are short" = "Короткие лапы";
@@ -34,13 +36,14 @@
 "Camera" = "Камера";
 "Photo Library" = "Фото библиотека";
 
-"Additional info" = "Здесь можно написать все, что угодно о котике";
+"Additional info" = "Здесь можно написать все, что угодно";
 
 "Suppressed Tail" = "Короткий хвост";
 "Short legs" = "Короткие лапы";
 "Hairless" = "Лысый";
 "Weight" = "Вес";
 "Castrated" = "Кастрированный";
+"years" = "лет";
 
 "Stranger Friendly" = "Друж. к посторонним";
 "Child Friendly" = "Друж. к детям";

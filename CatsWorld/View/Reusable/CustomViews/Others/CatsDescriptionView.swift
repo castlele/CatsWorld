@@ -14,43 +14,51 @@ struct CatsDescriptionView: View {
     var body: some View {
 		ForEach(descriptions) { description in
 			if description.name != "Description" {
-				HStack {
-					Text(description.name).lineLimit(2)
+				
+				if case let .str(value) = description.value, value.isEmpty {
+					EmptyView()
 					
-					Spacer()
-					
-					switch description.value {
-						case let .bool(value):
-							value ? Text("Yes") : Text("No")
-							
-						case let .int(value):
-							RatingView(rating: .constant(Int(value)),
-									   offImage: Image(systemName: "star"),
-									   onImage: Image(systemName: "star.fill"),
-									   isEditing: false
-							)
-						case let .float(value):
-							Text("\(value, specifier: "%.1f") kg")
-							
-						case let .str(value):
-							Text(value.capitalized)
-								.allowsTightening(true)
-								.lineLimit(nil)
-							
-						case let .temperament(value):
-							Text(value.rawValue.localize().capitalized)
-								.allowsTightening(true)
-								.lineLimit(nil)
-							
-						case let .showsArray(value):
-							List {
-								ForEach(value) { show in
-									Text("\(show.name)")
+				} else {
+					HStack {
+						Text(description.name).lineLimit(2)
+						
+						Spacer()
+						
+						switch description.value {
+							case let .bool(value):
+								value ? Text("Yes") : Text("No")
+								
+							case let .int(value):
+								RatingView(rating: .constant(Int(value)),
+										   offImage: Image(systemName: "star"),
+										   onImage: Image(systemName: "star.fill"),
+										   isEditing: false
+								)
+							case let .float(value):
+								Text("\(value, specifier: "%.1f") kg")
+								
+							case let .str(value):
+								Text(value.capitalized)
+									.allowsTightening(true)
+									.lineLimit(nil)
+									.padding(.vertical)
+								
+							case let .temperament(value):
+								Text(value.rawValue.localize().capitalized)
+									.allowsTightening(true)
+									.lineLimit(nil)
+									.padding(.vertical)
+								
+							case let .showsArray(value):
+								List {
+									ForEach(value) { show in
+										Text("\(show.name)")
+									}
 								}
-							}
+						}
 					}
+					.padding()
 				}
-				.padding()
 				
 			} else {
 				switch description.value {

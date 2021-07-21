@@ -63,8 +63,11 @@ struct EditingCatsPageView: View {
 									Color.black.opacity(0.4)
 									
 									Text("Add image")
+										.font(.system(size: 13, weight: .medium, design: .rounded))
+										.lineLimit(1)
+										.allowsTightening(true)
 										.foregroundColor(.white)
-										.padding(.bottom)
+										.padding([.bottom, .leading, .trailing])
 								}
 								.frame(height: 40)
 							}
@@ -277,10 +280,15 @@ struct EditingCatsPageView: View {
 							if catsViewModel.additionalInfo.isEmpty {
 								Text("Additional info")
 									.lineLimit(3)
+									.allowsTightening(true)
 									.font(.system(.body, design: .rounded))
 							}
 							
 							TextEditor(text: $catsViewModel.additionalInfo)
+								.background(
+									RoundedRectangle(cornerRadius: 10)
+										.stroke(Color.semiAccentColor)
+								)
 								.disableAutocorrection(true)
 								.background(Color.mainColor)
 								.accentColor(.accentColor)
@@ -375,6 +383,7 @@ struct EditingCatsPageView: View {
 							catsViewModel.isOnDeleteCharacter.toggle()
 						}
 					}
+					UIApplication.shared.endEditing(true)
 				}
 		)
 	}
