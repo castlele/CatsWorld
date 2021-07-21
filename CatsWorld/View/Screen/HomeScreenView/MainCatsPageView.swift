@@ -71,6 +71,7 @@ struct MainCatsPageView: View {
 			Spacer()
 			
 			ScrollView {
+				// MARK: - Additional Section
 				if catsDescriptionViewModel.isAdditionInfo {
 					CatsDescriptionSection() {
 						HStack(alignment: .firstTextBaseline) {
@@ -86,18 +87,22 @@ struct MainCatsPageView: View {
 				}
 				
 				VStack {
-					RadarChartView(
-						data: catsDescriptionViewModel.friendlyCharacteristics,
-						gridColor: .gray,
-						dataColor: .green,
-						reorder: catsDescriptionViewModel.reorderDataNames(names:)
-					)
-					.equatable()
-					.frame(width: 200, height: 150)
-					.padding()
+					// MARK: - Radar chart Section
+					if catsDescriptionViewModel.isChartDataEmpty {
+						RadarChartView(
+							data: catsDescriptionViewModel.friendlyCharacteristics,
+							gridColor: .gray,
+							dataColor: .green,
+							reorder: catsDescriptionViewModel.reorderDataNames(names:)
+						)
+						.equatable()
+						.frame(width: 200, height: 150)
+						.padding()
+					}
 					
 					Spacer()
-					
+
+					// MARK: - Main Sections
 					Group {
 						CatsDescriptionSection() {
 							CatsDescriptionView(descriptions: catsDescriptionViewModel.getDescriptionsFor(category: .physical))

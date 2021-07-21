@@ -49,6 +49,11 @@ final class CatsDescriptionViewModel: CatManipulator {
 		return characteristics
 	}
 	
+	var isChartDataEmpty: Bool {
+		let nonZeroChartData = friendlyCharacteristics.filter { $0.value != 0 }
+		return !nonZeroChartData.isEmpty
+	}
+	
 	// MARK: - Initialization
 	init(cat: CatsCard, context: NSManagedObjectContext) {
 		self.context = context

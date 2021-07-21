@@ -9,13 +9,16 @@ import SwiftUI
 
 struct CatsDescriptionView: View {
 	
-	@State var descriptions: [Description]
+	var descriptions: [Description]
 	
     var body: some View {
 		ForEach(descriptions) { description in
 			if description.name != "Description" {
 				
 				if case let .str(value) = description.value, value.isEmpty {
+					EmptyView()
+					
+				} else if case let .int(value) = description.value, value == 0 {
 					EmptyView()
 					
 				} else {

@@ -23,6 +23,7 @@ struct CatsDescriptionSection<Content: View>: View {
 					.background(
 						VStack {
 							Spacer()
+							
 							Divider()
 						}
 					)
