@@ -55,7 +55,29 @@ struct EditingCatsPageView: View {
 				ScrollView {
 					CatsAvatar(avatar: catsViewModel.catsImage ?? UIImage(systemName: "person.crop.circle.fill")!)
 						.frame(width: 150, height: 150)
-						.background(EarsView())
+						.overlay(
+							VStack {
+								Spacer()
+								
+								ZStack {
+									Color.black.opacity(0.4)
+									
+									Text("Add image")
+										.foregroundColor(.white)
+										.padding(.bottom)
+								}
+								.frame(height: 40)
+							}
+						)
+						.clipShape(Circle())
+						.background(
+							ZStack {
+								EarsView()
+								
+								Circle()
+									.stroke(Color.accentColor, lineWidth: 4)
+							}
+						)
 						.padding([.top, .bottom])
 						.simultaneousGesture(
 							TapGesture()

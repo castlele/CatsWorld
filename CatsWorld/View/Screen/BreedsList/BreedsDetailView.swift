@@ -15,11 +15,14 @@ struct BreedsDetailView: View {
 	
     var body: some View {
 		ScrollView {
+			
+			// MARK: - Image View
 			breedsViewModel.wrappedImage
 				.resizable()
 				.scaledToFit()
 				.background(Color.mainColor)
 				.overlay(
+					// MARK: - Loading Image
 					ZStack {
 						if breedsViewModel.isLoadingImage {
 							ZStack {
@@ -31,6 +34,7 @@ struct BreedsDetailView: View {
 							}
 						}
 						
+						// MARK: - Bottom Black line
 						VStack {
 							Spacer()
 							
@@ -46,12 +50,14 @@ struct BreedsDetailView: View {
 							.background(Color.black.opacity(0.4))
 						}
 						
+						// MARK: - Instagram heath
 						if breedsViewModel.isToggledAddToFavourite {
 							Image(systemName: "heart.fill")
 								.resizable()
 								.interpolation(.high)
 								.frame(width: 40, height: 40)
 								.foregroundColor(.white)
+							
 						} else {
 							EmptyView()
 						}
