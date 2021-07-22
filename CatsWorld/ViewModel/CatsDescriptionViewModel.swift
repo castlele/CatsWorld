@@ -211,7 +211,7 @@ extension CatsDescriptionViewModel {
 			case "Salmon":
 				colorComponents = (0.999, 0.854, 0.849, 1)
 			default:
-				colorComponents = (0.894, 0.984, 1, 1)
+				colorComponents = (0.910, 1, 1, 1)
 		}
 		
 		return colorComponents
