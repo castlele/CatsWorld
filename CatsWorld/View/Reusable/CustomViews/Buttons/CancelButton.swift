@@ -11,6 +11,7 @@ struct CancelButton<Content: View>: View {
 	
 	var presentationMode: Binding<PresentationMode>?
 	var showAlert: Binding<Bool>
+	var alertSettingAction: () -> Void
 	
 	var wasChanges: Bool = false
 	var action: () -> Void
@@ -20,12 +21,14 @@ struct CancelButton<Content: View>: View {
 	init(
 		presentation: Binding<PresentationMode>? = nil,
 		showAlert: Binding<Bool> = .constant(false),
+		alertSettingAction:  @escaping () -> Void = {},
 		wasChanges: Bool = false,
 		action: @escaping () -> Void = {},
 		@ViewBuilder content: () -> Content
 	) {
 		self.presentationMode = presentation
 		self.showAlert = showAlert
+		self.alertSettingAction = alertSettingAction
 		self.wasChanges = wasChanges
 		self.action = action
 		self.content = content()
@@ -34,7 +37,10 @@ struct CancelButton<Content: View>: View {
     var body: some View {
 		Button(action: {
 			if wasChanges {
+				alertSettingAction()
+				
 				showAlert.wrappedValue = true
+				
 			} else {
 				if let presentationMode = presentationMode {
 					if presentationMode.wrappedValue.isPresented {

@@ -42,6 +42,7 @@ final class CatsCardsPageViewModel: CatManipulator {
 	/// Otherwise, it will be saved
 	var deleteAfterCancelation: Bool
 	var managedObjectContext: NSManagedObjectContext
+	var alertToShow: Alert!
 	
 	@Published var currentCharacter = ""
 	@Published var isOnDeleteCharacter = false
@@ -205,9 +206,45 @@ extension CatsCardsPageViewModel {
 		case image(UIImage)
 	}
 }
+
+// MARK: - Alert Type
+extension CatsCardsPageViewModel {
+	
+	enum AlertType {
+		case delete
+		case cancel
+	}
+}
 	
 // MARK:- Public methods
 extension CatsCardsPageViewModel {
+	
+	func makeAlert(type: AlertType, presentation: Binding<PresentationMode>) {
+		switch type {
+			case .cancel:
+				alertToShow = Alert(
+					title: Text("Discarding changes"),
+					message: Text("Sure wanna discard"),
+					primaryButton: .default(Text("Discard"),
+											action: { [self] in
+												dismiss(presentation: presentation)
+												alertToShow = nil
+											}),
+					secondaryButton: .cancel({ self.alertToShow = nil })
+				)
+			case .delete:
+				alertToShow = Alert(
+					title: Text("Deleting a card"),
+					message: Text("Are you sure, you want to delete currently editing cat"),
+					primaryButton: .destructive(Text("Delete"),
+												action: { [self] in
+													deleteCat(presentation: presentation)
+													alertToShow = nil
+												}),
+					secondaryButton: .cancel({ self.alertToShow = nil })
+				)
+		}
+	}
 	
 	/// Saves changes, made to instance of `CatsCard`
 	func save() {

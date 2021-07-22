@@ -23,6 +23,7 @@ struct EditingCatsPageView: View {
 				TopBarView(minHeight: 100, maxHeight: 100, leading: {
 					CancelButton(
 						showAlert: $catsViewModel.isAlertShown,
+						alertSettingAction: { catsViewModel.makeAlert(type: .cancel, presentation: presentationMode) },
 						wasChanges: catsViewModel.wasChanged,
 						action: {
 							catsViewModel.dismiss(presentation: presentationMode)
@@ -38,9 +39,9 @@ struct EditingCatsPageView: View {
 						catsViewModel.dismiss(isDiscardChanges: false, presentation: presentationMode)
 						
 					}, content: {
-						View3D(
-							topView:  PawView().scale(0.8),
-							bottomView:  PawView().scale(0.8),
+						Image3D(
+							topView: Image(systemName: "checkmark"),
+							bottomView: Image(systemName: "checkmark"),
 							topColor: .volumeEffectColorTop,
 							bottomColor: .volumeEffectColorBottom	
 						)
@@ -302,7 +303,8 @@ struct EditingCatsPageView: View {
 					
 					// MARK: - Delete button
 					Button(action: {
-						catsViewModel.deleteCat(presentation: presentationMode)
+						catsViewModel.makeAlert(type: .delete, presentation: presentationMode)
+						catsViewModel.isAlertShown.toggle()
 						
 					}, label: {
 						Text("Delete")
@@ -315,14 +317,10 @@ struct EditingCatsPageView: View {
 				}
 				.frame(width: UIScreen.screenWidth)
 			}
+			// MARK: - Alert
 			.alert(isPresented: $catsViewModel.isAlertShown) {
 				// TODO:- Redo Alert with Error handling
-				Alert(
-					title: Text("Discarding changes"),
-					message: Text("Sure wanna discard"),
-					primaryButton: .default(Text("Discard"), action: { catsViewModel.dismiss(presentation: presentationMode) }),
-					secondaryButton: .cancel()
-				)
+				catsViewModel.alertToShow
 			}
 			// MARK: - Image Picker
 			.sheet(isPresented: $catsViewModel.isImagePicker) {
