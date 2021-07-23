@@ -39,11 +39,11 @@ struct EditingCatsPageView: View {
 						catsViewModel.dismiss(isDiscardChanges: false, presentation: presentationMode)
 						
 					}, content: {
-						Image3D(
-							topView: Image(systemName: "checkmark"),
-							bottomView: Image(systemName: "checkmark"),
+						View3D(
+							topView:  PawView().scale(0.8),
+							bottomView:  PawView().scale(0.8),
 							topColor: .volumeEffectColorTop,
-							bottomColor: .volumeEffectColorBottom	
+							bottomColor: .volumeEffectColorBottom
 						)
 						.equatable()
 					})
