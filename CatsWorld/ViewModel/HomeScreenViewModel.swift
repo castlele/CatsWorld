@@ -93,7 +93,7 @@ extension HomeScreenViewModel {
 	/// Set up `MainCatsPageView` and toggle `isMainCatsPageView`
 	/// - Parameter context: View context with `CatsCard` to set up `CatsDescriptionViewModel`
 	func observeCat(context: NSManagedObjectContext) {
-		DispatchQueue.global().async { [self] in
+		DispatchQueue.global(qos: .userInitiated).async { [self] in
 			mainCatsPageView = MainCatsPageView(catsDescriptionViewModel: CatsDescriptionViewModel(cat: self.selectedCat, context: context))
 			
 			DispatchQueue.main.async {
@@ -106,7 +106,7 @@ extension HomeScreenViewModel {
 	/// Method is used for creating new instance of `CatsCard`
 	/// - Parameter context: View context with `CatsCard` to set up `CatsCardsPageViewModel` and new instance of `CatsCard`
 	func makeNewCat(context: NSManagedObjectContext) {
-		DispatchQueue.global().async { [self] in
+		DispatchQueue.global(qos: .userInitiated).async { [self] in
 			let cat = CatsCard(context: context)
 			cat.id = UUID()
 			
@@ -123,7 +123,7 @@ extension HomeScreenViewModel {
 	/// Method is used for editing previousely created instace of `CatsCard`
 	/// - Parameter context: View context with `CatsCard` to set up `CatsCardsPageViewModel`
 	func editCat(context: NSManagedObjectContext) {
-		DispatchQueue.global().async { [self] in
+		DispatchQueue.global(qos: .userInitiated).async { [self] in
 			let catsCardsPageViewModel = CatsCardsPageViewModel(cat: selectedCat, deleteAfterCancelation: false, managedObjectContext: context)
 			editingCatsPageView = EditingCatsPageView(catsViewModel: catsCardsPageViewModel)
 			
@@ -141,7 +141,7 @@ extension HomeScreenViewModel {
 	
 	/// Set up `CatsCardsColorPicker` and toggle `isMenu`, `isColorPicker`
 	func changeCatsColor() {
-		DispatchQueue.global().async { [self] in
+		DispatchQueue.global(qos: .userInitiated).async { [self] in
 			catsCardsColorPicker = CatsCardsColorPicker(cat: getCat(), viewModel: self)
 			
 			DispatchQueue.main.async {
