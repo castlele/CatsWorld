@@ -316,6 +316,18 @@ struct EditingCatsPageView: View {
 					.padding([.leading, .trailing, .bottom])
 				}
 				.frame(width: UIScreen.screenWidth)
+				.gesture(
+					DragGesture()
+						.onChanged { _ in
+							if catsViewModel.isOnDeleteCharacter {
+								withAnimation(.linear) {
+									catsViewModel.isOnDeleteCharacter.toggle()
+								}
+							}
+							
+							UIApplication.shared.endEditing(true)
+						}
+				)
 			}
 			// MARK: - Alert
 			.alert(isPresented: $catsViewModel.isAlertShown) {
@@ -373,17 +385,6 @@ struct EditingCatsPageView: View {
 				}
 			}
 		}
-		.simultaneousGesture(
-			TapGesture()
-				.onEnded {
-					if catsViewModel.isOnDeleteCharacter {
-						withAnimation(.linear) {
-							catsViewModel.isOnDeleteCharacter.toggle()
-						}
-					}
-					UIApplication.shared.endEditing(true)
-				}
-		)
 	}
 }
 
