@@ -15,7 +15,9 @@ import SwiftUI
 extension CatsCard {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<CatsCard> {
-        return NSFetchRequest<CatsCard>(entityName: "CatsCard")
+		let request = NSFetchRequest<CatsCard>(entityName: "CatsCard")
+		request.sortDescriptors = []
+        return request
     }
 
 	// Properties needed for the card

@@ -59,6 +59,12 @@ final class CatsDescriptionViewModel: CatManipulator {
 		self.context = context
 		selectCat(cat)
 	}
+	
+	// MARK: - Deinitialization
+	deinit {
+		removeColorScheme()
+		deselectCat()
+	}
 }
 
 // MARK: - Public methods

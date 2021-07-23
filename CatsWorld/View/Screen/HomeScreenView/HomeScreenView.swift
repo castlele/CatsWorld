@@ -15,7 +15,7 @@ struct HomeScreenView: View {
 	
 	@EnvironmentObject var settingsViewModel: SettingsViewModel
 	
-	@FetchRequest(entity: CatsCard.entity(), sortDescriptors: []) var catsCards: FetchedResults<CatsCard>
+//	@FetchRequest(entity: CatsCard.entity(), sortDescriptors: []) var catsCards: FetchedResults<CatsCard>
 	
 	@StateObject var homeScreenViewModel = HomeScreenViewModel()
 		
@@ -181,7 +181,7 @@ struct HomeScreenView: View {
 					}
 					
 					// MARK: - Zero cat's cards text
-					if catsCards.isEmpty {
+					if homeScreenViewModel.isZeroCards(context: managedObjectContext) {
 						VStack {
 							Text("Empty CatsCards")
 								.font(.system(.body, design: .rounded))
@@ -194,6 +194,7 @@ struct HomeScreenView: View {
 					}
 				}
 			}
+			// MARK: - MainCatsPageView
 			.fullScreenCover(isPresented: $homeScreenViewModel.isMainCatsPageView) {
 				homeScreenViewModel.mainCatsPageView
 					.preferredColorScheme(settingsViewModel.wrappedColorScheme)
@@ -202,6 +203,7 @@ struct HomeScreenView: View {
 						homeScreenViewModel.deselectCat()
 					}
 			}
+			// MARK: - EditionCatsPageView
 			.sheet(isPresented: $homeScreenViewModel.isEditingCatsSheet) {
 				homeScreenViewModel.editingCatsPageView
 					.preferredColorScheme(settingsViewModel.wrappedColorScheme)
@@ -211,7 +213,7 @@ struct HomeScreenView: View {
 			}
 			.animation(.easeInOut(duration: 0.2).delay(0.41))
 			.blur(radius: homeScreenViewModel.isColorPicker ? 10 : 0)
-			.disabled(homeScreenViewModel.isColorPicker || homeScreenViewModel.isMenu)
+			.disabled(homeScreenViewModel.isColorPicker || homeScreenViewModel.isMenu || homeScreenViewModel.isSortingMenu)
 			
 			// MARK: - Selected cards
 			if homeScreenViewModel.isSelectedMode {
@@ -336,6 +338,9 @@ struct HomeScreenView: View {
 						.foregroundColor(.red)
 						
 						Button("More info") {
+							withAnimation(.linear(duration: 0.4)) {
+								homeScreenViewModel.isMenu.toggle()
+							}
 							homeScreenViewModel.observeCat(context: managedObjectContext)
 						}
 						.font(.system(.body, design: .rounded))

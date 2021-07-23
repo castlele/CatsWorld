@@ -53,6 +53,15 @@ final class HomeScreenViewModel: CatManipulator {
 // MARK:- Public methods
 extension HomeScreenViewModel {
 	
+	func isZeroCards(context: NSManagedObjectContext) -> Bool {
+		do {
+			let cards: [CatsCard] = try context.fetch(CatsCard.fetchRequest())
+			return cards.isEmpty
+		} catch {
+			return false
+		}
+	}
+	
 	func validateCatsCards(cat: CatsCard) -> Bool {
 		let searchingText = textToSearch.trimmingCharacters(in: .whitespacesAndNewlines)
 		
@@ -84,40 +93,67 @@ extension HomeScreenViewModel {
 	/// Set up `MainCatsPageView` and toggle `isMainCatsPageView`
 	/// - Parameter context: View context with `CatsCard` to set up `CatsDescriptionViewModel`
 	func observeCat(context: NSManagedObjectContext) {
-		mainCatsPageView = MainCatsPageView(catsDescriptionViewModel: CatsDescriptionViewModel(cat: self.selectedCat, context: context))
-		
-		isMainCatsPageView.toggle()
+		DispatchQueue.global().async { [self] in
+			mainCatsPageView = MainCatsPageView(catsDescriptionViewModel: CatsDescriptionViewModel(cat: self.selectedCat, context: context))
+			
+			DispatchQueue.main.async {
+				isMainCatsPageView.toggle()
+			}
+		}
 	}
 	
 	/// Set up `EditingCatsPageView` and toggle `isEditingCatsSheet`
 	/// Method is used for creating new instance of `CatsCard`
 	/// - Parameter context: View context with `CatsCard` to set up `CatsCardsPageViewModel` and new instance of `CatsCard`
 	func makeNewCat(context: NSManagedObjectContext) {
-		let cat = CatsCard(context: context)
-		cat.id = UUID()
-		let catsCardsPageViewModel = CatsCardsPageViewModel(cat: cat, deleteAfterCancelation: true, managedObjectContext: context)
-		editingCatsPageView = EditingCatsPageView(catsViewModel: catsCardsPageViewModel)
-		
-		isEditingCatsSheet.toggle()
+		DispatchQueue.global().async { [self] in
+			let cat = CatsCard(context: context)
+			cat.id = UUID()
+			
+			let catsCardsPageViewModel = CatsCardsPageViewModel(cat: cat, deleteAfterCancelation: true, managedObjectContext: context)
+			editingCatsPageView = EditingCatsPageView(catsViewModel: catsCardsPageViewModel)
+			
+			DispatchQueue.main.async {
+				isEditingCatsSheet.toggle()
+			}
+		}
 	}
 	
 	/// Set up `EditingCatsPageView` and toggle `isMenu`, `isEditingCatsSheet`
 	/// Method is used for editing previousely created instace of `CatsCard`
 	/// - Parameter context: View context with `CatsCard` to set up `CatsCardsPageViewModel`
 	func editCat(context: NSManagedObjectContext) {
-		let catsCardsPageViewModel = CatsCardsPageViewModel(cat: selectedCat, deleteAfterCancelation: false, managedObjectContext: context)
-		editingCatsPageView = EditingCatsPageView(catsViewModel: catsCardsPageViewModel)
-		
-		isMenu.toggle()
-		isEditingCatsSheet.toggle()
+		DispatchQueue.global().async { [self] in
+			let catsCardsPageViewModel = CatsCardsPageViewModel(cat: selectedCat, deleteAfterCancelation: false, managedObjectContext: context)
+			editingCatsPageView = EditingCatsPageView(catsViewModel: catsCardsPageViewModel)
+			
+			DispatchQueue.main.async {
+				withAnimation(.linear(duration: 0.4)) {
+					isMenu.toggle()
+				}
+				
+				withAnimation(.linear(duration: 0.4)) {
+					isEditingCatsSheet.toggle()
+				}
+			}
+		}
 	}
 	
 	/// Set up `CatsCardsColorPicker` and toggle `isMenu`, `isColorPicker`
 	func changeCatsColor() {
-		catsCardsColorPicker = CatsCardsColorPicker(cat: getCat(), viewModel: self)
-		
-		isMenu.toggle()
-		isColorPicker.toggle()
+		DispatchQueue.global().async { [self] in
+			catsCardsColorPicker = CatsCardsColorPicker(cat: getCat(), viewModel: self)
+			
+			DispatchQueue.main.async {
+				withAnimation(.linear(duration: 0.4)) {
+					isMenu.toggle()
+				}
+				
+				withAnimation(.linear(duration: 0.4)) {
+					isColorPicker.toggle()
+				}
+			}
+		}
 	}
 	
 	/// Method is using from Menu from `HomeScreenView`
@@ -130,7 +166,7 @@ extension HomeScreenViewModel {
 		
 		deselectCat()
 		
-		withAnimation() {
+		withAnimation(.linear(duration: 0.4)) {
 			isMenu.toggle()
 		}
 	}
