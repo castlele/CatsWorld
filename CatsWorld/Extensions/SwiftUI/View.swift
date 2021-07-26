@@ -25,4 +25,10 @@ extension View {
 			.font(.system(style, design: .rounded))
 			.padding(10)
 	}
+	
+	func menuTransition(_ zIndex: Double = 2) -> some View {
+		self
+			.zIndex(zIndex)
+			.transition(.asymmetric(insertion: .move(edge: .bottom), removal: .move(edge: .bottom)))
+	}
 }

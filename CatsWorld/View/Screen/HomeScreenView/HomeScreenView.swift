@@ -21,7 +21,7 @@ struct HomeScreenView: View {
 		
     var body: some View {
 		ZStack {
-			Color.mainColor
+			Color.mainColor.zIndex(0)
 			
 			VStack {
 				// MARK: - TopBarView
@@ -52,14 +52,16 @@ struct HomeScreenView: View {
 										.padding()
 										.rotationEffect(.degrees(homeScreenViewModel.isSortingAssending ? 0 : 180))
 										.onLongPressGesture {
-											withAnimation(.linear(duration: 0.2)) {
+											withAnimation(.easeInOut(duration: 0.5)) {
 												homeScreenViewModel.isSortingMenu.toggle()
 											}
 										}
 										.simultaneousGesture(
 											TapGesture()
 												.onEnded {
-													homeScreenViewModel.isSortingAssending.toggle()
+													withAnimation(.easeInOut(duration: 0.5)) {
+														homeScreenViewModel.isSortingAssending.toggle()
+													}
 												}
 										)
 									}
@@ -211,9 +213,10 @@ struct HomeScreenView: View {
 						homeScreenViewModel.editingCatsPageView = nil
 					}
 			}
-			.animation(.easeInOut(duration: 0.2).delay(0.41))
 			.blur(radius: homeScreenViewModel.isColorPicker ? 10 : 0)
 			.disabled(homeScreenViewModel.isColorPicker || homeScreenViewModel.isMenu || homeScreenViewModel.isSortingMenu)
+//			.animation(.easeInOut(duration: 2).delay(0.41))
+			.zIndex(1)
 			
 			// MARK: - Selected cards
 			if homeScreenViewModel.isSelectedMode {
@@ -297,9 +300,9 @@ struct HomeScreenView: View {
 				GeometryReader { geometry in
 					CatsDescriptionSection {
 						Button("Sort by names") {
-							homeScreenViewModel.sortingKey = "name"
 							
-							withAnimation(.linear(duration: 0.2)) {
+							withAnimation(.easeInOut(duration: 0.5)) {
+								homeScreenViewModel.sortingKey = "name"
 								homeScreenViewModel.isSortingMenu.toggle()
 							}
 						}
@@ -308,9 +311,9 @@ struct HomeScreenView: View {
 						.foregroundColor(.primary)
 						
 						Button("Sort by age") {
-							homeScreenViewModel.sortingKey = "dateOfBirth"
 							
-							withAnimation(.linear(duration: 0.2)) {
+							withAnimation(.easeInOut(duration: 0.5)) {
+								homeScreenViewModel.sortingKey = "dateOfBirth"
 								homeScreenViewModel.isSortingMenu.toggle()
 							}
 						}
@@ -319,11 +322,10 @@ struct HomeScreenView: View {
 						.foregroundColor(.primary)
 					}
 					.volumetricShadows(color1: .clear, color2: .shadowColor)
-					.animation(.linear(duration: 0.4))
-					.transition(.move(edge: .bottom))
 					.frame(minWidth: menuWidth, maxWidth: menuWidth, minHeight: 100, maxHeight: 100)
 					.offset(x: (geometry.size.width - menuWidth) / 2, y: geometry.frame(in: .local).maxY - 112)
 				}
+				.menuTransition()
 			}
 			
 			// MARK: - MenuView
