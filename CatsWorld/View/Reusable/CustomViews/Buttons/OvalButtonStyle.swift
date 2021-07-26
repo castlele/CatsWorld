@@ -33,6 +33,6 @@ struct OvalButtonStyle: ButtonStyle {
 			.clipShape(RoundedRectangle(cornerRadius: 20))
 			.volumetricShadows(shape: .roundedRect, color1: shadowColor1, color2: shadowColor2, radius: shadowRadius, isPressed: configuration.isPressed)
 			.scaleEffect(configuration.isPressed ? 0.85 : 1)
-			.animation(.linear(duration: 0.5))
+			.animation(.easeInOut)
 	}
 }

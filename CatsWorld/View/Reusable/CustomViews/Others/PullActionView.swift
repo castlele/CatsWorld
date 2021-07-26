@@ -26,7 +26,7 @@ struct PullActionView<Content: View>: View {
 				Color.clear
 					.frame(height: triggerHeight)
 					.onAppear {
-						withAnimation(.linear) {
+						withAnimation(.easeInOut(duration: 0.5)) {
 							isViewShown = true
 						}
 						makeMediumHaptics()
@@ -41,7 +41,7 @@ struct PullActionView<Content: View>: View {
 							}
 						}
 						
-						withAnimation(.linear) {
+						withAnimation(.easeInOut(duration: 0.5)) {
 							isViewShown = false
 						}
 						

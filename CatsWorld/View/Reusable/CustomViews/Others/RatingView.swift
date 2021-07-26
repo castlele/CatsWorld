@@ -53,13 +53,17 @@ struct RatingView<Content: View>: View {
 						onImage
 							.foregroundColor(onColor)
 							.onTapGesture {
-								self.rating.wrappedValue = rating
+								withAnimation(.easeInOut(duration: 0.5)) {
+									self.rating.wrappedValue = rating
+								}
 							}
 					} else {
 						offImage
 							.foregroundColor(offColor)
 							.onTapGesture {
-								self.rating.wrappedValue = rating
+								withAnimation(.easeInOut(duration: 0.5)) {
+									self.rating.wrappedValue = rating
+								}
 							}
 					}
 				}
