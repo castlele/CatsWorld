@@ -197,6 +197,19 @@ struct HomeScreenView: View {
 							Spacer()
 						}
 					}
+					
+					// MARK: - Null Search results
+					if homeScreenViewModel.isSearchGotNoResults(cats: catsCards) {
+						VStack {
+							Text("We didn't find anything")
+								.font(.system(.body, design: .rounded))
+								.multilineTextAlignment(.center)
+								.padding([.leading, .trailing, .top])
+								.padding(.top, 30)
+							
+							Spacer()
+						}
+					}
 				}
 			}
 			// MARK: - MainCatsPageView

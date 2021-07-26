@@ -62,6 +62,13 @@ extension HomeScreenViewModel {
 		}
 	}
 	
+	func isSearchGotNoResults(cats: FetchedResults<CatsCard>) -> Bool {
+		let isNoCats = !cats.isEmpty
+		let isSearchEmpty = cats.filter { validateCatsCards(cat: $0) }.isEmpty
+		
+		return isNoCats && isSearchEmpty
+	}
+	
 	func validateCatsCards(cat: CatsCard) -> Bool {
 		let searchingText = textToSearch.trimmingCharacters(in: .whitespacesAndNewlines)
 		

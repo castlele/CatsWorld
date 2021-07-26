@@ -85,6 +85,18 @@ struct BreedsList: View {
 					.listRowBackground(Color.mainColor)
 				}
 				.listStyle(InsetListStyle())
+				.overlay(
+					VStack {
+						if breedsViewModel.breeds.filter { breedsViewModel.validateBreeds(breed: $0) }.isEmpty {
+							Text("We didn't find anything")
+								.font(.system(.body, design: .rounded))
+								.multilineTextAlignment(.center)
+								.padding([.leading, .trailing, .top])
+								.padding(.top, 30)
+						}
+						Spacer()
+					}
+				)
 				.gesture(
 					DragGesture()
 						.onChanged { _ in
