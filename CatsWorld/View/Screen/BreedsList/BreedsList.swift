@@ -8,6 +8,7 @@
 import SwiftUI
 
 fileprivate struct BreedsRowView: View {
+	
 	let breed: Breed
 	@ObservedObject var viewModel: BreedsViewModel
 	
@@ -83,6 +84,7 @@ struct BreedsList: View {
 					}
 					.listRowBackground(Color.mainColor)
 				}
+				.listStyle(InsetListStyle())
 				.gesture(
 					DragGesture()
 						.onChanged { _ in

@@ -93,10 +93,16 @@ extension CatsDescriptionViewModel {
 	
 	/// Set up `EditingCatsPageView` and toggle `isEditingCatsPage`
 	func editCat() {
-		let catsViewModel = CatsCardsPageViewModel(cat: getCat(), deleteAfterCancelation: false, managedObjectContext: context)
-		editingCatsPageView = EditingCatsPageView(catsViewModel: catsViewModel)
-		
-		isEditingCatsPage.toggle()
+		DispatchQueue.global(qos: .userInitiated).async { [self] in
+			let catsViewModel = CatsCardsPageViewModel(cat: getCat(), deleteAfterCancelation: false, managedObjectContext: context)
+			editingCatsPageView = EditingCatsPageView(catsViewModel: catsViewModel)
+			
+			DispatchQueue.main.async {
+				withAnimation(.linear(duration: 0.5)) {
+					isEditingCatsPage.toggle()
+				}
+			}
+		}
 	}
 	
 	/// Get array of descriptions of the cat for certain category

@@ -15,7 +15,7 @@ struct HomeScreenView: View {
 	
 	@EnvironmentObject var settingsViewModel: SettingsViewModel
 	
-//	@FetchRequest(entity: CatsCard.entity(), sortDescriptors: []) var catsCards: FetchedResults<CatsCard>
+	@FetchRequest(entity: CatsCard.entity(), sortDescriptors: []) var catsCards: FetchedResults<CatsCard>
 	
 	@StateObject var homeScreenViewModel = HomeScreenViewModel()
 		
@@ -181,7 +181,7 @@ struct HomeScreenView: View {
 					}
 					
 					// MARK: - Zero cat's cards text
-					if homeScreenViewModel.isZeroCards(context: managedObjectContext) {
+					if catsCards.isEmpty {
 						VStack {
 							Text("Empty CatsCards")
 								.font(.system(.body, design: .rounded))

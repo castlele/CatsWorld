@@ -210,9 +210,7 @@ extension HomeScreenViewModel {
 			for cat in selectedCats {
 				context.delete(cat)
 			}
-			
-			selectedCats.removeAll()
-			
+						
 			toggleSelectionMode()
 		}
 	}
