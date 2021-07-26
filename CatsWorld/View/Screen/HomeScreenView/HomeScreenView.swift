@@ -168,7 +168,10 @@ struct HomeScreenView: View {
 											.onEnded { _ in
 												if !homeScreenViewModel.isSelectedMode {
 													homeScreenViewModel.selectCat(card)
-													homeScreenViewModel.isMenu.toggle()
+													
+													withAnimation(.easeInOut(duration: 0.5)) {
+														homeScreenViewModel.isMenu.toggle()
+													}
 												} else {
 													homeScreenViewModel.doOnSelect(cat: card)
 												}
@@ -215,17 +218,32 @@ struct HomeScreenView: View {
 			}
 			.blur(radius: homeScreenViewModel.isColorPicker ? 10 : 0)
 			.disabled(homeScreenViewModel.isColorPicker || homeScreenViewModel.isMenu || homeScreenViewModel.isSortingMenu)
-//			.animation(.easeInOut(duration: 2).delay(0.41))
 			.zIndex(1)
 			
 			// MARK: - Selected cards
 			if homeScreenViewModel.isSelectedMode {
 				GeometryReader { geometry in
-					
-					VStack {
-						HStack {
-							Spacer()
-							
+					Button(action: {
+						homeScreenViewModel.toggleSelectionMode()
+						
+					}, label: {
+						Text("Cancel")
+							.standardText(fgColor: .white, style: .body)
+							.padding(.horizontal, 5)
+					})
+					.frame(minWidth: 85)
+					.padding(.leading)
+					.buttonStyle(OvalButtonStyle(backgroundColor: Color(#colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)), shadowColor1: .clear))
+					.offset(x: geometry.frame(in: .global).minX, y: geometry.frame(in: .local).maxY - 45)
+				}
+				.zIndex(2)
+				.transition(.asymmetric(insertion: .move(edge: .leading), removal: .move(edge: .leading)))
+				
+				GeometryReader { geometry in
+					HStack {
+						Spacer()
+						
+						VStack(alignment: .trailing) {
 							Button(action: {
 								homeScreenViewModel.deleteAllSelectedCats(context: managedObjectContext)
 								
@@ -235,27 +253,11 @@ struct HomeScreenView: View {
 									.padding(.horizontal, 5)
 							})
 							.buttonStyle(OvalButtonStyle(
-											backgroundColor: homeScreenViewModel.isSelectedCatsCard ? .red : Color(#colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)),
-											shadowColor1: .clear
-										)
+								backgroundColor: homeScreenViewModel.isSelectedCatsCard ? .red : Color(#colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)),
+								shadowColor1: .clear
 							)
-							.padding(.trailing)
+							)
 							.padding(.bottom, 5)
-						}
-						
-						HStack {
-							Button(action: {
-								homeScreenViewModel.toggleSelectionMode()
-								
-							}, label: {
-								Text("Cancel")
-									.standardText(fgColor: .white, style: .body)
-									.padding(.horizontal, 5)
-							})
-							.buttonStyle(OvalButtonStyle(backgroundColor: Color(#colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)), shadowColor1: .clear))
-							.padding(.leading)
-							
-							Spacer()
 							
 							Button(action: {
 								homeScreenViewModel.selectAllCats(context: managedObjectContext)
@@ -266,13 +268,16 @@ struct HomeScreenView: View {
 									.padding(.horizontal, 5)
 							})
 							.buttonStyle(OvalButtonStyle(backgroundColor: Color(#colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)), shadowColor1: .clear))
-							.padding(.trailing)
 						}
 					}
-					.frame(width: UIScreen.screenWidth)
-					.offset(x: (geometry.size.width - UIScreen.screenWidth) / 2, y: geometry.frame(in: .local).maxY - 98)
+					.padding(.trailing)
+					.offset(y: geometry.frame(in: .local).maxY - 98)
 				}
+				.zIndex(2)
+				.transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .trailing)))
 			}
+			
+			
 			
 			// MARK: - ColorPicker
 			if homeScreenViewModel.isColorPicker {
@@ -284,8 +289,7 @@ struct HomeScreenView: View {
 					RoundedRectangle(cornerRadius: 20)
 						.stroke(Color.shadowColor)
 				)
-				.animation(.linear(duration: 0.4))
-				.transition(.move(edge: .bottom))
+				.menuTransition()
 				.onDisappear {
 					homeScreenViewModel.saveChanges(context: managedObjectContext)
 					
@@ -332,6 +336,7 @@ struct HomeScreenView: View {
 			if homeScreenViewModel.isMenu {
 				GeometryReader { geometry in
 					CatsDescriptionSection {
+						
 						Button("Delete") {
 							homeScreenViewModel.deleteCat(context: managedObjectContext)
 						}
@@ -340,9 +345,10 @@ struct HomeScreenView: View {
 						.foregroundColor(.red)
 						
 						Button("More info") {
-							withAnimation(.linear(duration: 0.4)) {
+							withAnimation(.easeInOut(duration: 0.5)) {
 								homeScreenViewModel.isMenu.toggle()
 							}
+
 							homeScreenViewModel.observeCat(context: managedObjectContext)
 						}
 						.font(.system(.body, design: .rounded))
@@ -364,7 +370,7 @@ struct HomeScreenView: View {
 						.foregroundColor(.primary)
 						
 						Button("Cancel") {
-							withAnimation(.linear(duration: 0.4)) {
+							withAnimation(.easeInOut(duration: 0.5)) {
 								homeScreenViewModel.isMenu.toggle()
 							}
 						}
@@ -373,11 +379,10 @@ struct HomeScreenView: View {
 						.foregroundColor(.primary)
 					}
 					.volumetricShadows(color1: .clear, color2: .shadowColor)
-					.animation(.linear(duration: 0.4))
-					.transition(.move(edge: .bottom))
 					.frame(minWidth: menuWidth, maxWidth: menuWidth, minHeight: 100, maxHeight: 100)
 					.offset(x: (geometry.size.width - menuWidth) / 2, y: geometry.frame(in: .local).maxY - 205)
 				}
+				.menuTransition()
 			}
 		}
 		.onDisappear {

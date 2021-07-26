@@ -97,7 +97,9 @@ extension HomeScreenViewModel {
 			mainCatsPageView = MainCatsPageView(catsDescriptionViewModel: CatsDescriptionViewModel(cat: self.selectedCat, context: context))
 			
 			DispatchQueue.main.async {
-				isMainCatsPageView.toggle()
+				withAnimation(.easeInOut(duration: 0.5)) {
+					isMainCatsPageView.toggle()
+				}
 			}
 		}
 	}
@@ -114,7 +116,9 @@ extension HomeScreenViewModel {
 			editingCatsPageView = EditingCatsPageView(catsViewModel: catsCardsPageViewModel)
 			
 			DispatchQueue.main.async {
-				isEditingCatsSheet.toggle()
+				withAnimation(.easeInOut(duration: 0.5)) {
+					isEditingCatsSheet.toggle()
+				}
 			}
 		}
 	}
@@ -128,11 +132,11 @@ extension HomeScreenViewModel {
 			editingCatsPageView = EditingCatsPageView(catsViewModel: catsCardsPageViewModel)
 			
 			DispatchQueue.main.async {
-				withAnimation(.linear(duration: 0.4)) {
+				withAnimation(.easeInOut(duration: 0.5)) {
 					isMenu.toggle()
 				}
 				
-				withAnimation(.linear(duration: 0.4)) {
+				withAnimation(.easeInOut(duration: 0.5)) {
 					isEditingCatsSheet.toggle()
 				}
 			}
@@ -145,11 +149,11 @@ extension HomeScreenViewModel {
 			catsCardsColorPicker = CatsCardsColorPicker(cat: getCat(), viewModel: self)
 			
 			DispatchQueue.main.async {
-				withAnimation(.linear(duration: 0.4)) {
+				withAnimation(.easeInOut(duration: 0.5)) {
 					isMenu.toggle()
 				}
 				
-				withAnimation(.linear(duration: 0.4)) {
+				withAnimation(.easeInOut(duration: 0.5)) {
 					isColorPicker.toggle()
 				}
 			}
@@ -166,7 +170,7 @@ extension HomeScreenViewModel {
 		
 		deselectCat()
 		
-		withAnimation(.linear(duration: 0.4)) {
+		withAnimation(.easeInOut(duration: 0.5)) {
 			isMenu.toggle()
 		}
 	}
@@ -185,11 +189,10 @@ extension HomeScreenViewModel {
 	}
 	
 	func toggleSelectionMode() {
-		withAnimation(.linear(duration: 0.5)) {
+		withAnimation(.easeInOut(duration: 0.5)) {
 			isSelectedMode.toggle()
+			removeSelectedCats()
 		}
-		
-		removeSelectedCats()
 	}
 	
 	func isCatSelected(cat: CatsCard) -> Double {
