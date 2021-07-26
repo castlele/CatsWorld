@@ -48,7 +48,7 @@ struct BreedsList: View {
 											.padding([.top, .bottom, .leading])
 										
 										Button(action: {
-											withAnimation(.linear(duration: 0.25)) {
+											withAnimation(.easeInOut(duration: 0.5)) {
 												breedsViewModel.isShowOnlyFavourites.toggle()
 											}
 											

@@ -34,7 +34,6 @@ struct CatsCardsColorPicker: View {
 				.padding()
 				.background(Color(viewModel.pickedColor.rawValue))
 				.cornerRadius(20)
-				.compositingGroup()
 				.volumetricShadows(color1: .clear)
 				
 				Spacer()
@@ -58,7 +57,7 @@ struct CatsCardsColorPicker: View {
 				DoneButton(action: {
 					cat.setColor(viewModel.pickedColor.rawValue)
 					
-					withAnimation(.linear(duration: 0.5)) {
+					withAnimation(.easeInOut(duration: 0.5)) {
 						viewModel.isColorPicker.toggle()
 					}
 				}, content: {
@@ -99,7 +98,7 @@ fileprivate struct ColorPickerView: View {
 					)
 					.frame(width: 60, height: 60)
 					.onTapGesture {
-						withAnimation(.spring()) {
+						withAnimation(.easeInOut(duration: 0.5)) {
 							pickedColor = color
 						}
 					}

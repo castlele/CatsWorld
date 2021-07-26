@@ -281,22 +281,21 @@ struct HomeScreenView: View {
 			
 			// MARK: - ColorPicker
 			if homeScreenViewModel.isColorPicker {
-				ZStack {
-					homeScreenViewModel.catsCardsColorPicker
-						.preferredColorScheme(settingsViewModel.wrappedColorScheme)
-				}
-				.background(
-					RoundedRectangle(cornerRadius: 20)
-						.stroke(Color.shadowColor)
-				)
-				.menuTransition()
-				.onDisappear {
-					homeScreenViewModel.saveChanges(context: managedObjectContext)
-					
-					homeScreenViewModel.deselectCat()
-					homeScreenViewModel.catsCardsColorPicker = nil
-					homeScreenViewModel.resetChanges()
-				}
+				homeScreenViewModel.catsCardsColorPicker
+					.preferredColorScheme(settingsViewModel.wrappedColorScheme)
+					.background(
+						RoundedRectangle(cornerRadius: 20)
+							.stroke(Color.shadowColor)
+					)
+					.zIndex(2)
+					.transition(.asymmetric(insertion: .scale, removal: .scale))
+					.onDisappear {
+						homeScreenViewModel.saveChanges(context: managedObjectContext)
+						
+						homeScreenViewModel.deselectCat()
+						homeScreenViewModel.catsCardsColorPicker = nil
+						homeScreenViewModel.resetChanges()
+					}
 			}
 			
 			// MARK: - Sorting MenuView

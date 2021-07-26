@@ -71,8 +71,10 @@ struct BreedsDetailView: View {
 				.gesture(
 					TapGesture(count: 2)
 						.onEnded {
-							breedsViewModel.makeBreedFavourite(breed, value: true)
-							breedsViewModel.toggleAddToFavouriteAnimation()
+							withAnimation(.easeInOut(duration: 0.5)) {
+								breedsViewModel.makeBreedFavourite(breed, value: true)
+								breedsViewModel.toggleAddToFavouriteAnimation()
+							}
 						}
 				)
 				.frame(height: 300)
