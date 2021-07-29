@@ -12,6 +12,9 @@ final class SettingsViewModel: ObservableObject {
 	
 	static var shared = SettingsViewModel()
 	
+	//MARK: - General
+	@Published var offset = CGFloat(0)
+	
 	// MARK: - Starter screen
 	@AppStorage("starterScreen") var starterScreen = 0
 	

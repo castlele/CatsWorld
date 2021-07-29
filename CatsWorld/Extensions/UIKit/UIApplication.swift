@@ -9,6 +9,8 @@ import UIKit
 
 extension UIApplication {
 	
+	static let safeAreaInsetsTop = UIApplication.shared.windows.first?.safeAreaInsets.top
+	
 	/// Dismiss keyboard 
 	func endEditing(_ force: Bool) {
 		self.windows

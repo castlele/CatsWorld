@@ -32,20 +32,36 @@ struct CatsAvatar: View {
     }
 }
 
-struct BreedsAvatar: View {
+struct MutableCornerAvatar: View {
 	
-	@State var avatar: Image
+	var avatar: Image
+	var isStroke = true
+	@Binding var cornerRadius: CGFloat
 	
 	var body: some View {
 		avatar
 			.resizable()
 			.scaledToFill()
 			.background(Color.mainColor)
-			.cornerRadius(20)
+			.cornerRadius(cornerRadius)
 			.background(
-				RoundedRectangle(cornerRadius: 20)
-					.stroke(Color.accentColor, lineWidth: 4)
+				RoundedRectangle(cornerRadius: cornerRadius)
+					.stroke(isStroke ? Color.accentColor : Color.clear, lineWidth: 4)
 			)
+	}
+}
+
+extension MutableCornerAvatar {
+	init(avatar: Image) {
+		self.avatar = avatar
+		self.isStroke = true
+		self._cornerRadius = .constant(CGFloat(20))
+	}
+	
+	init(avatar: Image, isStroke: Bool) {
+		self.avatar = avatar
+		self.isStroke = isStroke
+		self._cornerRadius = .constant(CGFloat(20))
 	}
 }
 
