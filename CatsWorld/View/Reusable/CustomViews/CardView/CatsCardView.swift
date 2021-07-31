@@ -29,7 +29,7 @@ struct CatsCardView: View {
 					Circle()
 						.stroke(Color.accentColor, lineWidth: 4)
 				)
-				.frame(minWidth: 50, minHeight: 50, maxHeight: 100)
+				.frame(minWidth: 50, maxWidth: 90, minHeight: 50, maxHeight: 90)
 				.padding(.trailing, 10)
 			
 			CatsMainInfoView(cat: cat, ageType: .constant(.age))

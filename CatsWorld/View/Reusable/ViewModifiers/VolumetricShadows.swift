@@ -12,6 +12,7 @@ struct VolumetricShadows: ViewModifier {
 	enum ShapeType {
 		case circle
 		case roundedRect
+		case rect
 	}
 	
 	let shadowType: AppShadow = SettingsViewModel.shared.wrappedShadows
@@ -39,6 +40,8 @@ struct VolumetricShadows: ViewModifier {
 				return AnyView(Circle().fill(color2))
 			case .roundedRect:
 				return AnyView(RoundedRectangle(cornerRadius: 20).fill(color2))
+			case .rect:
+				return AnyView(Rectangle().fill(color2))
 		}
 	}
 	
@@ -48,6 +51,12 @@ struct VolumetricShadows: ViewModifier {
 				return AnyView(Circle().stroke(color2, lineWidth: 2.5))
 			case .roundedRect:
 				return AnyView(RoundedRectangle(cornerRadius: 20).stroke(color2, lineWidth: 2.5))
+			case .rect:
+				return AnyView(Rectangle().stroke(
+								LinearGradient(
+									gradient: Gradient(colors: [.clear, .clear, .clear, color2]),
+									startPoint: .top, endPoint: .bottom
+								), lineWidth: 2.5))
 		}
 	}
 	

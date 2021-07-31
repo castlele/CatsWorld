@@ -40,15 +40,6 @@ struct TopBarView<Leading: View, Trailing: View, Content: View>: View {
 		ZStack {
 			backgroundColor.ignoresSafeArea(edges: .top)
 			
-			Rectangle()
-				.fill(Color.shadowColor.opacity(0.5))
-				.blur(radius: 2)
-				.offset(x: 0, y: 3)
-				.opacity(isVolume ? 1 : 0)
-			
-			Rectangle()
-				.fill(backgroundColor)
-			
 			VStack {
 				HStack {
 					leading
@@ -61,7 +52,15 @@ struct TopBarView<Leading: View, Trailing: View, Content: View>: View {
 				content
 			}
 		}
-		.frame(minHeight: minHeight, maxHeight: maxHeight)
+		.frame(height: maxHeight)
+//		.background(
+//			Rectangle()
+//				.fill(Color.shadowColor.opacity(1))
+//				.blur(radius: 2)
+//				.offset(y: 3)
+//				.opacity(isVolume ? 1 : 0)
+//		)
+		.volumetricShadows(shape: .rect, color1: .clear, color2: isVolume ? .shadowColor : .clear, radius: 2, isPressed: false)
     }
 }
 
@@ -165,10 +164,25 @@ extension TopBarView where Leading == EmptyView, Trailing == EmptyView, Content:
 
 struct TopBarView_Previews: PreviewProvider {
     static var previews: some View {
-		TopBarView(leading: {
-			Text("")
-		}, trailing: {
-			Text("")
-		})
+		ZStack {
+			Color.blue.zIndex(0)
+			
+			VStack(spacing:0) {
+				TopBarView(isVolume: true, backgroundColor: .red, maxHeight: 80, leading: {
+					Text("")
+				}, trailing: {
+					Text("")
+				})
+				.zIndex(2)
+				
+				ScrollView {
+					Text("hello")
+					
+					Text("World")
+				}
+				.listStyle(InsetListStyle())
+				.zIndex(1)
+			}
+		}
     }
 }

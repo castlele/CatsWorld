@@ -27,7 +27,7 @@ struct HomeScreenView: View {
 				// MARK: - TopBarView
 				TopBarView(
 					isVolume: false,
-					minHeight: 80,
+					minHeight: 90,
 					maxHeight: 90,
 					content: {
 						HStack {
@@ -71,7 +71,6 @@ struct HomeScreenView: View {
 								.padding()
 							
 							Spacer()
-							
 							
 							// MARK: - Make New Cat
 							Button(action: {

@@ -28,16 +28,15 @@ struct TabBarView: View {
 					Text("Map")
 				}
 				.tag(0)
-			NavigationView {
-				HomeScreenView()
-					.environmentObject(settingsViewModel)
-					.navigationBarHidden(true)
-			}
-			.tag(1)
-			.tabItem {
-				Image(systemName: "house")
-				Text("Home")
-			}
+			
+			HomeScreenView()
+				.environmentObject(settingsViewModel)
+				.navigationBarHidden(true)
+				.tag(1)
+				.tabItem {
+					Image(systemName: "house")
+					Text("Home")
+				}
 			
 			NavigationView {
 				BreedsList()
@@ -46,6 +45,7 @@ struct TabBarView: View {
 					.navigationBarHidden(true)
 					.accentColor(.accentColor)
 			}
+			.navigationViewStyle(StackNavigationViewStyle())
 			.tag(2)
 			.tabItem {
 				Image(systemName: "list.bullet")

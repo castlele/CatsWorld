@@ -24,6 +24,8 @@ final class CatsDescriptionViewModel: CatManipulator {
 	/// Represent if `EditingCatsPageView` should be shown
 	@Published var isEditingCatsPage = false
 	
+	@Published var isVolumeTopBar = false
+	
 	var catsCardColor: Color { determineCatsCardsColor() }
 	
 	var additionInfo: String { cat.wrappedInfo }
@@ -69,6 +71,23 @@ final class CatsDescriptionViewModel: CatManipulator {
 
 // MARK: - Public methods
 extension CatsDescriptionViewModel {
+	
+	func transitCatsMainInfoIntoTopBar(_ y: CGFloat) {
+		if y < -140 {
+			if !isVolumeTopBar {
+				DispatchQueue.main.async {
+					self.isVolumeTopBar = true
+				}
+			}
+			
+		} else if y > -140 {
+			if isVolumeTopBar {
+				DispatchQueue.main.async {
+					self.isVolumeTopBar = false
+				}
+			}
+		}
+	}
 	
 	/// Assign new value to private `colorScheme` property
 	/// - Parameter colorScheme: New color scheme
