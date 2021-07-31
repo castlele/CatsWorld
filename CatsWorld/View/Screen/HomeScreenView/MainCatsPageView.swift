@@ -93,6 +93,7 @@ struct MainCatsPageView: View {
 									 isGender: true,
 									 isAvatar: true)
 						.equatable()
+						.animation(nil)
 						.onTapGesture {
 							catsDescriptionViewModel.changeAgeType()
 						}
