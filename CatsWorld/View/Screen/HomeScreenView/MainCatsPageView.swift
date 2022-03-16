@@ -175,7 +175,7 @@ struct MainCatsPageView: View {
 			UIScrollView.appearance().bounces = false
 		}
 		.onDisappear {
-			UIScrollView.appearance().bounces = false
+			UIScrollView.appearance().bounces = true
 		}
 		.onChange(of: colorScheme) { newScheme in
 			catsDescriptionViewModel.setColorScheme(newScheme)

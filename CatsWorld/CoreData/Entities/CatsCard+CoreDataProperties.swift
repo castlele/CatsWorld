@@ -14,16 +14,20 @@ import SwiftUI
 
 extension CatsCard {
 
+	// MARK: - Fetch Request
     @nonobjc public class func fetchRequest() -> NSFetchRequest<CatsCard> {
 		let request = NSFetchRequest<CatsCard>(entityName: "CatsCard")
 		request.sortDescriptors = []
         return request
     }
 
+	//MARK: - Properties
 	// Properties needed for the card
 	@NSManaged public var id: UUID
 	@NSManaged public var image: Data?
 	@NSManaged public var color: String?
+	
+	@NSManaged public var relationship: NSSet?
 	
 	// General cat properties
     @NSManaged public var name: String?
@@ -50,6 +54,23 @@ extension CatsCard {
 	
 	// Additional information string
 	@NSManaged public var additionalInfo: String?
+}
+
+// MARK: - Generated accessors for relationship
+extension CatsCard {
+	
+	@objc(addRelationshipObject:)
+	@NSManaged public func addToRelationship(_ value: CatsCard)
+	
+	@objc(removeRelationshipObject:)
+	@NSManaged public func removeFromRelationship(_ value: CatsCard)
+	
+	@objc(addRelationship:)
+	@NSManaged public func addToRelationship(_ values: NSSet)
+	
+	@objc(removeRelationship:)
+	@NSManaged public func removeFromRelationship(_ values: NSSet)
+	
 }
 
 // MARK:- Wrapped properties

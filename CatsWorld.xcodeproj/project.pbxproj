@@ -29,6 +29,7 @@
 		7B33477D267E5C7500ED6F5F /* PawView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B33477C267E5C7500ED6F5F /* PawView.swift */; };
 		7B33A11F267B586600C780C0 /* RadarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B33A11E267B586600C780C0 /* RadarChart.swift */; };
 		7B43FF512697633C00EC60B6 /* ImageProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B43FF502697633C00EC60B6 /* ImageProcessor.swift */; };
+		7B51BD4026B664F300F069F9 /* WheelPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B51BD3F26B664F300F069F9 /* WheelPickerView.swift */; };
 		7B52B021269068E90065B7CB /* Description.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B52B020269068E90065B7CB /* Description.swift */; };
 		7B52B023269069B10065B7CB /* CatManipulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B52B022269069B10065B7CB /* CatManipulator.swift */; };
 		7B56A10A2673AE2F00BEF8DD /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B56A1092673AE2F00BEF8DD /* UIImage.swift */; };
@@ -122,6 +123,7 @@
 		7B33477C267E5C7500ED6F5F /* PawView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PawView.swift; sourceTree = "<group>"; };
 		7B33A11E267B586600C780C0 /* RadarChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadarChart.swift; sourceTree = "<group>"; };
 		7B43FF502697633C00EC60B6 /* ImageProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageProcessor.swift; sourceTree = "<group>"; };
+		7B51BD3F26B664F300F069F9 /* WheelPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WheelPickerView.swift; sourceTree = "<group>"; };
 		7B52B020269068E90065B7CB /* Description.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Description.swift; sourceTree = "<group>"; };
 		7B52B022269069B10065B7CB /* CatManipulator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatManipulator.swift; sourceTree = "<group>"; };
 		7B56A1092673AE2F00BEF8DD /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
@@ -297,6 +299,7 @@
 				7B32B6A326A1AE3B0002C014 /* PullActionView.swift */,
 				7B7EA2A226A4521600D70E74 /* CollectionElementView.swift */,
 				7BCFA33F26A46D17009569D7 /* RandomArrangementCollectionView.swift */,
+				7B51BD3F26B664F300F069F9 /* WheelPickerView.swift */,
 			);
 			path = Others;
 			sourceTree = "<group>";
@@ -642,6 +645,7 @@
 				7BF2D4A52672094E00985E88 /* CatsDescriptionCategory.swift in Sources */,
 				7B959AA4266F7B73001CB4FE /* VolumetricShadows.swift in Sources */,
 				7B86143E264D2953008616DB /* CatsCard+CoreDataClass.swift in Sources */,
+				7B51BD4026B664F300F069F9 /* WheelPickerView.swift in Sources */,
 				7B8B9A212642819600E98B8E /* Breed.swift in Sources */,
 				7B6E3D4D2652D6DC00B04B62 /* CatsAvatar.swift in Sources */,
 				7B6E3D4B2652D59E00B04B62 /* EditButton.swift in Sources */,

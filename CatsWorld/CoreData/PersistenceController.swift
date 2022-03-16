@@ -19,6 +19,7 @@ struct PersistenceController {
 		
 		for _ in 0..<10 {
 			let newCat = CatsCard(context: viewContext)
+			newCat.id = UUID()
 			newCat.name = "Example cat"
 		}
 		
