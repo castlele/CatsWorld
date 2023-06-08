@@ -1,5 +1,5 @@
 # CatsWorld Description 
-Helper application for breeders and those who want to become breeders.
+Helper application for breeders and those who want to become a breeder.
 
 ## Workflow
 
